@@ -117,17 +117,27 @@ function show(id){
       document.querySelector(".profile").appendChild(bioElement);
     }
     bioElement.textContent = bio;
-  }
+ localStorage.setItem("studioBio", bio);}
 }
         const savedName = localStorage.getItem("studioName");
 const savedUsername = localStorage.getItem("studioUsername");
-
+const savedBio = localStorage.getItem("studioBio");
 if(savedName){
   document.querySelector(".profile h2").textContent = savedName;
 }
 
 if(savedUsername){
   document.querySelector(".profile p").textContent = "@" + savedUsername;
-}</script>
+}
+if(savedBio){
+  let bioElement = document.querySelector(".profile-bio");
+  if(!bioElement){
+    bioElement = document.createElement("p");
+    bioElement.className = "profile-bio";
+    document.querySelector(".profile").appendChild(bioElement);
+  }
+  bioElement.textContent = savedBio;
+}
+</script>
 </body>
 </html>
