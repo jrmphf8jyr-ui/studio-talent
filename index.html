@@ -79,13 +79,13 @@ nav button{border:0;background:transparent;color:#777;font-size:11px;font-weight
     <div class="profile"><div class="bigavatar"><span id="profileAvatar">👨🏾‍💻</span><input type="file" id="profilePhoto" accept="image/*"></div><h2 style="margin:12px 0 4px">Your Name</h2><p style="color:#777;margin:0">@your_studio_name</p><button class="cta" style="margin-top:15px;background:var(--purple);color:#fff" onclick="editProfile()">Edit Profile</button><button class="cta" style="margin-top:10px;background:#777;color:#fff" onclick="editBio()">Edit Bio</button>
   </div>
 
-  <nav>
-    <button id="n-home" class="active" onclick="show('home')"><span class="navicon">⌂</span>Home</button>
-    <button id="n-explore" onclick="show('explore')"><span class="navicon">⌕</span>Explore</button>
-    <button id="n-create" onclick="show('create')"><span class="navicon">⊕</span>Create</button>
-    <button id="n-profile" onclick="show('profile')"><span class="navicon">♙</span>Profile</button>
-  </nav>
-</div>
+  
+<nav>
+  <button id="n-home" class="active" onclick="show('home')">Home</button>
+  <button id="n-explore" onclick="show('explore')">Explore</button>
+  <button id="n-create" onclick="show('create')">Create</button>
+  <button id="n-profile" onclick="show('profile')">Profile</button>
+</nav></div>
 <script>
 function show(id){
  document.querySelectorAll('.view').forEach(v=>v.classList.remove('activeView'));
