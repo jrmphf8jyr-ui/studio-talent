@@ -105,6 +105,19 @@ function show(id){
   if(username){
     document.querySelector(".profile p").textContent = "@" + username;
   }
+}function editBio(){
+  const bio = prompt("Write your bio:");
+  if(bio){
+    let bioElement = document.querySelector(".profile-bio");
+    if(!bioElement){
+      bioElement = document.createElement("p");
+      bioElement.className = "profile-bio";
+      bioElement.style.color = "#777";
+      bioElement.style.marginTop = "10px";
+      document.querySelector(".profile").appendChild(bioElement);
+    }
+    bioElement.textContent = bio;
+  }
 }
 </script>
 </body>
