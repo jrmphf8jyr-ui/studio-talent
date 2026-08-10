@@ -179,6 +179,10 @@ if (savedPhoto) {
   profileAvatar.appendChild(img);
 }
 function startTeacherOnboarding() {
+  if (localStorage.getItem("studioTeacherTalent")) {
+  alert("You are already a teacher! 👨‍🏫");
+  return;
+
   const talent = prompt("What is your talent?");
   if (!talent) return;
 
