@@ -178,6 +178,18 @@ if (savedPhoto) {
 
   profileAvatar.appendChild(img);
 }
+function startTeacherOnboarding() {
+  const talent = prompt("What is your talent?");
+  if (!talent) return;
+
+  const experience = prompt("Tell us briefly about your experience:");
+  if (!experience) return;
+
+  localStorage.setItem("studioTeacherTalent", talent);
+  localStorage.setItem("studioTeacherExperience", experience);
+
+  alert("Your teacher profile is ready! 🎉");
+}
 </script>
 </body>
 </html><!-- Studio Talent update -->
