@@ -177,6 +177,23 @@ if (savedPhoto) {
   img.style.objectFit = "cover";
 
   profileAvatar.appendChild(img);}
+  const teacherTalent = localStorage.getItem("studioTeacherTalent");
+const teacherExperience = localStorage.getItem("studioTeacherExperience");
+
+if (teacherTalent && teacherExperience) {
+  const teacherInfo = document.createElement("div");
+  teacherInfo.style.marginTop = "15px";
+  teacherInfo.style.padding = "15px";
+  teacherInfo.style.background = "#f1efff";
+  teacherInfo.style.borderRadius = "15px";
+
+  teacherInfo.innerHTML =
+    "<b>Teacher</b>" +
+    "<p style='margin:8px 0 4px'>Talent: " + teacherTalent + "</p>" +
+    "<p style='margin:0'>Experience: " + teacherExperience + "</p>";
+
+  document.querySelector(".profile").appendChild(teacherInfo);
+}
 function startTeacherOnboarding() {
   if (localStorage.getItem("studioTeacherTalent")) {
   alert("You are already a teacher! 👨‍🏫");
