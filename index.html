@@ -2009,6 +2009,10 @@ document
 
       reader.onload=
         function(event){
+          localStorage.setItem(
+  "studioProfilePhoto",
+  event.target.result
+);
 
           document
             .getElementById(
