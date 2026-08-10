@@ -2619,8 +2619,155 @@ function startCourse(id){
   );
 
 
-  alert(
-    "You can now learn this free course! 📚"
+  const courseLessons=
+    Array.isArray(lesson.lessons)
+    ?
+    lesson.lessons
+    :
+    [];
+
+
+  show("explore");
+
+
+  const list=
+    document.getElementById(
+      "lessonList"
+    );
+
+
+  list.innerHTML=
+
+  `
+
+  <div class="lesson">
+
+    <div class="lessonImg">
+      📚
+    </div>
+
+    <div class="lessonBody">
+
+      <span class="pill">
+        FREE COURSE
+      </span>
+
+      <h1>
+        ${escapeHTML(lesson.title)}
+      </h1>
+
+      <p>
+        ${escapeHTML(lesson.description)}
+      </p>
+
+      <p>
+        👨‍🏫
+        <b>
+          ${escapeHTML(
+            lesson.teacher ||
+            "Studio Teacher"
+          )}
+        </b>
+      </p>
+
+      <div class="notice">
+
+        📚
+        ${courseLessons.length}
+        lessons in this course
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="lesson">
+
+    <div class="lessonBody">
+
+      <h1>
+        📖 Course Lessons
+      </h1>
+
+      ${
+        courseLessons.length
+        ?
+        courseLessons
+          .map(function(item,index){
+
+            return `
+
+            <details
+              style="
+                background:#f7f7fb;
+                border-radius:14px;
+                padding:12px;
+                margin-top:10px;
+              "
+              ${index===0 ? "open" : ""}
+            >
+
+              <summary
+                style="
+                  font-weight:800;
+                  cursor:pointer;
+                ">
+
+                ${escapeHTML(
+                  item.title ||
+                  "Lesson "+(index+1)
+                )}
+
+              </summary>
+
+              <p
+                style="
+                  margin-top:12px;
+                  line-height:1.6;
+                ">
+
+                ${escapeHTML(
+                  item.content ||
+                  "Lesson content coming soon."
+                )}
+
+              </p>
+
+              <div class="notice">
+
+                ✅ Lesson ${index+1}
+                of ${courseLessons.length}
+
+              </div>
+
+            </details>
+
+            `;
+
+          })
+          .join("")
+        :
+        `
+        <div class="empty">
+
+          No lessons have been added
+          to this course yet.
+
+        </div>
+        `
+      }
+
+    </div>
+
+  </div>
+
+  `;
+
+
+  window.scrollTo(
+    0,
+    0
   );
 
 }
