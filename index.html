@@ -4,1700 +4,1155 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Studio Talent — Learn, Teach, Share</title>
-
 <style>
-:root{
-  --purple:#5b3df5;
-  --purple2:#7b61ff;
-  --ink:#151529;
-  --muted:#77758b;
-  --bg:#f7f7fb;
-  --card:#fff;
-  --green:#1f8a55;
-  --border:#ececf3;
-}
-
+:root{--purple:#5b3df5;--purple2:#7b61ff;--ink:#151529;--muted:#77758b;--bg:#f7f7fb;--card:#fff;--green:#1f8a55;--border:#ececf3}
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:#e9e9f1;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--ink);
-}
-
-button,input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.app{
-  width:min(430px,100%);
-  min-height:100vh;
-  margin:auto;
-  background:var(--bg);
-  position:relative;
-  padding-bottom:90px;
-}
-
-header{
-  padding:28px 20px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.logo{
-  font-size:28px;
-  font-weight:800;
-  color:var(--purple);
-}
-
-.sub{
-  font-size:13px;
-  font-weight:700;
-  margin-top:-3px;
-  color:var(--muted);
-}
-
-.icon{
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:50%;
-  background:#fff;
-  font-size:20px;
-}
-
-.view{
-  display:none;
-}
-
-.view.activeView{
-  display:block;
-}
-
-/* HOME */
-
-.hero{
-  margin:12px 16px;
-  background:linear-gradient(135deg,#17142d,#4931b9);
-  color:#fff;
-  border-radius:24px;
-  padding:24px;
-  min-height:230px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.hero h1{
-  font-size:32px;
-  line-height:1.02;
-  margin:0 0 12px;
-}
-
-.hero p{
-  margin:0 0 18px;
-  color:#ddd9ff;
-}
-
-.cta{
-  border:0;
-  background:#fff;
-  color:var(--purple);
-  font-weight:800;
-  padding:12px 18px;
-  border-radius:14px;
-  width:max-content;
-}
-
-.primary{
-  width:100%;
-  background:var(--purple);
-  color:#fff;
-}
-
-section{
-  padding:0 16px;
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:22px 0 12px;
-}
-
-h2{
-  font-size:18px;
-  margin:0;
-}
-
-.see{
-  color:var(--purple);
-  font-weight:700;
-  font-size:13px;
-}
-
-.cats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-}
-
-.cat{
-  border:0;
-  background:#fff;
-  border-radius:16px;
-  padding:12px 5px;
-  font-size:11px;
-  font-weight:700;
-  min-height:76px;
-  color:var(--ink);
-}
-
-.cat:hover{
-  box-shadow:0 4px 15px #ddd;
-}
-
-.emoji{
-  font-size:25px;
-  display:block;
-  margin-bottom:6px;
-}
-
-.teachers{
-  display:flex;
-  gap:10px;
-  overflow:auto;
-  padding-bottom:4px;
-}
-
-.teacher{
-  min-width:118px;
-  background:#fff;
-  border-radius:17px;
-  padding:12px;
-}
-
-.avatar{
-  height:72px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#ddd,#aaa);
-  display:grid;
-  place-items:center;
-  font-size:30px;
-}
-
-.teacher b{
-  display:block;
-  margin-top:8px;
-  font-size:13px;
-}
-
-.stars{
-  font-size:11px;
-  color:#8a6d00;
-  margin-top:4px;
-}
-
-.course{
-  display:flex;
-  gap:12px;
-  background:#fff;
-  border-radius:17px;
-  padding:12px;
-}
-
-.thumb{
-  width:88px;
-  height:72px;
-  flex-shrink:0;
-  border-radius:13px;
-  background:#d9d4ff;
-  display:grid;
-  place-items:center;
-  font-size:28px;
-}
-
-.course h3{
-  margin:4px 0;
-  font-size:14px;
-}
-
-.course p{
-  margin:6px 0 0;
-}
-
-.pill{
-  display:inline-block;
-  background:#ddf8e9;
-  color:#197348;
-  border-radius:10px;
-  padding:4px 8px;
-  font-size:10px;
-  font-weight:800;
-}
-
-/* EXPLORE */
-
-.search{
-  margin:12px 16px;
-  background:#fff;
-  border-radius:15px;
-  padding:14px;
-  color:#999;
-}
-
-.search input{
-  border:0;
-  outline:0;
-  width:calc(100% - 30px);
-  font-size:15px;
-}
-
-/* LESSON */
-
-.lesson{
-  margin:16px;
-  background:#fff;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 2px 10px #e4e4ec;
-}
-
-.lessonImg{
-  height:210px;
-  background:linear-gradient(135deg,#222,#777);
-  display:grid;
-  place-items:center;
-  color:#fff;
-  font-size:48px;
-}
-
-.lessonBody{
-  padding:18px;
-}
-
-.lessonBody h1{
-  font-size:22px;
-  margin:0 0 8px;
-}
-
-.lessonBody p{
-  color:var(--muted);
-  line-height:1.5;
-}
-
-.price{
-  font-size:20px;
-  font-weight:800;
-  margin:16px 0;
-}
-
-.enroll{
-  width:100%;
-  border:0;
-  background:var(--purple);
-  color:#fff;
-  padding:14px;
-  border-radius:14px;
-  font-weight:800;
-}
-
-/* CREATE */
-
-.createCard{
-  margin:16px;
-  background:#fff;
-  border-radius:20px;
-  padding:18px;
-}
-
-.createButton{
-  width:100%;
-  border:0;
-  background:var(--purple);
-  color:#fff;
-  padding:14px;
-  border-radius:14px;
-  font-weight:800;
-  margin-top:12px;
-}
-
-.option{
-  border:0;
-  width:100%;
-  text-align:left;
-  background:#fff;
-  border-radius:17px;
-  padding:14px;
-  display:flex;
-  gap:12px;
-  margin-bottom:10px;
-  box-shadow:0 2px 8px #e7e7ef;
-}
-
-.option .number{
-  width:60px;
-  height:60px;
-  border-radius:14px;
-  background:#e0dcff;
-  display:grid;
-  place-items:center;
-  font-size:26px;
-  flex-shrink:0;
-}
-
-.option h3{
-  margin:5px 0;
-}
-
-.option p{
-  margin:0;
-  color:var(--muted);
-  font-size:12px;
-}
-
-/* PROFILE */
-
-.profile{
-  margin:16px;
-  background:#fff;
-  border-radius:22px;
-  padding:22px;
-  text-align:center;
-}
-
-.bigavatar{
-  width:100px;
-  height:100px;
-  margin:auto;
-  border-radius:50%;
-  background:#d8d2ff;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-}
-
-.bigavatar img{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
-}
-
-.photoButton{
-  margin-top:10px;
-  border:0;
-  background:#eeeaff;
-  color:var(--purple);
-  padding:9px 14px;
-  border-radius:12px;
-  font-weight:700;
-}
-
-#profilePhoto{
-  display:none;
-}
-
-.profile h2{
-  margin:12px 0 4px;
-}
-
-.profileUsername{
-  color:var(--muted);
-  margin:0;
-}
-
-.profileBio{
-  color:var(--muted);
-  line-height:1.5;
-  margin-top:12px;
-}
-
-.editButton{
-  margin-top:15px;
-  width:100%;
-  border:0;
-  background:var(--purple);
-  color:#fff;
-  padding:12px;
-  border-radius:14px;
-  font-weight:800;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  margin:22px 16px 0;
-  background:#fff;
-  border-radius:18px;
-  padding:18px 5px;
-  text-align:center;
-}
-
-.stats b{
-  display:block;
-  font-size:18px;
-}
-
-.stats span{
-  font-size:11px;
-  color:var(--muted);
-}
-
-.teacherInfo{
-  margin-top:16px;
-  padding:15px;
-  background:#f1efff;
-  border-radius:15px;
-  text-align:left;
-}
-
-/* BOTTOM NAV */
-
-nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(430px,100%);
-  height:78px;
-  background:#fff;
-  border-top:1px solid #eee;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:8px 10px env(safe-area-inset-bottom);
-  z-index:100;
-}
-
-nav button{
-  border:0;
-  background:transparent;
-  color:#777;
-  font-size:11px;
-  font-weight:700;
-}
-
-.navicon{
-  display:block;
-  font-size:22px;
-  margin-bottom:2px;
-}
-
-.active{
-  color:var(--purple)!important;
-}
-
-/* EMPTY STATE */
-
-.empty{
-  text-align:center;
-  padding:35px 20px;
-  color:var(--muted);
-}
-
-.smallButton{
-  border:0;
-  background:#eeeaff;
-  color:var(--purple);
-  padding:10px 14px;
-  border-radius:12px;
-  font-weight:700;
-}
+body{margin:0;background:#e9e9f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{width:min(430px,100%);min-height:100vh;margin:auto;background:var(--bg);position:relative;padding-bottom:90px}
+header{padding:28px 20px 12px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:800;color:var(--purple)}
+.sub{font-size:13px;font-weight:700;margin-top:-3px;color:var(--muted)}
+.icon{width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:20px}
+.view{display:none}.view.activeView{display:block}
+.hero{margin:12px 16px;background:linear-gradient(135deg,#17142d,#4931b9);color:#fff;border-radius:24px;padding:24px;min-height:230px;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:32px;line-height:1.02;margin:0 0 12px}.hero p{margin:0 0 18px;color:#ddd9ff}
+.cta{border:0;background:#fff;color:var(--purple);font-weight:800;padding:12px 18px;border-radius:14px;width:max-content}
+.primary{width:100%;border:0;background:var(--purple);color:#fff;padding:14px;border-radius:14px;font-weight:800}
+.secondary{width:100%;border:0;background:#eeeef5;color:var(--ink);padding:12px;border-radius:14px;font-weight:800;margin-top:10px}
+section{padding:0 16px}.row{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}
+h2{font-size:18px;margin:0}.see{color:var(--purple);font-weight:700;font-size:13px}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.cat{border:0;background:#fff;border-radius:16px;padding:12px 5px;font-size:11px;font-weight:700;min-height:76px;color:var(--ink)}
+.emoji{font-size:25px;display:block;margin-bottom:6px}
+.teachers{display:flex;gap:10px;overflow:auto;padding-bottom:4px}
+.teacher{min-width:118px;background:#fff;border-radius:17px;padding:12px}
+.avatar{height:72px;border-radius:14px;background:linear-gradient(135deg,#ddd,#aaa);display:grid;place-items:center;font-size:30px}
+.teacher b{display:block;margin-top:8px;font-size:13px}.stars{font-size:11px;color:#8a6d00;margin-top:4px}
+.course{display:flex;gap:12px;background:#fff;border-radius:17px;padding:12px;margin-top:10px}
+.thumb{width:88px;height:72px;flex-shrink:0;border-radius:13px;background:#d9d4ff;display:grid;place-items:center;font-size:28px}
+.course h3{margin:4px 0;font-size:14px}.course p{margin:6px 0;color:var(--muted);font-size:12px}
+.pill{display:inline-block;background:#ddf8e9;color:#197348;border-radius:10px;padding:4px 8px;font-size:10px;font-weight:800}
+.paid{background:#eee9ff;color:var(--purple)}
+.search{margin:12px 16px;background:#fff;border-radius:15px;padding:14px;color:#999}
+.search input{border:0;outline:0;width:calc(100% - 30px);font-size:15px}
+.lesson{margin:16px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 10px #e4e4ec}
+.lessonImg{height:190px;background:linear-gradient(135deg,#222,#777);display:grid;place-items:center;color:#fff;font-size:48px}
+.lessonBody{padding:18px}.lessonBody h1{font-size:22px;margin:0 0 8px}.lessonBody p{color:var(--muted);line-height:1.5}
+.price{font-size:20px;font-weight:800;margin:16px 0}.enroll{width:100%;border:0;background:var(--purple);color:#fff;padding:14px;border-radius:14px;font-weight:800}
+.createCard{margin:16px;background:#fff;border-radius:20px;padding:18px}
+.createForm{margin:16px;background:#fff;border-radius:22px;padding:18px}
+.createForm h2{margin-bottom:4px}.createForm h3{margin:20px 0 10px}
+.createForm label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px}
+.createForm input,.createForm textarea,.createForm select{width:100%;border:1px solid var(--border);background:#fafafd;border-radius:12px;padding:12px;outline:0}
+.createForm textarea{min-height:85px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.publish{width:100%;border:0;background:var(--purple);color:#fff;padding:15px;border-radius:14px;font-weight:900;margin-top:18px}
+.notice{background:#f1efff;color:#4b3bc2;border-radius:12px;padding:12px;font-size:12px;margin-top:12px}
+.photoPreview{width:70px;height:70px;border-radius:50%;background:#ddd5ff;display:grid;place-items:center;font-size:30px;overflow:hidden;margin-bottom:8px}
+.photoPreview img{width:100%;height:100%;object-fit:cover}
+.profile{margin:16px;background:#fff;border-radius:22px;padding:22px;text-align:center}
+.bigavatar{width:100px;height:100px;margin:auto;border-radius:50%;background:#d8d2ff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:42px}
+.bigavatar img{width:100%;height:100%;object-fit:cover}
+.profile h2{margin:12px 0 4px}.profileUsername{color:var(--muted);margin:0}.profileBio{color:var(--muted);line-height:1.5;margin-top:12px}
+.editButton{margin-top:15px;width:100%;border:0;background:var(--purple);color:#fff;padding:12px;border-radius:14px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 16px 0;background:#fff;border-radius:18px;padding:18px 5px;text-align:center}
+.stats b{display:block;font-size:18px}.stats span{font-size:11px;color:var(--muted)}
+.teacherInfo{margin-top:16px;padding:15px;background:#f1efff;border-radius:15px;text-align:left}
+.empty{text-align:center;padding:35px 20px;color:var(--muted)}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:78px;background:#fff;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 10px env(safe-area-inset-bottom);z-index:100}
+nav button{border:0;background:transparent;color:#777;font-size:11px;font-weight:700}.navicon{display:block;font-size:22px;margin-bottom:2px}.active{color:var(--purple)!important}
+.hidden{display:none!important}
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-<!-- ================= HOME ================= -->
-
+<!-- HOME -->
 <div id="home" class="view activeView">
-
-<header>
-  <div>
-    <div class="logo">Studio</div>
-    <div class="sub">Talent</div>
-  </div>
-  <button class="icon">🔔</button>
-</header>
+<header><div><div class="logo">Studio</div><div class="sub">Talent</div></div><button class="icon">🔔</button></header>
 
 <div class="hero">
-  <h1>
-    Learn.<br>
-    Teach.<br>
-    <span style="color:#a99cff">Share your talent.</span>
-  </h1>
-
-  <p>
-    Everyone has a talent. Let's grow together.
-  </p>
-
-  <button class="cta" onclick="show('explore')">
-    Get Started →
-  </button>
+<h1>Learn.<br>Teach.<br><span style="color:#a99cff">Share your talent.</span></h1>
+<p>Everyone has a talent. Let's grow together.</p>
+<button class="cta" onclick="show('explore')">Get Started →</button>
 </div>
 
 <section>
-
-<div class="row">
-  <h2>Popular Categories</h2>
-  <span class="see" onclick="show('explore')">See all</span>
-</div>
+<div class="row"><h2>Popular Categories</h2><span class="see" onclick="show('explore')">See all</span></div>
 
 <div class="cats">
-
-<button class="cat" onclick="selectCategory('Music')">
-<span class="emoji">🎵</span>Music
-</button>
-
-<button class="cat" onclick="selectCategory('Art')">
-<span class="emoji">🎨</span>Art
-</button>
-
-<button class="cat" onclick="selectCategory('Dance')">
-<span class="emoji">💃</span>Dance
-</button>
-
-<button class="cat" onclick="selectCategory('Content')">
-<span class="emoji">🎬</span>Content
-</button>
-
+<button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
+<button class="cat" onclick="selectCategory('Art')"><span class="emoji">🎨</span>Art</button>
+<button class="cat" onclick="selectCategory('Dance')"><span class="emoji">💃</span>Dance</button>
+<button class="cat" onclick="selectCategory('Content')"><span class="emoji">🎬</span>Content</button>
 </div>
 
-<div class="row">
-  <h2>Top Teachers</h2>
-  <span class="see">See all</span>
-</div>
+<div class="row"><h2>Top Teachers</h2><span class="see">See all</span></div>
 
 <div class="teachers">
-
-<div class="teacher">
-<div class="avatar">🎥</div>
-<b>Adam Visuals</b>
-<div class="stars">⭐ 4.9</div>
+<div class="teacher"><div class="avatar">🎥</div><b>Adam Visuals</b><div class="stars">⭐ 4.9</div></div>
+<div class="teacher"><div class="avatar">🎤</div><b>Lea Music</b><div class="stars">⭐ 4.8</div></div>
+<div class="teacher"><div class="avatar">⚽</div><b>Coach Ibra</b><div class="stars">⭐ 4.9</div></div>
 </div>
 
-<div class="teacher">
-<div class="avatar">🎤</div>
-<b>Lea Music</b>
-<div class="stars">⭐ 4.8</div>
-</div>
-
-<div class="teacher">
-<div class="avatar">⚽</div>
-<b>Coach Ibra</b>
-<div class="stars">⭐ 4.9</div>
-</div>
-
-</div>
-
-<div class="row">
-<h2>New Courses</h2>
-<span class="see">See all</span>
-</div>
-
-<div id="homeCourse" class="course">
-<div class="thumb">📚</div>
-<div>
-<h3>How to Draw for Beginners</h3>
-<span class="pill">FREE</span>
-</div>
-</div>
-
+<div class="row"><h2>New Courses</h2><span class="see" onclick="show('explore')">See all</span></div>
+<div id="homeCourses"></div>
 </section>
 </div>
 
-
-<!-- ================= EXPLORE ================= -->
-
+<!-- EXPLORE -->
 <div id="explore" class="view">
-
-<header>
-<div>
-<div class="logo">Explore</div>
-<div class="sub">Find your next skill</div>
-</div>
-<button class="icon">⚙️</button>
-</header>
+<header><div><div class="logo">Explore</div><div class="sub">Find your next skill</div></div><button class="icon">⚙️</button></header>
 
 <div class="search">
-🔎
-<input id="searchInput"
-placeholder="Search skills, teachers, courses..."
-oninput="searchLessons()">
+🔎 <input id="searchInput" placeholder="Search skills, teachers, courses..." oninput="searchLessons()">
 </div>
 
 <section>
-
-<div class="row">
-<h2>Categories</h2>
-</div>
+<div class="row"><h2>Categories</h2></div>
 
 <div class="cats">
-
-<button class="cat" onclick="selectCategory('Music')">
-<span class="emoji">🎵</span>Music
-</button>
-
-<button class="cat" onclick="selectCategory('Art')">
-<span class="emoji">🎨</span>Art
-</button>
-
-<button class="cat" onclick="selectCategory('Dance')">
-<span class="emoji">💃</span>Dance
-</button>
-
-<button class="cat" onclick="selectCategory('Content')">
-<span class="emoji">🎬</span>Content
-</button>
-
-<button class="cat" onclick="selectCategory('Technical')">
-<span class="emoji">🔧</span>Technical
-</button>
-
-<button class="cat" onclick="selectCategory('Technology')">
-<span class="emoji">💻</span>Technology
-</button>
-
-<button class="cat" onclick="selectCategory('Sports')">
-<span class="emoji">⚽</span>Sports
-</button>
-
-<button class="cat" onclick="selectCategory('Languages')">
-<span class="emoji">🗣️</span>Languages
-</button>
-
+<button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
+<button class="cat" onclick="selectCategory('Art')"><span class="emoji">🎨</span>Art</button>
+<button class="cat" onclick="selectCategory('Dance')"><span class="emoji">💃</span>Dance</button>
+<button class="cat" onclick="selectCategory('Content')"><span class="emoji">🎬</span>Content</button>
+<button class="cat" onclick="selectCategory('Technical')"><span class="emoji">🔧</span>Technical</button>
+<button class="cat" onclick="selectCategory('Technology')"><span class="emoji">💻</span>Technology</button>
+<button class="cat" onclick="selectCategory('Sports')"><span class="emoji">⚽</span>Sports</button>
+<button class="cat" onclick="selectCategory('Languages')"><span class="emoji">🗣️</span>Languages</button>
 </div>
 
-<div class="row">
-<h2 id="categoryTitle">Featured lesson</h2>
-</div>
-
+<div class="row"><h2 id="categoryTitle">Featured lessons</h2></div>
 </section>
 
-<div class="lesson">
+<div id="lessonList"></div>
 
-<div class="lessonImg">
-📚
-</div>
-
+<div class="lesson" id="featuredLesson">
+<div class="lessonImg">📚</div>
 <div class="lessonBody">
-
-<h1 id="featuredLessonTitle">
-No lesson yet
-</h1>
-
-<p id="featuredLessonDescription">
-Create your first lesson from the Create section.
-</p>
-
-<div class="price" id="featuredLessonPrice">
-FREE
+<h1 id="featuredLessonTitle">No lesson yet</h1>
+<p id="featuredLessonDescription">Create your first lesson.</p>
+<div class="price" id="featuredLessonPrice">FREE</div>
+<button class="enroll" onclick="viewLesson()">View Lesson</button>
 </div>
-
-<button class="enroll" onclick="viewLesson()">
-View Lesson
-</button>
-
 </div>
 </div>
 
-<div id="searchResults"></div>
-
-</div>
-
-
-<!-- ================= CREATE ================= -->
-
+<!-- CREATE -->
 <div id="create" class="view">
 
 <header>
 <div>
 <div class="logo">Create</div>
-<div class="sub">Share what you know</div>
+<div class="sub">Create everything in one place</div>
 </div>
 </header>
 
-<div id="teacherHero" class="hero">
+<div class="hero">
+<h1>Create.<br>Teach.<br><span style="color:#a99cff">Earn.</span></h1>
+<p>Create your teacher profile, lesson, video and price together.</p>
+</div>
 
-<h1>Become a teacher.</h1>
+<div class="createForm">
 
-<p>
-Create lessons, help others and build your community.
+<h2>Create & Publish</h2>
+<p style="color:#777;font-size:12px">
+Everything is on this one page. Fill in your information and publish your lesson.
 </p>
 
-<button class="cta" onclick="startTeacherOnboarding()">
-Become a Teacher
+<h3>👤 Your Profile</h3>
+
+<label>Your name</label>
+<input id="createName" placeholder="Your name">
+
+<label>Username</label>
+<input id="createUsername" placeholder="@your_username">
+
+<label>Profile photo</label>
+<div class="photoPreview" id="createPhotoPreview">👨🏾‍💻</div>
+<input id="createPhoto" type="file" accept="image/*">
+
+<label>Bio</label>
+<textarea id="createBio" placeholder="Tell people about yourself"></textarea>
+
+<div class="grid2">
+<div>
+<label>Your talent</label>
+<input id="createTalent" placeholder="e.g. Electricity">
+</div>
+
+<div>
+<label>Experience</label>
+<input id="createExperience" placeholder="e.g. 2 years">
+</div>
+</div>
+
+<h3>📚 Your Lesson</h3>
+
+<label>Lesson title</label>
+<input id="lessonTitle" placeholder="What are you teaching?">
+
+<label>Category</label>
+<select id="lessonCategory">
+<option>🎵 Music</option>
+<option>🎨 Art</option>
+<option>💃 Dance</option>
+<option>🎬 Content</option>
+<option>🔧 Technical</option>
+<option>💻 Technology</option>
+<option>⚽ Sports</option>
+<option>🗣️ Languages</option>
+</select>
+
+<label>Lesson description</label>
+<textarea id="lessonDescription" placeholder="Explain what students will learn"></textarea>
+
+<label>Video link</label>
+<input id="lessonVideo" placeholder="Optional video URL">
+
+<label>Price</label>
+<div class="grid2">
+<select id="priceType" onchange="togglePrice()">
+<option value="FREE">FREE</option>
+<option value="PAID">PAID</option>
+</select>
+<input id="lessonPrice" type="number" min="0" step="0.01" placeholder="€ price" disabled>
+</div>
+
+<div class="notice">
+💡 Your profile, teacher information, lesson, category, video and price will all be saved together when you publish.
+</div>
+
+<button class="publish" onclick="publishEverything()">
+🚀 Publish Lesson
 </button>
 
 </div>
 
 <section>
-
-<div class="row">
-<h2>How it works</h2>
-</div>
-
-<button class="option" onclick="startTeacherOnboarding()">
-
-<div class="number">1️⃣</div>
-
-<div>
-<h3>Create your profile</h3>
-<p>
-Tell people about your talent and experience.
-</p>
-</div>
-
-</button>
-
-
-<button class="option" onclick="openLessonCreator()">
-
-<div class="number">2️⃣</div>
-
-<div>
-<h3>Upload your lessons</h3>
-<p>
-Add videos and teach step by step.
-</p>
-</div>
-
-</button>
-
-
-<button class="option" onclick="choosePrice()">
-
-<div class="number">3️⃣</div>
-
-<div>
-<h3>Choose your price</h3>
-<p>
-Make lessons free or paid.
-</p>
-</div>
-
-</button>
-
+<div class="row"><h2>My Published Lessons</h2></div>
+<div id="myLessons"></div>
 </section>
 
-<div class="createCard">
-
-<h2>Your lesson</h2>
-
-<p id="createLessonStatus" style="color:#777">
-You haven't created a lesson yet.
-</p>
-
-<button class="createButton" onclick="openLessonCreator()">
-Create a Lesson 📚
-</button>
-
 </div>
 
-</div>
-
-
-<!-- ================= PROFILE ================= -->
-
+<!-- PROFILE -->
 <div id="profile" class="view">
 
 <header>
-
-<div>
-<div class="logo">My Profile</div>
-<div class="sub">Your Studio journey</div>
-</div>
-
+<div><div class="logo">My Profile</div><div class="sub">Your Studio journey</div></div>
 <button class="icon">⚙️</button>
-
 </header>
 
-
 <div class="stats">
-
-<div>
-<b id="courseCount">0</b>
-<span>Courses</span>
+<div><b id="courseCount">0</b><span>Courses</span></div>
+<div><b>0</b><span>Followers</span></div>
+<div><b id="earningCount">€0</b><span>Earnings</span></div>
 </div>
-
-<div>
-<b>0</b>
-<span>Followers</span>
-</div>
-
-<div>
-<b id="earningCount">€0</b>
-<span>Earnings</span>
-</div>
-
-</div>
-
 
 <div class="profile">
 
 <div class="bigavatar">
-
 <span id="profileEmoji">👨🏾‍💻</span>
-
-<img id="profileImage"
-style="display:none"
-alt="Profile">
-
+<img id="profileImage" style="display:none" alt="Profile">
 </div>
 
-<input
-type="file"
-id="profilePhoto"
-accept="image/*"
-onchange="changeProfilePhoto()">
+<h2 id="profileName">Your Name</h2>
+<p id="profileUsername" class="profileUsername">@your_studio_name</p>
+<p id="profileBio" class="profileBio">Tell people about yourself and your talent.</p>
 
-<button
-class="photoButton"
-onclick="document.getElementById('profilePhoto').click()">
-📸 Change Profile Photo
+<button class="editButton" onclick="show('create')">
+✏️ Edit Everything
 </button>
-
-
-<h2 id="profileName">
-Your Name
-</h2>
-
-<p id="profileUsername" class="profileUsername">
-@your_studio_name
-</p>
-
-<p id="profileBio" class="profileBio">
-Tell people about yourself and your talent.
-</p>
-
-<button class="editButton" onclick="editProfile()">
-✏️ Edit Profile
-</button>
-
-<button
-class="editButton"
-style="background:#777"
-onclick="editBio()">
-📝 Edit Bio
-</button>
-
 
 <div id="teacherInfo"></div>
 
 </div>
-
 </div>
 
-
-<!-- ================= NAVIGATION ================= -->
-
+<!-- NAV -->
 <nav>
-
-<button
-id="n-home"
-class="active"
-onclick="show('home')">
-
-<span class="navicon">🏠</span>
-Home
-
-</button>
-
-<button
-id="n-explore"
-onclick="show('explore')">
-
-<span class="navicon">🔎</span>
-Explore
-
-</button>
-
-<button
-id="n-create"
-onclick="show('create')">
-
-<span class="navicon">➕</span>
-Create
-
-</button>
-
-<button
-id="n-profile"
-onclick="show('profile')">
-
-<span class="navicon">👤</span>
-Profile
-
-</button>
-
+<button id="n-home" class="active" onclick="show('home')"><span class="navicon">🏠</span>Home</button>
+<button id="n-explore" onclick="show('explore')"><span class="navicon">🔎</span>Explore</button>
+<button id="n-create" onclick="show('create')"><span class="navicon">➕</span>Create</button>
+<button id="n-profile" onclick="show('profile')"><span class="navicon">👤</span>Profile</button>
 </nav>
 
 </div>
 
-
 <script>
 
-/* =========================================
-   NAVIGATION
-========================================= */
+/* =========================
+NAVIGATION
+========================= */
 
 function show(id){
+document.querySelectorAll(".view").forEach(v=>v.classList.remove("activeView"));
 
-  document
-  .querySelectorAll(".view")
-  .forEach(function(view){
-    view.classList.remove("activeView");
-  });
+const page=document.getElementById(id);
+if(page)page.classList.add("activeView");
 
-  const page=document.getElementById(id);
+document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
 
-  if(page){
-    page.classList.add("activeView");
-  }
+const nav=document.getElementById("n-"+id);
+if(nav)nav.classList.add("active");
 
-  document
-  .querySelectorAll("nav button")
-  .forEach(function(button){
-    button.classList.remove("active");
-  });
+if(id==="create")loadCreateForm();
+if(id==="profile")loadProfile();
+if(id==="explore")renderLessons();
 
-  const navButton=document.getElementById("n-"+id);
-
-  if(navButton){
-    navButton.classList.add("active");
-  }
-
-  window.scrollTo(0,0);
+window.scrollTo(0,0);
 }
 
 
-/* =========================================
-   PROFILE
-========================================= */
+/* =========================
+CREATE EVERYTHING
+========================= */
 
-function editProfile(){
+function publishEverything(){
 
-  const name=prompt("Enter your name:");
+const name=document.getElementById("createName").value.trim();
+const username=document.getElementById("createUsername").value.trim().replace(/^@/,"");
+const bio=document.getElementById("createBio").value.trim();
+const talent=document.getElementById("createTalent").value.trim();
+const experience=document.getElementById("createExperience").value.trim();
 
-  if(name && name.trim()){
+const title=document.getElementById("lessonTitle").value.trim();
+const category=document.getElementById("lessonCategory").value;
+const description=document.getElementById("lessonDescription").value.trim();
+const video=document.getElementById("lessonVideo").value.trim();
 
-    const cleanName=name.trim();
+const priceType=document.getElementById("priceType").value;
+const price=document.getElementById("lessonPrice").value;
 
-    document.getElementById("profileName").textContent=cleanName;
+if(!name){
+alert("Please enter your name.");
+return;
+}
 
-    localStorage.setItem(
-      "studioName",
-      cleanName
-    );
-  }
+if(!username){
+alert("Please enter your username.");
+return;
+}
+
+if(!talent){
+alert("Please enter your talent.");
+return;
+}
+
+if(!title){
+alert("Please enter your lesson title.");
+return;
+}
+
+if(!description){
+alert("Please describe your lesson.");
+return;
+}
+
+if(priceType==="PAID" && (!price || Number(price)<0)){
+alert("Please enter a valid price.");
+return;
+}
 
 
-  const username=prompt("Enter your username:");
+/* SAVE PROFILE */
 
-  if(username && username.trim()){
+localStorage.setItem("studioName",name);
+localStorage.setItem("studioUsername",username);
+localStorage.setItem("studioBio",bio);
+localStorage.setItem("studioTeacherTalent",talent);
+localStorage.setItem("studioTeacherExperience",experience);
 
-    const cleanUsername=username
-    .trim()
-    .replace(/^@/,"");
 
-    document.getElementById("profileUsername")
-    .textContent="@"+cleanUsername;
+/* SAVE PHOTO */
 
-    localStorage.setItem(
-      "studioUsername",
-      cleanUsername
-    );
-  }
+const photo=document.getElementById("createPhoto").files[0];
+
+if(photo){
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+localStorage.setItem(
+"studioProfilePhoto",
+e.target.result
+);
+
+finishPublishing(
+name,
+username,
+title,
+category,
+description,
+video,
+priceType,
+price
+);
+
+};
+
+reader.readAsDataURL(photo);
+
+}else{
+
+finishPublishing(
+name,
+username,
+title,
+category,
+description,
+video,
+priceType,
+price
+);
+
+}
 
 }
 
 
-function editBio(){
+/* =========================
+FINISH PUBLISHING
+========================= */
 
-  const bio=prompt("Write your bio:");
+function finishPublishing(
+name,
+username,
+title,
+category,
+description,
+video,
+priceType,
+price
+){
 
-  if(bio && bio.trim()){
+let lessons=[];
 
-    const cleanBio=bio.trim();
+try{
+lessons=JSON.parse(
+localStorage.getItem("studioLessons") || "[]"
+);
+}catch(e){
+lessons=[];
+}
 
-    document.getElementById("profileBio")
-    .textContent=cleanBio;
+const lesson={
+id:Date.now(),
+teacher:name,
+username:username,
+title:title,
+category:category,
+description:description,
+video:video,
+priceType:priceType,
+price:priceType==="PAID" ? Number(price) : 0
+};
 
-    localStorage.setItem(
-      "studioBio",
-      cleanBio
-    );
-  }
+lessons.push(lesson);
+
+localStorage.setItem(
+"studioLessons",
+JSON.stringify(lessons)
+);
+
+
+/* KEEP COMPATIBILITY WITH YOUR OLD LESSON DATA */
+
+localStorage.setItem("studioLessonTitle",title);
+localStorage.setItem("studioLessonDescription",description);
+localStorage.setItem("studioLessonCategory",category);
+localStorage.setItem(
+"studioLessonPrice",
+priceType==="FREE" ? "FREE" : "€"+price
+);
+
+
+renderLesson();
+renderLessons();
+loadProfile();
+
+alert("Your profile and lesson have been published! 🎉");
+
+show("profile");
+}
+
+
+/* =========================
+PRICE
+========================= */
+
+function togglePrice(){
+
+const type=document.getElementById("priceType").value;
+const price=document.getElementById("lessonPrice");
+
+if(type==="PAID"){
+price.disabled=false;
+}else{
+price.disabled=true;
+price.value="";
+}
 
 }
 
 
-/* =========================================
-   PROFILE PHOTO
-========================================= */
+/* =========================
+LOAD CREATE FORM
+========================= */
 
-function changeProfilePhoto(){
+function loadCreateForm(){
 
-  const input=document.getElementById("profilePhoto");
+document.getElementById("createName").value=
+localStorage.getItem("studioName") || "";
 
-  const file=input.files[0];
+document.getElementById("createUsername").value=
+localStorage.getItem("studioUsername") || "";
 
-  if(!file){
-    return;
-  }
+document.getElementById("createBio").value=
+localStorage.getItem("studioBio") || "";
 
-  if(!file.type.startsWith("image/")){
-    alert("Please choose an image.");
-    return;
-  }
+document.getElementById("createTalent").value=
+localStorage.getItem("studioTeacherTalent") || "";
 
-  const reader=new FileReader();
+document.getElementById("createExperience").value=
+localStorage.getItem("studioTeacherExperience") || "";
 
-  reader.onload=function(event){
+const photo=
+localStorage.getItem("studioProfilePhoto");
 
-    const image=document.getElementById("profileImage");
-    const emoji=document.getElementById("profileEmoji");
+if(photo){
 
-    image.src=event.target.result;
+document.getElementById("createPhotoPreview").innerHTML=
+"<img src='"+photo+"' style='width:100%;height:100%;object-fit:cover;border-radius:50%'>";
 
-    image.style.display="block";
+}
 
-    emoji.style.display="none";
-
-    localStorage.setItem(
-      "studioProfilePhoto",
-      event.target.result
-    );
-
-  };
-
-  reader.readAsDataURL(file);
+renderMyLessons();
 }
 
 
-/* =========================================
-   TEACHER
-========================================= */
+/* =========================
+PHOTO PREVIEW
+========================= */
 
-function startTeacherOnboarding(){
+document.getElementById("createPhoto")
+.addEventListener("change",function(){
 
-  const existingTalent=
-    localStorage.getItem("studioTeacherTalent");
+const file=this.files[0];
 
-  if(existingTalent){
+if(!file)return;
 
-    alert("You are already a teacher! 👨‍🏫");
+if(!file.type.startsWith("image/")){
+alert("Please select an image.");
+return;
+}
 
-    show("profile");
+const reader=new FileReader();
 
-    return;
-  }
+reader.onload=function(e){
 
+document.getElementById("createPhotoPreview").innerHTML=
+"<img src='"+e.target.result+"' style='width:100%;height:100%;object-fit:cover;border-radius:50%'>";
 
-  const talent=prompt(
-    "What is your talent?"
-  );
+};
 
-  if(!talent || !talent.trim()){
-    return;
-  }
+reader.readAsDataURL(file);
 
-
-  const experience=prompt(
-    "Tell us briefly about your experience:"
-  );
-
-  if(!experience || !experience.trim()){
-    return;
-  }
+});
 
 
-  localStorage.setItem(
-    "studioTeacherTalent",
-    talent.trim()
-  );
+/* =========================
+PROFILE
+========================= */
 
-  localStorage.setItem(
-    "studioTeacherExperience",
-    experience.trim()
-  );
+function loadProfile(){
 
+const name=
+localStorage.getItem("studioName");
 
-  alert(
-    "Your teacher profile is ready! 🎉"
-  );
+const username=
+localStorage.getItem("studioUsername");
 
-  renderTeacherInfo();
+const bio=
+localStorage.getItem("studioBio");
 
-  show("profile");
+const photo=
+localStorage.getItem("studioProfilePhoto");
+
+if(name){
+
+document.getElementById("profileName")
+.textContent=name;
+
+}
+
+if(username){
+
+document.getElementById("profileUsername")
+.textContent="@"+username;
+
+}
+
+if(bio){
+
+document.getElementById("profileBio")
+.textContent=bio;
+
+}
+
+if(photo){
+
+const image=
+document.getElementById("profileImage");
+
+const emoji=
+document.getElementById("profileEmoji");
+
+image.src=photo;
+image.style.display="block";
+emoji.style.display="none";
+
+}
+
+renderTeacherInfo();
+
+const lessons=getLessons();
+
+document.getElementById("courseCount")
+.textContent=lessons.length;
+
 }
 
 
-/* =========================================
-   TEACHER INFORMATION
-========================================= */
+/* =========================
+TEACHER INFO
+========================= */
 
 function renderTeacherInfo(){
 
-  const talent=
-    localStorage.getItem("studioTeacherTalent");
+const talent=
+localStorage.getItem("studioTeacherTalent");
 
-  const experience=
-    localStorage.getItem("studioTeacherExperience");
+const experience=
+localStorage.getItem("studioTeacherExperience");
 
-  const container=
-    document.getElementById("teacherInfo");
+const box=
+document.getElementById("teacherInfo");
 
-  if(!container){
-    return;
-  }
+if(!box)return;
 
-  container.innerHTML="";
+if(!talent){
 
-  if(!talent){
-    return;
-  }
+box.innerHTML="";
+return;
 
+}
 
-  const box=document.createElement("div");
+box.innerHTML=
+"<div class='teacherInfo'>"+
+"<b>👨‍🏫 Teacher Profile</b>"+
+"<p><b>Talent:</b> "+
+escapeHTML(talent)+
+"</p>"+
+"<p><b>Experience:</b> "+
+escapeHTML(experience || "")+
+"</p>"+
+"</div>";
 
-  box.className="teacherInfo";
-
-  box.innerHTML=
-    "<b>👨‍🏫 Teacher Profile</b>"+
-    "<p style='margin:8px 0 4px'><b>Talent:</b> "+
-    escapeHTML(talent)+
-    "</p>"+
-    "<p style='margin:0'><b>Experience:</b> "+
-    escapeHTML(experience || "")+
-    "</p>";
-
-
-  container.appendChild(box);
 }
 
 
-/* =========================================
-   CREATE LESSON
-========================================= */
+/* =========================
+OLD PROFILE PHOTO SYSTEM
+========================= */
 
-function openLessonCreator(){
+function changeProfilePhoto(){
 
-  const oldTitle=
-    localStorage.getItem("studioLessonTitle");
+const input=
+document.getElementById("profilePhoto");
 
-  if(oldTitle){
+if(!input)return;
 
-    alert(
-      "You already have a lesson! 📚"
-    );
+const file=input.files[0];
 
-    show("explore");
+if(!file)return;
 
-    return;
-  }
+const reader=new FileReader();
 
+reader.onload=function(e){
 
-  const title=prompt(
-    "What is your lesson title?"
-  );
+localStorage.setItem(
+"studioProfilePhoto",
+e.target.result
+);
 
-  if(!title || !title.trim()){
-    return;
-  }
+loadProfile();
 
+};
 
-  const description=prompt(
-    "Describe your lesson briefly:"
-  );
+reader.readAsDataURL(file);
 
-  if(!description || !description.trim()){
-    return;
-  }
-
-
-  const category=prompt(
-    "Which category? Music, Art, Dance, Content, Technical, Technology, Sports or Languages"
-  );
-
-  if(!category || !category.trim()){
-    return;
-  }
-
-
-  localStorage.setItem(
-    "studioLessonTitle",
-    title.trim()
-  );
-
-  localStorage.setItem(
-    "studioLessonDescription",
-    description.trim()
-  );
-
-  localStorage.setItem(
-    "studioLessonCategory",
-    category.trim()
-  );
-
-
-  let price=
-    localStorage.getItem("studioLessonPrice");
-
-  if(!price){
-
-    price=prompt(
-      "Choose your price. Enter FREE or a price in €:"
-    );
-
-    if(!price || !price.trim()){
-      price="FREE";
-    }
-
-    localStorage.setItem(
-      "studioLessonPrice",
-      price.trim()
-    );
-  }
-
-
-  renderLesson();
-
-  alert(
-    "Your lesson has been created! 🎉"
-  );
-
-  show("explore");
 }
 
 
-/* =========================================
-   CHOOSE PRICE
-========================================= */
+/* =========================
+LESSONS
+========================= */
 
-function choosePrice(){
+function getLessons(){
 
-  const title=
-    localStorage.getItem("studioLessonTitle");
+try{
 
-  if(!title){
+return JSON.parse(
+localStorage.getItem("studioLessons") || "[]"
+);
 
-    alert(
-      "Create your lesson first. 📚"
-    );
+}catch(e){
 
-    return;
-  }
+return [];
 
-
-  const price=prompt(
-    "Enter FREE or your price in €:"
-  );
-
-  if(!price || !price.trim()){
-    return;
-  }
-
-
-  localStorage.setItem(
-    "studioLessonPrice",
-    price.trim()
-  );
-
-
-  renderLesson();
-
-  alert(
-    "Your lesson price has been saved! 💰"
-  );
 }
 
+}
 
-/* =========================================
-   DISPLAY LESSON
-========================================= */
 
 function renderLesson(){
 
-  const title=
-    localStorage.getItem("studioLessonTitle");
+const title=
+localStorage.getItem("studioLessonTitle");
 
-  const description=
-    localStorage.getItem(
-      "studioLessonDescription"
-    );
+const description=
+localStorage.getItem("studioLessonDescription");
 
-  const price=
-    localStorage.getItem(
-      "studioLessonPrice"
-    ) || "FREE";
+const price=
+localStorage.getItem("studioLessonPrice") || "FREE";
 
 
-  const titleElement=
-    document.getElementById(
-      "featuredLessonTitle"
-    );
+const titleElement=
+document.getElementById("featuredLessonTitle");
 
-  const descriptionElement=
-    document.getElementById(
-      "featuredLessonDescription"
-    );
+const descriptionElement=
+document.getElementById("featuredLessonDescription");
 
-  const priceElement=
-    document.getElementById(
-      "featuredLessonPrice"
-    );
+const priceElement=
+document.getElementById("featuredLessonPrice");
 
 
-  if(titleElement){
+if(titleElement){
 
-    titleElement.textContent=
-      title || "No lesson yet";
-  }
+titleElement.textContent=
+title || "No lesson yet";
 
+}
 
-  if(descriptionElement){
+if(descriptionElement){
 
-    descriptionElement.textContent=
-      description ||
-      "Create your first lesson from the Create section.";
-  }
+descriptionElement.textContent=
+description ||
+"Create your first lesson.";
 
+}
 
-  if(priceElement){
+if(priceElement){
 
-    if(
-      price.toUpperCase()==="FREE"
-    ){
+priceElement.textContent=price;
 
-      priceElement.textContent="FREE";
+}
 
-    }else{
-
-      priceElement.textContent=
-        price.includes("€")
-        ? price
-        : "€"+price;
-    }
-  }
-
-
-  const status=
-    document.getElementById(
-      "createLessonStatus"
-    );
-
-  if(status){
-
-    if(title){
-
-      status.textContent=
-        "📚 "+title+
-        " • "+price;
-
-    }else{
-
-      status.textContent=
-        "You haven't created a lesson yet.";
-    }
-  }
-
-
-  const courseCount=
-    document.getElementById(
-      "courseCount"
-    );
-
-  if(courseCount){
-
-    courseCount.textContent=
-      title ? "1" : "0";
-  }
 }
 
 
-/* =========================================
-   VIEW LESSON
-========================================= */
+function renderLessons(){
+
+const lessons=getLessons();
+
+const list=
+document.getElementById("lessonList");
+
+if(!list)return;
+
+if(!lessons.length){
+
+list.innerHTML="";
+return;
+
+}
+
+list.innerHTML=
+lessons.map(function(lesson){
+
+const price=
+lesson.priceType==="PAID"
+? "€"+lesson.price
+: "FREE";
+
+return `
+<div class="lesson">
+<div class="lessonImg">📚</div>
+<div class="lessonBody">
+<span class="pill ${lesson.priceType==="PAID"?"paid":""}">
+${escapeHTML(lesson.category)} · ${price}
+</span>
+<h1>${escapeHTML(lesson.title)}</h1>
+<p>${escapeHTML(lesson.description)}</p>
+
+<div class="price">${price}</div>
+
+${
+lesson.video
+?
+"<button class='enroll' onclick=\"openVideo('"+
+escapeHTML(lesson.video)+
+"')\">🎥 Watch Lesson</button>"
+:
+""
+}
+
+</div>
+</div>
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+MY LESSONS
+========================= */
+
+function renderMyLessons(){
+
+const box=
+document.getElementById("myLessons");
+
+if(!box)return;
+
+const lessons=getLessons();
+
+if(!lessons.length){
+
+box.innerHTML=
+"<div class='empty'>"+
+"You haven't published a lesson yet."+
+"</div>";
+
+return;
+
+}
+
+box.innerHTML=
+lessons.map(function(lesson){
+
+const price=
+lesson.priceType==="PAID"
+? "€"+lesson.price
+: "FREE";
+
+return `
+<div class="course">
+<div class="thumb">📚</div>
+<div>
+<h3>${escapeHTML(lesson.title)}</h3>
+<p>${escapeHTML(lesson.category)}</p>
+<span class="pill ${lesson.priceType==="PAID"?"paid":""}">
+${price}
+</span>
+</div>
+</div>
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+VIEW FEATURED LESSON
+========================= */
 
 function viewLesson(){
 
-  const title=
-    localStorage.getItem(
-      "studioLessonTitle"
-    );
+const title=
+localStorage.getItem("studioLessonTitle");
 
-  if(!title){
+const description=
+localStorage.getItem("studioLessonDescription");
 
-    alert(
-      "There is no lesson yet. Go to Create and make your first lesson. 📚"
-    );
+const price=
+localStorage.getItem("studioLessonPrice") || "FREE";
 
-    return;
-  }
+if(!title){
 
+alert(
+"There is no lesson yet. Go to Create and publish your first lesson. 📚"
+);
 
-  const description=
-    localStorage.getItem(
-      "studioLessonDescription"
-    ) || "";
+return;
 
-  const price=
-    localStorage.getItem(
-      "studioLessonPrice"
-    ) || "FREE";
+}
 
-  alert(
-    "📚 "+title+
-    "\n\n"+
-    description+
-    "\n\nPrice: "+price
-  );
+alert(
+"📚 "+title+
+"\n\n"+
+description+
+"\n\nPrice: "+price
+);
+
 }
 
 
-/* =========================================
-   CATEGORY
-========================================= */
+/* =========================
+CATEGORY
+========================= */
 
 function selectCategory(category){
 
-  document.getElementById(
-    "categoryTitle"
-  ).textContent=
-    category+" lessons";
+document.getElementById(
+"categoryTitle"
+).textContent=
+category+" lessons";
 
-  const savedCategory=
-    localStorage.getItem(
-      "studioLessonCategory"
-    );
+const search=
+document.getElementById("searchInput");
 
-  const title=
-    localStorage.getItem(
-      "studioLessonTitle"
-    );
+search.value=category;
 
-  if(
-    title &&
-    savedCategory &&
-    savedCategory.toLowerCase()===
-    category.toLowerCase()
-  ){
+searchLessons();
 
-    renderLesson();
+show("explore");
 
-  }else if(title){
-
-    document.getElementById(
-      "featuredLessonTitle"
-    ).textContent=
-      "No "+category+" lesson yet";
-
-    document.getElementById(
-      "featuredLessonDescription"
-    ).textContent=
-      "Create a lesson in the "+category+" category.";
-
-  }else{
-
-    document.getElementById(
-      "featuredLessonTitle"
-    ).textContent=
-      "No "+category+" lesson yet";
-
-    document.getElementById(
-      "featuredLessonDescription"
-    ).textContent=
-      "Be the first teacher to create a "+category+" lesson.";
-  }
-
-
-  show("explore");
 }
 
 
-/* =========================================
-   SEARCH
-========================================= */
+/* =========================
+SEARCH
+========================= */
 
 function searchLessons(){
 
-  const input=
-    document.getElementById(
-      "searchInput"
-    );
+const query=
+document.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
 
-  const results=
-    document.getElementById(
-      "searchResults"
-    );
+const lessons=getLessons();
 
-  const query=
-    input.value.toLowerCase().trim();
+const list=
+document.getElementById("lessonList");
 
+if(!list)return;
 
-  results.innerHTML="";
+const filtered=
+lessons.filter(function(lesson){
 
+return !query ||
+lesson.title.toLowerCase().includes(query) ||
+lesson.description.toLowerCase().includes(query) ||
+lesson.category.toLowerCase().includes(query) ||
+lesson.teacher.toLowerCase().includes(query);
 
-  if(!query){
-    return;
-  }
-
-
-  const title=
-    localStorage.getItem(
-      "studioLessonTitle"
-    );
-
-  const description=
-    localStorage.getItem(
-      "studioLessonDescription"
-    );
-
-  const category=
-    localStorage.getItem(
-      "studioLessonCategory"
-    );
+});
 
 
-  if(
-    title &&
-    (
-      title.toLowerCase().includes(query) ||
-      description.toLowerCase().includes(query) ||
-      category.toLowerCase().includes(query)
-    )
-  ){
+if(!filtered.length){
 
-    const card=document.createElement("div");
+list.innerHTML=
+"<div class='empty'>"+
+"No lessons found yet. 🔎"+
+"</div>";
 
-    card.className="lesson";
+return;
 
-    card.innerHTML=
-      "<div class='lessonBody'>"+
-      "<h1>"+escapeHTML(title)+"</h1>"+
-      "<p>"+escapeHTML(description)+"</p>"+
-      "<span class='pill'>"+
-      escapeHTML(
-        localStorage.getItem("studioLessonPrice") || "FREE"
-      )+
-      "</span>"+
-      "</div>";
-
-    results.appendChild(card);
-
-  }else{
-
-    results.innerHTML=
-      "<div class='empty'>"+
-      "No lesson found yet. 🔎"+
-      "</div>";
-  }
 }
 
 
-/* =========================================
-   SECURITY HELPER
-========================================= */
+list.innerHTML=
+filtered.map(function(lesson){
+
+const price=
+lesson.priceType==="PAID"
+? "€"+lesson.price
+: "FREE";
+
+return `
+<div class="lesson">
+<div class="lessonImg">📚</div>
+<div class="lessonBody">
+
+<span class="pill ${lesson.priceType==="PAID"?"paid":""}">
+${escapeHTML(lesson.category)} · ${price}
+</span>
+
+<h1>${escapeHTML(lesson.title)}</h1>
+
+<p>${escapeHTML(lesson.description)}</p>
+
+<p>
+👨‍🏫 ${escapeHTML(lesson.teacher)}
+</p>
+
+<div class="price">${price}</div>
+
+${
+lesson.video
+?
+"<button class='enroll' onclick=\"openVideo('"+
+escapeHTML(lesson.video)+
+"')\">🎥 Watch Lesson</button>"
+:
+""
+}
+
+</div>
+</div>
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+VIDEO
+========================= */
+
+function openVideo(url){
+
+try{
+
+const parsed=new URL(url);
+
+if(
+parsed.protocol==="http:" ||
+parsed.protocol==="https:"
+){
+
+window.open(
+parsed.href,
+"_blank"
+);
+
+}
+
+}catch(e){
+
+alert("Please use a valid video URL.");
+
+}
+
+}
+
+
+/* =========================
+ESCAPE
+========================= */
 
 function escapeHTML(value){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
 }
 
 
-/* =========================================
-   LOAD SAVED DATA
-========================================= */
+/* =========================
+SEARCH OLD DATA
+========================= */
 
-function loadSavedData(){
+function migrateOldLesson(){
 
-  const savedName=
-    localStorage.getItem("studioName");
+const title=
+localStorage.getItem("studioLessonTitle");
 
-  const savedUsername=
-    localStorage.getItem("studioUsername");
+if(!title)return;
 
-  const savedBio=
-    localStorage.getItem("studioBio");
+const existing=getLessons();
 
-  const savedPhoto=
-    localStorage.getItem("studioProfilePhoto");
+const already=existing.some(
+lesson=>lesson.title===title
+);
 
+if(already)return;
 
-  if(savedName){
+const description=
+localStorage.getItem(
+"studioLessonDescription"
+) || "";
 
-    document.getElementById(
-      "profileName"
-    ).textContent=savedName;
-  }
+const category=
+localStorage.getItem(
+"studioLessonCategory"
+) || "Content";
 
+const oldPrice=
+localStorage.getItem(
+"studioLessonPrice"
+) || "FREE";
 
-  if(savedUsername){
+const paid=
+oldPrice.toUpperCase()!=="FREE";
 
-    document.getElementById(
-      "profileUsername"
-    ).textContent=
-      "@"+savedUsername;
-  }
+existing.push({
 
+id:Date.now(),
 
-  if(savedBio){
+teacher:
+localStorage.getItem("studioName") ||
+"Studio Teacher",
 
-    document.getElementById(
-      "profileBio"
-    ).textContent=savedBio;
-  }
+username:
+localStorage.getItem("studioUsername") ||
+"",
 
+title:title,
 
-  if(savedPhoto){
+category:category,
 
-    const image=
-      document.getElementById(
-        "profileImage"
-      );
+description:description,
 
-    const emoji=
-      document.getElementById(
-        "profileEmoji"
-      );
+video:"",
 
-    image.src=savedPhoto;
+priceType:paid?"PAID":"FREE",
 
-    image.style.display="block";
+price:paid?
+Number(
+oldPrice.replace("€","")
+) || 0
+:0
 
-    emoji.style.display="none";
-  }
+});
 
+localStorage.setItem(
+"studioLessons",
+JSON.stringify(existing)
+);
 
-  renderTeacherInfo();
-
-  renderLesson();
 }
 
 
-/* =========================================
-   START APP
-========================================= */
+/* =========================
+START
+========================= */
 
-loadSavedData();
+migrateOldLesson();
+
+loadProfile();
+
+renderLesson();
+
+renderLessons();
+
+renderMyLessons();
 
 </script>
 
