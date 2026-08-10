@@ -151,6 +151,7 @@ h2{
   color:var(--purple);
   font-weight:700;
   font-size:13px;
+  cursor:pointer;
 }
 
 /* CATEGORIES */
@@ -192,6 +193,7 @@ h2{
   background:#fff;
   border-radius:17px;
   padding:12px;
+  cursor:pointer;
 }
 
 .avatar{
@@ -635,7 +637,8 @@ small{
 <body>
 
 <div class="app">
-  <!-- HOME -->
+
+<!-- HOME -->
 
 <div id="home" class="view activeView">
 
@@ -866,7 +869,7 @@ onclick="openNotifications()">
 <input
 id="searchInput"
 placeholder="Search skills, teachers, courses..."
-oninput="searchLessons">
+oninput="searchLessons()">
 
 </div>
 
@@ -1505,6 +1508,7 @@ Languages:"🗣️"
 
 };
 
+
 const DEFAULT_ELECTRICAL=[
 
 {
@@ -1544,6 +1548,9 @@ content:"Learn how to check an electrical installation safely before using it."
 
 ];
 
+
+/* STORAGE */
+
 function getLessons(){
 
 try{
@@ -1565,6 +1572,7 @@ return [];
 
 }
 
+
 function saveLessons(data){
 
 localStorage.setItem(
@@ -1573,6 +1581,7 @@ JSON.stringify(data)
 );
 
 }
+
 
 function getArray(key){
 
@@ -1595,6 +1604,7 @@ return [];
 
 }
 
+
 function saveArray(key,data){
 
 localStorage.setItem(
@@ -1604,6 +1614,7 @@ JSON.stringify(data)
 
 }
 
+
 function cleanUsername(value){
 
 return String(value || "")
@@ -1612,6 +1623,7 @@ return String(value || "")
 
 }
 
+
 function categoryName(value){
 
 return String(value || "")
@@ -1619,6 +1631,7 @@ return String(value || "")
 .trim();
 
 }
+
 
 function escapeHTML(value){
 
@@ -1631,11 +1644,13 @@ return String(value ?? "")
 
 }
 
+
 function escAttr(value){
 
 return escapeHTML(value);
 
 }
+
 
 function priceText(lesson){
 
@@ -1652,6 +1667,7 @@ return "FREE";
 
 }
 
+
 function getCurrentUser(){
 
 return localStorage.getItem(
@@ -1660,7 +1676,10 @@ return localStorage.getItem(
 
 }
 
-function show(id){
+
+/* NAVIGATION */
+
+function show(id,skipRender=false){
 
 document
 .querySelectorAll(".view")
@@ -1672,8 +1691,10 @@ view.classList.remove(
 
 });
 
+
 const page=
 document.getElementById(id);
+
 
 if(page){
 
@@ -1682,6 +1703,7 @@ page.classList.add(
 );
 
 }
+
 
 document
 .querySelectorAll("nav button")
@@ -1693,10 +1715,12 @@ button.classList.remove(
 
 });
 
+
 const navButton=
 document.getElementById(
 "n-"+id
 );
+
 
 if(navButton){
 
@@ -1706,11 +1730,13 @@ navButton.classList.add(
 
 }
 
+
 if(id==="create"){
 
 loadCreateForm();
 
 }
+
 
 if(id==="profile"){
 
@@ -1718,11 +1744,13 @@ loadProfile();
 
 }
 
-if(id==="explore"){
+
+if(id==="explore" && !skipRender){
 
 renderLessons();
 
 }
+
 
 if(id==="home"){
 
@@ -1730,12 +1758,16 @@ renderHomeCourses();
 
 }
 
+
 window.scrollTo(
 0,
 0
 );
 
 }
+
+
+/* PRICE */
 
 function togglePrice(){
 
@@ -1762,6 +1794,9 @@ price.value="";
 }
 
 }
+
+
+/* COURSE LESSON EDITORS */
 
 function addLessonEditor(
 data={title:"",content:""}
@@ -1815,6 +1850,7 @@ box.appendChild(div);
 
 }
 
+
 function renumberEditors(){
 
 document
@@ -1833,6 +1869,7 @@ box.querySelector(
 });
 
 }
+
 
 function collectEditors(){
 
@@ -1868,6 +1905,9 @@ item.content;
 
 }
 
+
+/* CREATE FORM */
+
 function loadCreateForm(){
 
 const fields={
@@ -1879,6 +1919,7 @@ createTalent:"studioTeacherTalent",
 createExperience:"studioTeacherExperience"
 
 };
+
 
 Object.keys(fields)
 .forEach(function(id){
@@ -1897,15 +1938,18 @@ fields[id]
 
 });
 
+
 const photo=
 localStorage.getItem(
 "studioProfilePhoto"
 );
 
+
 const preview=
 document.getElementById(
 "createPhotoPreview"
 );
+
 
 if(photo){
 
@@ -1921,9 +1965,13 @@ preview.innerHTML=
 
 }
 
+
 renderMyLessons();
 
 }
+
+
+/* PHOTO */
 
 document
 .getElementById("createPhoto")
@@ -1978,6 +2026,7 @@ reader.readAsDataURL(file);
 
 });
 
+
 function readFileAsDataURL(file){
 
 return new Promise(
@@ -2013,6 +2062,9 @@ file
 });
 
 }
+
+
+/* PUBLISH */
 
 async function publishEverything(){
 
@@ -2164,6 +2216,9 @@ return;
 
 }
 
+
+/* PROFILE */
+
 localStorage.setItem(
 "studioName",
 name
@@ -2188,6 +2243,9 @@ localStorage.setItem(
 "studioTeacherExperience",
 experience
 );
+
+
+/* PROFILE PHOTO */
 
 const photoFile=
 document.getElementById(
@@ -2220,6 +2278,9 @@ photo
 
 }
 
+
+/* COURSE IMAGE */
+
 let courseImage="";
 
 const imageFile=
@@ -2248,14 +2309,21 @@ imageFile
 
 }
 
+
+/* LESSONS */
+
 let courseLessons=
 collectEditors();
 
 if(!courseLessons.length){
 
 if(
-title.toLowerCase().includes("electrical") ||
-title.toLowerCase().includes("wiring")
+title.toLowerCase().includes(
+"electrical"
+) ||
+title.toLowerCase().includes(
+"wiring"
+)
 ){
 
 courseLessons=
@@ -2282,6 +2350,9 @@ content:description
 }
 
 }
+
+
+/* COURSE */
 
 const course={
 
@@ -2357,6 +2428,9 @@ alert(
 show("profile");
 
 }
+
+
+/* COURSE CARD */
 
 function renderLessonCard(
 lesson,
@@ -2506,6 +2580,9 @@ onclick="event.stopPropagation();shareCourse(${Number(lesson.id)})">
 
 }
 
+
+/* COURSE DETAILS */
+
 function openCourse(id){
 
 const lesson=
@@ -2591,7 +2668,13 @@ onclick="startCourse(${Number(lesson.id)})">
 
 }
 
-show("explore");
+/*
+IMPORTANT FIX:
+skipRender=true prevents show("explore")
+from rebuilding the Explore lesson list.
+*/
+
+show("explore",true);
 
 const list=
 document.getElementById(
@@ -2711,6 +2794,7 @@ onclick="shareCourse(${Number(lesson.id)})">
 
 </div>
 
+
 <div class="lesson">
 
 <div class="lessonBody">
@@ -2773,6 +2857,9 @@ item.content ||
 
 }
 
+
+/* FREE COURSE */
+
 function startCourse(id){
 
 const lesson=
@@ -2821,6 +2908,9 @@ lesson.title
 openCourse(id);
 
 }
+
+
+/* PAID COURSE DEMO */
 
 function buyCourse(id){
 
@@ -2908,6 +2998,9 @@ openCourse(id);
 
 }
 
+
+/* EXPLORE */
+
 function renderLessons(
 lessonsToShow
 ){
@@ -2966,6 +3059,9 @@ true
 .join("");
 
 }
+
+
+/* SEARCH */
 
 function searchLessons(){
 
@@ -3051,6 +3147,9 @@ lessons
 
 }
 
+
+/* CATEGORY */
+
 function selectCategory(
 category
 ){
@@ -3072,6 +3171,9 @@ show("explore");
 searchLessons();
 
 }
+
+
+/* HOME */
 
 function renderHomeCourses(){
 
@@ -3182,6 +3284,9 @@ ${priceText(lesson)}
 .join("");
 
 }
+
+
+/* MY COURSES */
 
 function renderMyLessons(){
 
@@ -3305,6 +3410,9 @@ ${priceText(lesson)}
 
 }
 
+
+/* PROFILE COURSES */
+
 function renderProfileLessons(){
 
 const box=
@@ -3363,6 +3471,9 @@ false
 .join("");
 
 }
+
+
+/* PROFILE */
 
 function loadProfile(){
 
@@ -3471,6 +3582,9 @@ renderProfileLessons();
 
 }
 
+
+/* TEACHER INFO */
+
 function renderTeacherInfo(){
 
 const talent=
@@ -3535,6 +3649,9 @@ experience ||
 
 }
 
+
+/* TEACHERS */
+
 function getTeacherLessons(
 name
 ){
@@ -3553,6 +3670,7 @@ String(name || "")
 });
 
 }
+
 
 function getFollowers(
 name
@@ -3574,6 +3692,7 @@ String(name)
 }).length;
 
 }
+
 
 function openTeacher(
 name
@@ -3618,7 +3737,7 @@ localStorage.getItem(
 :
 "";
 
-show("explore");
+show("explore",true);
 
 document.getElementById(
 "lessonList"
@@ -3749,6 +3868,9 @@ true
 
 }
 
+
+/* FOLLOW */
+
 function toggleFollow(
 name
 ){
@@ -3856,6 +3978,9 @@ name
 
 }
 
+
+/* NOTIFICATIONS */
+
 function getNotifications(){
 
 return getArray(
@@ -3863,6 +3988,7 @@ return getArray(
 );
 
 }
+
 
 function saveNotifications(
 data
@@ -3874,6 +4000,7 @@ data
 );
 
 }
+
 
 function addNotification(
 title,
@@ -3910,6 +4037,7 @@ notifications.slice(
 
 }
 
+
 function openNotifications(){
 
 const notifications=
@@ -3923,7 +4051,7 @@ return !item.read;
 
 }).length;
 
-show("explore");
+show("explore",true);
 
 let html=
 
@@ -4038,6 +4166,7 @@ html;
 
 }
 
+
 function markNotificationsRead(){
 
 const data=
@@ -4058,6 +4187,9 @@ openNotifications();
 
 }
 
+
+/* MESSAGES */
+
 function getMessages(){
 
 return getArray(
@@ -4065,6 +4197,7 @@ return getArray(
 );
 
 }
+
 
 function saveMessages(
 data
@@ -4076,6 +4209,7 @@ data
 );
 
 }
+
 
 function openMessage(
 teacher
@@ -4090,7 +4224,7 @@ teacher;
 
 });
 
-show("explore");
+show("explore",true);
 
 document.getElementById(
 "lessonList"
@@ -4181,6 +4315,7 @@ onclick='sendMessage(${JSON.stringify(teacher)})'>
 
 }
 
+
 function sendMessage(
 teacher
 ){
@@ -4250,12 +4385,13 @@ teacher
 
 }
 
+
 function openMyMessages(){
 
 const messages=
 getMessages();
 
-show("explore");
+show("explore",true);
 
 const teachers=[
 ...
@@ -4361,6 +4497,9 @@ Open conversation
 
 }
 
+
+/* EARNINGS */
+
 function getEarnings(){
 
 return Number(
@@ -4370,6 +4509,7 @@ localStorage.getItem(
 );
 
 }
+
 
 function openEarnings(){
 
@@ -4495,6 +4635,9 @@ ${priceText(lesson)}
 
 }
 
+
+/* LIKES */
+
 function toggleLike(
 id
 ){
@@ -4563,6 +4706,9 @@ renderLessons();
 
 }
 
+
+/* COMMENTS */
+
 function openComments(
 id
 ){
@@ -4583,13 +4729,15 @@ return;
 }
 
 lesson.comments=
-Array.isArray(lesson.comments)
+Array.isArray(
+lesson.comments
+)
 ?
 lesson.comments
 :
 [];
 
-show("explore");
+show("explore",true);
 
 document.getElementById(
 "lessonList"
@@ -4677,6 +4825,7 @@ onclick="addComment(${Number(id)})">
 
 }
 
+
 function addComment(
 id
 ){
@@ -4752,6 +4901,9 @@ openComments(id);
 
 }
 
+
+/* SHARE */
+
 async function shareCourse(
 id
 ){
@@ -4815,6 +4967,9 @@ alert(text);
 
 }
 
+
+/* RENDER */
+
 function renderAll(){
 
 renderHomeCourses();
@@ -4826,6 +4981,9 @@ renderMyLessons();
 loadProfile();
 
 }
+
+
+/* START */
 
 function startStudioTalent(){
 
@@ -4929,6 +5087,9 @@ togglePrice();
 
 }
 
+
+/* START APP */
+
 if(
 document.readyState===
 "loading"
@@ -4944,6 +5105,9 @@ startStudioTalent
 startStudioTalent();
 
 }
+
+
+/* HOME NOTIFICATIONS */
 
 document
 .getElementById(
