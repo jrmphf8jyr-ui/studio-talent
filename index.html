@@ -136,6 +136,48 @@ if(savedBio){
   }
   bioElement.textContent = savedBio;
 }
+const profilePhoto = document.getElementById("profilePhoto");
+const profileAvatar = document.getElementById("profileAvatar");
+
+profilePhoto.addEventListener("change", function () {
+  const file = this.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      profileAvatar.innerHTML = "";
+
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      img.style.width = "88px";
+      img.style.height = "88px";
+      img.style.borderRadius = "50%";
+      img.style.objectFit = "cover";
+
+      profileAvatar.appendChild(img);
+
+      localStorage.setItem("studioProfilePhoto", e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+  }
+});
+
+const savedPhoto = localStorage.getItem("studioProfilePhoto");
+
+if (savedPhoto) {
+  profileAvatar.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = savedPhoto;
+  img.style.width = "88px";
+  img.style.height = "88px";
+  img.style.borderRadius = "50%";
+  img.style.objectFit = "cover";
+
+  profileAvatar.appendChild(img);
+}
 </script>
 </body>
 </html><!-- Studio Talent update -->
