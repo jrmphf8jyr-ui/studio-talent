@@ -211,7 +211,12 @@ function startTeacherOnboarding() {
   alert("Your teacher profile is ready! 🎉");
 }
 function openLessonCreator() {
-  const title = prompt("What is your lesson title?");
+if (localStorage.getItem("studioLessonTitle")) {
+  alert("You already have a lesson! 📚");
+  return;
+}
+
+const title = prompt("What is your lesson title?");
   if (!title) return;
 
   const description = prompt("Describe your lesson briefly:");
