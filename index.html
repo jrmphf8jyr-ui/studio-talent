@@ -7,1240 +7,341 @@
 
 <style>
 :root{
-  --purple:#5b3df5;
-  --purple2:#7b61ff;
-  --ink:#151529;
-  --muted:#77758b;
-  --bg:#f7f7fb;
-  --card:#fff;
-  --border:#ececf3;
-  --dark:#17142d;
-  --green:#1f8a55;
+--purple:#5b3df5;--purple2:#7b61ff;--ink:#151529;--muted:#77758b;
+--bg:#f7f7fb;--card:#fff;--border:#ececf3;--dark:#17142d;
 }
-
 *{box-sizing:border-box}
-
 html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  background:#e9e9f1;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--ink);
-}
-
-button,input,textarea,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.app{
-  width:min(430px,100%);
-  min-height:100vh;
-  margin:auto;
-  background:var(--bg);
-  position:relative;
-  padding-bottom:92px;
-}
-
-.view{display:none}
-.view.activeView{display:block}
-
-header{
-  padding:28px 20px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.logo{
-  font-size:28px;
-  font-weight:800;
-  color:var(--purple);
-}
-
-.sub{
-  font-size:13px;
-  font-weight:700;
-  margin-top:-3px;
-  color:var(--muted);
-}
-
-.icon{
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:50%;
-  background:#fff;
-  font-size:20px;
-}
-
-.hero{
-  margin:12px 16px;
-  background:linear-gradient(135deg,#17142d,#4931b9);
-  color:#fff;
-  border-radius:24px;
-  padding:24px;
-  min-height:230px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.hero h1{
-  font-size:32px;
-  line-height:1.02;
-  margin:0 0 12px;
-}
-
-.hero p{
-  margin:0 0 18px;
-  color:#ddd9ff;
-}
-
-.cta{
-  border:0;
-  background:#fff;
-  color:var(--purple);
-  font-weight:800;
-  padding:12px 18px;
-  border-radius:14px;
-  width:max-content;
-}
-
+body{margin:0;background:#e9e9f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{width:min(430px,100%);min-height:100vh;margin:auto;background:var(--bg);position:relative;padding-bottom:92px}
+.view{display:none}.view.activeView{display:block}
+header{padding:28px 20px 12px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:800;color:var(--purple)}
+.sub{font-size:13px;font-weight:700;margin-top:-3px;color:var(--muted)}
+.icon{width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:20px}
+.hero{margin:12px 16px;background:linear-gradient(135deg,#17142d,#4931b9);color:#fff;border-radius:24px;padding:24px;min-height:230px;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:32px;line-height:1.02;margin:0 0 12px}
+.hero p{margin:0 0 18px;color:#ddd9ff}
+.cta{border:0;background:#fff;color:var(--purple);font-weight:800;padding:12px 18px;border-radius:14px;width:max-content}
 section{padding:0 16px}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:22px 0 12px;
-}
-
-h2{
-  font-size:18px;
-  margin:0;
-}
-
-.see{
-  color:var(--purple);
-  font-weight:700;
-  font-size:13px;
-  cursor:pointer;
-}
-
-.cats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-}
-
-.cat{
-  border:0;
-  background:#fff;
-  border-radius:16px;
-  padding:12px 5px;
-  font-size:11px;
-  font-weight:700;
-  min-height:76px;
-  color:var(--ink);
-}
-
-.emoji{
-  font-size:25px;
-  display:block;
-  margin-bottom:6px;
-}
-
-.teachers{
-  display:flex;
-  gap:10px;
-  overflow:auto;
-  padding-bottom:4px;
-}
-
-.teacher{
-  min-width:118px;
-  background:#fff;
-  border-radius:17px;
-  padding:12px;
-  cursor:pointer;
-}
-
-.avatar{
-  height:72px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#ddd,#aaa);
-  display:grid;
-  place-items:center;
-  font-size:30px;
-  overflow:hidden;
-}
-
-.avatar img,
-.bigavatar img,
-.photoPreview img,
-.courseImg img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.teacher b{
-  display:block;
-  margin-top:8px;
-  font-size:13px;
-}
-
-.stars{
-  font-size:11px;
-  color:#8a6d00;
-  margin-top:4px;
-}
-
-.course{
-  display:flex;
-  gap:12px;
-  background:#fff;
-  border-radius:17px;
-  padding:12px;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-.thumb{
-  width:88px;
-  height:72px;
-  flex-shrink:0;
-  border-radius:13px;
-  background:#d9d4ff;
-  display:grid;
-  place-items:center;
-  font-size:28px;
-  overflow:hidden;
-}
-
-.course h3{
-  margin:4px 0;
-  font-size:14px;
-}
-
-.course p{
-  margin:6px 0;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.pill{
-  display:inline-block;
-  background:#ddf8e9;
-  color:#197348;
-  border-radius:10px;
-  padding:4px 8px;
-  font-size:10px;
-  font-weight:800;
-}
-
-.paid{
-  background:#eee9ff;
-  color:var(--purple);
-}
-
-.search{
-  margin:12px 16px;
-  background:#fff;
-  border-radius:15px;
-  padding:14px;
-  color:#999;
-}
-
-.search input{
-  border:0;
-  outline:0;
-  width:calc(100% - 30px);
-  font-size:15px;
-}
-
-.lesson{
-  margin:16px;
-  background:#fff;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 2px 10px #e4e4ec;
-}
-
-.lessonImg{
-  height:190px;
-  background:linear-gradient(135deg,#222,#777);
-  display:grid;
-  place-items:center;
-  color:#fff;
-  font-size:48px;
-  overflow:hidden;
-}
-
-.lessonImg img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.lessonBody{
-  padding:18px;
-}
-
-.lessonBody h1{
-  font-size:22px;
-  margin:8px 0;
-}
-
-.lessonBody h2{
-  font-size:20px;
-  margin:8px 0 14px;
-}
-
-.lessonBody p{
-  color:var(--muted);
-  line-height:1.5;
-}
-
-.price{
-  font-size:20px;
-  font-weight:800;
-  margin:16px 0;
-}
-
-.enroll,
-.publish,
-.editButton{
-  width:100%;
-  border:0;
-  background:var(--purple);
-  color:#fff;
-  padding:14px;
-  border-radius:14px;
-  font-weight:800;
-}
-
-.darkButton{
-  background:#151529!important;
-}
-
-.backButton{
-  width:100%;
-  border:0;
-  background:#f0eff8;
-  color:var(--ink);
-  padding:13px;
-  border-radius:14px;
-  font-weight:800;
-  margin-bottom:10px;
-}
-
-.notice{
-  background:#f1efff;
-  color:#4b3bc2;
-  border-radius:12px;
-  padding:12px;
-  font-size:12px;
-  margin-top:12px;
-}
-
-.progressWrap{
-  background:#eeeef5;
-  height:9px;
-  border-radius:20px;
-  overflow:hidden;
-  margin:12px 0;
-}
-
-.progressBar{
-  height:100%;
-  background:var(--purple);
-  border-radius:20px;
-  width:0%;
-}
-
-.lessonNavigation{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
-}
-
-.lessonNavigation button{
-  border:0;
-  border-radius:13px;
-  padding:13px 8px;
-  background:#eee9ff;
-  color:var(--purple);
-  font-weight:800;
-}
-
-.lessonNavigation button:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-}
-
-.createForm{
-  margin:16px;
-  background:#fff;
-  border-radius:22px;
-  padding:18px;
-}
-
-.createForm h2{
-  margin-bottom:4px;
-}
-
-.createForm h3{
-  margin:20px 0 10px;
-}
-
-.createForm label{
-  display:block;
-  font-size:12px;
-  font-weight:800;
-  margin:12px 0 6px;
-}
-
-.createForm input,
-.createForm textarea,
-.createForm select{
-  width:100%;
-  border:1px solid var(--border);
-  background:#fafafd;
-  border-radius:12px;
-  padding:12px;
-  outline:0;
-}
-
-.createForm textarea{
-  min-height:85px;
-  resize:vertical;
-}
-
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.publish{
-  margin-top:18px;
-}
-
-.photoPreview{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:#ddd5ff;
-  display:grid;
-  place-items:center;
-  font-size:30px;
-  overflow:hidden;
-  margin-bottom:8px;
-}
-
-.courseImg{
-  width:88px;
-  height:72px;
-  border-radius:13px;
-  background:#d9d4ff;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-  font-size:28px;
-  flex-shrink:0;
-}
-
-.profile{
-  margin:16px;
-  background:#fff;
-  border-radius:22px;
-  padding:22px;
-  text-align:center;
-}
-
-.bigavatar{
-  width:100px;
-  height:100px;
-  margin:auto;
-  border-radius:50%;
-  background:#d8d2ff;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-}
-
-.profile h2{
-  margin:12px 0 4px;
-}
-
-.profileUsername{
-  color:var(--muted);
-  margin:0;
-}
-
-.profileBio{
-  color:var(--muted);
-  line-height:1.5;
-  margin-top:12px;
-}
-
-.editButton{
-  margin-top:10px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  margin:22px 16px 0;
-  background:#fff;
-  border-radius:18px;
-  padding:18px 5px;
-  text-align:center;
-}
-
-.stats b{
-  display:block;
-  font-size:18px;
-}
-
-.stats span{
-  font-size:11px;
-  color:var(--muted);
-}
-
-.teacherInfo{
-  margin-top:16px;
-  padding:15px;
-  background:#f1efff;
-  border-radius:15px;
-  text-align:left;
-}
-
-.empty{
-  text-align:center;
-  padding:35px 20px;
-  color:var(--muted);
-}
-
-.actionGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:0 16px;
-}
-
-.actionButton{
-  border:0;
-  background:#fff;
-  border-radius:16px;
-  padding:15px 10px;
-  font-weight:800;
-  color:var(--ink);
-}
-
-.actionButton span{
-  display:block;
-  font-size:25px;
-  margin-bottom:5px;
-}
-
-.socialBar{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-}
-
-.socialBar button{
-  flex:1;
-  border:0;
-  background:#f4f3fb;
-  border-radius:11px;
-  padding:9px;
-  font-weight:700;
-}
-
-.comment{
-  background:#f7f7fb;
-  border-radius:12px;
-  padding:10px;
-  margin-top:8px;
-  font-size:13px;
-}
-
-.lessonEditor{
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:12px;
-  margin-top:10px;
-  background:#fafafd;
-}
-
-.lessonEditor textarea{
-  min-height:70px;
-}
-
-.smallBtn{
-  border:0;
-  border-radius:10px;
-  padding:9px 11px;
-  background:#eee9ff;
-  color:var(--purple);
-  font-weight:800;
-}
-
-.danger{
-  background:#ffe8e8;
-  color:#b42318;
-}
-
-.videoPreview{
-  width:100%;
-  margin-top:10px;
-  border-radius:14px;
-  background:#111;
-  overflow:hidden;
-}
-
-.videoPreview video{
-  display:block;
-  width:100%;
-  max-height:260px;
-  object-fit:contain;
-}
-
-.videoMeta{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:6px;
-}
-
-.courseVideo{
-  width:100%;
-  border-radius:15px;
-  margin-top:12px;
-  background:#111;
-  overflow:hidden;
-}
-
-.courseVideo video{
-  width:100%;
-  display:block;
-  max-height:260px;
-}
-
-nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(430px,100%);
-  height:78px;
-  background:#fff;
-  border-top:1px solid #eee;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:8px 10px env(safe-area-inset-bottom);
-  z-index:100;
-}
-
-nav button{
-  border:0;
-  background:transparent;
-  color:#777;
-  font-size:11px;
-  font-weight:700;
-}
-
-.navicon{
-  display:block;
-  font-size:22px;
-  margin-bottom:2px;
-}
-
-nav button.active{
-  color:var(--purple)!important;
-}
-
-small{
-  color:var(--muted);
-}
-
-.videoButton{
-  display:block;
-  text-align:center;
-  text-decoration:none;
-  background:#151529;
-  color:#fff;
-  padding:13px;
-  border-radius:13px;
-  font-weight:800;
-  margin-top:12px;
-}
+.row{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}
+h2{font-size:18px;margin:0}
+.see{color:var(--purple);font-weight:700;font-size:13px;cursor:pointer}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.cat{border:0;background:#fff;border-radius:16px;padding:12px 5px;font-size:11px;font-weight:700;min-height:76px;color:var(--ink)}
+.emoji{font-size:25px;display:block;margin-bottom:6px}
+.teachers{display:flex;gap:10px;overflow:auto;padding-bottom:4px}
+.teacher{min-width:118px;background:#fff;border-radius:17px;padding:12px;cursor:pointer}
+.avatar{height:72px;border-radius:14px;background:linear-gradient(135deg,#ddd,#aaa);display:grid;place-items:center;font-size:30px;overflow:hidden}
+.avatar img,.bigavatar img,.photoPreview img{width:100%;height:100%;object-fit:cover}
+.teacher b{display:block;margin-top:8px;font-size:13px}
+.stars{font-size:11px;color:#8a6d00;margin-top:4px}
+.course{display:flex;gap:12px;background:#fff;border-radius:17px;padding:12px;margin-top:10px;cursor:pointer}
+.thumb{width:88px;height:72px;flex-shrink:0;border-radius:13px;background:#d9d4ff;display:grid;place-items:center;font-size:28px;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.course h3{margin:4px 0;font-size:14px}
+.course p{margin:6px 0;color:var(--muted);font-size:12px}
+.pill{display:inline-block;background:#ddf8e9;color:#197348;border-radius:10px;padding:4px 8px;font-size:10px;font-weight:800}
+.paid{background:#eee9ff;color:var(--purple)}
+.search{margin:12px 16px;background:#fff;border-radius:15px;padding:14px;color:#999}
+.search input{border:0;outline:0;width:calc(100% - 30px);font-size:15px}
+.lesson{margin:16px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 10px #e4e4ec}
+.lessonImg{height:190px;background:linear-gradient(135deg,#222,#777);display:grid;place-items:center;color:#fff;font-size:48px;overflow:hidden}
+.lessonImg img{width:100%;height:100%;object-fit:cover}
+.lessonBody{padding:18px}
+.lessonBody h1{font-size:22px;margin:8px 0}
+.lessonBody h2{font-size:20px;margin:8px 0 14px}
+.lessonBody p{color:var(--muted);line-height:1.5}
+.price{font-size:20px;font-weight:800;margin:16px 0}
+.enroll,.publish,.editButton{width:100%;border:0;background:var(--purple);color:#fff;padding:14px;border-radius:14px;font-weight:800}
+.darkButton{background:#151529!important}
+.backButton{width:100%;border:0;background:#f0eff8;color:var(--ink);padding:13px;border-radius:14px;font-weight:800;margin-bottom:10px}
+.notice{background:#f1efff;color:#4b3bc2;border-radius:12px;padding:12px;font-size:12px;margin-top:12px}
+.progressWrap{background:#eeeef5;height:9px;border-radius:20px;overflow:hidden;margin:12px 0}
+.progressBar{height:100%;background:var(--purple);border-radius:20px;width:0}
+.lessonNavigation{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+.lessonNavigation button{border:0;border-radius:13px;padding:13px 8px;background:#eee9ff;color:var(--purple);font-weight:800}
+.lessonNavigation button:disabled{opacity:.4}
+.createForm{margin:16px;background:#fff;border-radius:22px;padding:18px}
+.createForm h2{margin-bottom:4px}.createForm h3{margin:20px 0 10px}
+.createForm label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px}
+.createForm input,.createForm textarea,.createForm select{width:100%;border:1px solid var(--border);background:#fafafd;border-radius:12px;padding:12px;outline:0}
+.createForm textarea{min-height:85px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.publish{margin-top:18px}
+.photoPreview{width:70px;height:70px;border-radius:50%;background:#ddd5ff;display:grid;place-items:center;font-size:30px;overflow:hidden;margin-bottom:8px}
+.profile{margin:16px;background:#fff;border-radius:22px;padding:22px;text-align:center}
+.bigavatar{width:100px;height:100px;margin:auto;border-radius:50%;background:#d8d2ff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:42px}
+.profile h2{margin:12px 0 4px}.profileUsername{color:var(--muted);margin:0}
+.profileBio{color:var(--muted);line-height:1.5;margin-top:12px}
+.editButton{margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 16px 0;background:#fff;border-radius:18px;padding:18px 5px;text-align:center}
+.stats b{display:block;font-size:18px}.stats span{font-size:11px;color:var(--muted)}
+.teacherInfo{margin-top:16px;padding:15px;background:#f1efff;border-radius:15px;text-align:left}
+.empty{text-align:center;padding:35px 20px;color:var(--muted)}
+.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.actionButton{border:0;background:#fff;border-radius:16px;padding:15px 10px;font-weight:800;color:var(--ink)}
+.actionButton span{display:block;font-size:25px;margin-bottom:5px}
+.socialBar{display:flex;gap:8px;margin-top:12px}
+.socialBar button{flex:1;border:0;background:#f4f3fb;border-radius:11px;padding:9px;font-weight:700}
+.comment{background:#f7f7fb;border-radius:12px;padding:10px;margin-top:8px;font-size:13px}
+.lessonEditor{border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px;background:#fafafd}
+.lessonEditor textarea{min-height:70px}
+.smallBtn{border:0;border-radius:10px;padding:9px 11px;background:#eee9ff;color:var(--purple);font-weight:800}
+.danger{background:#ffe8e8;color:#b42318}
+.videoPreview,.courseVideo{width:100%;margin-top:10px;border-radius:14px;background:#111;overflow:hidden}
+.videoPreview video,.courseVideo video{display:block;width:100%;max-height:280px;object-fit:contain}
+.videoMeta{font-size:11px;color:var(--muted);margin-top:6px}
+.videoButton{display:block;text-align:center;text-decoration:none;background:#151529;color:#fff;padding:13px;border-radius:13px;font-weight:800;margin-top:12px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:78px;background:#fff;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 10px env(safe-area-inset-bottom);z-index:100}
+nav button{border:0;background:transparent;color:#777;font-size:11px;font-weight:700}
+.navicon{display:block;font-size:22px;margin-bottom:2px}
+nav button.active{color:var(--purple)!important}
+small{color:var(--muted)}
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
+<!-- HOME -->
 <div id="home" class="view activeView">
-
 <header>
-<div>
-<div class="logo">Studio</div>
-<div class="sub">Talent</div>
-</div>
-
+<div><div class="logo">Studio</div><div class="sub">Talent</div></div>
 <button class="icon" id="homeNotificationButton">🔔</button>
 </header>
 
 <div class="hero">
-
-<h1>
-Learn.<br>
-Teach.<br>
-<span style="color:#a99cff">Share your talent.</span>
-</h1>
-
+<h1>Learn.<br>Teach.<br><span style="color:#a99cff">Share your talent.</span></h1>
 <p>Everyone has a talent. Let's grow together.</p>
-
-<button class="cta" onclick="show('explore')">
-Get Started →
-</button>
-
+<button class="cta" onclick="show('explore')">Get Started →</button>
 </div>
 
 <section>
-
-<div class="row">
-<h2>Popular Categories</h2>
-<span class="see" onclick="show('explore')">See all</span>
-</div>
-
+<div class="row"><h2>Popular Categories</h2><span class="see" onclick="show('explore')">See all</span></div>
 <div class="cats">
-
-<button class="cat" onclick="selectCategory('Music')">
-<span class="emoji">🎵</span>Music
-</button>
-
-<button class="cat" onclick="selectCategory('Art')">
-<span class="emoji">🎨</span>Art
-</button>
-
-<button class="cat" onclick="selectCategory('Dance')">
-<span class="emoji">💃</span>Dance
-</button>
-
-<button class="cat" onclick="selectCategory('Content')">
-<span class="emoji">🎬</span>Content
-</button>
-
+<button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
+<button class="cat" onclick="selectCategory('Art')"><span class="emoji">🎨</span>Art</button>
+<button class="cat" onclick="selectCategory('Dance')"><span class="emoji">💃</span>Dance</button>
+<button class="cat" onclick="selectCategory('Content')"><span class="emoji">🎬</span>Content</button>
 </div>
 
-<div class="row">
-<h2>Top Teachers</h2>
-<span class="see" onclick="show('explore')">See all</span>
-</div>
-
+<div class="row"><h2>Top Teachers</h2><span class="see" onclick="show('explore')">See all</span></div>
 <div class="teachers">
-
-<div class="teacher" onclick="openTeacher('Adam Visuals')">
-<div class="avatar">🎥</div>
-<b>Adam Visuals</b>
-<div class="stars">⭐ 4.9</div>
+<div class="teacher" onclick="openTeacher('Adam Visuals')"><div class="avatar">🎥</div><b>Adam Visuals</b><div class="stars">⭐ 4.9</div></div>
+<div class="teacher" onclick="openTeacher('Lea Music')"><div class="avatar">🎤</div><b>Lea Music</b><div class="stars">⭐ 4.8</div></div>
+<div class="teacher" onclick="openTeacher('Coach Ibra')"><div class="avatar">⚽</div><b>Coach Ibra</b><div class="stars">⭐ 4.9</div></div>
 </div>
 
-<div class="teacher" onclick="openTeacher('Lea Music')">
-<div class="avatar">🎤</div>
-<b>Lea Music</b>
-<div class="stars">⭐ 4.8</div>
-</div>
-
-<div class="teacher" onclick="openTeacher('Coach Ibra')">
-<div class="avatar">⚽</div>
-<b>Coach Ibra</b>
-<div class="stars">⭐ 4.9</div>
-</div>
-
-</div>
-
-<div class="row">
-<h2>New Courses</h2>
-<span class="see" onclick="show('explore')">See all</span>
-</div>
-
+<div class="row"><h2>New Courses</h2><span class="see" onclick="show('explore')">See all</span></div>
 <div id="homeCourses"></div>
-
 </section>
 </div>
 
-
+<!-- EXPLORE -->
 <div id="explore" class="view">
-
 <header>
-
-<div>
-<div class="logo">Explore</div>
-<div class="sub">Find your next skill</div>
-</div>
-
+<div><div class="logo">Explore</div><div class="sub">Find your next skill</div></div>
 <button class="icon" onclick="openNotifications()">🔔</button>
-
 </header>
 
-<div class="search">
-🔎
-<input
-id="searchInput"
-placeholder="Search skills, teachers, courses..."
-oninput="searchLessons">
+<div class="search">🔎
+<input id="searchInput" placeholder="Search skills, teachers, courses..." oninput="searchLessons()">
 </div>
 
 <section>
-
-<div class="row">
-<h2>Categories</h2>
-</div>
-
+<div class="row"><h2>Categories</h2></div>
 <div class="cats">
-
-<button class="cat" onclick="selectCategory('Music')">
-<span class="emoji">🎵</span>Music
-</button>
-
-<button class="cat" onclick="selectCategory('Art')">
-<span class="emoji">🎨</span>Art
-</button>
-
-<button class="cat" onclick="selectCategory('Dance')">
-<span class="emoji">💃</span>Dance
-</button>
-
-<button class="cat" onclick="selectCategory('Content')">
-<span class="emoji">🎬</span>Content
-</button>
-
-<button class="cat" onclick="selectCategory('Technical')">
-<span class="emoji">🔧</span>Technical
-</button>
-
-<button class="cat" onclick="selectCategory('Technology')">
-<span class="emoji">💻</span>Technology
-</button>
-
-<button class="cat" onclick="selectCategory('Sports')">
-<span class="emoji">⚽</span>Sports
-</button>
-
-<button class="cat" onclick="selectCategory('Languages')">
-<span class="emoji">🗣️</span>Languages
-</button>
-
+<button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
+<button class="cat" onclick="selectCategory('Art')"><span class="emoji">🎨</span>Art</button>
+<button class="cat" onclick="selectCategory('Dance')"><span class="emoji">💃</span>Dance</button>
+<button class="cat" onclick="selectCategory('Content')"><span class="emoji">🎬</span>Content</button>
+<button class="cat" onclick="selectCategory('Technical')"><span class="emoji">🔧</span>Technical</button>
+<button class="cat" onclick="selectCategory('Technology')"><span class="emoji">💻</span>Technology</button>
+<button class="cat" onclick="selectCategory('Sports')"><span class="emoji">⚽</span>Sports</button>
+<button class="cat" onclick="selectCategory('Languages')"><span class="emoji">🗣️</span>Languages</button>
 </div>
-
-<div class="row">
-<h2 id="categoryTitle">All lessons</h2>
-</div>
-
+<div class="row"><h2 id="categoryTitle">All lessons</h2></div>
 </section>
-
 <div id="lessonList"></div>
-
 </div>
 
-
+<!-- CREATE -->
 <div id="create" class="view">
-
-<header>
-
-<div>
-<div class="logo">Create</div>
-<div class="sub">Create everything in one place</div>
-</div>
-
-</header>
+<header><div><div class="logo">Create</div><div class="sub">Create everything in one place</div></div></header>
 
 <div class="hero">
-
-<h1>
-Create.<br>
-Teach.<br>
-<span style="color:#a99cff">Earn.</span>
-</h1>
-
-<p>
-Create your teacher profile and publish your course.
-</p>
-
+<h1>Create.<br>Teach.<br><span style="color:#a99cff">Earn.</span></h1>
+<p>Create your teacher profile and publish your course.</p>
 </div>
 
 <div class="createForm">
-
 <h2>Create & Publish</h2>
-
-<p style="color:#777;font-size:12px">
-Your profile and course information are saved on this device.
-</p>
+<p style="color:#777;font-size:12px">Your profile and course information are saved on this device.</p>
 
 <h3>👤 Your Profile</h3>
-
-<label>Your name</label>
-<input id="createName" placeholder="Your name">
-
-<label>Username</label>
-<input id="createUsername" placeholder="@your_username">
-
+<label>Your name</label><input id="createName" placeholder="Your name">
+<label>Username</label><input id="createUsername" placeholder="@your_username">
 <label>Profile photo</label>
-
-<div class="photoPreview" id="createPhotoPreview">
-👨🏾‍💻
-</div>
-
+<div class="photoPreview" id="createPhotoPreview">👨🏾‍💻</div>
 <input id="createPhoto" type="file" accept="image/*">
-
-<label>Bio</label>
-
-<textarea
-id="createBio"
-placeholder="Tell people about yourself and your talent"></textarea>
+<label>Bio</label><textarea id="createBio" placeholder="Tell people about yourself and your talent"></textarea>
 
 <div class="grid2">
-
-<div>
-<label>Your talent</label>
-<input id="createTalent" placeholder="e.g. Music">
-</div>
-
-<div>
-<label>Experience</label>
-<input id="createExperience" placeholder="e.g. 2 years">
-</div>
-
+<div><label>Your talent</label><input id="createTalent" placeholder="e.g. Music"></div>
+<div><label>Experience</label><input id="createExperience" placeholder="e.g. 2 years"></div>
 </div>
 
 <h3>📚 Your Course</h3>
-
-<label>Course title</label>
-<input id="lessonTitle" placeholder="What are you teaching?">
+<label>Course title</label><input id="lessonTitle" placeholder="What are you teaching?">
 
 <label>Category</label>
-
 <select id="lessonCategory">
-<option value="Music">🎵 Music</option>
-<option value="Art">🎨 Art</option>
-<option value="Dance">💃 Dance</option>
-<option value="Content">🎬 Content</option>
-<option value="Technical">🔧 Technical</option>
-<option value="Technology">💻 Technology</option>
-<option value="Sports">⚽ Sports</option>
-<option value="Languages">🗣️ Languages</option>
+<option value="Music">🎵 Music</option><option value="Art">🎨 Art</option>
+<option value="Dance">💃 Dance</option><option value="Content">🎬 Content</option>
+<option value="Technical">🔧 Technical</option><option value="Technology">💻 Technology</option>
+<option value="Sports">⚽ Sports</option><option value="Languages">🗣️ Languages</option>
 </select>
 
 <label>Course description</label>
-
-<textarea
-id="lessonDescription"
-placeholder="Explain what students will learn"></textarea>
+<textarea id="lessonDescription" placeholder="Explain what students will learn"></textarea>
 
 <label>Course image</label>
 <input id="lessonImage" type="file" accept="image/*">
 
 <label>🎥 Upload Course Video</label>
+<input id="lessonVideoFile" type="file" accept="video/*">
 
-<input
-id="lessonVideoFile"
-type="file"
-accept="video/*">
-
-<div
-id="videoUploadPreview"
-class="videoPreview"
-style="display:none">
-</div>
-
-<div
-id="videoUploadInfo"
-class="videoMeta"
-style="display:none">
-</div>
+<div id="videoUploadPreview" class="videoPreview" style="display:none"></div>
+<div id="videoUploadInfo" class="videoMeta" style="display:none"></div>
 
 <label>Or add a video link</label>
-
-<input
-id="lessonVideo"
-type="url"
-placeholder="Optional YouTube/video URL">
+<input id="lessonVideo" type="url" placeholder="Optional YouTube/video URL">
 
 <label>Price</label>
-
 <div class="grid2">
-
 <select id="priceType" onchange="togglePrice()">
 <option value="FREE">FREE</option>
 <option value="PAID">PAID</option>
 </select>
-
-<input
-id="lessonPrice"
-type="number"
-min="0"
-step="0.01"
-placeholder="€ price"
-disabled>
-
+<input id="lessonPrice" type="number" min="0" step="0.01" placeholder="€ price" disabled>
 </div>
 
 <h3>📖 Course Lessons</h3>
-
 <div id="lessonEditors"></div>
+<button type="button" class="smallBtn" onclick="addLessonEditor()">➕ Add Lesson</button>
 
-<button
-type="button"
-class="smallBtn"
-onclick="addLessonEditor()">
-➕ Add Lesson
-</button>
+<div class="notice">Each course has its own lessons. Your lessons are saved with that course.</div>
 
-<div class="notice">
-Each course has its own lessons.
-Your lessons are saved with that course.
-</div>
-
-<button
-class="publish"
-onclick="publishEverything()">
-🚀 Publish Course
-</button>
-
+<button class="publish" onclick="publishEverything()">🚀 Publish Course</button>
 </div>
 
 <section>
-
-<div class="row">
-<h2>My Published Courses</h2>
-</div>
-
+<div class="row"><h2>My Published Courses</h2></div>
 <div id="myLessons"></div>
-
 </section>
-
 </div>
 
-
+<!-- PROFILE -->
 <div id="profile" class="view">
-
 <header>
-
-<div>
-<div class="logo">My Profile</div>
-<div class="sub">Your Studio journey</div>
-</div>
-
+<div><div class="logo">My Profile</div><div class="sub">Your Studio journey</div></div>
 <button class="icon" onclick="openNotifications()">🔔</button>
-
 </header>
 
 <div class="stats">
-
-<div>
-<b id="courseCount">0</b>
-<span>Courses</span>
-</div>
-
-<div>
-<b id="followerCount">0</b>
-<span>Following</span>
-</div>
-
-<div>
-<b id="earningCount">€0</b>
-<span>Earnings</span>
-</div>
-
+<div><b id="courseCount">0</b><span>Courses</span></div>
+<div><b id="followerCount">0</b><span>Following</span></div>
+<div><b id="earningCount">€0</b><span>Earnings</span></div>
 </div>
 
 <div class="profile">
-
 <div class="bigavatar">
-
 <span id="profileEmoji">👨🏾‍💻</span>
-
-<img
-id="profileImage"
-style="display:none"
-alt="Profile">
-
+<img id="profileImage" style="display:none" alt="Profile">
 </div>
-
 <h2 id="profileName">Your Name</h2>
-
-<p id="profileUsername" class="profileUsername">
-@your_studio_name
-</p>
-
-<p id="profileBio" class="profileBio">
-Tell people about yourself and your talent.
-</p>
-
-<button
-class="editButton"
-onclick="show('create')">
-✏️ Edit Profile / Create Course
-</button>
-
+<p id="profileUsername" class="profileUsername">@your_studio_name</p>
+<p id="profileBio" class="profileBio">Tell people about yourself and your talent.</p>
+<button class="editButton" onclick="show('create')">✏️ Edit Profile / Create Course</button>
 <div id="teacherInfo"></div>
-
 </div>
 
 <div class="actionGrid">
-
-<button class="actionButton" onclick="openNotifications()">
-<span>🔔</span>Notifications
-</button>
-
-<button class="actionButton" onclick="openMyMessages()">
-<span>💬</span>Messages
-</button>
-
-<button class="actionButton" onclick="openEarnings()">
-<span>💰</span>Earnings
-</button>
-
-<button class="actionButton" onclick="show('create')">
-<span>➕</span>Create Course
-</button>
-
+<button class="actionButton" onclick="openNotifications()"><span>🔔</span>Notifications</button>
+<button class="actionButton" onclick="openMyMessages()"><span>💬</span>Messages</button>
+<button class="actionButton" onclick="openEarnings()"><span>💰</span>Earnings</button>
+<button class="actionButton" onclick="show('create')"><span>➕</span>Create Course</button>
 </div>
 
 <section>
-
-<div class="row">
-<h2>My Courses</h2>
-</div>
-
+<div class="row"><h2>My Courses</h2></div>
 <div id="profileLessons"></div>
-
 </section>
-
 </div>
-
 
 <nav>
-
-<button id="n-home" class="active" onclick="show('home')">
-<span class="navicon">🏠</span>
-Home
-</button>
-
-<button id="n-explore" onclick="show('explore')">
-<span class="navicon">🔎</span>
-Explore
-</button>
-
-<button id="n-create" onclick="show('create')">
-<span class="navicon">➕</span>
-Create
-</button>
-
-<button id="n-profile" onclick="show('profile')">
-<span class="navicon">👤</span>
-Profile
-</button>
-
+<button id="n-home" class="active" onclick="show('home')"><span class="navicon">🏠</span>Home</button>
+<button id="n-explore" onclick="show('explore')"><span class="navicon">🔎</span>Explore</button>
+<button id="n-create" onclick="show('create')"><span class="navicon">➕</span>Create</button>
+<button id="n-profile" onclick="show('profile')"><span class="navicon">👤</span>Profile</button>
 </nav>
-
 </div>
 
-
 <script>
-
 const CATEGORY_ICONS={
-Music:"🎵",
-Art:"🎨",
-Dance:"💃",
-Content:"🎬",
-Technical:"🔧",
-Technology:"💻",
-Sports:"⚽",
-Languages:"🗣️"
+Music:"🎵",Art:"🎨",Dance:"💃",Content:"🎬",
+Technical:"🔧",Technology:"💻",Sports:"⚽",Languages:"🗣️"
 };
 
 const DEFAULT_ELECTRICAL=[
-{
-title:"Lesson 1 — Electrical Safety",
-content:"Before working with electricity, always switch OFF the power and verify that the circuit is dead. Use insulated tools, appropriate protective equipment, keep the work area dry, and never work on exposed live wires."
-},
-{
-title:"Lesson 2 — Electrical Tools",
-content:"Learn the essential tools used for house electrical wiring. Identify insulated screwdrivers, voltage testers, pliers, wire strippers, measuring tools and other equipment. Always use tools that are suitable and in good condition."
-},
-{
-title:"Lesson 3 — Cables and Wires",
-content:"Learn the different types of electrical cables and how to choose them. Understand conductor size, insulation, identification and the importance of selecting cables appropriate for the circuit and installation."
-},
-{
-title:"Lesson 4 — Switches and Sockets",
-content:"Learn the basic principles of installing switches and electrical sockets. Understand correct connections, positioning and safe isolation before working on the circuit."
-},
-{
-title:"Lesson 5 — Lighting",
-content:"Learn the basic principles of house lighting circuits. Understand how lighting points, switches and cables work together and how to plan a safe lighting installation."
-},
-{
-title:"Lesson 6 — House Wiring",
-content:"Learn how to plan and install the electrical wiring of a house. Understand circuit organisation, distribution, protection, cable routing and the importance of following applicable electrical regulations."
-},
-{
-title:"Lesson 7 — Testing the Installation",
-content:"Learn how to check an electrical installation safely before using it. Testing should be performed with appropriate equipment and according to applicable electrical safety procedures and regulations."
-}
+{title:"Lesson 1 — Electrical Safety",content:"Before working with electricity, always switch OFF the power and verify that the circuit is dead. Use insulated tools, appropriate protective equipment, keep the work area dry, and never work on exposed live wires."},
+{title:"Lesson 2 — Electrical Tools",content:"Learn the essential tools used for house electrical wiring. Identify insulated screwdrivers, voltage testers, pliers, wire strippers, measuring tools and other equipment."},
+{title:"Lesson 3 — Cables and Wires",content:"Learn the different types of electrical cables and how to choose them. Understand conductor size, insulation, identification and the importance of selecting cables appropriate for the circuit."},
+{title:"Lesson 4 — Switches and Sockets",content:"Learn the basic principles of installing switches and electrical sockets. Understand correct connections, positioning and safe isolation before working on the circuit."},
+{title:"Lesson 5 — Lighting",content:"Learn the basic principles of house lighting circuits. Understand how lighting points, switches and cables work together and how to plan a safe lighting installation."},
+{title:"Lesson 6 — House Wiring",content:"Learn how to plan and install the electrical wiring of a house. Understand circuit organisation, distribution, protection, cable routing and applicable electrical regulations."},
+{title:"Lesson 7 — Testing the Installation",content:"Learn how to check an electrical installation safely before using it. Testing should be performed with appropriate equipment and according to applicable electrical safety procedures and regulations."}
 ];
+
+/* =========================
+   LOCAL STORAGE
+========================= */
 
 function getLessons(){
 try{
-const data=JSON.parse(localStorage.getItem("studioLessons")||"[]");
-return Array.isArray(data)?data:[];
-}catch(error){
-return[];
-}
+const x=JSON.parse(localStorage.getItem("studioLessons")||"[]");
+return Array.isArray(x)?x:[];
+}catch(e){return[]}
 }
 
-function saveLessons(data){
-localStorage.setItem("studioLessons",JSON.stringify(data));
+function saveLessons(x){
+localStorage.setItem("studioLessons",JSON.stringify(x));
 }
 
 function getArray(key){
 try{
-const data=JSON.parse(localStorage.getItem(key)||"[]");
-return Array.isArray(data)?data:[];
-}catch(error){
-return[];
-}
+const x=JSON.parse(localStorage.getItem(key)||"[]");
+return Array.isArray(x)?x:[];
+}catch(e){return[]}
 }
 
-function saveArray(key,data){
-localStorage.setItem(key,JSON.stringify(data));
+function saveArray(key,x){
+localStorage.setItem(key,JSON.stringify(x));
 }
 
-function cleanUsername(value){
-return String(value||"").trim().replace(/^@/,"");
+function cleanUsername(x){
+return String(x||"").trim().replace(/^@/,"");
 }
 
-function categoryName(value){
-return String(value||"").replace(/^[^A-Za-z]+/,"").trim();
+function categoryName(x){
+return String(x||"").replace(/^[^A-Za-z]+/,"").trim();
 }
 
-function escapeHTML(value){
-return String(value??"")
+function escapeHTML(x){
+return String(x??"")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -1248,49 +349,217 @@ return String(value??"")
 .replace(/'/g,"&#039;");
 }
 
-function escAttr(value){
-return escapeHTML(value);
-}
+function escAttr(x){return escapeHTML(x)}
 
 function priceText(course){
-if(course.priceType==="PAID"){
-return "€"+Number(course.price||0).toFixed(2).replace(/\.00$/,"");
-}
-return "FREE";
+return course.priceType==="PAID"
+?"€"+Number(course.price||0).toFixed(2).replace(/\.00$/,"")
+:"FREE";
 }
 
 function getCurrentUser(){
 return localStorage.getItem("studioUsername")||"local-user";
 }
 
+/* =========================
+   INDEXED DB VIDEO STORAGE
+========================= */
+
+const VIDEO_DB_NAME="StudioTalentVideoDB";
+const VIDEO_DB_VERSION=1;
+const VIDEO_STORE="videos";
+
+function openVideoDB(){
+
+return new Promise(function(resolve,reject){
+
+if(!window.indexedDB){
+reject(new Error("IndexedDB is not supported."));
+return;
+}
+
+const request=indexedDB.open(
+VIDEO_DB_NAME,
+VIDEO_DB_VERSION
+);
+
+request.onupgradeneeded=function(event){
+
+const db=event.target.result;
+
+if(!db.objectStoreNames.contains(VIDEO_STORE)){
+db.createObjectStore(VIDEO_STORE);
+}
+
+};
+
+request.onsuccess=function(){
+resolve(request.result);
+};
+
+request.onerror=function(){
+reject(request.error);
+};
+
+});
+}
+
+async function saveVideoBlob(courseId,file){
+
+const db=await openVideoDB();
+
+return new Promise(function(resolve,reject){
+
+const transaction=db.transaction(
+VIDEO_STORE,
+"readwrite"
+);
+
+const store=transaction.objectStore(
+VIDEO_STORE
+);
+
+const request=store.put(
+file,
+String(courseId)
+);
+
+request.onsuccess=function(){
+resolve(true);
+};
+
+request.onerror=function(){
+reject(request.error);
+};
+
+transaction.oncomplete=function(){
+db.close();
+};
+
+transaction.onerror=function(){
+reject(transaction.error);
+};
+
+});
+}
+
+async function getVideoBlob(courseId){
+
+try{
+
+const db=await openVideoDB();
+
+return await new Promise(function(resolve,reject){
+
+const transaction=db.transaction(
+VIDEO_STORE,
+"readonly"
+);
+
+const store=transaction.objectStore(
+VIDEO_STORE
+);
+
+const request=store.get(
+String(courseId)
+);
+
+request.onsuccess=function(){
+resolve(request.result||null);
+};
+
+request.onerror=function(){
+reject(request.error);
+};
+
+transaction.oncomplete=function(){
+db.close();
+};
+
+});
+
+}catch(error){
+
+console.error("Video loading error:",error);
+return null;
+
+}
+}
+
+async function deleteVideoBlob(courseId){
+
+try{
+
+const db=await openVideoDB();
+
+await new Promise(function(resolve,reject){
+
+const transaction=db.transaction(
+VIDEO_STORE,
+"readwrite"
+);
+
+const request=
+transaction.objectStore(VIDEO_STORE)
+.delete(String(courseId));
+
+request.onsuccess=function(){resolve()};
+request.onerror=function(){reject(request.error)};
+
+});
+
+db.close();
+
+}catch(error){
+
+console.error(error);
+
+}
+}
+
+function getLegacyVideo(course){
+
+return course.videoFile||
+course.uploadedVideo||
+"";
+
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
 function show(id,skipRender=false){
 
-document.querySelectorAll(".view").forEach(function(view){
-view.classList.remove("activeView");
+document.querySelectorAll(".view")
+.forEach(function(v){
+v.classList.remove("activeView");
 });
 
 const page=document.getElementById(id);
 
 if(page)page.classList.add("activeView");
 
-document.querySelectorAll("nav button").forEach(function(button){
-button.classList.remove("active");
+document.querySelectorAll("nav button")
+.forEach(function(b){
+b.classList.remove("active");
 });
 
-const navButton=document.getElementById("n-"+id);
+const nav=document.getElementById("n-"+id);
 
-if(navButton)navButton.classList.add("active");
+if(nav)nav.classList.add("active");
 
 if(id==="create")loadCreateForm();
-
 if(id==="profile")loadProfile();
-
 if(id==="explore"&&!skipRender)renderLessons();
-
 if(id==="home")renderHomeCourses();
 
 window.scrollTo(0,0);
 }
+
+/* =========================
+   PRICE
+========================= */
 
 function togglePrice(){
 
@@ -1307,36 +576,29 @@ price.value="";
 }
 }
 
+/* =========================
+   LESSON EDITORS
+========================= */
+
 function addLessonEditor(data={title:"",content:""}){
 
 const box=document.getElementById("lessonEditors");
 
 if(!box)return;
 
-const number=box.children.length+1;
-
+const n=box.children.length+1;
 const div=document.createElement("div");
 
 div.className="lessonEditor";
 
 div.innerHTML=`
-
-<label>Lesson ${number} title</label>
-
-<input
-class="newLessonTitle"
-value="${escAttr(data.title)}"
-placeholder="e.g. Lesson 1 — Introduction">
+<label>Lesson ${n} title</label>
+<input class="newLessonTitle" value="${escAttr(data.title)}" placeholder="e.g. Lesson 1 — Introduction">
 
 <label>Lesson content</label>
+<textarea class="newLessonContent" placeholder="What will students learn?">${escapeHTML(data.content)}</textarea>
 
-<textarea
-class="newLessonContent"
-placeholder="What will students learn?">${escapeHTML(data.content)}</textarea>
-
-<button
-type="button"
-class="smallBtn danger"
+<button type="button" class="smallBtn danger"
 onclick="this.parentElement.remove();renumberEditors()">
 🗑️ Remove lesson
 </button>
@@ -1360,7 +622,9 @@ if(label)label.textContent="Lesson "+(index+1)+" title";
 function collectEditors(){
 
 return Array.from(
-document.querySelectorAll("#lessonEditors .lessonEditor")
+document.querySelectorAll(
+"#lessonEditors .lessonEditor"
+)
 )
 .map(function(box){
 
@@ -1370,10 +634,14 @@ content:box.querySelector(".newLessonContent").value.trim()
 };
 
 })
-.filter(function(item){
-return item.title||item.content;
+.filter(function(x){
+return x.title||x.content;
 });
 }
+
+/* =========================
+   CREATE FORM
+========================= */
 
 function loadCreateForm(){
 
@@ -1387,30 +655,29 @@ createExperience:"studioTeacherExperience"
 
 Object.keys(fields).forEach(function(id){
 
-const element=document.getElementById(id);
+const el=document.getElementById(id);
 
-if(element){
-element.value=localStorage.getItem(fields[id])||"";
-}
+if(el)el.value=localStorage.getItem(fields[id])||"";
 
 });
 
 const photo=localStorage.getItem("studioProfilePhoto");
-
 const preview=document.getElementById("createPhotoPreview");
 
 if(preview){
 
-if(photo){
-preview.innerHTML='<img src="'+escAttr(photo)+'" alt="Profile">';
-}else{
-preview.innerHTML="👨🏾‍💻";
-}
+preview.innerHTML=photo
+?'<img src="'+escAttr(photo)+'" alt="Profile">'
+:"👨🏾‍💻";
 
 }
 
 renderMyLessons();
 }
+
+/* =========================
+   FILE READER
+========================= */
 
 function readFileAsDataURL(file){
 
@@ -1434,14 +701,12 @@ reader.readAsDataURL(file);
 });
 }
 
+/* =========================
+   PHOTO
+========================= */
 
-/* PROFILE PHOTO */
-
-const createPhotoInput=document.getElementById("createPhoto");
-
-if(createPhotoInput){
-
-createPhotoInput.addEventListener("change",function(){
+document.getElementById("createPhoto")
+.addEventListener("change",function(){
 
 const file=this.files[0];
 
@@ -1450,48 +715,39 @@ if(!file)return;
 if(!file.type.startsWith("image/")){
 
 alert("Please select an image.");
-
 this.value="";
-
 return;
+
 }
 
 const reader=new FileReader();
 
-reader.onload=function(event){
+reader.onload=function(e){
 
 localStorage.setItem(
 "studioProfilePhoto",
-event.target.result
+e.target.result
 );
 
-const preview=document.getElementById("createPhotoPreview");
-
-if(preview){
-
-preview.innerHTML=
+document.getElementById(
+"createPhotoPreview"
+).innerHTML=
 '<img src="'+
-escAttr(event.target.result)+
+escAttr(e.target.result)+
 '" alt="Profile">';
-
-}
 
 };
 
 reader.readAsDataURL(file);
 
 });
-}
 
+/* =========================
+   VIDEO PREVIEW
+========================= */
 
-/* VIDEO UPLOAD PREVIEW */
-
-const lessonVideoFile=
-document.getElementById("lessonVideoFile");
-
-if(lessonVideoFile){
-
-lessonVideoFile.addEventListener("change",function(){
+document.getElementById("lessonVideoFile")
+.addEventListener("change",function(){
 
 const file=this.files[0];
 
@@ -1503,120 +759,72 @@ document.getElementById("videoUploadInfo");
 
 if(!file){
 
-if(preview){
 preview.style.display="none";
 preview.innerHTML="";
-}
-
-if(info){
 info.style.display="none";
 info.textContent="";
-}
-
 return;
+
 }
 
 if(!file.type.startsWith("video/")){
 
 alert("Please select a video file.");
-
 this.value="";
-
 return;
+
 }
 
 const url=URL.createObjectURL(file);
 
-if(preview){
-
 preview.style.display="block";
 
 preview.innerHTML=`
-
 <video
 controls
 playsinline
 src="${escAttr(url)}">
 </video>
-
 `;
 
-}
-
-if(info){
-
 info.style.display="block";
-
-const sizeMB=
-(file.size/1024/1024).toFixed(1);
 
 info.textContent=
 file.name+
 " · "+
-sizeMB+
+(file.size/1024/1024).toFixed(1)+
 " MB";
 
-}
-
 });
-}
 
-
-/* PUBLISH */
+/* =========================
+   PUBLISH
+========================= */
 
 async function publishEverything(){
 
 const name=document.getElementById("createName").value.trim();
-
-const username=cleanUsername(
-document.getElementById("createUsername").value
-);
-
+const username=cleanUsername(document.getElementById("createUsername").value);
 const bio=document.getElementById("createBio").value.trim();
-
 const talent=document.getElementById("createTalent").value.trim();
-
 const experience=document.getElementById("createExperience").value.trim();
 
 const title=document.getElementById("lessonTitle").value.trim();
-
 const category=document.getElementById("lessonCategory").value;
-
 const description=document.getElementById("lessonDescription").value.trim();
-
 const video=document.getElementById("lessonVideo").value.trim();
 
-const videoFileInput=
-document.getElementById("lessonVideoFile");
+const videoInput=document.getElementById("lessonVideoFile");
+const selectedVideo=videoInput.files[0];
 
 const priceType=document.getElementById("priceType").value;
-
 const price=document.getElementById("lessonPrice").value;
 
-if(!name){
-alert("Please enter your name.");
-return;
-}
-
-if(!username){
-alert("Please enter your username.");
-return;
-}
-
-if(!talent){
-alert("Please enter your talent.");
-return;
-}
-
-if(!title){
-alert("Please enter your course title.");
-return;
-}
-
-if(!description){
-alert("Please describe your course.");
-return;
-}
+if(!name){alert("Please enter your name.");return}
+if(!username){alert("Please enter your username.");return}
+if(!talent){alert("Please enter your talent.");return}
+if(!title){alert("Please enter your course title.");return}
+if(!description){alert("Please describe your course.");return}
 
 if(priceType==="PAID"&&(!price||Number(price)<0)){
 alert("Please enter a valid price.");
@@ -1627,17 +835,16 @@ if(video){
 
 try{
 
-const url=new URL(video);
+const u=new URL(video);
 
-if(url.protocol!=="http:"&&url.protocol!=="https:"){
+if(u.protocol!=="http:"&&u.protocol!=="https:")
 throw new Error();
-}
 
-}catch(error){
+}catch(e){
 
 alert("Please enter a valid video URL.");
-
 return;
+
 }
 }
 
@@ -1649,7 +856,7 @@ localStorage.setItem("studioBio",bio);
 localStorage.setItem("studioTeacherTalent",talent);
 localStorage.setItem("studioTeacherExperience",experience);
 
-/* PROFILE PHOTO */
+/* PROFILE IMAGE */
 
 const photoFile=
 document.getElementById("createPhoto").files[0];
@@ -1657,26 +864,25 @@ document.getElementById("createPhoto").files[0];
 if(photoFile){
 
 if(!photoFile.type.startsWith("image/")){
-
 alert("Please select an image.");
-
 return;
 }
 
 try{
 
-const photo=await readFileAsDataURL(photoFile);
+const photo=
+await readFileAsDataURL(photoFile);
 
 localStorage.setItem(
 "studioProfilePhoto",
 photo
 );
 
-}catch(error){
+}catch(e){
 
-alert("Could not save the profile photo.");
-
+alert("Could not save profile photo.");
 return;
+
 }
 }
 
@@ -1690,56 +896,24 @@ document.getElementById("lessonImage").files[0];
 if(imageFile){
 
 if(!imageFile.type.startsWith("image/")){
-
 alert("Please select a course image.");
-
 return;
 }
 
 try{
 
-courseImage=await readFileAsDataURL(imageFile);
+courseImage=
+await readFileAsDataURL(imageFile);
 
-}catch(error){
+}catch(e){
 
-alert("Could not save the course image.");
-
+alert("Could not save course image.");
 return;
+
 }
 }
 
-/* COURSE VIDEO */
-
-let uploadedVideo="";
-
-if(
-videoFileInput &&
-videoFileInput.files &&
-videoFileInput.files[0]
-){
-
-const selectedVideo=
-videoFileInput.files[0];
-
-if(!selectedVideo.type.startsWith("video/")){
-
-alert("Please select a valid video.");
-
-return;
-}
-
-try{
-
-uploadedVideo=
-await readFileAsDataURL(selectedVideo);
-
-}catch(error){
-
-alert("Could not save the video.");
-
-return;
-}
-}
+/* LESSONS */
 
 let courseLessons=collectEditors();
 
@@ -1751,59 +925,90 @@ title.toLowerCase().includes("wiring")
 ){
 
 courseLessons=
-DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
+DEFAULT_ELECTRICAL.map(function(x){
+return{...x};
 });
 
 }else{
 
-courseLessons=[{
+courseLessons=[
+{
 title:"Lesson 1 — Introduction",
 content:description
-}];
+}
+];
 
 }
 }
+
+/* CREATE COURSE */
+
+const courseId=Date.now();
 
 const course={
 
-id:Date.now(),
-
+id:courseId,
 teacher:name,
-
 username:username,
-
 title:title,
-
 category:category,
-
 description:description,
-
 video:video,
-
-videoFile:uploadedVideo,
-
+videoFile:"",
+hasUploadedVideo:false,
 image:courseImage,
-
 lessons:courseLessons,
-
 priceType:priceType,
-
 price:priceType==="PAID"?Number(price):0,
-
 likes:[],
-
 comments:[],
-
 createdAt:new Date().toISOString()
 
 };
+
+/* SAVE COURSE */
 
 const lessons=getLessons();
 
 lessons.push(course);
 
 saveLessons(lessons);
+
+/* SAVE VIDEO TO INDEXED DB */
+
+if(selectedVideo){
+
+if(!selectedVideo.type.startsWith("video/")){
+
+alert("Please select a valid video.");
+return;
+
+}
+
+try{
+
+await saveVideoBlob(
+courseId,
+selectedVideo
+);
+
+course.hasUploadedVideo=true;
+
+saveLessons(lessons);
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Course was created, but the video could not be saved. Please try the video again."
+);
+
+return;
+
+}
+
+}
 
 addNotification(
 "Course published",
@@ -1812,35 +1017,95 @@ title+" is now available."
 
 renderAll();
 
-alert("Your profile and course have been published! 🎉");
+alert(
+"Your profile and course have been published! 🎉"
+);
 
 show("profile");
 
 }
 
+/* =========================
+   VIDEO RENDERING
+========================= */
 
-/* COURSE CARD */
+async function renderCourseVideo(
+course,
+containerId,
+label="🎥 Course Video"
+){
+
+const container=
+document.getElementById(containerId);
+
+if(!container)return;
+
+container.innerHTML="";
+
+const legacy=getLegacyVideo(course);
+
+if(legacy){
+
+container.innerHTML=`
+<div class="courseVideo">
+<video controls playsinline src="${escAttr(legacy)}"></video>
+</div>
+`;
+
+return;
+
+}
+
+if(!course.hasUploadedVideo){
+
+return;
+
+}
+
+const blob=
+await getVideoBlob(course.id);
+
+if(!blob){
+
+container.innerHTML=`
+<div class="notice">
+🎥 Video is no longer available on this device.
+</div>
+`;
+
+return;
+
+}
+
+const url=URL.createObjectURL(blob);
+
+container.innerHTML=`
+<div class="courseVideo">
+<video controls playsinline src="${escAttr(url)}"></video>
+</div>
+`;
+
+}
+
+/* =========================
+   COURSE CARD
+========================= */
 
 function renderLessonCard(course,includeTeacher){
 
 const category=categoryName(course.category);
-
 const icon=CATEGORY_ICONS[category]||"📚";
 
 const likes=Array.isArray(course.likes)
-?course.likes.length
-:0;
+?course.likes.length:0;
 
 const comments=Array.isArray(course.comments)
-?course.comments.length
-:0;
+?course.comments.length:0;
 
 return`
-
 <div class="lesson">
 
 <div class="lessonImg">
-
 ${
 course.image
 ?
@@ -1848,58 +1113,32 @@ course.image
 :
 icon
 }
-
 </div>
 
 <div class="lessonBody">
 
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
-
-${escapeHTML(category)}
-·
-${priceText(course)}
-
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
+${escapeHTML(category)} · ${priceText(course)}
 </span>
 
-<h1>
-${escapeHTML(course.title)}
-</h1>
+<h1>${escapeHTML(course.title)}</h1>
 
-<p>
-${escapeHTML(course.description)}
-</p>
+<p>${escapeHTML(course.description)}</p>
 
 ${
 includeTeacher
 ?
-`
-<p>
-👨‍🏫
-<b>
-${escapeHTML(course.teacher||"Studio Teacher")}
-</b>
-</p>
-`
-:
-""
+`<p>👨‍🏫 <b>${escapeHTML(course.teacher||"Studio Teacher")}</b></p>`
+:""
 }
 
-<div class="price">
-${priceText(course)}
-</div>
+<div class="price">${priceText(course)}</div>
 
 ${
-course.videoFile
+course.hasUploadedVideo||getLegacyVideo(course)
 ?
-`
-<div class="videoMeta">
-🎥 Course video available
-</div>
-`
-:
-""
+`<div class="videoMeta">🎥 Video available</div>`
+:""
 }
 
 ${
@@ -1912,95 +1151,72 @@ onclick='event.stopPropagation();openTeacher(${JSON.stringify(course.teacher||"S
 👨‍🏫 View Teacher
 </button>
 `
-:
-""
+:""
 }
 
 <div class="socialBar">
 
-<button
-onclick="event.stopPropagation();toggleLike(${Number(course.id)})">
+<button onclick="event.stopPropagation();toggleLike(${Number(course.id)})">
 ❤️ ${likes}
 </button>
 
-<button
-onclick="event.stopPropagation();openComments(${Number(course.id)})">
+<button onclick="event.stopPropagation();openComments(${Number(course.id)})">
 💬 ${comments}
 </button>
 
-<button
-onclick="event.stopPropagation();shareCourse(${Number(course.id)})">
+<button onclick="event.stopPropagation();shareCourse(${Number(course.id)})">
 🔗 Share
 </button>
 
 </div>
 
 </div>
-
 </div>
-
 `;
+
 }
 
-
-/* COURSE DETAILS */
+/* =========================
+   OPEN COURSE
+========================= */
 
 function openCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
+const course=getLessons().find(function(x){
+return String(x.id)===String(id);
 });
 
 if(!course){
-
 alert("Course not found.");
-
 return;
 }
 
 const category=categoryName(course.category);
-
 const icon=CATEGORY_ICONS[category]||"📚";
 
-const enrolled=getArray("studioEnrolled").includes(Number(course.id));
+const enrolled=
+getArray("studioEnrolled")
+.includes(Number(course.id));
 
-const lessons=Array.isArray(course.lessons)
-?course.lessons
-:[];
+const lessons=
+Array.isArray(course.lessons)
+?course.lessons:[];
 
-let actionButton;
+let action;
 
 if(course.priceType==="PAID"){
 
-actionButton=enrolled
+action=enrolled
 ?
-`
-<button
-class="enroll"
-onclick="startCourse(${Number(course.id)})">
-▶️ Continue Course
-</button>
-`
+`<button class="enroll" onclick="startCourse(${Number(course.id)})">▶️ Continue Course</button>`
 :
-`
-<button
-class="enroll"
-onclick="buyCourse(${Number(course.id)})">
-💳 Buy Course ${priceText(course)}
-</button>
-`;
+`<button class="enroll" onclick="buyCourse(${Number(course.id)})">💳 Buy Course ${priceText(course)}</button>`;
 
 }else{
 
-actionButton=`
-<button
-class="enroll"
-onclick="startCourse(${Number(course.id)})">
-▶️ ${
-enrolled
-?"Continue Free Course"
-:"Start Free Course"
-}
+action=`
+<button class="enroll" onclick="startCourse(${Number(course.id)})">
+▶️ ${enrolled?"Continue Free Course":"Start Free Course"}
 </button>
 `;
 
@@ -2034,73 +1250,39 @@ icon
 
 <div class="lessonBody">
 
-<button
-class="backButton"
-onclick="renderLessons()">
+<button class="backButton" onclick="renderLessons()">
 ← Back to All Courses
 </button>
 
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
-${escapeHTML(category)}
-·
-${priceText(course)}
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
+${escapeHTML(category)} · ${priceText(course)}
 </span>
 
-<h1>
-${escapeHTML(course.title)}
-</h1>
+<h1>${escapeHTML(course.title)}</h1>
 
-<p>
-${escapeHTML(course.description)}
-</p>
+<p>${escapeHTML(course.description)}</p>
 
-<p>
-👨‍🏫
-<b>
-${escapeHTML(course.teacher||"Studio Teacher")}
-</b>
-</p>
+<p>👨‍🏫 <b>${escapeHTML(course.teacher||"Studio Teacher")}</b></p>
 
-${actionButton}
+${action}
 
-${
-course.videoFile
-?
-`
-<div class="courseVideo">
-
-<video
-controls
-playsinline
-src="${escAttr(course.videoFile)}">
-</video>
-
-</div>
-`
-:
-""
-}
+<div id="courseVideo-${course.id}"></div>
 
 ${
 course.video
 ?
 `
-<a
-class="videoButton"
+<a class="videoButton"
 href="${escAttr(course.video)}"
 target="_blank"
 rel="noopener">
 🎥 Course Video Link
 </a>
 `
-:
-""
+:""
 }
 
 <div class="notice">
-
 ${
 enrolled
 ?
@@ -2108,84 +1290,56 @@ enrolled
 :
 "Start the free course to begin learning."
 }
-
 </div>
 
-<h2 style="margin-top:22px;">
-📖 Course Lessons
-</h2>
+<h2 style="margin-top:22px">📖 Course Lessons</h2>
 
 <div class="progressWrap">
-
-<div
-class="progressBar"
-style="width:${percent}%">
-</div>
-
+<div class="progressBar" style="width:${percent}%"></div>
 </div>
 
 <small>
-
 ${
 lessons.length
 ?
 "Progress: "+
 Math.min(Math.max(progress+1,0),lessons.length)+
-" of "+
-lessons.length+
-" lessons"
+" of "+lessons.length+" lessons"
 :
 "No lessons yet"
 }
-
 </small>
 
 ${
 lessons.map(function(item,index){
 
-const completed=index<=progress&&enrolled;
+const completed=
+index<=progress&&enrolled;
 
 return`
-
-<div
-style="
+<div style="
 background:#f7f7fb;
 border-radius:14px;
 padding:14px;
-margin-top:10px;
-">
+margin-top:10px">
 
-<div
-style="
-font-weight:800;
-margin-bottom:8px;
-">
-
+<div style="font-weight:800;margin-bottom:8px">
 ${completed?"✅":"📘"}
-
-${escapeHTML(
-item.title||"Lesson "+(index+1)
-)}
-
+${escapeHTML(item.title||"Lesson "+(index+1))}
 </div>
 
-<button
-class="smallBtn"
+<button class="smallBtn"
 onclick="openLesson(${Number(course.id)},${index})">
-
 ${completed?"Review Lesson":"Open Lesson"}
-
 </button>
 
 </div>
-
 `;
 
 }).join("")
 }
 
 </div>
-
 </div>
 
 <div class="lesson">
@@ -2197,19 +1351,11 @@ ${completed?"Review Lesson":"Open Lesson"}
 <div class="socialBar">
 
 <button onclick="toggleLike(${Number(course.id)})">
-❤️ ${
-Array.isArray(course.likes)
-?course.likes.length
-:0
-}
+❤️ ${Array.isArray(course.likes)?course.likes.length:0}
 </button>
 
 <button onclick="openComments(${Number(course.id)})">
-💬 ${
-Array.isArray(course.comments)
-?course.comments.length
-:0
-}
+💬 ${Array.isArray(course.comments)?course.comments.length:0}
 </button>
 
 <button onclick="shareCourse(${Number(course.id)})">
@@ -2219,89 +1365,86 @@ Array.isArray(course.comments)
 </div>
 
 </div>
-
 </div>
-
 `;
+
+renderCourseVideo(
+course,
+"courseVideo-"+course.id
+);
 }
 
-
-/* PROGRESS */
+/* =========================
+   PROGRESS
+========================= */
 
 function getCourseProgress(id){
 
 try{
 
-const progress=JSON.parse(
+const x=JSON.parse(
 localStorage.getItem("studioCourseProgress")||"{}"
 );
 
-const value=Number(progress[String(id)]);
+const value=Number(x[String(id)]);
 
 return Number.isFinite(value)?value:-1;
 
-}catch(error){
+}catch(e){
 
 return-1;
+
 }
 }
 
 function saveCourseProgress(id,index){
 
-let progress={};
+let x={};
 
 try{
-
-progress=JSON.parse(
+x=JSON.parse(
 localStorage.getItem("studioCourseProgress")||"{}"
 );
+}catch(e){}
 
-}catch(error){
-
-progress={};
-}
-
-progress[String(id)]=index;
+x[String(id)]=index;
 
 localStorage.setItem(
 "studioCourseProgress",
-JSON.stringify(progress)
+JSON.stringify(x)
 );
 }
 
-
-/* LESSON READER */
+/* =========================
+   LESSON
+========================= */
 
 function openLesson(courseId,index){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(courseId);
+const course=getLessons().find(function(x){
+return String(x.id)===String(courseId);
 });
 
 if(!course){
-
 alert("Course not found.");
-
 return;
 }
 
-const lessons=Array.isArray(course.lessons)
-?course.lessons
-:[];
+const lessons=
+Array.isArray(course.lessons)
+?course.lessons:[];
 
 if(!lessons.length){
-
 openCourse(courseId);
-
 return;
 }
 
-const lessonIndex=Math.max(
+const i=Math.max(
 0,
 Math.min(Number(index)||0,lessons.length-1)
 );
 
-const item=lessons[lessonIndex];
+const item=lessons[i];
 
 let enrolled=getArray("studioEnrolled");
 
@@ -2318,41 +1461,27 @@ addNotification(
 
 }
 
-saveCourseProgress(courseId,lessonIndex);
+saveCourseProgress(courseId,i);
 
 show("explore",true);
 
 const list=document.getElementById("lessonList");
 
 const percent=Math.round(
-((lessonIndex+1)/lessons.length)*100
+((i+1)/lessons.length)*100
 );
 
-const previous=lessonIndex>0
+const previous=i>0
 ?
-`
-<button onclick="openLesson(${Number(courseId)},${lessonIndex-1})">
-← Previous
-</button>
-`
+`<button onclick="openLesson(${Number(courseId)},${i-1})">← Previous</button>`
 :
-`
-<button disabled>← Previous</button>
-`;
+`<button disabled>← Previous</button>`;
 
-const next=lessonIndex<lessons.length-1
+const next=i<lessons.length-1
 ?
-`
-<button onclick="openLesson(${Number(courseId)},${lessonIndex+1})">
-Next →
-</button>
-`
+`<button onclick="openLesson(${Number(courseId)},${i+1})">Next →</button>`
 :
-`
-<button onclick="finishCourse(${Number(courseId)})">
-🎉 Finish Course
-</button>
-`;
+`<button onclick="finishCourse(${Number(courseId)})">🎉 Finish Course</button>`;
 
 list.innerHTML=`
 
@@ -2360,8 +1489,7 @@ list.innerHTML=`
 
 <div class="lessonBody">
 
-<button
-class="backButton"
+<button class="backButton"
 onclick="openCourse(${Number(courseId)})">
 ← Back to Course
 </button>
@@ -2370,161 +1498,86 @@ onclick="openCourse(${Number(courseId)})">
 ${escapeHTML(course.category||"Course")}
 </span>
 
-<h1>
-${escapeHTML(course.title)}
-</h1>
+<h1>${escapeHTML(course.title)}</h1>
 
 <div class="progressWrap">
-
-<div
-class="progressBar"
-style="width:${percent}%">
+<div class="progressBar" style="width:${percent}%"></div>
 </div>
 
-</div>
+<small>Lesson ${i+1} of ${lessons.length}</small>
 
-<small>
-Lesson ${lessonIndex+1} of ${lessons.length}
-</small>
-
-<h2 style="margin-top:18px;">
-${escapeHTML(item.title||"Lesson "+(lessonIndex+1))}
+<h2 style="margin-top:18px">
+${escapeHTML(item.title||"Lesson "+(i+1))}
 </h2>
 
-<p
-style="
+<p style="
 font-size:16px;
 line-height:1.7;
-color:#55536b;
-">
-
+color:#55536b">
 ${escapeHTML(item.content||"Lesson content coming soon.")}
-
 </p>
 
-${
-course.videoFile
-?
-`
-<div class="courseVideo">
-
-<video
-controls
-playsinline
-src="${escAttr(course.videoFile)}">
-</video>
-
-</div>
-`
-:
-""
-}
+<div id="lessonVideo-${course.id}"></div>
 
 ${
 course.video
 ?
 `
-<a
-class="videoButton"
+<a class="videoButton"
 href="${escAttr(course.video)}"
 target="_blank"
 rel="noopener">
 🎥 Watch Course Video
 </a>
 `
-:
-""
+:""
 }
 
 <div class="lessonNavigation">
-
 ${previous}
-
 ${next}
-
 </div>
 
+<div class="notice">
 ${
-lessonIndex===lessons.length-1
+i===lessons.length-1
 ?
-`
-<div class="notice">
-🎉 You reached the final lesson.
-Keep practicing and stay safe.
-</div>
-`
+"🎉 You reached the final lesson. Keep practicing and stay safe."
 :
-`
-<div class="notice">
-Complete this lesson and continue to the next lesson.
-</div>
-`
+"Complete this lesson and continue to the next lesson."
 }
-
 </div>
 
 </div>
-
+</div>
 `;
+
+renderCourseVideo(
+course,
+"lessonVideo-"+course.id
+);
 
 window.scrollTo(0,0);
 }
 
-
-/* FINISH COURSE */
-
-function finishCourse(id){
-
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
-});
-
-if(!course)return;
-
-const lessons=Array.isArray(course.lessons)
-?course.lessons
-:[];
-
-if(lessons.length){
-
-saveCourseProgress(
-id,
-lessons.length-1
-);
-
-}
-
-addNotification(
-"Course completed",
-"You completed: "+course.title
-);
-
-alert("🎉 Congratulations! You completed the course.");
-
-openCourse(id);
-}
-
-
-/* START COURSE */
+/* =========================
+   COURSE START / FINISH
+========================= */
 
 function startCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
+const course=getLessons().find(function(x){
+return String(x.id)===String(id);
 });
 
 if(!course){
-
 alert("Course not found.");
-
 return;
 }
 
 let enrolled=getArray("studioEnrolled");
 
-const alreadyEnrolled=enrolled.includes(Number(id));
-
-if(!alreadyEnrolled){
+if(!enrolled.includes(Number(id))){
 
 enrolled.push(Number(id));
 
@@ -2537,39 +1590,58 @@ addNotification(
 
 }
 
-const savedProgress=getCourseProgress(id);
+const saved=getCourseProgress(id);
 
-const firstLesson=savedProgress>=0?savedProgress:0;
-
-openLesson(id,firstLesson);
+openLesson(
+id,
+saved>=0?saved:0
+);
 }
 
+function finishCourse(id){
 
-/* PAID COURSE */
+const course=getLessons().find(function(x){
+return String(x.id)===String(id);
+});
+
+if(!course)return;
+
+const lessons=
+Array.isArray(course.lessons)
+?course.lessons:[];
+
+if(lessons.length){
+saveCourseProgress(id,lessons.length-1);
+}
+
+addNotification(
+"Course completed",
+"You completed: "+course.title
+);
+
+alert("🎉 Congratulations! You completed the course.");
+
+openCourse(id);
+}
 
 function buyCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
+const course=getLessons().find(function(x){
+return String(x.id)===String(id);
 });
 
 if(!course)return;
 
 if(course.priceType!=="PAID"){
-
 startCourse(id);
-
 return;
 }
 
 let enrolled=getArray("studioEnrolled");
 
 if(!enrolled.includes(Number(id))){
-
 enrolled.push(Number(id));
-
 saveArray("studioEnrolled",enrolled);
-
 }
 
 let purchases=getArray("studioPurchases");
@@ -2592,53 +1664,41 @@ alert("Demo purchase successful! 💳");
 openLesson(id,0);
 }
 
+/* =========================
+   EXPLORE
+========================= */
 
-/* EXPLORE */
-
-function renderLessons(lessonsToShow){
+function renderLessons(data){
 
 const list=document.getElementById("lessonList");
 
 if(!list)return;
 
-const lessons=lessonsToShow||getLessons();
+const courses=data||getLessons();
 
-if(!lessons.length){
+if(!courses.length){
 
 list.innerHTML=`
-
 <div class="empty">
-No lessons found yet.
+No lessons found yet.<br>
 Create the first course! 📚
 </div>
-
 `;
 
 return;
 }
 
 list.innerHTML=
-lessons
-.slice()
-.reverse()
-.map(function(course){
+courses.slice().reverse().map(function(course){
 
 return`
-
 <div onclick="openCourse(${Number(course.id)})">
-
 ${renderLessonCard(course,true)}
-
 </div>
-
 `;
 
-})
-.join("");
+}).join("");
 }
-
-
-/* SEARCH */
 
 function searchLessons(){
 
@@ -2646,17 +1706,17 @@ const input=document.getElementById("searchInput");
 
 if(!input)return;
 
-const query=input.value.toLowerCase().trim();
+const q=input.value.toLowerCase().trim();
 
-const lessons=getLessons().filter(function(course){
+const courses=getLessons().filter(function(course){
 
 return(
-!query||
-String(course.title||"").toLowerCase().includes(query)||
-String(course.description||"").toLowerCase().includes(query)||
-String(course.teacher||"").toLowerCase().includes(query)||
-String(course.username||"").toLowerCase().includes(query)||
-categoryName(course.category).toLowerCase().includes(query)
+!q||
+String(course.title||"").toLowerCase().includes(q)||
+String(course.description||"").toLowerCase().includes(q)||
+String(course.teacher||"").toLowerCase().includes(q)||
+String(course.username||"").toLowerCase().includes(q)||
+categoryName(course.category).toLowerCase().includes(q)
 );
 
 });
@@ -2665,31 +1725,29 @@ const title=document.getElementById("categoryTitle");
 
 if(title){
 
-title.textContent=query
-?'Results for "'+query+'"'
+title.textContent=q
+?'Results for "'+q+'"'
 :"All lessons";
 
 }
 
-renderLessons(lessons);
+renderLessons(courses);
 }
-
-
-/* CATEGORY */
 
 function selectCategory(category){
 
-const search=document.getElementById("searchInput");
+const input=document.getElementById("searchInput");
 
-if(search)search.value=category;
+if(input)input.value=category;
 
 show("explore");
 
 searchLessons();
 }
 
-
-/* HOME */
+/* =========================
+   HOME
+========================= */
 
 function renderHomeCourses(){
 
@@ -2697,20 +1755,15 @@ const box=document.getElementById("homeCourses");
 
 if(!box)return;
 
-const courses=getLessons()
-.slice()
-.reverse()
-.slice(0,3);
+const courses=getLessons().slice().reverse().slice(0,3);
 
 if(!courses.length){
 
 box.innerHTML=`
-
 <div class="empty">
-No courses yet.
+No courses yet.<br>
 Create the first one! 📚
 </div>
-
 `;
 
 return;
@@ -2721,9 +1774,7 @@ box.innerHTML=courses.map(function(course){
 const category=categoryName(course.category);
 
 return`
-
-<div
-class="course"
+<div class="course"
 onclick="openCourse(${Number(course.id)})">
 
 <div class="thumb">
@@ -2731,7 +1782,7 @@ onclick="openCourse(${Number(course.id)})">
 ${
 course.image
 ?
-'<img src="'+escAttr(course.image)+'" style="width:100%;height:100%;object-fit:cover">'
+'<img src="'+escAttr(course.image)+'">'
 :
 (CATEGORY_ICONS[category]||"📚")
 }
@@ -2740,31 +1791,24 @@ course.image
 
 <div>
 
-<h3>
-${escapeHTML(course.title)}
-</h3>
+<h3>${escapeHTML(course.title)}</h3>
 
-<p>
-${escapeHTML(course.teacher||"Studio Teacher")}
-</p>
+<p>${escapeHTML(course.teacher||"Studio Teacher")}</p>
 
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
 ${priceText(course)}
 </span>
 
 </div>
-
 </div>
-
 `;
 
 }).join("");
 }
 
-
-/* MY COURSES */
+/* =========================
+   MY COURSES
+========================= */
 
 function renderMyLessons(){
 
@@ -2775,35 +1819,26 @@ if(!box)return;
 const name=localStorage.getItem("studioName")||"";
 
 const courses=getLessons().filter(function(course){
-
 return !name||course.teacher===name;
-
 });
 
 if(!courses.length){
 
 box.innerHTML=`
-
 <div class="empty">
 You haven't published a course yet.
 </div>
-
 `;
 
 return;
 }
 
-box.innerHTML=courses
-.slice()
-.reverse()
-.map(function(course){
+box.innerHTML=courses.slice().reverse().map(function(course){
 
 const category=categoryName(course.category);
 
 return`
-
-<div
-class="course"
+<div class="course"
 onclick="openCourse(${Number(course.id)})">
 
 <div class="thumb">
@@ -2811,7 +1846,7 @@ onclick="openCourse(${Number(course.id)})">
 ${
 course.image
 ?
-'<img src="'+escAttr(course.image)+'" style="width:100%;height:100%;object-fit:cover">'
+'<img src="'+escAttr(course.image)+'">'
 :
 (CATEGORY_ICONS[category]||"📚")
 }
@@ -2820,9 +1855,7 @@ course.image
 
 <div>
 
-<h3>
-${escapeHTML(course.title)}
-</h3>
+<h3>${escapeHTML(course.title)}</h3>
 
 <p>
 ${escapeHTML(category)}
@@ -2832,31 +1865,26 @@ lessons
 </p>
 
 ${
-course.videoFile
+course.hasUploadedVideo||getLegacyVideo(course)
 ?
-`<p>🎥 Video uploaded</p>`
-:
-""
+"<p>🎥 Video uploaded</p>"
+:""
 }
 
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
 ${priceText(course)}
 </span>
 
 </div>
-
 </div>
-
 `;
 
-})
-.join("");
+}).join("");
 }
 
-
-/* PROFILE COURSES */
+/* =========================
+   PROFILE
+========================= */
 
 function renderProfileLessons(){
 
@@ -2867,54 +1895,36 @@ if(!box)return;
 const name=localStorage.getItem("studioName")||"";
 
 const courses=getLessons().filter(function(course){
-
 return !name||course.teacher===name;
-
 });
 
 if(!courses.length){
 
 box.innerHTML=`
-
 <div class="empty">
 Your published courses will appear here.
 </div>
-
 `;
 
 return;
 }
 
-box.innerHTML=courses
-.slice()
-.reverse()
-.map(function(course){
+box.innerHTML=courses.slice().reverse().map(function(course){
 
 return`
-
 <div onclick="openCourse(${Number(course.id)})">
-
 ${renderLessonCard(course,false)}
-
 </div>
-
 `;
 
-})
-.join("");
+}).join("");
 }
-
-
-/* PROFILE */
 
 function loadProfile(){
 
 const name=localStorage.getItem("studioName");
-
 const username=localStorage.getItem("studioUsername");
-
 const bio=localStorage.getItem("studioBio");
-
 const photo=localStorage.getItem("studioProfilePhoto");
 
 document.getElementById("profileName").textContent=
@@ -2927,7 +1937,6 @@ document.getElementById("profileBio").textContent=
 bio||"Tell people about yourself and your talent.";
 
 const image=document.getElementById("profileImage");
-
 const emoji=document.getElementById("profileEmoji");
 
 if(photo){
@@ -2944,13 +1953,10 @@ emoji.style.display="block";
 }
 
 const courses=getLessons().filter(function(course){
-
 return !name||course.teacher===name;
-
 });
 
-document.getElementById("courseCount").textContent=
-courses.length;
+document.getElementById("courseCount").textContent=courses.length;
 
 document.getElementById("followerCount").textContent=
 getArray("studioFollowing").length;
@@ -2959,95 +1965,77 @@ document.getElementById("earningCount").textContent=
 "€"+getEarnings().toFixed(2);
 
 renderTeacherInfo();
-
 renderProfileLessons();
 }
-
-
-/* TEACHER INFO */
 
 function renderTeacherInfo(){
 
 const talent=localStorage.getItem("studioTeacherTalent");
-
 const experience=localStorage.getItem("studioTeacherExperience");
-
 const box=document.getElementById("teacherInfo");
 
 if(!box)return;
 
 if(!talent){
-
 box.innerHTML="";
-
 return;
 }
 
 box.innerHTML=`
-
 <div class="teacherInfo">
 
 <b>👨‍🏫 Teacher Profile</b>
 
-<p>
-<b>Talent:</b>
-${escapeHTML(talent)}
-</p>
+<p><b>Talent:</b> ${escapeHTML(talent)}</p>
 
-<p>
-<b>Experience:</b>
+<p><b>Experience:</b>
 ${escapeHTML(experience||"Not specified")}
 </p>
 
 </div>
-
 `;
 }
 
-
-/* TEACHERS */
+/* =========================
+   TEACHERS / FOLLOW
+========================= */
 
 function getTeacherLessons(name){
 
 return getLessons().filter(function(course){
 
-return String(course.teacher||"").toLowerCase()
-===
+return String(course.teacher||"").toLowerCase()===
 String(name||"").toLowerCase();
 
 });
-
 }
 
 function getFollowers(name){
 
 return getArray("studioFollowers").filter(function(item){
 
-return String(item.teacher||"").toLowerCase()
-===
+return String(item.teacher||"").toLowerCase()===
 String(name||"").toLowerCase();
 
 }).length;
-
 }
 
 function openTeacher(name){
 
 const lessons=getTeacherLessons(name);
-
 const following=getArray("studioFollowing");
 
 const followed=following.some(function(item){
 
-return String(item).toLowerCase()===String(name).toLowerCase();
+return String(item).toLowerCase()===
+String(name).toLowerCase();
 
 });
 
 const myName=localStorage.getItem("studioName")||"";
+const isMine=name===myName;
 
-const isMyProfile=name===myName;
-
-const photo=isMyProfile
+const photo=isMine
 ?localStorage.getItem("studioProfilePhoto")
 :"";
 
@@ -3062,7 +2050,7 @@ document.getElementById("lessonList").innerHTML=`
 ${
 photo
 ?
-'<img src="'+escAttr(photo)+'" alt="">'
+'<img src="'+escAttr(photo)+'">'
 :
 "👨‍🏫"
 }
@@ -3071,34 +2059,23 @@ photo
 
 <h2>${escapeHTML(name)}</h2>
 
-<p>
-👥 ${getFollowers(name)} followers
-</p>
+<p>👥 ${getFollowers(name)} followers</p>
 
 ${
-!isMyProfile
+!isMine
 ?
 `
-
-<button
-class="editButton"
+<button class="editButton"
 onclick='toggleFollow(${JSON.stringify(name)})'>
-
 ${followed?"❤️ Following":"🤍 Follow"}
-
 </button>
 
-<button
-class="editButton darkButton"
+<button class="editButton darkButton"
 onclick='openMessage(${JSON.stringify(name)})'>
-
 💬 Message
-
 </button>
-
 `
-:
-""
+:""
 }
 
 </div>
@@ -3112,45 +2089,32 @@ onclick='openMessage(${JSON.stringify(name)})'>
 <div id="teacherCourses"></div>
 
 </section>
-
 `;
 
-const courseBox=document.getElementById("teacherCourses");
+const box=document.getElementById("teacherCourses");
 
 if(!lessons.length){
 
-courseBox.innerHTML=`
-
+box.innerHTML=`
 <div class="empty">
 This teacher hasn't published a course yet.
 </div>
-
 `;
 
 return;
 }
 
-courseBox.innerHTML=lessons
-.slice()
-.reverse()
-.map(function(course){
+box.innerHTML=
+lessons.slice().reverse().map(function(course){
 
 return`
-
 <div onclick="openCourse(${Number(course.id)})">
-
 ${renderLessonCard(course,true)}
-
 </div>
-
 `;
 
-})
-.join("");
+}).join("");
 }
-
-
-/* FOLLOW */
 
 function toggleFollow(name){
 
@@ -3183,10 +2147,7 @@ String(getCurrentUser()).toLowerCase()
 
 saveArray("studioFollowers",followers);
 
-addNotification(
-"Unfollowed",
-"You unfollowed "+name
-);
+addNotification("Unfollowed","You unfollowed "+name);
 
 }else{
 
@@ -3201,10 +2162,7 @@ user:getCurrentUser()
 
 saveArray("studioFollowers",followers);
 
-addNotification(
-"New follow",
-"You are now following "+name
-);
+addNotification("New follow","You are now following "+name);
 
 }
 
@@ -3213,40 +2171,39 @@ saveArray("studioFollowing",following);
 openTeacher(name);
 }
 
-
-/* NOTIFICATIONS */
+/* =========================
+   NOTIFICATIONS
+========================= */
 
 function getNotifications(){
 return getArray("studioNotifications");
 }
 
-function saveNotifications(data){
-saveArray("studioNotifications",data);
+function saveNotifications(x){
+saveArray("studioNotifications",x);
 }
 
 function addNotification(title,message){
 
-const notifications=getNotifications();
+const x=getNotifications();
 
-notifications.unshift({
-
+x.unshift({
 id:Date.now(),
 title:title,
 message:message,
 read:false,
 time:new Date().toLocaleString()
-
 });
 
-saveNotifications(notifications.slice(0,50));
+saveNotifications(x.slice(0,50));
 }
 
 function openNotifications(){
 
-const notifications=getNotifications();
+const notes=getNotifications();
 
-const unread=notifications.filter(function(item){
-return !item.read;
+const unread=notes.filter(function(x){
+return !x.read;
 }).length;
 
 show("explore",true);
@@ -3254,78 +2211,51 @@ show("explore",true);
 let html=`
 
 <div class="lesson">
-
 <div class="lessonBody">
 
-<button
-class="backButton"
-onclick="renderLessons()">
+<button class="backButton" onclick="renderLessons()">
 ← Back to Explore
 </button>
 
 <h1>🔔 Notifications</h1>
 
-<p>
-${unread}
-unread notification${unread===1?"":"s"}
-</p>
+<p>${unread} unread notification${unread===1?"":"s"}</p>
 
-<button
-class="enroll"
+<button class="enroll"
 onclick="markNotificationsRead()">
 ✓ Mark all as read
 </button>
 
 </div>
-
 </div>
-
 `;
 
-if(!notifications.length){
+if(!notes.length){
 
-html+=`
-
-<div class="empty">
-No notifications yet. 🔔
-</div>
-
-`;
+html+=`<div class="empty">No notifications yet. 🔔</div>`;
 
 }else{
 
-html+=notifications.map(function(n){
+html+=notes.map(function(n){
 
 return`
-
 <div class="course">
 
-<div class="thumb">
-${n.read?"🔔":"🔴"}
-</div>
+<div class="thumb">${n.read?"🔔":"🔴"}</div>
 
 <div>
 
-<h3>
-${escapeHTML(n.title)}
-</h3>
+<h3>${escapeHTML(n.title)}</h3>
 
-<p>
-${escapeHTML(n.message)}
-</p>
+<p>${escapeHTML(n.message)}</p>
 
-<small>
-${escapeHTML(n.time)}
-</small>
+<small>${escapeHTML(n.time)}</small>
 
 </div>
-
 </div>
-
 `;
 
 }).join("");
-
 }
 
 document.getElementById("lessonList").innerHTML=html;
@@ -3333,36 +2263,31 @@ document.getElementById("lessonList").innerHTML=html;
 
 function markNotificationsRead(){
 
-const data=getNotifications().map(function(item){
-
-item.read=true;
-
-return item;
-
+const x=getNotifications().map(function(n){
+n.read=true;
+return n;
 });
 
-saveNotifications(data);
-
+saveNotifications(x);
 openNotifications();
 }
 
-
-/* MESSAGES */
+/* =========================
+   MESSAGES
+========================= */
 
 function getMessages(){
 return getArray("studioMessages");
 }
 
-function saveMessages(data){
-saveArray("studioMessages",data);
+function saveMessages(x){
+saveArray("studioMessages",x);
 }
 
 function openMessage(teacher){
 
-const messages=getMessages().filter(function(item){
-
-return item.teacher===teacher;
-
+const messages=getMessages().filter(function(x){
+return x.teacher===teacher;
 });
 
 show("explore",true);
@@ -3373,15 +2298,14 @@ document.getElementById("lessonList").innerHTML=`
 
 <div class="lessonBody">
 
-<button
-class="backButton"
+<button class="backButton"
 onclick='openTeacher(${JSON.stringify(teacher)})'>
 ← Back to Teacher
 </button>
 
 <h1>💬 ${escapeHTML(teacher)}</h1>
 
-<div id="messageList">
+<div>
 
 ${
 messages.length
@@ -3389,56 +2313,32 @@ messages.length
 messages.map(function(m){
 
 return`
-
 <div class="comment">
-
 <b>${escapeHTML(m.from)}</b>
-
 <p>${escapeHTML(m.text)}</p>
-
 <small>${escapeHTML(m.time)}</small>
-
 </div>
-
 `;
 
 }).join("")
 :
-`
-
-<div class="empty">
-No messages yet.
-Start the conversation!
-</div>
-
-`
+`<div class="empty">No messages yet. Start the conversation!</div>`
 }
 
 </div>
 
-<textarea
-id="messageText"
+<textarea id="messageText"
 placeholder="Write a message..."
-style="
-width:100%;
-margin-top:15px;
-border:1px solid var(--border);
-border-radius:12px;
-padding:12px;
-min-height:80px;
-"></textarea>
+style="width:100%;margin-top:15px;border:1px solid var(--border);border-radius:12px;padding:12px;min-height:80px"></textarea>
 
-<button
-class="enroll"
+<button class="enroll"
 style="margin-top:10px"
 onclick='sendMessage(${JSON.stringify(teacher)})'>
 📤 Send Message
 </button>
 
 </div>
-
 </div>
-
 `;
 }
 
@@ -3451,26 +2351,18 @@ if(!input)return;
 const text=input.value.trim();
 
 if(!text){
-
 alert("Write a message first.");
-
 return;
 }
 
 const messages=getMessages();
 
 messages.push({
-
 id:Date.now(),
-
 teacher:teacher,
-
 from:localStorage.getItem("studioName")||"You",
-
 text:text,
-
 time:new Date().toLocaleString()
-
 });
 
 saveMessages(messages);
@@ -3491,9 +2383,7 @@ show("explore",true);
 
 const teachers=[
 ...new Set(
-messages.map(function(item){
-return item.teacher;
-})
+messages.map(function(x){return x.teacher;})
 )
 ];
 
@@ -3502,69 +2392,47 @@ const list=document.getElementById("lessonList");
 if(!teachers.length){
 
 list.innerHTML=`
-
 <div class="lesson">
-
 <div class="lessonBody">
-
 <h1>💬 Messages</h1>
-
-<div class="empty">
-No messages yet.
+<div class="empty">No messages yet.</div>
 </div>
-
 </div>
-
-</div>
-
 `;
 
 return;
 }
 
 list.innerHTML=`
-
 <div class="lesson">
-
 <div class="lessonBody">
-
 <h1>💬 Messages</h1>
-
 <p>Choose a conversation.</p>
-
 </div>
-
 </div>
-
 `;
 
 teachers.forEach(function(teacher){
 
 list.innerHTML+=`
-
-<div
-class="course"
+<div class="course"
 onclick='openMessage(${JSON.stringify(teacher)})'>
 
 <div class="thumb">💬</div>
 
 <div>
-
 <h3>${escapeHTML(teacher)}</h3>
-
 <p>Open conversation</p>
-
 </div>
 
 </div>
-
 `;
-
 });
 }
 
-
-/* EARNINGS */
+/* =========================
+   EARNINGS
+========================= */
 
 function getEarnings(){
 
@@ -3577,12 +2445,11 @@ localStorage.getItem("studioEarnings")||0
 function openEarnings(){
 
 const earnings=getEarnings();
-
 const name=localStorage.getItem("studioName")||"";
 
-const courses=getLessons().filter(function(item){
+const courses=getLessons().filter(function(x){
 
-return item.teacher===name&&item.priceType==="PAID";
+return x.teacher===name&&x.priceType==="PAID";
 
 });
 
@@ -3602,35 +2469,25 @@ box.innerHTML=`
 €${earnings.toFixed(2)}
 </div>
 
-<p>
-Demo earnings from paid-course activity.
-</p>
+<p>Demo earnings from paid-course activity.</p>
 
 <div class="notice">
-
 💡 This is a demo earning system.
-Real payments, online users and withdrawals require a secure backend and payment provider.
-
+Real payments and withdrawals require a secure backend and payment provider.
 </div>
 
 </div>
-
 </div>
 
-<div class="row">
-<h2>Paid Courses</h2>
-</div>
-
+<div class="row"><h2>Paid Courses</h2></div>
 `;
 
 if(!courses.length){
 
 box.innerHTML+=`
-
 <div class="empty">
 You don't have paid courses yet.
 </div>
-
 `;
 
 }else{
@@ -3638,52 +2495,44 @@ You don't have paid courses yet.
 box.innerHTML+=courses.map(function(course){
 
 return`
-
 <div class="course">
 
 <div class="thumb">💰</div>
 
 <div>
 
-<h3>
-${escapeHTML(course.title)}
-</h3>
+<h3>${escapeHTML(course.title)}</h3>
 
-<p>
-Price: ${priceText(course)}
-</p>
+<p>Price: ${priceText(course)}</p>
 
 </div>
 
 </div>
-
 `;
 
 }).join("");
-
 }
 }
 
-
-/* LIKES */
+/* =========================
+   LIKES
+========================= */
 
 function toggleLike(id){
 
 const courses=getLessons();
 
-const course=courses.find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=courses.find(function(x){
+return Number(x.id)===Number(id);
 });
 
 if(!course)return;
 
 const user=getCurrentUser();
 
-course.likes=Array.isArray(course.likes)
-?course.likes
-:[];
+course.likes=
+Array.isArray(course.likes)
+?course.likes:[];
 
 const index=course.likes.indexOf(user);
 
@@ -3704,35 +2553,24 @@ addNotification(
 
 saveLessons(courses);
 
-const activeLesson=document.querySelector(".lessonNavigation");
-
-if(activeLesson){
-
-openCourse(id);
-
-}else{
-
 renderLessons();
-
-}
 }
 
-
-/* COMMENTS */
+/* =========================
+   COMMENTS
+========================= */
 
 function openComments(id){
 
-const course=getLessons().find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=getLessons().find(function(x){
+return Number(x.id)===Number(id);
 });
 
 if(!course)return;
 
-course.comments=Array.isArray(course.comments)
-?course.comments
-:[];
+course.comments=
+Array.isArray(course.comments)
+?course.comments:[];
 
 show("explore",true);
 
@@ -3742,42 +2580,30 @@ document.getElementById("lessonList").innerHTML=`
 
 <div class="lessonBody">
 
-<button
-class="backButton"
+<button class="backButton"
 onclick="openCourse(${Number(id)})">
 ← Back to Course
 </button>
 
 <h1>💬 Comments</h1>
 
-<div id="comments">
+<div>
 
 ${
 course.comments.length
 ?
-course.comments.map(function(comment){
+course.comments.map(function(c){
 
 return`
-
 <div class="comment">
-
-<b>${escapeHTML(comment.user)}</b>
-
-<div>${escapeHTML(comment.text)}</div>
-
+<b>${escapeHTML(c.user)}</b>
+<div>${escapeHTML(c.text)}</div>
 </div>
-
 `;
 
 }).join("")
 :
-`
-
-<div class="empty">
-No comments yet.
-</div>
-
-`
+`<div class="empty">No comments yet.</div>`
 }
 
 </div>
@@ -3785,13 +2611,7 @@ No comments yet.
 <textarea
 id="commentText"
 placeholder="Write a comment..."
-style="
-width:100%;
-margin-top:12px;
-border:1px solid var(--border);
-border-radius:12px;
-padding:12px;
-"></textarea>
+style="width:100%;margin-top:12px;border:1px solid var(--border);border-radius:12px;padding:12px"></textarea>
 
 <button
 class="enroll"
@@ -3801,9 +2621,7 @@ onclick="addComment(${Number(id)})">
 </button>
 
 </div>
-
 </div>
-
 `;
 }
 
@@ -3816,34 +2634,26 @@ if(!input)return;
 const text=input.value.trim();
 
 if(!text){
-
 alert("Write a comment first.");
-
 return;
 }
 
 const courses=getLessons();
 
-const course=courses.find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=courses.find(function(x){
+return Number(x.id)===Number(id);
 });
 
 if(!course)return;
 
-course.comments=Array.isArray(course.comments)
-?course.comments
-:[];
+course.comments=
+Array.isArray(course.comments)
+?course.comments:[];
 
 course.comments.push({
-
 user:localStorage.getItem("studioName")||"You",
-
 text:text,
-
 time:new Date().toISOString()
-
 });
 
 saveLessons(courses);
@@ -3851,15 +2661,14 @@ saveLessons(courses);
 openComments(id);
 }
 
-
-/* SHARE */
+/* =========================
+   SHARE
+========================= */
 
 async function shareCourse(id){
 
-const course=getLessons().find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=getLessons().find(function(x){
+return Number(x.id)===Number(id);
 });
 
 if(!course)return;
@@ -3877,7 +2686,7 @@ title:course.title,
 text:text
 });
 
-}catch(error){}
+}catch(e){}
 
 }else{
 
@@ -3887,28 +2696,18 @@ await navigator.clipboard.writeText(text);
 
 alert("Course text copied to clipboard.");
 
-}catch(error){
+}catch(e){
 
 alert(text);
 
 }
-}
-}
-
-
-/* RENDER */
-
-function renderAll(){
-
-renderHomeCourses();
-renderLessons();
-renderMyLessons();
-loadProfile();
 
 }
+}
 
-
-/* ENSURE ELECTRICAL COURSE */
+/* =========================
+   ENSURE ELECTRICAL COURSE
+========================= */
 
 function ensureElectricalCourse(){
 
@@ -3926,48 +2725,32 @@ if(!electrical){
 
 if(lessons.length===0){
 
-const name=localStorage.getItem("studioName")||"Mamadou";
+const name=
+localStorage.getItem("studioName")||"Mamadou";
 
-const username=localStorage.getItem("studioUsername")||"mamadou";
+const username=
+localStorage.getItem("studioUsername")||"mamadou";
 
-const course={
+lessons.push({
 
 id:Date.now(),
-
 teacher:name,
-
 username:username,
-
 title:"House Electrical Wiring",
-
 category:"Technical",
-
-description:
-"Learn how to install electrical systems and wire a house safely.",
-
+description:"Learn how to install electrical systems and wire a house safely.",
 video:"",
-
 videoFile:"",
-
+hasUploadedVideo:false,
 image:"",
-
-lessons:DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
-}),
-
+lessons:DEFAULT_ELECTRICAL.map(function(x){return{...x}}),
 priceType:"FREE",
-
 price:0,
-
 likes:[],
-
 comments:[],
-
 createdAt:new Date().toISOString()
 
-};
-
-lessons.push(course);
+});
 
 saveLessons(lessons);
 
@@ -3982,8 +2765,8 @@ electrical.lessons.length<7
 ){
 
 electrical.lessons=
-DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
+DEFAULT_ELECTRICAL.map(function(x){
+return{...x};
 });
 
 electrical.priceType="FREE";
@@ -3994,15 +2777,13 @@ saveLessons(lessons);
 }
 }
 
+/* =========================
+   MIGRATION
+========================= */
 
-/* START */
-
-function startStudioTalent(){
-
-ensureElectricalCourse();
+function migrateCourses(){
 
 let lessons=getLessons();
-
 let changed=false;
 
 lessons=lessons.map(function(course){
@@ -4010,7 +2791,6 @@ lessons=lessons.map(function(course){
 if(!Array.isArray(course.lessons)){
 
 course.lessons=
-(
 String(course.title||"")
 .toLowerCase()
 .includes("electrical")
@@ -4018,42 +2798,36 @@ String(course.title||"")
 String(course.title||"")
 .toLowerCase()
 .includes("wiring")
-)
 ?
-DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
-})
+DEFAULT_ELECTRICAL.map(function(x){return{...x}})
 :
-[
-{
+[{
 title:"Lesson 1 — Introduction",
-content:course.description||
-"Lesson content coming soon."
-}
-];
+content:course.description||"Lesson content coming soon."
+}];
 
 changed=true;
 }
 
 if(!Array.isArray(course.likes)){
-
 course.likes=[];
-
 changed=true;
 }
 
 if(!Array.isArray(course.comments)){
-
 course.comments=[];
-
 changed=true;
 }
 
-/* Keep old courses compatible with video upload */
+if(typeof course.hasUploadedVideo!=="boolean"){
 
-if(typeof course.videoFile!=="string"){
+if(course.videoFile){
+course.hasUploadedVideo=true;
+}
 
-course.videoFile="";
+else{
+course.hasUploadedVideo=false;
+}
 
 changed=true;
 
@@ -4063,20 +2837,35 @@ return course;
 
 });
 
-if(changed){
+if(changed)saveLessons(lessons);
+}
 
-saveLessons(lessons);
+/* =========================
+   RENDER
+========================= */
+
+function renderAll(){
+
+renderHomeCourses();
+renderLessons();
+renderMyLessons();
+loadProfile();
 
 }
 
-renderAll();
+/* =========================
+   START
+========================= */
 
+async function startStudioTalent(){
+
+ensureElectricalCourse();
+migrateCourses();
+
+renderAll();
 togglePrice();
 
 }
-
-
-/* START APP */
 
 if(document.readyState==="loading"){
 
@@ -4091,22 +2880,12 @@ startStudioTalent();
 
 }
 
-
-/* HOME NOTIFICATIONS */
-
-const homeNotificationButton=
 document.getElementById(
 "homeNotificationButton"
-);
-
-if(homeNotificationButton){
-
-homeNotificationButton.addEventListener(
+).addEventListener(
 "click",
 openNotifications
 );
-
-}
 
 </script>
 
