@@ -1531,7 +1531,7 @@ document
 .getElementById("createPhoto")
 .addEventListener(
 "change",
-function(){
+async function(){
 
 const file=this.files[0];
 
@@ -1547,28 +1547,148 @@ return;
 
 }
 
-const reader=new FileReader();
+try{
 
-reader.onload=function(event){
-
-setAccountValue(
-"studioProfilePhoto",
-event.target.result
-);
+const compressedPhoto=
+await compressProfilePhoto(file);
 
 document.getElementById(
 "createPhotoPreview"
 ).innerHTML=
 '<img src="'+
-escapeHTML(event.target.result)+
+escapeHTML(compressedPhoto)+
 '" alt="Profile">';
+
+this.dataset.compressedPhoto=
+compressedPhoto;
+
+}catch(error){
+
+console.error(
+"Profile photo compression error:",
+error
+);
+
+alert(
+"Could not process the profile photo. Please choose another photo."
+);
+
+this.value="";
+this.dataset.compressedPhoto="";
+
+}
+
+}
+);
+
+
+/* PROFILE PHOTO COMPRESSION */
+
+function compressProfilePhoto(file){
+
+return new Promise(function(resolve,reject){
+
+const reader=new FileReader();
+
+reader.onload=function(event){
+
+const image=new Image();
+
+image.onload=function(){
+
+const MAX_SIZE=700;
+
+let width=image.width;
+let height=image.height;
+
+if(width>height){
+
+if(width>MAX_SIZE){
+
+height=
+Math.round(
+height*(MAX_SIZE/width)
+);
+
+width=MAX_SIZE;
+
+}
+
+}else{
+
+if(height>MAX_SIZE){
+
+width=
+Math.round(
+width*(MAX_SIZE/height)
+);
+
+height=MAX_SIZE;
+
+}
+
+}
+
+const canvas=
+document.createElement("canvas");
+
+canvas.width=width;
+canvas.height=height;
+
+const context=
+canvas.getContext("2d");
+
+if(!context){
+
+reject(
+new Error("Canvas is not supported.")
+);
+
+return;
+
+}
+
+context.drawImage(
+image,
+0,
+0,
+width,
+height
+);
+
+const compressed=
+canvas.toDataURL(
+"image/jpeg",
+0.72
+);
+
+resolve(compressed);
+
+};
+
+image.onerror=function(){
+
+reject(
+new Error("Could not read image.")
+);
+
+};
+
+image.src=event.target.result;
+
+};
+
+reader.onerror=function(){
+
+reject(reader.error);
 
 };
 
 reader.readAsDataURL(file);
 
+});
+
 }
-);
 
 
 /* VIDEO PREVIEW */
