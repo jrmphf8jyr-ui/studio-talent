@@ -3,11 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
 <title>Studio Talent — Learn, Teach, Share</title>
 
 <style>
-
 :root{
   --purple:#5b3df5;
   --purple2:#7b61ff;
@@ -20,13 +18,9 @@
   --green:#1f8a55;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
@@ -35,10 +29,7 @@ body{
   color:var(--ink);
 }
 
-button,
-input,
-textarea,
-select{
+button,input,textarea,select{
   font:inherit;
 }
 
@@ -294,7 +285,7 @@ h2{
   font-size:15px;
 }
 
-/* LESSON / COURSE */
+/* LESSON */
 
 .lesson{
   margin:16px;
@@ -698,7 +689,6 @@ small{
   font-weight:800;
   margin-top:12px;
 }
-
 </style>
 </head>
 
@@ -711,7 +701,6 @@ small{
 <div id="home" class="view activeView">
 
 <header>
-
 <div>
 <div class="logo">Studio</div>
 <div class="sub">Talent</div>
@@ -720,7 +709,6 @@ small{
 <button class="icon" id="homeNotificationButton">
 🔔
 </button>
-
 </header>
 
 <div class="hero">
@@ -853,7 +841,6 @@ See all
 
 </div>
 
-
 <!-- EXPLORE -->
 
 <div id="explore" class="view">
@@ -887,16 +874,14 @@ onclick="openNotifications()">
 <input
 id="searchInput"
 placeholder="Search skills, teachers, courses..."
-oninput="searchLessons">
+oninput="searchLessons()">
 
 </div>
 
 <section>
 
 <div class="row">
-
 <h2>Categories</h2>
-
 </div>
 
 <div class="cats">
@@ -956,7 +941,6 @@ All lessons
 <div id="lessonList"></div>
 
 </div>
-
 
 <!-- CREATE -->
 
@@ -1169,7 +1153,6 @@ onclick="publishEverything()">
 
 </div>
 
-
 <!-- PROFILE -->
 
 <div id="profile" class="view">
@@ -1308,7 +1291,6 @@ Create Course
 
 </div>
 
-
 <!-- NAV -->
 
 <nav>
@@ -1354,7 +1336,6 @@ Profile
 
 </div>
 
-
 <script>
 
 /* =========================================================
@@ -1378,157 +1359,148 @@ const CATEGORY_ICONS={
    ========================================================= */
 
 const DEFAULT_ELECTRICAL=[
-  {
-    title:"Lesson 1 — Electrical Safety",
-    content:"Before working with electricity, always switch OFF the power and verify that the circuit is dead. Use insulated tools, appropriate protective equipment, keep the work area dry, and never work on exposed live wires."
-  },
-  {
-    title:"Lesson 2 — Electrical Tools",
-    content:"Learn the essential tools used for house electrical wiring. Identify insulated screwdrivers, voltage testers, pliers, wire strippers, measuring tools and other equipment. Always use tools that are suitable and in good condition."
-  },
-  {
-    title:"Lesson 3 — Cables and Wires",
-    content:"Learn the different types of electrical cables and how to choose them. Understand conductor size, insulation, identification and the importance of selecting cables appropriate for the circuit and installation."
-  },
-  {
-    title:"Lesson 4 — Switches and Sockets",
-    content:"Learn the basic principles of installing switches and electrical sockets. Understand correct connections, positioning and safe isolation before working on the circuit."
-  },
-  {
-    title:"Lesson 5 — Lighting",
-    content:"Learn the basic principles of house lighting circuits. Understand how lighting points, switches and cables work together and how to plan a safe lighting installation."
-  },
-  {
-    title:"Lesson 6 — House Wiring",
-    content:"Learn how to plan and install the electrical wiring of a house. Understand circuit organisation, distribution, protection, cable routing and the importance of following applicable electrical regulations."
-  },
-  {
-    title:"Lesson 7 — Testing the Installation",
-    content:"Learn how to check an electrical installation safely before using it. Testing should be performed with appropriate equipment and according to applicable electrical safety procedures and regulations."
-  }
+{
+title:"Lesson 1 — Electrical Safety",
+content:"Before working with electricity, always switch OFF the power and verify that the circuit is dead. Use insulated tools, appropriate protective equipment, keep the work area dry, and never work on exposed live wires."
+},
+{
+title:"Lesson 2 — Electrical Tools",
+content:"Learn the essential tools used for house electrical wiring. Identify insulated screwdrivers, voltage testers, pliers, wire strippers, measuring tools and other equipment. Always use tools that are suitable and in good condition."
+},
+{
+title:"Lesson 3 — Cables and Wires",
+content:"Learn the different types of electrical cables and how to choose them. Understand conductor size, insulation, identification and the importance of selecting cables appropriate for the circuit and installation."
+},
+{
+title:"Lesson 4 — Switches and Sockets",
+content:"Learn the basic principles of installing switches and electrical sockets. Understand correct connections, positioning and safe isolation before working on the circuit."
+},
+{
+title:"Lesson 5 — Lighting",
+content:"Learn the basic principles of house lighting circuits. Understand how lighting points, switches and cables work together and how to plan a safe lighting installation."
+},
+{
+title:"Lesson 6 — House Wiring",
+content:"Learn how to plan and install the electrical wiring of a house. Understand circuit organisation, distribution, protection, cable routing and the importance of following applicable electrical regulations."
+},
+{
+title:"Lesson 7 — Testing the Installation",
+content:"Learn how to check an electrical installation safely before using it. Testing should be performed with appropriate equipment and according to applicable electrical safety procedures and regulations."
+}
 ];
 
 
 /* =========================================================
-   STORAGE HELPERS
+   STORAGE
    ========================================================= */
 
 function getLessons(){
 
-  try{
+try{
 
-    const data=JSON.parse(
-      localStorage.getItem("studioLessons") || "[]"
-    );
+const data=JSON.parse(
+localStorage.getItem("studioLessons")||"[]"
+);
 
-    return Array.isArray(data) ? data : [];
+return Array.isArray(data)?data:[];
 
-  }catch(error){
+}catch(error){
 
-    return [];
-
-  }
+return[];
 
 }
 
+}
 
 function saveLessons(data){
 
-  localStorage.setItem(
-    "studioLessons",
-    JSON.stringify(data)
-  );
+localStorage.setItem(
+"studioLessons",
+JSON.stringify(data)
+);
 
 }
-
 
 function getArray(key){
 
-  try{
+try{
 
-    const data=JSON.parse(
-      localStorage.getItem(key) || "[]"
-    );
+const data=JSON.parse(
+localStorage.getItem(key)||"[]"
+);
 
-    return Array.isArray(data) ? data : [];
+return Array.isArray(data)?data:[];
 
-  }catch(error){
+}catch(error){
 
-    return [];
-
-  }
+return[];
 
 }
 
+}
 
 function saveArray(key,data){
 
-  localStorage.setItem(
-    key,
-    JSON.stringify(data)
-  );
+localStorage.setItem(
+key,
+JSON.stringify(data)
+);
 
 }
-
 
 function cleanUsername(value){
 
-  return String(value || "")
-    .trim()
-    .replace(/^@/,"");
+return String(value||"")
+.trim()
+.replace(/^@/,"");
 
 }
-
 
 function categoryName(value){
 
-  return String(value || "")
-    .replace(/^[^A-Za-z]+/,"")
-    .trim();
+return String(value||"")
+.replace(/^[^A-Za-z]+/,"")
+.trim();
 
 }
-
 
 function escapeHTML(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
-
 
 function escAttr(value){
 
-  return escapeHTML(value);
+return escapeHTML(value);
 
 }
-
 
 function priceText(course){
 
-  if(course.priceType==="PAID"){
+if(course.priceType==="PAID"){
 
-    return "€"+
-      Number(course.price || 0)
-        .toFixed(2)
-        .replace(/\.00$/,"");
-
-  }
-
-  return "FREE";
+return "€"+
+Number(course.price||0)
+.toFixed(2)
+.replace(/\.00$/,"");
 
 }
 
+return "FREE";
+
+}
 
 function getCurrentUser(){
 
-  return localStorage.getItem(
-    "studioUsername"
-  ) || "local-user";
+return localStorage.getItem(
+"studioUsername"
+)||"local-user";
 
 }
 
@@ -1539,73 +1511,65 @@ function getCurrentUser(){
 
 function show(id,skipRender=false){
 
-  document
-    .querySelectorAll(".view")
-    .forEach(function(view){
+document
+.querySelectorAll(".view")
+.forEach(function(view){
 
-      view.classList.remove("activeView");
+view.classList.remove("activeView");
 
-    });
+});
 
+const page=document.getElementById(id);
 
-  const page=document.getElementById(id);
+if(page){
 
-  if(page){
+page.classList.add("activeView");
 
-    page.classList.add("activeView");
+}
 
-  }
+document
+.querySelectorAll("nav button")
+.forEach(function(button){
 
+button.classList.remove("active");
 
-  document
-    .querySelectorAll("nav button")
-    .forEach(function(button){
+});
 
-      button.classList.remove("active");
+const navButton=document.getElementById(
+"n-"+id
+);
 
-    });
+if(navButton){
 
+navButton.classList.add("active");
 
-  const navButton=document.getElementById(
-    "n-"+id
-  );
+}
 
-  if(navButton){
+if(id==="create"){
 
-    navButton.classList.add("active");
+loadCreateForm();
 
-  }
+}
 
+if(id==="profile"){
 
-  if(id==="create"){
+loadProfile();
 
-    loadCreateForm();
+}
 
-  }
+if(id==="explore"&&!skipRender){
 
+renderLessons();
 
-  if(id==="profile"){
+}
 
-    loadProfile();
+if(id==="home"){
 
-  }
+renderHomeCourses();
 
+}
 
-  if(id==="explore" && !skipRender){
-
-    renderLessons();
-
-  }
-
-
-  if(id==="home"){
-
-    renderHomeCourses();
-
-  }
-
-
-  window.scrollTo(0,0);
+window.scrollTo(0,0);
 
 }
 
@@ -1616,25 +1580,30 @@ function show(id,skipRender=false){
 
 function togglePrice(){
 
-  const type=document.getElementById("priceType");
-  const price=document.getElementById("lessonPrice");
+const type=document.getElementById(
+"priceType"
+);
 
-  if(!type || !price){
+const price=document.getElementById(
+"lessonPrice"
+);
 
-    return;
+if(!type||!price){
 
-  }
+return;
 
-  if(type.value==="PAID"){
+}
 
-    price.disabled=false;
+if(type.value==="PAID"){
 
-  }else{
+price.disabled=false;
 
-    price.disabled=true;
-    price.value="";
+}else{
 
-  }
+price.disabled=true;
+price.value="";
+
+}
 
 }
 
@@ -1645,108 +1614,106 @@ function togglePrice(){
 
 function addLessonEditor(data={title:"",content:""}){
 
-  const box=document.getElementById(
-    "lessonEditors"
-  );
+const box=document.getElementById(
+"lessonEditors"
+);
 
-  if(!box){
+if(!box){
 
-    return;
-
-  }
-
-  const number=box.children.length+1;
-
-  const div=document.createElement("div");
-
-  div.className="lessonEditor";
-
-  div.innerHTML=`
-
-    <label>
-      Lesson ${number} title
-    </label>
-
-    <input
-      class="newLessonTitle"
-      value="${escAttr(data.title)}"
-      placeholder="e.g. Lesson 1 — Introduction">
-
-    <label>
-      Lesson content
-    </label>
-
-    <textarea
-      class="newLessonContent"
-      placeholder="What will students learn?">${escapeHTML(data.content)}</textarea>
-
-    <button
-      type="button"
-      class="smallBtn danger"
-      onclick="this.parentElement.remove();renumberEditors()">
-
-      🗑️ Remove lesson
-
-    </button>
-
-  `;
-
-  box.appendChild(div);
+return;
 
 }
 
+const number=box.children.length+1;
+
+const div=document.createElement("div");
+
+div.className="lessonEditor";
+
+div.innerHTML=`
+
+<label>
+Lesson ${number} title
+</label>
+
+<input
+class="newLessonTitle"
+value="${escAttr(data.title)}"
+placeholder="e.g. Lesson 1 — Introduction">
+
+<label>
+Lesson content
+</label>
+
+<textarea
+class="newLessonContent"
+placeholder="What will students learn?">${escapeHTML(data.content)}</textarea>
+
+<button
+type="button"
+class="smallBtn danger"
+onclick="this.parentElement.remove();renumberEditors()">
+
+🗑️ Remove lesson
+
+</button>
+
+`;
+
+box.appendChild(div);
+
+}
 
 function renumberEditors(){
 
-  document
-    .querySelectorAll(
-      "#lessonEditors .lessonEditor"
-    )
-    .forEach(function(box,index){
+document
+.querySelectorAll(
+"#lessonEditors .lessonEditor"
+)
+.forEach(function(box,index){
 
-      const label=box.querySelector("label");
+const label=box.querySelector("label");
 
-      if(label){
+if(label){
 
-        label.textContent=
-          "Lesson "+
-          (index+1)+
-          " title";
-
-      }
-
-    });
+label.textContent=
+"Lesson "+
+(index+1)+
+" title";
 
 }
 
+});
+
+}
 
 function collectEditors(){
 
-  return Array.from(
-    document.querySelectorAll(
-      "#lessonEditors .lessonEditor"
-    )
-  )
-  .map(function(box){
+return Array.from(
+document.querySelectorAll(
+"#lessonEditors .lessonEditor"
+)
+)
+.map(function(box){
 
-    return{
+return{
 
-      title:box.querySelector(
-        ".newLessonTitle"
-      ).value.trim(),
+title:box.querySelector(
+".newLessonTitle"
+).value.trim(),
 
-      content:box.querySelector(
-        ".newLessonContent"
-      ).value.trim()
+content:box.querySelector(
+".newLessonContent"
+).value.trim()
 
-    };
+};
 
-  })
-  .filter(function(item){
+})
+.filter(function(item){
 
-    return item.title || item.content;
+return item.title||item.content;
 
-  });
+});
 
 }
 
@@ -1757,60 +1724,58 @@ function collectEditors(){
 
 function loadCreateForm(){
 
-  const fields={
+const fields={
 
-    createName:"studioName",
-    createUsername:"studioUsername",
-    createBio:"studioBio",
-    createTalent:"studioTeacherTalent",
-    createExperience:"studioTeacherExperience"
+createName:"studioName",
+createUsername:"studioUsername",
+createBio:"studioBio",
+createTalent:"studioTeacherTalent",
+createExperience:"studioTeacherExperience"
 
-  };
+};
 
+Object.keys(fields)
+.forEach(function(id){
 
-  Object.keys(fields)
-    .forEach(function(id){
+const element=document.getElementById(id);
 
-      const element=document.getElementById(id);
+if(element){
 
-      if(element){
+element.value=
+localStorage.getItem(
+fields[id]
+)||"";
 
-        element.value=
-          localStorage.getItem(
-            fields[id]
-          ) || "";
+}
 
-      }
+});
 
-    });
+const photo=localStorage.getItem(
+"studioProfilePhoto"
+);
 
+const preview=document.getElementById(
+"createPhotoPreview"
+);
 
-  const photo=localStorage.getItem(
-    "studioProfilePhoto"
-  );
+if(preview){
 
-  const preview=document.getElementById(
-    "createPhotoPreview"
-  );
+if(photo){
 
-  if(preview){
+preview.innerHTML=
+'<img src="'+
+escAttr(photo)+
+'" alt="Profile">';
 
-    if(photo){
+}else{
 
-      preview.innerHTML=
-        '<img src="'+
-        escAttr(photo)+
-        '" alt="Profile">';
+preview.innerHTML="👨🏾‍💻";
 
-    }else{
+}
 
-      preview.innerHTML="👨🏾‍💻";
+}
 
-    }
-
-  }
-
-  renderMyLessons();
+renderMyLessons();
 
 }
 
@@ -1821,93 +1786,96 @@ function loadCreateForm(){
 
 function readFileAsDataURL(file){
 
-  return new Promise(function(resolve,reject){
+return new Promise(function(resolve,reject){
 
-    if(!file){
+if(!file){
 
-      resolve("");
+resolve("");
 
-      return;
+return;
 
-    }
+}
 
-    const reader=new FileReader();
+const reader=new FileReader();
 
-    reader.onload=function(){
+reader.onload=function(){
 
-      resolve(reader.result);
+resolve(reader.result);
 
-    };
+};
 
-    reader.onerror=reject;
+reader.onerror=reject;
 
-    reader.readAsDataURL(file);
+reader.readAsDataURL(file);
 
-  });
+});
 
 }
 
 
 /* =========================================================
-   PROFILE PHOTO PREVIEW
+   PROFILE PHOTO
    ========================================================= */
 
-const createPhotoInput=document.getElementById(
-  "createPhoto"
+const createPhotoInput=
+document.getElementById(
+"createPhoto"
 );
 
 if(createPhotoInput){
 
-  createPhotoInput.addEventListener(
-    "change",
-    function(){
+createPhotoInput.addEventListener(
+"change",
+function(){
 
-      const file=this.files[0];
+const file=this.files[0];
 
-      if(!file){
+if(!file){
 
-        return;
+return;
 
-      }
+}
 
-      if(!file.type.startsWith("image/")){
+if(!file.type.startsWith("image/")){
 
-        alert("Please select an image.");
+alert(
+"Please select an image."
+);
 
-        this.value="";
+this.value="";
 
-        return;
+return;
 
-      }
+}
 
-      const reader=new FileReader();
+const reader=new FileReader();
 
-      reader.onload=function(event){
+reader.onload=function(event){
 
-        localStorage.setItem(
-          "studioProfilePhoto",
-          event.target.result
-        );
+localStorage.setItem(
+"studioProfilePhoto",
+event.target.result
+);
 
-        const preview=document.getElementById(
-          "createPhotoPreview"
-        );
+const preview=document.getElementById(
+"createPhotoPreview"
+);
 
-        if(preview){
+if(preview){
 
-          preview.innerHTML=
-            '<img src="'+
-            escAttr(event.target.result)+
-            '" alt="Profile">';
+preview.innerHTML=
+'<img src="'+
+escAttr(event.target.result)+
+'" alt="Profile">';
 
-        }
+}
 
-      };
+};
 
-      reader.readAsDataURL(file);
+reader.readAsDataURL(file);
 
-    }
-  );
+}
+);
 
 }
 
@@ -1918,328 +1886,325 @@ if(createPhotoInput){
 
 async function publishEverything(){
 
-  const name=document.getElementById(
-    "createName"
-  ).value.trim();
+const name=document.getElementById(
+"createName"
+).value.trim();
 
-  const username=cleanUsername(
-    document.getElementById(
-      "createUsername"
-    ).value
-  );
+const username=cleanUsername(
+document.getElementById(
+"createUsername"
+).value
+);
 
-  const bio=document.getElementById(
-    "createBio"
-  ).value.trim();
+const bio=document.getElementById(
+"createBio"
+).value.trim();
 
-  const talent=document.getElementById(
-    "createTalent"
-  ).value.trim();
+const talent=document.getElementById(
+"createTalent"
+).value.trim();
 
-  const experience=document.getElementById(
-    "createExperience"
-  ).value.trim();
+const experience=document.getElementById(
+"createExperience"
+).value.trim();
 
-  const title=document.getElementById(
-    "lessonTitle"
-  ).value.trim();
+const title=document.getElementById(
+"lessonTitle"
+).value.trim();
 
-  const category=document.getElementById(
-    "lessonCategory"
-  ).value;
+const category=document.getElementById(
+"lessonCategory"
+).value;
 
-  const description=document.getElementById(
-    "lessonDescription"
-  ).value.trim();
+const description=document.getElementById(
+"lessonDescription"
+).value.trim();
 
-  const video=document.getElementById(
-    "lessonVideo"
-  ).value.trim();
+const video=document.getElementById(
+"lessonVideo"
+).value.trim();
 
-  const priceType=document.getElementById(
-    "priceType"
-  ).value;
+const priceType=document.getElementById(
+"priceType"
+).value;
 
-  const price=document.getElementById(
-    "lessonPrice"
-  ).value;
+const price=document.getElementById(
+"lessonPrice"
+).value;
 
+if(!name){
 
-  if(!name){
+alert("Please enter your name.");
 
-    alert("Please enter your name.");
+return;
 
-    return;
+}
 
-  }
+if(!username){
 
+alert("Please enter your username.");
 
-  if(!username){
+return;
 
-    alert("Please enter your username.");
+}
 
-    return;
+if(!talent){
 
-  }
+alert("Please enter your talent.");
 
+return;
 
-  if(!talent){
+}
 
-    alert("Please enter your talent.");
+if(!title){
 
-    return;
+alert("Please enter your course title.");
 
-  }
+return;
 
+}
 
-  if(!title){
+if(!description){
 
-    alert("Please enter your course title.");
+alert("Please describe your course.");
 
-    return;
+return;
 
-  }
+}
 
+if(
+priceType==="PAID" &&
+(!price||Number(price)<0)
+){
 
-  if(!description){
+alert(
+"Please enter a valid price."
+);
 
-    alert("Please describe your course.");
+return;
 
-    return;
+}
 
-  }
+if(video){
 
+try{
 
-  if(
-    priceType==="PAID" &&
-    (!price || Number(price)<0)
-  ){
+const url=new URL(video);
 
-    alert("Please enter a valid price.");
+if(
+url.protocol!=="http:" &&
+url.protocol!=="https:"
+){
 
-    return;
+throw new Error();
 
-  }
+}
 
+}catch(error){
 
-  if(video){
+alert(
+"Please enter a valid video URL."
+);
 
-    try{
+return;
 
-      const url=new URL(video);
+}
 
-      if(
-        url.protocol!=="http:" &&
-        url.protocol!=="https:"
-      ){
+}
 
-        throw new Error();
+/* PROFILE */
 
-      }
+localStorage.setItem(
+"studioName",
+name
+);
 
-    }catch(error){
+localStorage.setItem(
+"studioUsername",
+username
+);
 
-      alert("Please enter a valid video URL.");
+localStorage.setItem(
+"studioBio",
+bio
+);
 
-      return;
+localStorage.setItem(
+"studioTeacherTalent",
+talent
+);
 
-    }
+localStorage.setItem(
+"studioTeacherExperience",
+experience
+);
 
-  }
+/* PROFILE PHOTO */
 
+const photoFile=document.getElementById(
+"createPhoto"
+).files[0];
 
-  /* SAVE PROFILE */
+if(photoFile){
 
-  localStorage.setItem(
-    "studioName",
-    name
-  );
+if(!photoFile.type.startsWith("image/")){
 
-  localStorage.setItem(
-    "studioUsername",
-    username
-  );
+alert(
+"Please select an image."
+);
 
-  localStorage.setItem(
-    "studioBio",
-    bio
-  );
+return;
 
-  localStorage.setItem(
-    "studioTeacherTalent",
-    talent
-  );
+}
 
-  localStorage.setItem(
-    "studioTeacherExperience",
-    experience
-  );
+try{
 
+const photo=await readFileAsDataURL(
+photoFile
+);
 
-  /* PROFILE PHOTO */
+localStorage.setItem(
+"studioProfilePhoto",
+photo
+);
 
-  const photoFile=document.getElementById(
-    "createPhoto"
-  ).files[0];
+}catch(error){
 
-  if(photoFile){
+alert(
+"Could not save the profile photo."
+);
 
-    if(!photoFile.type.startsWith("image/")){
+return;
 
-      alert("Please select an image.");
+}
 
-      return;
+}
 
-    }
+/* COURSE IMAGE */
 
-    try{
+let courseImage="";
 
-      const photo=await readFileAsDataURL(
-        photoFile
-      );
+const imageFile=document.getElementById(
+"lessonImage"
+).files[0];
 
-      localStorage.setItem(
-        "studioProfilePhoto",
-        photo
-      );
+if(imageFile){
 
-    }catch(error){
+if(!imageFile.type.startsWith("image/")){
 
-      alert("Could not save the profile photo.");
+alert(
+"Please select a course image."
+);
 
-      return;
+return;
 
-    }
+}
 
-  }
+try{
 
+courseImage=
+await readFileAsDataURL(imageFile);
 
-  /* COURSE IMAGE */
+}catch(error){
 
-  let courseImage="";
+alert(
+"Could not save the course image."
+);
 
-  const imageFile=document.getElementById(
-    "lessonImage"
-  ).files[0];
+return;
 
-  if(imageFile){
+}
 
-    if(!imageFile.type.startsWith("image/")){
+}
 
-      alert("Please select a course image.");
+/* LESSONS */
 
-      return;
+let courseLessons=collectEditors();
 
-    }
+if(!courseLessons.length){
 
-    try{
+if(
+title.toLowerCase().includes("electrical")||
+title.toLowerCase().includes("wiring")
+){
 
-      courseImage=
-        await readFileAsDataURL(imageFile);
+courseLessons=
+DEFAULT_ELECTRICAL.map(function(item){
 
-    }catch(error){
+return{...item};
 
-      alert("Could not save the course image.");
+});
 
-      return;
+}else{
 
-    }
+courseLessons=[
 
-  }
+{
+title:"Lesson 1 — Introduction",
+content:description
+}
 
+];
 
-  /* LESSONS */
+}
 
-  let courseLessons=collectEditors();
+}
 
-  if(!courseLessons.length){
+/* COURSE */
 
-    if(
-      title.toLowerCase().includes("electrical") ||
-      title.toLowerCase().includes("wiring")
-    ){
+const course={
 
-      courseLessons=
-        DEFAULT_ELECTRICAL.map(function(item){
+id:Date.now(),
 
-          return {...item};
+teacher:name,
 
-        });
+username:username,
 
-    }else{
+title:title,
 
-      courseLessons=[
+category:category,
 
-        {
-          title:"Lesson 1 — Introduction",
-          content:description
-        }
+description:description,
 
-      ];
+video:video,
 
-    }
+image:courseImage,
 
-  }
+lessons:courseLessons,
 
+priceType:priceType,
 
-  /* COURSE */
+price:
+priceType==="PAID"
+?Number(price)
+:0,
 
-  const course={
+likes:[],
 
-    id:Date.now(),
+comments:[],
 
-    teacher:name,
+createdAt:new Date().toISOString()
 
-    username:username,
+};
 
-    title:title,
+const lessons=getLessons();
 
-    category:category,
+lessons.push(course);
 
-    description:description,
+saveLessons(lessons);
 
-    video:video,
+addNotification(
+"Course published",
+title+" is now available."
+);
 
-    image:courseImage,
+renderAll();
 
-    lessons:courseLessons,
+alert(
+"Your profile and course have been published! 🎉"
+);
 
-    priceType:priceType,
-
-    price:
-      priceType==="PAID"
-      ? Number(price)
-      : 0,
-
-    likes:[],
-
-    comments:[],
-
-    createdAt:new Date().toISOString()
-
-  };
-
-
-  const lessons=getLessons();
-
-  lessons.push(course);
-
-  saveLessons(lessons);
-
-
-  addNotification(
-    "Course published",
-    title+" is now available."
-  );
-
-
-  renderAll();
-
-  alert(
-    "Your profile and course have been published! 🎉"
-  );
-
-  show("profile");
+show("profile");
 
 }
 
@@ -2249,137 +2214,136 @@ async function publishEverything(){
    ========================================================= */
 
 function renderLessonCard(
-  lesson,
-  includeTeacher
+course,
+includeTeacher
 ){
 
-  const category=categoryName(
-    lesson.category
-  );
+const category=categoryName(
+course.category
+);
 
-  const icon=
-    CATEGORY_ICONS[category] || "📚";
+const icon=
+CATEGORY_ICONS[category]||"📚";
 
-  const likes=
-    Array.isArray(lesson.likes)
-    ? lesson.likes.length
-    : 0;
+const likes=
+Array.isArray(course.likes)
+?course.likes.length
+:0;
 
-  const comments=
-    Array.isArray(lesson.comments)
-    ? lesson.comments.length
-    : 0;
+const comments=
+Array.isArray(course.comments)
+?course.comments.length
+:0;
 
+return`
 
-  return `
+<div class="lesson">
 
-    <div class="lesson">
+<div class="lessonImg">
 
-      <div class="lessonImg">
+${
+course.image
+?
+'<img src="'+
+escAttr(course.image)+
+'" alt="">'
+:
+icon
+}
 
-        ${
-          lesson.image
-          ?
-          '<img src="'+
-          escAttr(lesson.image)+
-          '" alt="">'
-          :
-          icon
-        }
+</div>
 
-      </div>
+<div class="lessonBody">
 
-      <div class="lessonBody">
+<span class="pill ${
+course.priceType==="PAID"
+?"paid"
+:""
+}">
 
-        <span class="pill ${
-          lesson.priceType==="PAID"
-          ? "paid"
-          : ""
-        }">
+${escapeHTML(category)}
+·
+${priceText(course)}
 
-          ${escapeHTML(category)}
-          ·
-          ${priceText(lesson)}
+</span>
 
-        </span>
+<h1>
+${escapeHTML(course.title)}
+</h1>
 
-        <h1>
-          ${escapeHTML(lesson.title)}
-        </h1>
+<p>
+${escapeHTML(course.description)}
+</p>
 
-        <p>
-          ${escapeHTML(lesson.description)}
-        </p>
+${
+includeTeacher
+?
+`
+<p>
+👨‍🏫
+<b>
+${escapeHTML(
+course.teacher||"Studio Teacher"
+)}
+</b>
+</p>
+`
+:
+""
+}
 
-        ${
-          includeTeacher
-          ?
-          `
-          <p>
-            👨‍🏫
-            <b>
-              ${escapeHTML(
-                lesson.teacher || "Studio Teacher"
-              )}
-            </b>
-          </p>
-          `
-          :
-          ""
-        }
+<div class="price">
+${priceText(course)}
+</div>
 
-        <div class="price">
-          ${priceText(lesson)}
-        </div>
+${
+includeTeacher
+?
+`
+<button
+class="enroll darkButton"
+onclick='event.stopPropagation();openTeacher(${JSON.stringify(
+course.teacher||"Studio Teacher"
+)})'>
 
-        ${
-          includeTeacher
-          ?
-          `
-          <button
-            class="enroll darkButton"
-            onclick='event.stopPropagation();openTeacher(${JSON.stringify(
-              lesson.teacher || "Studio Teacher"
-            )})'>
+👨‍🏫 View Teacher
 
-            👨‍🏫 View Teacher
+</button>
+`
+:
+""
+}
 
-          </button>
-          `
-          :
-          ""
-        }
+<div class="socialBar">
 
-        <div class="socialBar">
+<button
+onclick="event.stopPropagation();toggleLike(${Number(course.id)})">
 
-          <button
-            onclick="event.stopPropagation();toggleLike(${Number(lesson.id)})">
+❤️ ${likes}
 
-            ❤️ ${likes}
+</button>
 
-          </button>
+<button
+onclick="event.stopPropagation();openComments(${Number(course.id)})">
 
-          <button
-            onclick="event.stopPropagation();openComments(${Number(lesson.id)})">
+💬 ${comments}
 
-            💬 ${comments}
+</button>
 
-          </button>
+<button
+onclick="event.stopPropagation();shareCourse(${Number(course.id)})">
 
-          <button
-            onclick="event.stopPropagation();shareCourse(${Number(lesson.id)})">
+🔗 Share
 
-            🔗 Share
+</button>
 
-          </button>
+</div>
 
-        </div>
+</div>
 
-      </div>
+</div>
 
-    </div>
-
-  `;
+`;
 
 }
 
@@ -2390,640 +2354,638 @@ function renderLessonCard(
 
 function openCourse(id){
 
-  const course=getLessons().find(function(item){
+const course=getLessons().find(function(item){
 
-    return String(item.id)===String(id);
+return String(item.id)===
+String(id);
 
-  });
+});
 
+if(!course){
 
-  if(!course){
+alert(
+"Course not found."
+);
 
-    alert("Course not found.");
+return;
 
-    return;
+}
 
-  }
+const category=categoryName(
+course.category
+);
 
+const icon=
+CATEGORY_ICONS[category]||"📚";
 
-  const category=categoryName(
-    course.category
-  );
+const enrolled=getArray(
+"studioEnrolled"
+).includes(
+Number(course.id)
+);
 
-  const icon=
-    CATEGORY_ICONS[category] || "📚";
+const lessons=
+Array.isArray(course.lessons)
+?course.lessons
+:[];
 
+let actionButton;
 
-  const enrolled=getArray(
-    "studioEnrolled"
-  ).includes(
-    Number(course.id)
-  );
+if(course.priceType==="PAID"){
 
+actionButton=
+enrolled
+?
+`
+<button
+class="enroll"
+onclick="startCourse(${Number(course.id)})">
 
-  const lessons=
-    Array.isArray(course.lessons)
-    ? course.lessons
-    : [];
+▶️ Continue Course
 
+</button>
+`
+:
+`
+<button
+class="enroll"
+onclick="buyCourse(${Number(course.id)})">
 
-  let actionButton;
+💳 Buy Course
+${priceText(course)}
 
+</button>
+`;
 
-  if(course.priceType==="PAID"){
+}else{
 
-    actionButton=
-      enrolled
-      ?
-      `
-      <button
-        class="enroll"
-        onclick="startCourse(${Number(course.id)})">
+actionButton=
+`
+<button
+class="enroll"
+onclick="startCourse(${Number(course.id)})">
 
-        ▶️ Continue Course
+▶️ ${
+enrolled
+?"Continue Free Course"
+:"Start Free Course"
+}
 
-      </button>
-      `
-      :
-      `
-      <button
-        class="enroll"
-        onclick="buyCourse(${Number(course.id)})">
+</button>
+`;
 
-        💳 Buy Course ${priceText(course)}
+}
 
-      </button>
-      `;
+show("explore",true);
 
-  }else{
+const list=document.getElementById(
+"lessonList"
+);
 
-    actionButton=
-      `
-      <button
-        class="enroll"
-        onclick="startCourse(${Number(course.id)})">
+const progress=getCourseProgress(
+course.id
+);
 
-        ${
-          enrolled
-          ?
-          "▶️ Continue Free Course"
-          :
-          "▶️ Start Free Course"
-        }
+const percent=
+lessons.length
+?
+Math.round(
+((Math.max(progress,0)+1)/
+lessons.length)*100
+)
+:0;
 
-      </button>
-      `;
+list.innerHTML=`
 
-  }
+<div class="lesson">
 
+<div class="lessonImg">
 
-  show("explore",true);
+${
+course.image
+?
+'<img src="'+
+escAttr(course.image)+
+'" alt="">'
+:
+icon
+}
 
+</div>
+
+<div class="lessonBody">
+
+<button
+class="backButton"
+onclick="renderLessons()">
 
-  const list=document.getElementById(
-    "lessonList"
-  );
+← Back to All Courses
 
+</button>
 
-  const progress=
-    getCourseProgress(course.id);
+<span class="pill ${
+course.priceType==="PAID"
+?"paid"
+:""
+}">
 
-  const percent=
-    lessons.length
-    ?
-    Math.round(
-      ((progress+1)/lessons.length)*100
-    )
-    :0;
-
+${escapeHTML(category)}
+·
+${priceText(course)}
+
+</span>
 
-  list.innerHTML=`
+<h1>
+${escapeHTML(course.title)}
+</h1>
+
+<p>
+${escapeHTML(course.description)}
+</p>
+
+<p>
+👨‍🏫
+<b>
+${escapeHTML(
+course.teacher||"Studio Teacher"
+)}
+</b>
+</p>
+
+${actionButton}
+
+${
+course.video
+?
+`
+<a
+class="videoButton"
+href="${escAttr(course.video)}"
+target="_blank"
+rel="noopener">
+
+🎥 Course Video
+
+</a>
+`
+:
+""
+}
 
-    <div class="lesson">
+<div class="notice">
 
-      <div class="lessonImg">
+${
+enrolled
+?
+"You are enrolled in this course. Choose a lesson below."
+:
+"Start the free course to begin learning."
+}
 
-        ${
-          course.image
-          ?
-          '<img src="'+
-          escAttr(course.image)+
-          '" alt="">'
-          :
-          icon
-        }
-
-      </div>
-
-      <div class="lessonBody">
-
-        <button
-          class="backButton"
-          onclick="renderLessons()">
-
-          ← Back to All Courses
+</div>
 
-        </button>
-
-        <span class="pill ${
-          course.priceType==="PAID"
-          ? "paid"
-          : ""
-        }">
-
-          ${escapeHTML(category)}
-          ·
-          ${priceText(course)}
-
-        </span>
-
-        <h1>
-          ${escapeHTML(course.title)}
-        </h1>
-
-        <p>
-          ${escapeHTML(course.description)}
-        </p>
-
-        <p>
-          👨‍🏫
-          <b>
-            ${escapeHTML(
-              course.teacher || "Studio Teacher"
-            )}
-          </b>
-        </p>
-
-        ${actionButton}
-
-        ${
-          course.video
-          ?
-          `
-          <a
-            class="videoButton"
-            href="${escAttr(course.video)}"
-            target="_blank"
-            rel="noopener">
-
-            🎥 Course Video
-
-          </a>
-          `
-          :
-          ""
-        }
+<h2 style="margin-top:22px;">
+📖 Course Lessons
+</h2>
 
-        <div class="notice">
+<div class="progressWrap">
 
-          ${
-            enrolled
-            ?
-            "You are enrolled in this course. Choose a lesson below."
-            :
-            "Start the free course to begin learning."
-          }
+<div
+class="progressBar"
+style="width:${percent}%">
 
-        </div>
+</div>
 
-        <h2 style="margin-top:22px;">
-          📖 Course Lessons
-        </h2>
+</div>
 
-        <div class="progressWrap">
+<small>
 
-          <div
-            class="progressBar"
-            style="width:${percent}%">
+${
+lessons.length
+?
+"Progress: "+
+Math.min(
+Math.max(progress+1,0),
+lessons.length
+)+
+" of "+
+lessons.length+
+" lessons"
+:
+"No lessons yet"
+}
 
-          </div>
+</small>
 
-        </div>
+${
+lessons.map(function(item,index){
 
-        <small>
-          ${
-            lessons.length
-            ?
-            "Progress: "+
-            Math.min(progress+1,lessons.length)+
-            " of "+
-            lessons.length+
-            " lessons"
-            :
-            "No lessons yet"
-          }
-        </small>
+const completed=
+index<=progress&&enrolled;
 
-        ${
-          lessons.map(function(item,index){
+return`
 
-            const completed=
-              index<=progress && enrolled;
+<div
+style="
+background:#f7f7fb;
+border-radius:14px;
+padding:14px;
+margin-top:10px;
+">
 
-            return `
+<div
+style="
+font-weight:800;
+margin-bottom:8px;
+">
 
-              <div
-                style="
-                  background:#f7f7fb;
-                  border-radius:14px;
-                  padding:14px;
-                  margin-top:10px;
-                ">
+${
+completed
+?"✅"
+:"📘"
+}
 
-                <div
-                  style="
-                    font-weight:800;
-                    margin-bottom:8px;
-                  ">
+${escapeHTML(
+item.title||
+"Lesson "+(index+1)
+)}
 
-                  ${
-                    completed
-                    ? "✅"
-                    : "📘"
-                  }
+</div>
 
-                  ${escapeHTML(
-                    item.title ||
-                    "Lesson "+(index+1)
-                  )}
+<button
+class="smallBtn"
+onclick="openLesson(${Number(course.id)},${index})">
 
-                </div>
+${
+completed
+?"Review Lesson"
+:"Open Lesson"
+}
 
-                <button
-                  class="smallBtn"
-                  onclick="openLesson(${Number(course.id)},${index})">
+</button>
 
-                  ${
-                    completed
-                    ? "Review Lesson"
-                    : "Open Lesson"
-                  }
+</div>
 
-                </button>
+`;
 
-              </div>
+}).join("")
+}
 
-            `;
+</div>
 
-          }).join("")}
+</div>
 
-      </div>
+<div class="lesson">
 
-    </div>
+<div class="lessonBody">
 
-    <div class="lesson">
+<h2>
+❤️ Course Activity
+</h2>
 
-      <div class="lessonBody">
+<div class="socialBar">
 
-        <h2>❤️ Course Activity</h2>
+<button
+onclick="toggleLike(${Number(course.id)})">
 
-        <div class="socialBar">
+❤️ ${
+Array.isArray(course.likes)
+?course.likes.length
+:0
+}
 
-          <button
-            onclick="toggleLike(${Number(course.id)})">
+</button>
 
-            ❤️ ${
-              Array.isArray(course.likes)
-              ? course.likes.length
-              : 0
-            }
+<button
+onclick="openComments(${Number(course.id)})">
 
-          </button>
+💬 ${
+Array.isArray(course.comments)
+?course.comments.length
+:0
+}
 
-          <button
-            onclick="openComments(${Number(course.id)})">
+</button>
 
-            💬 ${
-              Array.isArray(course.comments)
-              ? course.comments.length
-              : 0
-            }
+<button
+onclick="shareCourse(${Number(course.id)})">
 
-          </button>
+🔗 Share
 
-          <button
-            onclick="shareCourse(${Number(course.id)})">
+</button>
 
-            🔗 Share
+</div>
 
-          </button>
+</div>
 
-        </div>
+</div>
 
-      </div>
-
-    </div>
-
-  `;
+`;
 
 }
 
 
 /* =========================================================
-   COURSE PROGRESS
+   PROGRESS
    ========================================================= */
 
 function getCourseProgress(id){
 
-  const progress=
-    JSON.parse(
-      localStorage.getItem(
-        "studioCourseProgress"
-      ) || "{}"
-    );
+try{
 
-  const value=Number(
-    progress[String(id)]
-  );
+const progress=JSON.parse(
+localStorage.getItem(
+"studioCourseProgress"
+)||"{}"
+);
 
-  return Number.isFinite(value)
-    ? value
-    : -1;
+const value=Number(
+progress[String(id)]
+);
+
+return Number.isFinite(value)
+?value
+:-1;
+
+}catch(error){
+
+return-1;
 
 }
 
+}
 
 function saveCourseProgress(id,index){
 
-  let progress={};
+let progress={};
 
-  try{
+try{
 
-    progress=
-      JSON.parse(
-        localStorage.getItem(
-          "studioCourseProgress"
-        ) || "{}"
-      );
+progress=JSON.parse(
+localStorage.getItem(
+"studioCourseProgress"
+)||"{}"
+);
 
-  }catch(error){
+}catch(error){
 
-    progress={};
+progress={};
 
-  }
+}
 
-  progress[String(id)]=index;
+progress[String(id)]=index;
 
-  localStorage.setItem(
-    "studioCourseProgress",
-    JSON.stringify(progress)
-  );
+localStorage.setItem(
+"studioCourseProgress",
+JSON.stringify(progress)
+);
 
 }
 
 
 /* =========================================================
-   ACTUAL LESSON READER
+   LESSON READER
    ========================================================= */
 
 function openLesson(courseId,index){
 
-  const course=getLessons().find(function(item){
+const course=getLessons().find(function(item){
 
-    return String(item.id)===String(courseId);
+return String(item.id)===
+String(courseId);
 
-  });
+});
 
+if(!course){
 
-  if(!course){
+alert(
+"Course not found."
+);
 
-    alert("Course not found.");
+return;
 
-    return;
+}
 
-  }
+const lessons=
+Array.isArray(course.lessons)
+?course.lessons
+:[];
 
+if(!lessons.length){
 
-  const lessons=
-    Array.isArray(course.lessons)
-    ? course.lessons
-    : [];
+openCourse(courseId);
 
+return;
 
-  if(!lessons.length){
+}
 
-    openCourse(courseId);
+const lessonIndex=Math.max(
+0,
+Math.min(
+Number(index)||0,
+lessons.length-1
+)
+);
 
-    return;
+const item=lessons[lessonIndex];
 
-  }
+let enrolled=getArray(
+"studioEnrolled"
+);
 
+if(!enrolled.includes(Number(courseId))){
 
-  const lessonIndex=Math.max(
-    0,
-    Math.min(
-      Number(index) || 0,
-      lessons.length-1
-    )
-  );
+enrolled.push(Number(courseId));
 
+saveArray(
+"studioEnrolled",
+enrolled
+);
 
-  const item=lessons[lessonIndex];
+addNotification(
+"Course started",
+"You started: "+course.title
+);
 
+}
 
-  /* Make sure the user is enrolled */
+saveCourseProgress(
+courseId,
+lessonIndex
+);
 
-  let enrolled=getArray(
-    "studioEnrolled"
-  );
+show("explore",true);
 
+const list=document.getElementById(
+"lessonList"
+);
 
-  if(!enrolled.includes(Number(courseId))){
+const percent=Math.round(
+((lessonIndex+1)/
+lessons.length)*100
+);
 
-    enrolled.push(Number(courseId));
+const previous=
+lessonIndex>0
+?
+`
+<button
+onclick="openLesson(${Number(courseId)},${lessonIndex-1})">
 
-    saveArray(
-      "studioEnrolled",
-      enrolled
-    );
+← Previous
 
-    addNotification(
-      "Course started",
-      "You started: "+course.title
-    );
+</button>
+`
+:
+`
+<button disabled>
+← Previous
+</button>
+`;
 
-  }
+const next=
+lessonIndex<lessons.length-1
+?
+`
+<button
+onclick="openLesson(${Number(courseId)},${lessonIndex+1})">
 
+Next →
 
-  saveCourseProgress(
-    courseId,
-    lessonIndex
-  );
+</button>
+`
+:
+`
+<button
+onclick="finishCourse(${Number(courseId)})">
 
+🎉 Finish Course
 
-  show("explore",true);
+</button>
+`;
 
+list.innerHTML=`
 
-  const list=document.getElementById(
-    "lessonList"
-  );
+<div class="lesson">
 
+<div class="lessonBody">
 
-  const percent=Math.round(
-    ((lessonIndex+1)/lessons.length)*100
-  );
+<button
+class="backButton"
+onclick="openCourse(${Number(courseId)})">
 
+← Back to Course
 
-  const previous=
-    lessonIndex>0
-    ?
-    `
-    <button
-      onclick="openLesson(${Number(courseId)},${lessonIndex-1})">
+</button>
 
-      ← Previous
+<span class="pill">
 
-    </button>
-    `
-    :
-    `
-    <button disabled>
-      ← Previous
-    </button>
-    `;
+${escapeHTML(
+course.category||"Course"
+)}
 
+</span>
 
-  const next=
-    lessonIndex<lessons.length-1
-    ?
-    `
-    <button
-      onclick="openLesson(${Number(courseId)},${lessonIndex+1})">
+<h1>
+${escapeHTML(course.title)}
+</h1>
 
-      Next →
-    </button>
-    `
-    :
-    `
-    <button
-      onclick="finishCourse(${Number(courseId)})">
+<div class="progressWrap">
 
-      🎉 Finish Course
+<div
+class="progressBar"
+style="width:${percent}%">
 
-    </button>
-    `;
+</div>
 
+</div>
 
-  list.innerHTML=`
+<small>
 
-    <div class="lesson">
+Lesson ${lessonIndex+1}
+of
+${lessons.length}
 
-      <div class="lessonBody">
+</small>
 
-        <button
-          class="backButton"
-          onclick="openCourse(${Number(courseId)})">
+<h2 style="margin-top:18px;">
 
-          ← Back to Course
+${escapeHTML(
+item.title||
+"Lesson "+(lessonIndex+1)
+)}
 
-        </button>
+</h2>
 
-        <span class="pill">
+<p
+style="
+font-size:16px;
+line-height:1.7;
+color:#55536b;
+">
 
-          ${escapeHTML(
-            course.category || "Course"
-          )}
+${escapeHTML(
+item.content||
+"Lesson content coming soon."
+)}
 
-        </span>
+</p>
 
-        <h1>
-          ${escapeHTML(course.title)}
-        </h1>
+${
+course.video
+?
+`
+<a
+class="videoButton"
+href="${escAttr(course.video)}"
+target="_blank"
+rel="noopener">
 
-        <div class="progressWrap">
+🎥 Watch Course Video
 
-          <div
-            class="progressBar"
-            style="width:${percent}%">
+</a>
+`
+:
+""
+}
 
-          </div>
+<div class="lessonNavigation">
 
-        </div>
+${previous}
 
-        <small>
-          Lesson ${lessonIndex+1}
-          of
-          ${lessons.length}
-        </small>
+${next}
 
-        <h2 style="margin-top:18px;">
+</div>
 
-          ${escapeHTML(
-            item.title ||
-            "Lesson "+(lessonIndex+1)
-          )}
+${
+lessonIndex===lessons.length-1
+?
+`
+<div class="notice">
 
-        </h2>
+🎉 You reached the final lesson.
+Keep practicing and stay safe.
 
-        <p
-          style="
-            font-size:16px;
-            line-height:1.7;
-            color:#55536b;
-          ">
+</div>
+`
+:
+`
+<div class="notice">
 
-          ${escapeHTML(
-            item.content ||
-            "Lesson content coming soon."
-          )}
+Complete this lesson and continue
+to the next lesson.
 
-        </p>
+</div>
+`
+}
 
-        ${
-          course.video
-          ?
-          `
-          <a
-            class="videoButton"
-            href="${escAttr(course.video)}"
-            target="_blank"
-            rel="noopener">
+</div>
 
-            🎥 Watch Course Video
+</div>
 
-          </a>
-          `
-          :
-          ""
-        }
+`;
 
-        <div class="lessonNavigation">
-
-          ${previous}
-
-          ${next}
-
-        </div>
-
-        ${
-          lessonIndex===lessons.length-1
-          ?
-          `
-          <div class="notice">
-
-            🎉 You reached the final lesson.
-            Keep practicing and stay safe.
-
-          </div>
-          `
-          :
-          `
-          <div class="notice">
-
-            Complete this lesson and continue
-            to the next lesson.
-
-          </div>
-          `
-        }
-
-      </div>
-
-    </div>
-
-  `;
-
-  window.scrollTo(0,0);
+window.scrollTo(0,0);
 
 }
 
@@ -3034,208 +2996,191 @@ function openLesson(courseId,index){
 
 function finishCourse(id){
 
-  const course=getLessons().find(function(item){
+const course=getLessons().find(function(item){
 
-    return String(item.id)===String(id);
+return String(item.id)===
+String(id);
 
-  });
+});
 
+if(!course){
 
-  if(!course){
+return;
 
-    return;
+}
 
-  }
+const lessons=
+Array.isArray(course.lessons)
+?course.lessons
+:[];
 
+if(lessons.length){
 
-  const lessons=
-    Array.isArray(course.lessons)
-    ? course.lessons
-    : [];
+saveCourseProgress(
+id,
+lessons.length-1
+);
 
+}
 
-  if(lessons.length){
+addNotification(
+"Course completed",
+"You completed: "+course.title
+);
 
-    saveCourseProgress(
-      id,
-      lessons.length-1
-    );
+alert(
+"🎉 Congratulations! You completed the course."
+);
 
-  }
-
-
-  addNotification(
-    "Course completed",
-    "You completed: "+course.title
-  );
-
-
-  alert(
-    "🎉 Congratulations! You completed the course."
-  );
-
-
-  openCourse(id);
+openCourse(id);
 
 }
 
 
 /* =========================================================
-   FREE COURSE
+   START COURSE
    ========================================================= */
 
 function startCourse(id){
 
-  const course=getLessons().find(function(item){
+const course=getLessons().find(function(item){
 
-    return String(item.id)===String(id);
+return String(item.id)===
+String(id);
 
-  });
+});
 
+if(!course){
 
-  if(!course){
+alert(
+"Course not found."
+);
 
-    alert("Course not found.");
+return;
 
-    return;
+}
 
-  }
+let enrolled=getArray(
+"studioEnrolled"
+);
 
+const alreadyEnrolled=
+enrolled.includes(
+Number(id)
+);
 
-  let enrolled=getArray(
-    "studioEnrolled"
-  );
+if(!alreadyEnrolled){
 
+enrolled.push(
+Number(id)
+);
 
-  const alreadyEnrolled=
-    enrolled.includes(Number(id));
+saveArray(
+"studioEnrolled",
+enrolled
+);
 
+addNotification(
+"Course started",
+"You started: "+course.title
+);
 
-  if(!alreadyEnrolled){
+}
 
-    enrolled.push(Number(id));
+/*
+IMPORTANT:
+Start Course opens Lesson 1.
+*/
 
-    saveArray(
-      "studioEnrolled",
-      enrolled
-    );
+const savedProgress=
+getCourseProgress(id);
 
-    addNotification(
-      "Course started",
-      "You started: "+course.title
-    );
+const firstLesson=
+savedProgress>=0
+?savedProgress
+:0;
 
-  }
-
-
-  /*
-    IMPORTANT:
-    Do NOT call openCourse() here.
-    Start Course must open Lesson 1.
-  */
-
-  const savedProgress=
-    getCourseProgress(id);
-
-
-  const firstLesson=
-    savedProgress>=0
-    ?
-    savedProgress
-    :
-    0;
-
-
-  openLesson(
-    id,
-    firstLesson
-  );
+openLesson(
+id,
+firstLesson
+);
 
 }
 
 
 /* =========================================================
-   PAID COURSE DEMO
+   PAID COURSE
    ========================================================= */
 
 function buyCourse(id){
 
-  const course=getLessons().find(function(item){
+const course=getLessons().find(function(item){
 
-    return String(item.id)===String(id);
+return String(item.id)===
+String(id);
 
-  });
+});
 
+if(!course){
 
-  if(!course){
+return;
 
-    return;
+}
 
-  }
+if(course.priceType!=="PAID"){
 
+startCourse(id);
 
-  if(course.priceType!=="PAID"){
+return;
 
-    startCourse(id);
+}
 
-    return;
+let enrolled=getArray(
+"studioEnrolled"
+);
 
-  }
+if(!enrolled.includes(Number(id))){
 
+enrolled.push(Number(id));
 
-  let enrolled=getArray(
-    "studioEnrolled"
-  );
+saveArray(
+"studioEnrolled",
+enrolled
+);
 
+}
 
-  if(!enrolled.includes(Number(id))){
+let purchases=getArray(
+"studioPurchases"
+);
 
-    enrolled.push(Number(id));
+purchases.push({
 
-    saveArray(
-      "studioEnrolled",
-      enrolled
-    );
+courseId:Number(id),
 
-  }
+price:Number(
+course.price||0
+),
 
+time:new Date().toISOString()
 
-  let purchases=getArray(
-    "studioPurchases"
-  );
+});
 
+saveArray(
+"studioPurchases",
+purchases
+);
 
-  purchases.push({
+addNotification(
+"Course purchased",
+"Demo purchase: "+course.title
+);
 
-    courseId:Number(id),
+alert(
+"Demo purchase successful! 💳"
+);
 
-    price:Number(
-      course.price || 0
-    ),
-
-    time:new Date().toISOString()
-
-  });
-
-
-  saveArray(
-    "studioPurchases",
-    purchases
-  );
-
-
-  addNotification(
-    "Course purchased",
-    "Demo purchase: "+course.title
-  );
-
-
-  alert(
-    "Demo purchase successful! 💳"
-  );
-
-
-  openLesson(id,0);
+openLesson(id,0);
 
 }
 
@@ -3244,64 +3189,62 @@ function buyCourse(id){
    EXPLORE
    ========================================================= */
 
-function renderLessons(lessonsToShow){
+function renderLessons(
+lessonsToShow
+){
 
-  const list=document.getElementById(
-    "lessonList"
-  );
+const list=document.getElementById(
+"lessonList"
+);
 
+if(!list){
 
-  if(!list){
+return;
 
-    return;
+}
 
-  }
+const lessons=
+lessonsToShow||getLessons();
 
+if(!lessons.length){
 
-  const lessons=
-    lessonsToShow || getLessons();
+list.innerHTML=`
 
+<div class="empty">
 
-  if(!lessons.length){
+No lessons found yet.
+Create the first course! 📚
 
-    list.innerHTML=`
+</div>
 
-      <div class="empty">
+`;
 
-        No lessons found yet.
-        Create the first course! 📚
+return;
 
-      </div>
+}
 
-    `;
+list.innerHTML=
+lessons
+.slice()
+.reverse()
+.map(function(course){
 
-    return;
+return`
 
-  }
+<div
+onclick="openCourse(${Number(course.id)})">
 
+${renderLessonCard(
+course,
+true
+)}
 
-  list.innerHTML=
-    lessons
-      .slice()
-      .reverse()
-      .map(function(course){
+</div>
 
-        return `
+`;
 
-          <div
-            onclick="openCourse(${Number(course.id)})">
-
-            ${renderLessonCard(
-              course,
-              true
-            )}
-
-          </div>
-
-        `;
-
-      })
-      .join("");
+})
+.join("");
 
 }
 
@@ -3312,84 +3255,80 @@ function renderLessons(lessonsToShow){
 
 function searchLessons(){
 
-  const input=document.getElementById(
-    "searchInput"
-  );
+const input=document.getElementById(
+"searchInput"
+);
 
+if(!input){
 
-  if(!input){
+return;
 
-    return;
+}
 
-  }
+const query=input.value
+.toLowerCase()
+.trim();
 
+const lessons=getLessons().filter(
+function(course){
 
-  const query=input.value
-    .toLowerCase()
-    .trim();
+return(
 
+!query||
 
-  const lessons=getLessons().filter(
-    function(course){
+String(
+course.title||""
+)
+.toLowerCase()
+.includes(query)||
 
-      return(
+String(
+course.description||""
+)
+.toLowerCase()
+.includes(query)||
 
-        !query ||
+String(
+course.teacher||""
+)
+.toLowerCase()
+.includes(query)||
 
-        String(
-          course.title || ""
-        )
-        .toLowerCase()
-        .includes(query) ||
+String(
+course.username||""
+)
+.toLowerCase()
+.includes(query)||
 
-        String(
-          course.description || ""
-        )
-        .toLowerCase()
-        .includes(query) ||
+categoryName(
+course.category
+)
+.toLowerCase()
+.includes(query)
 
-        String(
-          course.teacher || ""
-        )
-        .toLowerCase()
-        .includes(query) ||
+);
 
-        String(
-          course.username || ""
-        )
-        .toLowerCase()
-        .includes(query) ||
+}
+);
 
-        categoryName(
-          course.category
-        )
-        .toLowerCase()
-        .includes(query)
+const title=document.getElementById(
+"categoryTitle"
+);
 
-      );
+if(title){
 
-    }
-  );
+title.textContent=
+query
+?
+'Results for "'+query+'"'
+:
+"All lessons";
 
+}
 
-  const title=document.getElementById(
-    "categoryTitle"
-  );
-
-
-  if(title){
-
-    title.textContent=
-      query
-      ?
-      'Results for "'+query+'"'
-      :
-      "All lessons";
-
-  }
-
-
-  renderLessons(lessons);
+renderLessons(
+lessons
+);
 
 }
 
@@ -3398,23 +3337,23 @@ function searchLessons(){
    CATEGORY
    ========================================================= */
 
-function selectCategory(category){
+function selectCategory(
+category
+){
 
-  const search=document.getElementById(
-    "searchInput"
-  );
+const search=document.getElementById(
+"searchInput"
+);
 
+if(search){
 
-  if(search){
+search.value=category;
 
-    search.value=category;
+}
 
-  }
+show("explore");
 
-
-  show("explore");
-
-  searchLessons();
+searchLessons();
 
 }
 
@@ -3425,102 +3364,100 @@ function selectCategory(category){
 
 function renderHomeCourses(){
 
-  const box=document.getElementById(
-    "homeCourses"
-  );
+const box=document.getElementById(
+"homeCourses"
+);
 
+if(!box){
 
-  if(!box){
+return;
 
-    return;
+}
 
-  }
+const courses=getLessons()
+.slice()
+.reverse()
+.slice(0,3);
 
+if(!courses.length){
 
-  const lessons=getLessons()
-    .slice()
-    .reverse()
-    .slice(0,3);
+box.innerHTML=`
 
+<div class="empty">
 
-  if(!lessons.length){
+No courses yet.
+Create the first one! 📚
 
-    box.innerHTML=`
+</div>
 
-      <div class="empty">
+`;
 
-        No courses yet.
-        Create the first one! 📚
+return;
 
-      </div>
+}
 
-    `;
+box.innerHTML=
+courses
+.map(function(course){
 
-    return;
+const category=categoryName(
+course.category
+);
 
-  }
+return`
 
+<div
+class="course"
+onclick="openCourse(${Number(course.id)})">
 
-  box.innerHTML=lessons.map(function(course){
+<div class="thumb">
 
-    const category=categoryName(
-      course.category
-    );
+${
+course.image
+?
+'<img src="'+
+escAttr(course.image)+
+'" style="width:100%;height:100%;object-fit:cover">'
+:
+(
+CATEGORY_ICONS[category]||
+"📚"
+)
+}
 
+</div>
 
-    return `
+<div>
 
-      <div
-        class="course"
-        onclick="openCourse(${Number(course.id)})">
+<h3>
+${escapeHTML(course.title)}
+</h3>
 
-        <div class="thumb">
+<p>
+${escapeHTML(
+course.teacher||
+"Studio Teacher"
+)}
+</p>
 
-          ${
-            course.image
-            ?
-            '<img src="'+
-            escAttr(course.image)+
-            '" style="width:100%;height:100%;object-fit:cover">'
-            :
-            (
-              CATEGORY_ICONS[category]
-              || "📚"
-            )
-          }
+<span class="pill ${
+course.priceType==="PAID"
+?"paid"
+:""
+}">
 
-        </div>
+${priceText(course)}
 
-        <div>
+</span>
 
-          <h3>
-            ${escapeHTML(course.title)}
-          </h3>
+</div>
 
-          <p>
-            ${escapeHTML(
-              course.teacher ||
-              "Studio Teacher"
-            )}
-          </p>
+</div>
 
-          <span class="pill ${
-            course.priceType==="PAID"
-            ? "paid"
-            : ""
-          }">
+`;
 
-            ${priceText(course)}
-
-          </span>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
+})
+.join("");
 
 }
 
@@ -3531,120 +3468,115 @@ function renderHomeCourses(){
 
 function renderMyLessons(){
 
-  const box=document.getElementById(
-    "myLessons"
-  );
+const box=document.getElementById(
+"myLessons"
+);
 
+if(!box){
 
-  if(!box){
+return;
 
-    return;
+}
 
-  }
+const name=localStorage.getItem(
+"studioName"
+)||"";
 
+const courses=getLessons().filter(
+function(course){
 
-  const name=localStorage.getItem(
-    "studioName"
-  ) || "";
+return !name||
+course.teacher===name;
 
+}
+);
 
-  const lessons=getLessons().filter(
-    function(course){
+if(!courses.length){
 
-      return !name ||
-        course.teacher===name;
+box.innerHTML=`
 
-    }
-  );
+<div class="empty">
 
+You haven't published a course yet.
 
-  if(!lessons.length){
+</div>
 
-    box.innerHTML=`
+`;
 
-      <div class="empty">
+return;
 
-        You haven't published a course yet.
+}
 
-      </div>
+box.innerHTML=
+courses
+.slice()
+.reverse()
+.map(function(course){
 
-    `;
+const category=categoryName(
+course.category
+);
 
-    return;
+return`
 
-  }
+<div
+class="course"
+onclick="openCourse(${Number(course.id)})">
 
+<div class="thumb">
 
-  box.innerHTML=lessons
-    .slice()
-    .reverse()
-    .map(function(course){
+${
+course.image
+?
+'<img src="'+
+escAttr(course.image)+
+'" style="width:100%;height:100%;object-fit:cover">'
+:
+(
+CATEGORY_ICONS[category]||
+"📚"
+)
+}
 
-      const category=categoryName(
-        course.category
-      );
+</div>
 
+<div>
 
-      return `
+<h3>
+${escapeHTML(course.title)}
+</h3>
 
-        <div
-          class="course"
-          onclick="openCourse(${Number(course.id)})">
+<p>
 
-          <div class="thumb">
+${escapeHTML(category)}
+·
+${
+Array.isArray(course.lessons)
+?course.lessons.length
+:0
+}
+lessons
 
-            ${
-              course.image
-              ?
-              '<img src="'+
-              escAttr(course.image)+
-              '" style="width:100%;height:100%;object-fit:cover">'
-              :
-              (
-                CATEGORY_ICONS[category]
-                || "📚"
-              )
-            }
+</p>
 
-          </div>
+<span class="pill ${
+course.priceType==="PAID"
+?"paid"
+:""
+}">
 
-          <div>
+${priceText(course)}
 
-            <h3>
-              ${escapeHTML(course.title)}
-            </h3>
+</span>
 
-            <p>
-              ${escapeHTML(category)}
-              ·
-              ${
-                Array.isArray(course.lessons)
-                ?
-                course.lessons.length
-                :
-                0
-              }
-              lessons
-            </p>
+</div>
 
-            <span class="pill ${
-              course.priceType==="PAID"
-              ? "paid"
-              : ""
-            }">
+</div>
 
-              ${priceText(course)}
+`;
 
-            </span>
-
-          </div>
-
-        </div>
-
-      `;
-
-    })
-    .join("");
+})
+.join("");
 
 }
 
@@ -3655,71 +3587,67 @@ function renderMyLessons(){
 
 function renderProfileLessons(){
 
-  const box=document.getElementById(
-    "profileLessons"
-  );
+const box=document.getElementById(
+"profileLessons"
+);
 
+if(!box){
 
-  if(!box){
+return;
 
-    return;
+}
 
-  }
+const name=localStorage.getItem(
+"studioName"
+)||"";
 
+const courses=getLessons().filter(
+function(course){
 
-  const name=localStorage.getItem(
-    "studioName"
-  ) || "";
+return !name||
+course.teacher===name;
 
+}
+);
 
-  const lessons=getLessons().filter(
-    function(course){
+if(!courses.length){
 
-      return !name ||
-        course.teacher===name;
+box.innerHTML=`
 
-    }
-  );
+<div class="empty">
 
+Your published courses will appear here.
 
-  if(!lessons.length){
+</div>
 
-    box.innerHTML=`
+`;
 
-      <div class="empty">
+return;
 
-        Your published courses will appear here.
+}
 
-      </div>
+box.innerHTML=
+courses
+.slice()
+.reverse()
+.map(function(course){
 
-    `;
+return`
 
-    return;
+<div
+onclick="openCourse(${Number(course.id)})">
 
-  }
+${renderLessonCard(
+course,
+false
+)}
 
+</div>
 
-  box.innerHTML=lessons
-    .slice()
-    .reverse()
-    .map(function(course){
+`;
 
-      return `
-
-        <div
-          onclick="openCourse(${Number(course.id)})">
-
-          ${renderLessonCard(
-            course,
-            false
-          )}
-
-        </div>
-
-      `;
-
-    })
-    .join("");
+})
+.join("");
 
 }
 
@@ -3730,105 +3658,96 @@ function renderProfileLessons(){
 
 function loadProfile(){
 
-  const name=localStorage.getItem(
-    "studioName"
-  );
+const name=localStorage.getItem(
+"studioName"
+);
 
-  const username=localStorage.getItem(
-    "studioUsername"
-  );
+const username=localStorage.getItem(
+"studioUsername"
+);
 
-  const bio=localStorage.getItem(
-    "studioBio"
-  );
+const bio=localStorage.getItem(
+"studioBio"
+);
 
-  const photo=localStorage.getItem(
-    "studioProfilePhoto"
-  );
+const photo=localStorage.getItem(
+"studioProfilePhoto"
+);
 
+document.getElementById(
+"profileName"
+).textContent=
+name||"Your Name";
 
-  document.getElementById(
-    "profileName"
-  ).textContent=
-    name || "Your Name";
+document.getElementById(
+"profileUsername"
+).textContent=
+"@"+
+(
+username||
+"your_studio_name"
+);
 
+document.getElementById(
+"profileBio"
+).textContent=
+bio||
+"Tell people about yourself and your talent.";
 
-  document.getElementById(
-    "profileUsername"
-  ).textContent=
-    "@"+(
-      username ||
-      "your_studio_name"
-    );
+const image=document.getElementById(
+"profileImage"
+);
 
+const emoji=document.getElementById(
+"profileEmoji"
+);
 
-  document.getElementById(
-    "profileBio"
-  ).textContent=
-    bio ||
-    "Tell people about yourself and your talent.";
+if(photo){
 
+image.src=photo;
 
-  const image=document.getElementById(
-    "profileImage"
-  );
+image.style.display="block";
 
-  const emoji=document.getElementById(
-    "profileEmoji"
-  );
+emoji.style.display="none";
 
+}else{
 
-  if(photo){
+image.style.display="none";
 
-    image.src=photo;
+emoji.style.display="block";
 
-    image.style.display="block";
+}
 
-    emoji.style.display="none";
+const courses=getLessons().filter(
+function(course){
 
-  }else{
+return !name||
+course.teacher===name;
 
-    image.style.display="none";
+}
+);
 
-    emoji.style.display="block";
+document.getElementById(
+"courseCount"
+).textContent=
+courses.length;
 
-  }
+document.getElementById(
+"followerCount"
+).textContent=
+getArray(
+"studioFollowing"
+).length;
 
+document.getElementById(
+"earningCount"
+).textContent=
+"€"+
+getEarnings().toFixed(2);
 
-  const lessons=getLessons().filter(
-    function(course){
+renderTeacherInfo();
 
-      return !name ||
-        course.teacher===name;
-
-    }
-  );
-
-
-  document.getElementById(
-    "courseCount"
-  ).textContent=
-    lessons.length;
-
-
-  document.getElementById(
-    "followerCount"
-  ).textContent=
-    getArray(
-      "studioFollowing"
-    ).length;
-
-
-  document.getElementById(
-    "earningCount"
-  ).textContent=
-    "€"+
-    getEarnings().toFixed(2);
-
-
-  renderTeacherInfo();
-
-  renderProfileLessons();
+renderProfileLessons();
 
 }
 
@@ -3839,59 +3758,60 @@ function loadProfile(){
 
 function renderTeacherInfo(){
 
-  const talent=localStorage.getItem(
-    "studioTeacherTalent"
-  );
+const talent=localStorage.getItem(
+"studioTeacherTalent"
+);
 
-  const experience=localStorage.getItem(
-    "studioTeacherExperience"
-  );
+const experience=localStorage.getItem(
+"studioTeacherExperience"
+);
 
-  const box=document.getElementById(
-    "teacherInfo"
-  );
+const box=document.getElementById(
+"teacherInfo"
+);
 
+if(!box){
 
-  if(!box){
+return;
 
-    return;
+}
 
-  }
+if(!talent){
 
+box.innerHTML="";
 
-  if(!talent){
+return;
 
-    box.innerHTML="";
+}
 
-    return;
+box.innerHTML=`
 
-  }
+<div class="teacherInfo">
 
+<b>
+👨‍🏫 Teacher Profile
+</b>
 
-  box.innerHTML=`
+<p>
 
-    <div class="teacherInfo">
+<b>Talent:</b>
+${escapeHTML(talent)}
 
-      <b>
-        👨‍🏫 Teacher Profile
-      </b>
+</p>
 
-      <p>
-        <b>Talent:</b>
-        ${escapeHTML(talent)}
-      </p>
+<p>
 
-      <p>
-        <b>Experience:</b>
-        ${escapeHTML(
-          experience ||
-          "Not specified"
-        )}
-      </p>
+<b>Experience:</b>
+${escapeHTML(
+experience||
+"Not specified"
+)}
 
-    </div>
+</p>
 
-  `;
+</div>
+
+`;
 
 }
 
@@ -3902,217 +3822,206 @@ function renderTeacherInfo(){
 
 function getTeacherLessons(name){
 
-  return getLessons().filter(
-    function(course){
+return getLessons().filter(
+function(course){
 
-      return String(
-        course.teacher || ""
-      )
-      .toLowerCase()
-      ===
-      String(name || "")
-      .toLowerCase();
-
-    }
-  );
+return String(
+course.teacher||""
+)
+.toLowerCase()
+===
+String(name||"")
+.toLowerCase();
 
 }
+);
 
+}
 
 function getFollowers(name){
 
-  return getArray(
-    "studioFollowers"
-  )
-  .filter(function(item){
+return getArray(
+"studioFollowers"
+)
+.filter(function(item){
 
-    return String(
-      item.teacher || ""
-    )
-    .toLowerCase()
-    ===
-    String(name || "")
-    .toLowerCase();
+return String(
+item.teacher||""
+)
+.toLowerCase()
+===
+String(name||"")
+.toLowerCase();
 
-  })
-  .length;
+})
+.length;
 
 }
 
-
 function openTeacher(name){
 
-  const lessons=getTeacherLessons(
-    name
-  );
+const lessons=getTeacherLessons(
+name
+);
 
+const following=getArray(
+"studioFollowing"
+);
 
-  const following=getArray(
-    "studioFollowing"
-  );
+const followed=following.some(
+function(item){
 
+return String(item)
+.toLowerCase()
+===
+String(name)
+.toLowerCase();
 
-  const followed=following.some(
-    function(item){
+}
+);
 
-      return String(item)
-        .toLowerCase()
-        ===
-        String(name)
-        .toLowerCase();
+const myName=
+localStorage.getItem(
+"studioName"
+)||"";
 
-    }
-  );
+const isMyProfile=
+name===myName;
 
+const photo=
+isMyProfile
+?
+localStorage.getItem(
+"studioProfilePhoto"
+)
+:
+"";
 
-  const myName=
-    localStorage.getItem(
-      "studioName"
-    ) || "";
+show("explore",true);
 
+document.getElementById(
+"lessonList"
+).innerHTML=`
 
-  const isMyProfile=
-    name===myName;
+<div class="profile">
 
+<div class="bigavatar">
 
-  const photo=
-    isMyProfile
-    ?
-    localStorage.getItem(
-      "studioProfilePhoto"
-    )
-    :
-    "";
+${
+photo
+?
+'<img src="'+
+escAttr(photo)+
+'" alt="">'
+:
+"👨‍🏫"
+}
 
+</div>
 
-  show("explore",true);
+<h2>
+${escapeHTML(name)}
+</h2>
 
+<p>
+👥
+${getFollowers(name)}
+followers
+</p>
 
-  document.getElementById(
-    "lessonList"
-  ).innerHTML=`
+${
+!isMyProfile
+?
+`
 
-    <div class="profile">
+<button
+class="editButton"
+onclick='toggleFollow(${JSON.stringify(name)})'>
 
-      <div class="bigavatar">
+${
+followed
+?
+"❤️ Following"
+:
+"🤍 Follow"
+}
 
-        ${
-          photo
-          ?
-          '<img src="'+
-          escAttr(photo)+
-          '" alt="">'
-          :
-          "👨‍🏫"
-        }
+</button>
 
-      </div>
+<button
+class="editButton darkButton"
+onclick='openMessage(${JSON.stringify(name)})'>
 
-      <h2>
-        ${escapeHTML(name)}
-      </h2>
+💬 Message
 
-      <p>
-        👥
-        ${getFollowers(name)}
-        followers
-      </p>
+</button>
 
-      ${
-        !isMyProfile
-        ?
-        `
+`
+:
+""
+}
 
-        <button
-          class="editButton"
-          onclick='toggleFollow(${JSON.stringify(name)})'>
+</div>
 
-          ${
-            followed
-            ?
-            "❤️ Following"
-            :
-            "🤍 Follow"
-          }
+<section>
 
-        </button>
+<div class="row">
 
-        <button
-          class="editButton darkButton"
-          onclick='openMessage(${JSON.stringify(name)})'>
+<h2>
+${escapeHTML(name)}'s Courses
+</h2>
 
-          💬 Message
+</div>
 
-        </button>
+<div id="teacherCourses"></div>
 
-        `
-        :
-        ""
-      }
+</section>
 
-    </div>
+`;
 
-    <section>
+const courseBox=document.getElementById(
+"teacherCourses"
+);
 
-      <div class="row">
+if(!lessons.length){
 
-        <h2>
-          ${escapeHTML(name)}'s Courses
-        </h2>
+courseBox.innerHTML=`
 
-      </div>
+<div class="empty">
 
-      <div id="teacherCourses"></div>
+This teacher hasn't published
+a course yet.
 
-    </section>
+</div>
 
-  `;
+`;
 
+return;
 
-  const courseBox=document.getElementById(
-    "teacherCourses"
-  );
+}
 
+courseBox.innerHTML=
+lessons
+.slice()
+.reverse()
+.map(function(course){
 
-  if(!lessons.length){
+return`
 
-    courseBox.innerHTML=`
+<div
+onclick="openCourse(${Number(course.id)})">
 
-      <div class="empty">
+${renderLessonCard(
+course,
+true
+)}
 
-        This teacher hasn't published
-        a course yet.
+</div>
 
-      </div>
+`;
 
-    `;
-
-    return;
-
-  }
-
-
-  courseBox.innerHTML=lessons
-    .slice()
-    .reverse()
-    .map(function(course){
-
-      return `
-
-        <div
-          onclick="openCourse(${Number(course.id)})">
-
-          ${renderLessonCard(
-            course,
-            true
-          )}
-
-        </div>
-
-      `;
-
-    })
-    .join("");
+})
+.join("");
 
 }
 
@@ -4123,113 +4032,103 @@ function openTeacher(name){
 
 function toggleFollow(name){
 
-  let following=getArray(
-    "studioFollowing"
-  );
+let following=getArray(
+"studioFollowing"
+);
 
+const index=following.findIndex(
+function(item){
 
-  const index=following.findIndex(
-    function(item){
+return String(item)
+.toLowerCase()
+===
+String(name)
+.toLowerCase();
 
-      return String(item)
-        .toLowerCase()
-        ===
-        String(name)
-        .toLowerCase();
+}
+);
 
-    }
-  );
+if(index>=0){
 
+following.splice(
+index,
+1
+);
 
-  if(index>=0){
+let followers=getArray(
+"studioFollowers"
+);
 
-    following.splice(index,1);
+followers=followers.filter(
+function(item){
 
+return !(
+String(
+item.teacher||""
+)
+.toLowerCase()
+===
+String(name)
+.toLowerCase()
+&&
+String(
+item.user||""
+)
+.toLowerCase()
+===
+String(
+getCurrentUser()
+)
+.toLowerCase()
+);
 
-    let followers=getArray(
-      "studioFollowers"
-    );
+}
+);
 
+saveArray(
+"studioFollowers",
+followers
+);
 
-    followers=followers.filter(
-      function(item){
+addNotification(
+"Unfollowed",
+"You unfollowed "+name
+);
 
-        return !(
-          String(
-            item.teacher || ""
-          )
-          .toLowerCase()
-          ===
-          String(name)
-          .toLowerCase()
-          &&
-          String(
-            item.user || ""
-          )
-          .toLowerCase()
-          ===
-          String(
-            getCurrentUser()
-          )
-          .toLowerCase()
-        );
+}else{
 
-      }
-    );
+following.push(name);
 
+let followers=getArray(
+"studioFollowers"
+);
 
-    saveArray(
-      "studioFollowers",
-      followers
-    );
+followers.push({
 
+teacher:name,
 
-    addNotification(
-      "Unfollowed",
-      "You unfollowed "+name
-    );
+user:getCurrentUser()
 
+});
 
-  }else{
+saveArray(
+"studioFollowers",
+followers
+);
 
-    following.push(name);
+addNotification(
+"New follow",
+"You are now following "+name
+);
 
+}
 
-    let followers=getArray(
-      "studioFollowers"
-    );
+saveArray(
+"studioFollowing",
+following
+);
 
-
-    followers.push({
-
-      teacher:name,
-
-      user:getCurrentUser()
-
-    });
-
-
-    saveArray(
-      "studioFollowers",
-      followers
-    );
-
-
-    addNotification(
-      "New follow",
-      "You are now following "+name
-    );
-
-  }
-
-
-  saveArray(
-    "studioFollowing",
-    following
-  );
-
-
-  openTeacher(name);
+openTeacher(name);
 
 }
 
@@ -4240,196 +4139,186 @@ function toggleFollow(name){
 
 function getNotifications(){
 
-  return getArray(
-    "studioNotifications"
-  );
+return getArray(
+"studioNotifications"
+);
 
 }
-
 
 function saveNotifications(data){
 
-  saveArray(
-    "studioNotifications",
-    data
-  );
+saveArray(
+"studioNotifications",
+data
+);
 
 }
-
 
 function addNotification(
-  title,
-  message
+title,
+message
 ){
 
-  const notifications=
-    getNotifications();
+const notifications=
+getNotifications();
 
+notifications.unshift({
 
-  notifications.unshift({
+id:Date.now(),
 
-    id:Date.now(),
+title:title,
 
-    title:title,
+message:message,
 
-    message:message,
+read:false,
 
-    read:false,
+time:new Date().toLocaleString()
 
-    time:new Date().toLocaleString()
+});
 
-  });
-
-
-  saveNotifications(
-    notifications.slice(0,50)
-  );
+saveNotifications(
+notifications.slice(0,50)
+);
 
 }
-
 
 function openNotifications(){
 
-  const notifications=
-    getNotifications();
+const notifications=
+getNotifications();
 
+const unread=
+notifications.filter(
+function(item){
 
-  const unread=
-    notifications.filter(
-      function(item){
+return !item.read;
 
-        return !item.read;
+}
+).length;
 
-      }
-    ).length;
+show("explore",true);
 
+let html=`
 
-  show("explore",true);
+<div class="lesson">
 
+<div class="lessonBody">
 
-  let html=`
+<button
+class="backButton"
+onclick="renderLessons()">
 
-    <div class="lesson">
+← Back to Explore
 
-      <div class="lessonBody">
+</button>
 
-        <button
-          class="backButton"
-          onclick="renderLessons()">
+<h1>
+🔔 Notifications
+</h1>
 
-          ← Back to Explore
+<p>
 
-        </button>
+${unread}
+unread notification${
+unread===1
+?""
+:"s"
+}
 
-        <h1>
-          🔔 Notifications
-        </h1>
+</p>
 
-        <p>
+<button
+class="enroll"
+onclick="markNotificationsRead()">
 
-          ${unread}
-          unread notification${
-            unread===1 ? "" : "s"
-          }
+✓ Mark all as read
 
-        </p>
+</button>
 
-        <button
-          class="enroll"
-          onclick="markNotificationsRead()">
+</div>
 
-          ✓ Mark all as read
+</div>
 
-        </button>
+`;
 
-      </div>
+if(!notifications.length){
 
-    </div>
+html+=`
 
-  `;
+<div class="empty">
 
+No notifications yet. 🔔
 
-  if(!notifications.length){
+</div>
 
-    html+=`
+`;
 
-      <div class="empty">
+}else{
 
-        No notifications yet. 🔔
+html+=notifications
+.map(function(n){
 
-      </div>
+return`
 
-    `;
+<div class="course">
 
-  }else{
+<div class="thumb">
 
-    html+=notifications
-      .map(function(n){
+${
+n.read
+?
+"🔔"
+:
+"🔴"
+}
 
-        return `
+</div>
 
-          <div class="course">
+<div>
 
-            <div class="thumb">
+<h3>
+${escapeHTML(n.title)}
+</h3>
 
-              ${
-                n.read
-                ?
-                "🔔"
-                :
-                "🔴"
-              }
+<p>
+${escapeHTML(n.message)}
+</p>
 
-            </div>
+<small>
+${escapeHTML(n.time)}
+</small>
 
-            <div>
+</div>
 
-              <h3>
-                ${escapeHTML(n.title)}
-              </h3>
+</div>
 
-              <p>
-                ${escapeHTML(n.message)}
-              </p>
+`;
 
-              <small>
-                ${escapeHTML(n.time)}
-              </small>
-
-            </div>
-
-          </div>
-
-        `;
-
-      })
-      .join("");
-
-  }
-
-
-  document.getElementById(
-    "lessonList"
-  ).innerHTML=html;
+})
+.join("");
 
 }
 
+document.getElementById(
+"lessonList"
+).innerHTML=html;
+
+}
 
 function markNotificationsRead(){
 
-  const data=getNotifications()
-    .map(function(item){
+const data=getNotifications()
+.map(function(item){
 
-      item.read=true;
+item.read=true;
 
-      return item;
+return item;
 
-    });
+});
 
+saveNotifications(data);
 
-  saveNotifications(data);
-
-  openNotifications();
+openNotifications();
 
 }
 
@@ -4440,293 +4329,278 @@ function markNotificationsRead(){
 
 function getMessages(){
 
-  return getArray(
-    "studioMessages"
-  );
+return getArray(
+"studioMessages"
+);
 
 }
-
 
 function saveMessages(data){
 
-  saveArray(
-    "studioMessages",
-    data
-  );
+saveArray(
+"studioMessages",
+data
+);
 
 }
-
 
 function openMessage(teacher){
 
-  const messages=getMessages()
-    .filter(function(item){
+const messages=getMessages()
+.filter(function(item){
 
-      return item.teacher===teacher;
+return item.teacher===teacher;
 
-    });
+});
 
+show("explore",true);
 
-  show("explore",true);
+document.getElementById(
+"lessonList"
+).innerHTML=`
 
+<div class="lesson">
 
-  document.getElementById(
-    "lessonList"
-  ).innerHTML=`
+<div class="lessonBody">
 
-    <div class="lesson">
+<button
+class="backButton"
+onclick='openTeacher(${JSON.stringify(teacher)})'>
 
-      <div class="lessonBody">
+← Back to Teacher
 
-        <button
-          class="backButton"
-          onclick='openTeacher(${JSON.stringify(teacher)})'>
+</button>
 
-          ← Back to Teacher
+<h1>
+💬 ${escapeHTML(teacher)}
+</h1>
 
-        </button>
+<div id="messageList">
 
-        <h1>
-          💬 ${escapeHTML(teacher)}
-        </h1>
+${
+messages.length
+?
+messages
+.map(function(m){
 
-        <div id="messageList">
+return`
 
-          ${
-            messages.length
-            ?
-            messages.map(function(m){
+<div class="comment">
 
-              return `
+<b>
+${escapeHTML(m.from)}
+</b>
 
-                <div class="comment">
+<p>
+${escapeHTML(m.text)}
+</p>
 
-                  <b>
-                    ${escapeHTML(m.from)}
-                  </b>
+<small>
+${escapeHTML(m.time)}
+</small>
 
-                  <p>
-                    ${escapeHTML(m.text)}
-                  </p>
+</div>
 
-                  <small>
-                    ${escapeHTML(m.time)}
-                  </small>
+`;
 
-                </div>
+})
+.join("")
+:
+`
 
-              `;
+<div class="empty">
 
-            }).join("")
-            :
-            `
+No messages yet.
+Start the conversation!
 
-            <div class="empty">
+</div>
 
-              No messages yet.
-              Start the conversation!
-
-            </div>
-
-            `
-          }
-
-        </div>
-
-        <textarea
-          id="messageText"
-          placeholder="Write a message..."
-          style="
-            width:100%;
-            margin-top:15px;
-            border:1px solid var(--border);
-            border-radius:12px;
-            padding:12px;
-            min-height:80px;
-          "></textarea>
-
-        <button
-          class="enroll"
-          style="margin-top:10px"
-          onclick='sendMessage(${JSON.stringify(teacher)})'>
-
-          📤 Send Message
-
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
+`
 }
 
+</div>
+
+<textarea
+id="messageText"
+placeholder="Write a message..."
+style="
+width:100%;
+margin-top:15px;
+border:1px solid var(--border);
+border-radius:12px;
+padding:12px;
+min-height:80px;
+"></textarea>
+
+<button
+class="enroll"
+style="margin-top:10px"
+onclick='sendMessage(${JSON.stringify(teacher)})'>
+
+📤 Send Message
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
 
 function sendMessage(teacher){
 
-  const input=document.getElementById(
-    "messageText"
-  );
+const input=document.getElementById(
+"messageText"
+);
 
+if(!input){
 
-  if(!input){
-
-    return;
-
-  }
-
-
-  const text=input.value.trim();
-
-
-  if(!text){
-
-    alert("Write a message first.");
-
-    return;
-
-  }
-
-
-  const messages=getMessages();
-
-
-  messages.push({
-
-    id:Date.now(),
-
-    teacher:teacher,
-
-    from:
-      localStorage.getItem(
-        "studioName"
-      ) || "You",
-
-    text:text,
-
-    time:new Date().toLocaleString()
-
-  });
-
-
-  saveMessages(messages);
-
-
-  addNotification(
-    "Message sent",
-    "Your message was sent to "+teacher
-  );
-
-
-  openMessage(teacher);
+return;
 
 }
 
+const text=input.value.trim();
+
+if(!text){
+
+alert(
+"Write a message first."
+);
+
+return;
+
+}
+
+const messages=getMessages();
+
+messages.push({
+
+id:Date.now(),
+
+teacher:teacher,
+
+from:
+localStorage.getItem(
+"studioName"
+)||"You",
+
+text:text,
+
+time:new Date().toLocaleString()
+
+});
+
+saveMessages(messages);
+
+addNotification(
+"Message sent",
+"Your message was sent to "+teacher
+);
+
+openMessage(teacher);
+
+}
 
 function openMyMessages(){
 
-  const messages=getMessages();
+const messages=getMessages();
 
+show("explore",true);
 
-  show("explore",true);
+const teachers=[
+...new Set(
+messages.map(function(item){
 
+return item.teacher;
 
-  const teachers=[
-    ...new Set(
-      messages.map(function(item){
+})
+)
+];
 
-        return item.teacher;
+const list=document.getElementById(
+"lessonList"
+);
 
-      })
-    )
-  ];
+if(!teachers.length){
 
+list.innerHTML=`
 
-  const list=document.getElementById(
-    "lessonList"
-  );
+<div class="lesson">
 
+<div class="lessonBody">
 
-  if(!teachers.length){
+<h1>
+💬 Messages
+</h1>
 
-    list.innerHTML=`
+<div class="empty">
 
-      <div class="lesson">
+No messages yet.
 
-        <div class="lessonBody">
+</div>
 
-          <h1>
-            💬 Messages
-          </h1>
+</div>
 
-          <div class="empty">
+</div>
 
-            No messages yet.
+`;
 
-          </div>
+return;
 
-        </div>
+}
 
-      </div>
+list.innerHTML=`
 
-    `;
+<div class="lesson">
 
-    return;
+<div class="lessonBody">
 
-  }
+<h1>
+💬 Messages
+</h1>
 
+<p>
+Choose a conversation.
+</p>
 
-  list.innerHTML=`
+</div>
 
-    <div class="lesson">
+</div>
 
-      <div class="lessonBody">
+`;
 
-        <h1>
-          💬 Messages
-        </h1>
+teachers.forEach(
+function(teacher){
 
-        <p>
-          Choose a conversation.
-        </p>
+list.innerHTML+=`
 
-      </div>
+<div
+class="course"
+onclick='openMessage(${JSON.stringify(teacher)})'>
 
-    </div>
+<div class="thumb">
+💬
+</div>
 
-  `;
+<div>
 
+<h3>
+${escapeHTML(teacher)}
+</h3>
 
-  teachers.forEach(function(teacher){
+<p>
+Open conversation
+</p>
 
-    list.innerHTML+=`
+</div>
 
-      <div
-        class="course"
-        onclick='openMessage(${JSON.stringify(teacher)})'>
+</div>
 
-        <div class="thumb">
-          💬
-        </div>
+`;
 
-        <div>
-
-          <h3>
-            ${escapeHTML(teacher)}
-          </h3>
-
-          <p>
-            Open conversation
-          </p>
-
-        </div>
-
-      </div>
-
-    `;
-
-  });
+});
 
 }
 
@@ -4737,131 +4611,124 @@ function openMyMessages(){
 
 function getEarnings(){
 
-  return Number(
-    localStorage.getItem(
-      "studioEarnings"
-    ) || 0
-  );
+return Number(
+localStorage.getItem(
+"studioEarnings"
+)||0
+);
 
 }
 
-
 function openEarnings(){
 
-  const earnings=getEarnings();
+const earnings=getEarnings();
 
+const name=
+localStorage.getItem(
+"studioName"
+)||"";
 
-  const name=
-    localStorage.getItem(
-      "studioName"
-    ) || "";
+const courses=getLessons()
+.filter(function(item){
 
+return item.teacher===name&&
+item.priceType==="PAID";
 
-  const lessons=getLessons()
-    .filter(function(item){
+});
 
-      return item.teacher===name &&
-        item.priceType==="PAID";
+show("profile");
 
-    });
+const box=document.getElementById(
+"profileLessons"
+);
 
+box.innerHTML=`
 
-  show("profile");
+<div class="lesson">
 
+<div class="lessonBody">
 
-  const box=document.getElementById(
-    "profileLessons"
-  );
+<h1>
+💰 Earnings
+</h1>
 
+<div class="price">
+€${earnings.toFixed(2)}
+</div>
 
-  box.innerHTML=`
+<p>
+Demo earnings from paid-course activity.
+</p>
 
-    <div class="lesson">
+<div class="notice">
 
-      <div class="lessonBody">
+💡 This is a demo earning system.
+Real payments, online users and
+withdrawals require a secure backend
+and payment provider.
 
-        <h1>
-          💰 Earnings
-        </h1>
+</div>
 
-        <div class="price">
-          €${earnings.toFixed(2)}
-        </div>
+</div>
 
-        <p>
-          Demo earnings from paid-course activity.
-        </p>
+</div>
 
-        <div class="notice">
+<div class="row">
 
-          💡 This is a demo earning system.
-          Real payments, online users and
-          withdrawals require a secure backend
-          and payment provider.
+<h2>
+Paid Courses
+</h2>
 
-        </div>
+</div>
 
-      </div>
+`;
 
-    </div>
+if(!courses.length){
 
-    <div class="row">
+box.innerHTML+=`
 
-      <h2>
-        Paid Courses
-      </h2>
+<div class="empty">
 
-    </div>
+You don't have paid courses yet.
 
-  `;
+</div>
 
+`;
 
-  if(!lessons.length){
+}else{
 
-    box.innerHTML+=`
+box.innerHTML+=courses
+.map(function(course){
 
-      <div class="empty">
+return`
 
-        You don't have paid courses yet.
+<div class="course">
 
-      </div>
+<div class="thumb">
+💰
+</div>
 
-    `;
+<div>
 
-  }else{
+<h3>
+${escapeHTML(course.title)}
+</h3>
 
-    box.innerHTML+=lessons
-      .map(function(course){
+<p>
+Price:
+${priceText(course)}
+</p>
 
-        return `
+</div>
 
-          <div class="course">
+</div>
 
-            <div class="thumb">
-              💰
-            </div>
+`;
 
-            <div>
+})
+.join("");
 
-              <h3>
-                ${escapeHTML(course.title)}
-              </h3>
-
-              <p>
-                Price:
-                ${priceText(course)}
-              </p>
-
-            </div>
-
-          </div>
-
-        `;
-
-      })
-      .join("");
-
-  }
+}
 
 }
 
@@ -4872,84 +4739,70 @@ function openEarnings(){
 
 function toggleLike(id){
 
-  const lessons=getLessons();
+const courses=getLessons();
 
+const course=courses.find(
+function(item){
 
-  const course=lessons.find(
-    function(item){
+return Number(item.id)===
+Number(id);
 
-      return Number(item.id)===
-        Number(id);
+}
+);
 
-    }
-  );
+if(!course){
 
+return;
 
-  if(!course){
+}
 
-    return;
+const user=getCurrentUser();
 
-  }
+course.likes=
+Array.isArray(course.likes)
+?
+course.likes
+:
+[];
 
+const index=course.likes.indexOf(
+user
+);
 
-  const user=getCurrentUser();
+if(index>=0){
 
+course.likes.splice(
+index,
+1
+);
 
-  course.likes=
-    Array.isArray(course.likes)
-    ?
-    course.likes
-    :
-    [];
+}else{
 
+course.likes.push(user);
 
-  const index=course.likes.indexOf(
-    user
-  );
+addNotification(
+"Course liked",
+"You liked "+course.title
+);
 
+}
 
-  if(index>=0){
+saveLessons(courses);
 
-    course.likes.splice(
-      index,
-      1
-    );
+const activeLesson=
+document.querySelector(
+".lessonNavigation"
+);
 
-  }else{
+if(activeLesson){
 
-    course.likes.push(user);
+openCourse(id);
 
-    addNotification(
-      "Course liked",
-      "You liked "+course.title
-    );
+}else{
 
-  }
+renderLessons();
 
-
-  saveLessons(lessons);
-
-
-  /*
-    If we are currently reading a lesson,
-    keep that screen.
-  */
-
-  const activeLesson=
-    document.querySelector(
-      ".lessonNavigation"
-    );
-
-
-  if(activeLesson){
-
-    openCourse(id);
-
-  }else{
-
-    renderLessons();
-
-  }
+}
 
 }
 
@@ -4960,197 +4813,186 @@ function toggleLike(id){
 
 function openComments(id){
 
-  const course=getLessons().find(
-    function(item){
+const course=getLessons().find(
+function(item){
 
-      return Number(item.id)===
-        Number(id);
+return Number(item.id)===
+Number(id);
 
-    }
-  );
+}
+);
 
+if(!course){
 
-  if(!course){
-
-    return;
-
-  }
-
-
-  course.comments=
-    Array.isArray(course.comments)
-    ?
-    course.comments
-    :
-    [];
-
-
-  show("explore",true);
-
-
-  document.getElementById(
-    "lessonList"
-  ).innerHTML=`
-
-    <div class="lesson">
-
-      <div class="lessonBody">
-
-        <button
-          class="backButton"
-          onclick="openCourse(${Number(id)})">
-
-          ← Back to Course
-
-        </button>
-
-        <h1>
-          💬 Comments
-        </h1>
-
-        <div id="comments">
-
-          ${
-            course.comments.length
-            ?
-            course.comments.map(function(comment){
-
-              return `
-
-                <div class="comment">
-
-                  <b>
-                    ${escapeHTML(
-                      comment.user
-                    )}
-                  </b>
-
-                  <div>
-                    ${escapeHTML(
-                      comment.text
-                    )}
-                  </div>
-
-                </div>
-
-              `;
-
-            }).join("")
-            :
-            `
-
-            <div class="empty">
-
-              No comments yet.
-
-            </div>
-
-            `
-          }
-
-        </div>
-
-        <textarea
-          id="commentText"
-          placeholder="Write a comment..."
-          style="
-            width:100%;
-            margin-top:12px;
-            border:1px solid var(--border);
-            border-radius:12px;
-            padding:12px;
-          "></textarea>
-
-        <button
-          class="enroll"
-          style="margin-top:8px"
-          onclick="addComment(${Number(id)})">
-
-          📤 Comment
-
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
+return;
 
 }
 
+course.comments=
+Array.isArray(course.comments)
+?
+course.comments
+:
+[];
+
+show("explore",true);
+
+document.getElementById(
+"lessonList"
+).innerHTML=`
+
+<div class="lesson">
+
+<div class="lessonBody">
+
+<button
+class="backButton"
+onclick="openCourse(${Number(id)})">
+
+← Back to Course
+
+</button>
+
+<h1>
+💬 Comments
+</h1>
+
+<div id="comments">
+
+${
+course.comments.length
+?
+course.comments
+.map(function(comment){
+
+return`
+
+<div class="comment">
+
+<b>
+${escapeHTML(
+comment.user
+)}
+</b>
+
+<div>
+${escapeHTML(
+comment.text
+)}
+</div>
+
+</div>
+
+`;
+
+})
+.join("")
+:
+`
+
+<div class="empty">
+
+No comments yet.
+
+</div>
+
+`
+}
+
+</div>
+
+<textarea
+id="commentText"
+placeholder="Write a comment..."
+style="
+width:100%;
+margin-top:12px;
+border:1px solid var(--border);
+border-radius:12px;
+padding:12px;
+"></textarea>
+
+<button
+class="enroll"
+style="margin-top:8px"
+onclick="addComment(${Number(id)})">
+
+📤 Comment
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
 
 function addComment(id){
 
-  const input=document.getElementById(
-    "commentText"
-  );
+const input=document.getElementById(
+"commentText"
+);
 
+if(!input){
 
-  if(!input){
+return;
 
-    return;
+}
 
-  }
+const text=input.value.trim();
 
+if(!text){
 
-  const text=input.value.trim();
+alert(
+"Write a comment first."
+);
 
+return;
 
-  if(!text){
+}
 
-    alert("Write a comment first.");
+const courses=getLessons();
 
-    return;
+const course=courses.find(
+function(item){
 
-  }
+return Number(item.id)===
+Number(id);
 
+}
+);
 
-  const lessons=getLessons();
+if(!course){
 
+return;
 
-  const course=lessons.find(
-    function(item){
+}
 
-      return Number(item.id)===
-        Number(id);
+course.comments=
+Array.isArray(course.comments)
+?
+course.comments
+:
+[];
 
-    }
-  );
+course.comments.push({
 
+user:
+localStorage.getItem(
+"studioName"
+)||"You",
 
-  if(!course){
+text:text,
 
-    return;
+time:new Date().toISOString()
 
-  }
+});
 
+saveLessons(courses);
 
-  course.comments=
-    Array.isArray(course.comments)
-    ?
-    course.comments
-    :
-    [];
-
-
-  course.comments.push({
-
-    user:
-      localStorage.getItem(
-        "studioName"
-      ) || "You",
-
-    text:text,
-
-    time:new Date().toISOString()
-
-  });
-
-
-  saveLessons(lessons);
-
-
-  openComments(id);
+openComments(id);
 
 }
 
@@ -5161,82 +5003,77 @@ function addComment(id){
 
 async function shareCourse(id){
 
-  const course=getLessons().find(
-    function(item){
+const course=getLessons().find(
+function(item){
 
-      return Number(item.id)===
-        Number(id);
+return Number(item.id)===
+Number(id);
 
-    }
-  );
+}
+);
 
+if(!course){
 
-  if(!course){
+return;
 
-    return;
+}
 
-  }
+const text=
+"Check out this Studio Talent course: "+
+course.title;
 
+if(navigator.share){
 
-  const text=
-    "Check out this Studio Talent course: "+
-    course.title;
+try{
 
+await navigator.share({
 
-  if(navigator.share){
+title:course.title,
 
-    try{
+text:text
 
-      await navigator.share({
+});
 
-        title:course.title,
+}catch(error){
 
-        text:text
+}
 
-      });
+}else{
 
-    }catch(error){
+try{
 
-      /* User cancelled sharing. */
+await navigator.clipboard.writeText(
+text
+);
 
-    }
+alert(
+"Course text copied to clipboard."
+);
 
-  }else{
+}catch(error){
 
-    try{
+alert(text);
 
-      await navigator.clipboard.writeText(
-        text
-      );
+}
 
-      alert(
-        "Course text copied to clipboard."
-      );
-
-    }catch(error){
-
-      alert(text);
-
-    }
-
-  }
+}
 
 }
 
 
 /* =========================================================
-   RENDER ALL
+   RENDER
    ========================================================= */
 
 function renderAll(){
 
-  renderHomeCourses();
+renderHomeCourses();
 
-  renderLessons();
+renderLessons();
 
-  renderMyLessons();
+renderMyLessons();
 
-  loadProfile();
+loadProfile();
 
 }
 
@@ -5247,124 +5084,110 @@ function renderAll(){
 
 function ensureElectricalCourse(){
 
-  let lessons=getLessons();
+let lessons=getLessons();
 
+const electrical=lessons.find(
+function(course){
 
-  const electrical=lessons.find(
-    function(course){
+return String(
+course.title||""
+)
+.toLowerCase()
+.includes(
+"house electrical wiring"
+);
 
-      return String(
-        course.title || ""
-      )
-      .toLowerCase()
-      .includes(
-        "house electrical wiring"
-      );
+}
+);
 
-    }
-  );
+if(!electrical){
 
+if(lessons.length===0){
 
-  if(!electrical){
+const name=
+localStorage.getItem(
+"studioName"
+)||"Mamadou";
 
-    /*
-      Do not automatically create a course
-      if the user already has courses.
-      This only restores the known Studio Talent
-      free electrical course when the storage is empty.
-    */
+const username=
+localStorage.getItem(
+"studioUsername"
+)||"mamadou";
 
-    if(lessons.length===0){
+const course={
 
-      const name=
-        localStorage.getItem(
-          "studioName"
-        ) || "Mamadou";
+id:Date.now(),
 
+teacher:name,
 
-      const username=
-        localStorage.getItem(
-          "studioUsername"
-        ) || "mamadou";
+username:username,
 
+title:"House Electrical Wiring",
 
-      const course={
+category:"Technical",
 
-        id:Date.now(),
+description:
+"Learn how to install electrical systems and wire a house safely.",
 
-        teacher:name,
+video:"",
 
-        username:username,
+image:"",
 
-        title:"House Electrical Wiring",
+lessons:
+DEFAULT_ELECTRICAL.map(
+function(item){
 
-        category:"Technical",
+return{...item};
 
-        description:
-          "Learn how to install electrical systems and wire a house safely.",
+}
+),
 
-        video:"",
+priceType:"FREE",
 
-        image:"",
+price:0,
 
-        lessons:
-          DEFAULT_ELECTRICAL.map(function(item){
+likes:[],
 
-            return {...item};
+comments:[],
 
-          }),
+createdAt:
+new Date().toISOString()
 
-        priceType:"FREE",
+};
 
-        price:0,
+lessons.push(course);
 
-        likes:[],
+saveLessons(lessons);
 
-        comments:[],
+}
 
-        createdAt:new Date().toISOString()
+return;
 
-      };
+}
 
+if(
+!Array.isArray(
+electrical.lessons
+)||
+electrical.lessons.length<7
+){
 
-      lessons.push(course);
+electrical.lessons=
+DEFAULT_ELECTRICAL.map(
+function(item){
 
-      saveLessons(lessons);
+return{...item};
 
-    }
+}
+);
 
-    return;
+electrical.priceType="FREE";
 
-  }
+electrical.price=0;
 
+saveLessons(lessons);
 
-  /*
-    If the electrical course exists but somehow
-    its 7 lessons disappeared, restore them.
-  */
-
-  if(
-    !Array.isArray(
-      electrical.lessons
-    ) ||
-    electrical.lessons.length<7
-  ){
-
-    electrical.lessons=
-      DEFAULT_ELECTRICAL.map(function(item){
-
-        return {...item};
-
-      });
-
-
-    electrical.priceType="FREE";
-
-    electrical.price=0;
-
-    saveLessons(lessons);
-
-  }
+}
 
 }
 
@@ -5375,105 +5198,100 @@ function ensureElectricalCourse(){
 
 function startStudioTalent(){
 
-  ensureElectricalCourse();
+ensureElectricalCourse();
 
+let lessons=getLessons();
 
-  let lessons=getLessons();
+let changed=false;
 
-  let changed=false;
+lessons=lessons.map(
+function(course){
 
+if(
+!Array.isArray(
+course.lessons
+)
+){
 
-  lessons=lessons.map(
-    function(course){
+course.lessons=
+(
+String(
+course.title||""
+)
+.toLowerCase()
+.includes("electrical")
+||
+String(
+course.title||""
+)
+.toLowerCase()
+.includes("wiring")
+)
+?
+DEFAULT_ELECTRICAL.map(
+function(item){
 
-      if(
-        !Array.isArray(
-          course.lessons
-        )
-      ){
+return{...item};
 
-        course.lessons=
-          (
-            String(
-              course.title || ""
-            )
-            .toLowerCase()
-            .includes("electrical")
-            ||
-            String(
-              course.title || ""
-            )
-            .toLowerCase()
-            .includes("wiring")
-          )
-          ?
-          DEFAULT_ELECTRICAL.map(
-            function(item){
+}
+)
+:
+[
 
-              return {...item};
+{
+title:
+"Lesson 1 — Introduction",
 
-            }
-          )
-          :
-          [
-            {
-              title:
-                "Lesson 1 — Introduction",
+content:
+course.description||
+"Lesson content coming soon."
 
-              content:
-                course.description ||
-                "Lesson content coming soon."
-            }
-          ];
+}
 
+];
 
-        changed=true;
+changed=true;
 
-      }
+}
 
+if(
+!Array.isArray(
+course.likes
+)
+){
 
-      if(
-        !Array.isArray(
-          course.likes
-        )
-      ){
+course.likes=[];
 
-        course.likes=[];
+changed=true;
 
-        changed=true;
+}
 
-      }
+if(
+!Array.isArray(
+course.comments
+)
+){
 
+course.comments=[];
 
-      if(
-        !Array.isArray(
-          course.comments
-        )
-      ){
+changed=true;
 
-        course.comments=[];
+}
 
-        changed=true;
+return course;
 
-      }
+}
+);
 
+if(changed){
 
-      return course;
+saveLessons(lessons);
 
-    }
-  );
+}
 
+renderAll();
 
-  if(changed){
-
-    saveLessons(lessons);
-
-  }
-
-
-  renderAll();
-
-  togglePrice();
+togglePrice();
 
 }
 
@@ -5483,17 +5301,17 @@ function startStudioTalent(){
    ========================================================= */
 
 if(
-  document.readyState==="loading"
+document.readyState==="loading"
 ){
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    startStudioTalent
-  );
+document.addEventListener(
+"DOMContentLoaded",
+startStudioTalent
+);
 
 }else{
 
-  startStudioTalent();
+startStudioTalent();
 
 }
 
@@ -5503,17 +5321,16 @@ if(
    ========================================================= */
 
 const homeNotificationButton=
-  document.getElementById(
-    "homeNotificationButton"
-  );
-
+document.getElementById(
+"homeNotificationButton"
+);
 
 if(homeNotificationButton){
 
-  homeNotificationButton.addEventListener(
-    "click",
-    openNotifications
-  );
+homeNotificationButton.addEventListener(
+"click",
+openNotifications
+);
 
 }
 
