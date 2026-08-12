@@ -8,92 +8,313 @@
 <style>
 :root{
 --purple:#5b3df5;--purple2:#7b61ff;--ink:#151529;--muted:#77758b;
---bg:#f7f7fb;--card:#fff;--border:#ececf3;--dark:#17142d;--green:#1f8a55
+--bg:#f7f7fb;--card:#fff;--border:#ececf3;--dark:#17142d;
+--green:#1f8a55
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:#e9e9f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
-button,input,textarea,select{font:inherit}button{cursor:pointer}
-.app{width:min(430px,100%);min-height:100vh;margin:auto;background:var(--bg);position:relative;padding-bottom:92px}
-.view{display:none}.view.activeView{display:block}
-header{padding:28px 20px 12px;display:flex;justify-content:space-between;align-items:center}
+body{
+margin:0;background:#e9e9f1;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+color:var(--ink)
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{
+width:min(430px,100%);
+min-height:100vh;
+margin:auto;
+background:var(--bg);
+position:relative;
+padding-bottom:92px
+}
+.view{display:none}
+.view.activeView{display:block}
+
+header{
+padding:28px 20px 12px;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
 .logo{font-size:28px;font-weight:800;color:var(--purple)}
 .sub{font-size:13px;font-weight:700;margin-top:-3px;color:var(--muted)}
-.icon{width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:20px}
-.hero{margin:12px 16px;background:linear-gradient(135deg,#17142d,#4931b9);color:#fff;border-radius:24px;padding:24px;min-height:230px;display:flex;flex-direction:column;justify-content:center}
-.hero h1{font-size:32px;line-height:1.02;margin:0 0 12px}.hero p{margin:0 0 18px;color:#ddd9ff}
-.cta{border:0;background:#fff;color:var(--purple);font-weight:800;padding:12px 18px;border-radius:14px;width:max-content}
-section{padding:0 16px}.row{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}
-h2{font-size:18px;margin:0}.see{color:var(--purple);font-weight:700;font-size:13px;cursor:pointer}
-.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
-.cat{border:0;background:#fff;border-radius:16px;padding:12px 5px;font-size:11px;font-weight:700;min-height:76px;color:var(--ink)}
+.icon{
+width:42px;height:42px;border:0;border-radius:50%;
+background:#fff;font-size:20px
+}
+
+.hero{
+margin:12px 16px;
+background:linear-gradient(135deg,#17142d,#4931b9);
+color:#fff;border-radius:24px;padding:24px;
+min-height:230px;
+display:flex;flex-direction:column;justify-content:center
+}
+.hero h1{font-size:32px;line-height:1.02;margin:0 0 12px}
+.hero p{margin:0 0 18px;color:#ddd9ff}
+.cta{
+border:0;background:#fff;color:var(--purple);
+font-weight:800;padding:12px 18px;border-radius:14px;width:max-content
+}
+
+section{padding:0 16px}
+.row{
+display:flex;justify-content:space-between;align-items:center;
+margin:22px 0 12px
+}
+h2{font-size:18px;margin:0}
+.see{color:var(--purple);font-weight:700;font-size:13px;cursor:pointer}
+
+.cats{
+display:grid;grid-template-columns:repeat(4,1fr);gap:9px
+}
+.cat{
+border:0;background:#fff;border-radius:16px;padding:12px 5px;
+font-size:11px;font-weight:700;min-height:76px;color:var(--ink)
+}
 .emoji{font-size:25px;display:block;margin-bottom:6px}
-.teachers{display:flex;gap:10px;overflow:auto;padding-bottom:4px}
-.teacher{min-width:118px;background:#fff;border-radius:17px;padding:12px;cursor:pointer}
-.avatar{height:72px;border-radius:14px;background:linear-gradient(135deg,#ddd,#aaa);display:grid;place-items:center;font-size:30px;overflow:hidden}
-.avatar img,.bigavatar img,.photoPreview img,.courseImg img,.thumb img,.lessonImg img{width:100%;height:100%;object-fit:cover}
-.teacher b{display:block;margin-top:8px;font-size:13px}.stars{font-size:11px;color:#8a6d00;margin-top:4px}
-.course{display:flex;gap:12px;background:#fff;border-radius:17px;padding:12px;margin-top:10px;cursor:pointer}
-.thumb{width:88px;height:72px;flex-shrink:0;border-radius:13px;background:#d9d4ff;display:grid;place-items:center;font-size:28px;overflow:hidden}
-.course h3{margin:4px 0;font-size:14px}.course p{margin:6px 0;color:var(--muted);font-size:12px}
-.pill{display:inline-block;background:#ddf8e9;color:#197348;border-radius:10px;padding:4px 8px;font-size:10px;font-weight:800}
+
+.teachers{
+display:flex;gap:10px;overflow:auto;padding-bottom:4px
+}
+.teacher{
+min-width:118px;background:#fff;border-radius:17px;
+padding:12px;cursor:pointer
+}
+.avatar{
+height:72px;border-radius:14px;
+background:linear-gradient(135deg,#ddd,#aaa);
+display:grid;place-items:center;font-size:30px;overflow:hidden
+}
+.avatar img,.bigavatar img,.photoPreview img,
+.courseImg img,.thumb img,.lessonImg img{
+width:100%;height:100%;object-fit:cover
+}
+.teacher b{display:block;margin-top:8px;font-size:13px}
+.stars{font-size:11px;color:#8a6d00;margin-top:4px}
+
+.course{
+display:flex;gap:12px;background:#fff;border-radius:17px;
+padding:12px;margin-top:10px;cursor:pointer
+}
+.thumb{
+width:88px;height:72px;flex-shrink:0;border-radius:13px;
+background:#d9d4ff;display:grid;place-items:center;
+font-size:28px;overflow:hidden
+}
+.course h3{margin:4px 0;font-size:14px}
+.course p{margin:6px 0;color:var(--muted);font-size:12px}
+
+.pill{
+display:inline-block;background:#ddf8e9;color:#197348;
+border-radius:10px;padding:4px 8px;font-size:10px;font-weight:800
+}
 .paid{background:#eee9ff;color:var(--purple)}
-.search{margin:12px 16px;background:#fff;border-radius:15px;padding:14px;color:#999}
-.search input{border:0;outline:0;width:calc(100% - 30px);font-size:15px}
-.lesson{margin:16px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 10px #e4e4ec}
-.lessonImg{height:190px;background:linear-gradient(135deg,#222,#777);display:grid;place-items:center;color:#fff;font-size:48px;overflow:hidden}
-.lessonBody{padding:18px}.lessonBody h1{font-size:22px;margin:8px 0}.lessonBody h2{font-size:20px;margin:8px 0 14px}
-.lessonBody p{color:var(--muted);line-height:1.5}.price{font-size:20px;font-weight:800;margin:16px 0}
-.enroll,.publish,.editButton{width:100%;border:0;background:var(--purple);color:#fff;padding:14px;border-radius:14px;font-weight:800}
-.darkButton{background:#151529!important}.backButton{width:100%;border:0;background:#f0eff8;color:var(--ink);padding:13px;border-radius:14px;font-weight:800;margin-bottom:10px}
-.notice{background:#f1efff;color:#4b3bc2;border-radius:12px;padding:12px;font-size:12px;margin-top:12px}
-.progressWrap{background:#eeeef5;height:9px;border-radius:20px;overflow:hidden;margin:12px 0}.progressBar{height:100%;background:var(--purple);border-radius:20px;width:0}
-.lessonNavigation{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
-.lessonNavigation button{border:0;border-radius:13px;padding:13px 8px;background:#eee9ff;color:var(--purple);font-weight:800}
+
+.search{
+margin:12px 16px;background:#fff;border-radius:15px;
+padding:14px;color:#999
+}
+.search input{
+border:0;outline:0;width:calc(100% - 30px);font-size:15px
+}
+
+.lesson{
+margin:16px;background:#fff;border-radius:20px;
+overflow:hidden;box-shadow:0 2px 10px #e4e4ec
+}
+.lessonImg{
+height:190px;background:linear-gradient(135deg,#222,#777);
+display:grid;place-items:center;color:#fff;font-size:48px;overflow:hidden
+}
+.lessonBody{padding:18px}
+.lessonBody h1{font-size:22px;margin:8px 0}
+.lessonBody h2{font-size:20px;margin:8px 0 14px}
+.lessonBody p{color:var(--muted);line-height:1.5}
+
+.price{font-size:20px;font-weight:800;margin:16px 0}
+.enroll,.publish,.editButton{
+width:100%;border:0;background:var(--purple);
+color:#fff;padding:14px;border-radius:14px;font-weight:800
+}
+.publish:disabled{opacity:.6}
+.darkButton{background:#151529!important}
+.backButton{
+width:100%;border:0;background:#f0eff8;color:var(--ink);
+padding:13px;border-radius:14px;font-weight:800;margin-bottom:10px
+}
+.notice{
+background:#f1efff;color:#4b3bc2;border-radius:12px;
+padding:12px;font-size:12px;margin-top:12px
+}
+.progressWrap{
+background:#eeeef5;height:9px;border-radius:20px;
+overflow:hidden;margin:12px 0
+}
+.progressBar{
+height:100%;background:var(--purple);
+border-radius:20px;width:0
+}
+.lessonNavigation{
+display:grid;grid-template-columns:1fr 1fr;
+gap:10px;margin-top:15px
+}
+.lessonNavigation button{
+border:0;border-radius:13px;padding:13px 8px;
+background:#eee9ff;color:var(--purple);font-weight:800
+}
 .lessonNavigation button:disabled{opacity:.4}
-.createForm{margin:16px;background:#fff;border-radius:22px;padding:18px}.createForm h3{margin:20px 0 10px}
-.createForm label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px}
-.createForm input,.createForm textarea,.createForm select{width:100%;border:1px solid var(--border);background:#fafafd;border-radius:12px;padding:12px;outline:0}
-.createForm textarea{min-height:85px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.publish{margin-top:18px}
-.photoPreview{width:70px;height:70px;border-radius:50%;background:#ddd5ff;display:grid;place-items:center;font-size:30px;overflow:hidden;margin-bottom:8px}
-.profile{margin:16px;background:#fff;border-radius:22px;padding:22px;text-align:center}
-.bigavatar{width:100px;height:100px;margin:auto;border-radius:50%;background:#d8d2ff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:42px}
-.profile h2{margin:12px 0 4px}.profileUsername{color:var(--muted);margin:0}.profileBio{color:var(--muted);line-height:1.5;margin-top:12px}
-.editButton{margin-top:10px}.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 16px 0;background:#fff;border-radius:18px;padding:18px 5px;text-align:center}
-.stats b{display:block;font-size:18px}.stats span{font-size:11px;color:var(--muted)}
-.teacherInfo{margin-top:16px;padding:15px;background:#f1efff;border-radius:15px;text-align:left}
+
+.createForm{
+margin:16px;background:#fff;border-radius:22px;padding:18px
+}
+.createForm h3{margin:20px 0 10px}
+.createForm label{
+display:block;font-size:12px;font-weight:800;margin:12px 0 6px
+}
+.createForm input,.createForm textarea,.createForm select{
+width:100%;border:1px solid var(--border);
+background:#fafafd;border-radius:12px;padding:12px;outline:0
+}
+.createForm textarea{min-height:85px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.publish{margin-top:18px}
+
+.photoPreview{
+width:70px;height:70px;border-radius:50%;
+background:#ddd5ff;display:grid;place-items:center;
+font-size:30px;overflow:hidden;margin-bottom:8px
+}
+
+.profile{
+margin:16px;background:#fff;border-radius:22px;
+padding:22px;text-align:center
+}
+.bigavatar{
+width:100px;height:100px;margin:auto;border-radius:50%;
+background:#d8d2ff;overflow:hidden;
+display:flex;align-items:center;justify-content:center;font-size:42px
+}
+.profile h2{margin:12px 0 4px}
+.profileUsername{color:var(--muted);margin:0}
+.profileBio{color:var(--muted);line-height:1.5;margin-top:12px}
+.editButton{margin-top:10px}
+.stats{
+display:grid;grid-template-columns:repeat(3,1fr);
+margin:22px 16px 0;background:#fff;border-radius:18px;
+padding:18px 5px;text-align:center
+}
+.stats b{display:block;font-size:18px}
+.stats span{font-size:11px;color:var(--muted)}
+
+.teacherInfo{
+margin-top:16px;padding:15px;background:#f1efff;
+border-radius:15px;text-align:left
+}
 .empty{text-align:center;padding:35px 20px;color:var(--muted)}
-.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
-.actionButton{border:0;background:#fff;border-radius:16px;padding:15px 10px;font-weight:800;color:var(--ink)}
+
+.actionGrid{
+display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px
+}
+.actionButton{
+border:0;background:#fff;border-radius:16px;
+padding:15px 10px;font-weight:800;color:var(--ink)
+}
 .actionButton span{display:block;font-size:25px;margin-bottom:5px}
-.socialBar{display:flex;gap:8px;margin-top:12px}.socialBar button{flex:1;border:0;background:#f4f3fb;border-radius:11px;padding:9px;font-weight:700}
-.comment{background:#f7f7fb;border-radius:12px;padding:10px;margin-top:8px;font-size:13px}
-.lessonEditor{border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px;background:#fafafd}
-.lessonEditor textarea{min-height:70px}.smallBtn{border:0;border-radius:10px;padding:9px 11px;background:#eee9ff;color:var(--purple);font-weight:800}
+
+.socialBar{display:flex;gap:8px;margin-top:12px}
+.socialBar button{
+flex:1;border:0;background:#f4f3fb;
+border-radius:11px;padding:9px;font-weight:700
+}
+.comment{
+background:#f7f7fb;border-radius:12px;
+padding:10px;margin-top:8px;font-size:13px
+}
+.lessonEditor{
+border:1px solid var(--border);border-radius:14px;
+padding:12px;margin-top:10px;background:#fafafd
+}
+.lessonEditor textarea{min-height:70px}
+.smallBtn{
+border:0;border-radius:10px;padding:9px 11px;
+background:#eee9ff;color:var(--purple);font-weight:800
+}
 .danger{background:#ffe8e8;color:#b42318}
-.videoPreview,.courseVideo{width:100%;margin-top:10px;border-radius:14px;background:#111;overflow:hidden}
-.videoPreview video,.courseVideo video{display:block;width:100%;max-height:280px;object-fit:contain}
-.videoMeta{font-size:11px;color:var(--muted);margin-top:6px}.videoButton{display:block;text-align:center;text-decoration:none;background:#151529;color:#fff;padding:13px;border-radius:13px;font-weight:800;margin-top:12px}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:78px;background:#fff;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 10px env(safe-area-inset-bottom);z-index:100}
-nav button{border:0;background:transparent;color:#777;font-size:11px;font-weight:700}.navicon{display:block;font-size:22px;margin-bottom:2px}nav button.active{color:var(--purple)!important}
+
+.videoPreview,.courseVideo{
+width:100%;margin-top:10px;border-radius:14px;
+background:#111;overflow:hidden
+}
+.videoPreview video,.courseVideo video{
+display:block;width:100%;max-height:280px;object-fit:contain
+}
+.videoMeta{font-size:11px;color:var(--muted);margin-top:6px}
+.videoButton{
+display:block;text-align:center;text-decoration:none;
+background:#151529;color:#fff;padding:13px;
+border-radius:13px;font-weight:800;margin-top:12px
+}
+
+nav{
+position:fixed;bottom:0;left:50%;
+transform:translateX(-50%);
+width:min(430px,100%);
+height:78px;background:#fff;border-top:1px solid #eee;
+display:grid;grid-template-columns:repeat(4,1fr);
+padding:8px 10px env(safe-area-inset-bottom);
+z-index:100
+}
+nav button{
+border:0;background:transparent;color:#777;
+font-size:11px;font-weight:700
+}
+.navicon{display:block;font-size:22px;margin-bottom:2px}
+nav button.active{color:var(--purple)!important}
 small{color:var(--muted)}
 
-/* REAL ACCOUNT SCREEN */
-#authView{min-height:100vh;padding:28px 20px;background:linear-gradient(180deg,#f7f7fb,#eeeafd)}
-.authLogo{font-size:40px;font-weight:900;color:var(--purple);margin-top:35px}
+/* AUTH */
+#authView{
+min-height:100vh;padding:28px 20px;
+background:linear-gradient(180deg,#f7f7fb,#eeeafd)
+}
+.authLogo{
+font-size:40px;font-weight:900;color:var(--purple);margin-top:35px
+}
 .authSub{color:var(--muted);font-weight:700;margin-bottom:28px}
-.authCard{background:#fff;border-radius:24px;padding:22px;box-shadow:0 4px 20px #dddde8}
+.authCard{
+background:#fff;border-radius:24px;padding:22px;
+box-shadow:0 4px 20px #dddde8
+}
 .authCard h1{margin:0 0 8px;font-size:26px}
 .authCard p{color:var(--muted);font-size:13px;line-height:1.5}
-.authCard label{display:block;font-size:12px;font-weight:800;margin:14px 0 6px}
-.authCard input{width:100%;border:1px solid var(--border);background:#fafafd;border-radius:12px;padding:13px;outline:0}
-.authPrimary{width:100%;border:0;background:var(--purple);color:#fff;padding:14px;border-radius:13px;font-weight:800;margin-top:18px}
-.authSecondary{width:100%;border:0;background:#eee9ff;color:var(--purple);padding:13px;border-radius:13px;font-weight:800;margin-top:10px}
-.authMessage{margin-top:12px;padding:11px;border-radius:11px;font-size:12px;display:none}
+.authCard label{
+display:block;font-size:12px;font-weight:800;margin:14px 0 6px
+}
+.authCard input{
+width:100%;border:1px solid var(--border);
+background:#fafafd;border-radius:12px;padding:13px;outline:0
+}
+.authPrimary{
+width:100%;border:0;background:var(--purple);color:#fff;
+padding:14px;border-radius:13px;font-weight:800;margin-top:18px
+}
+.authSecondary{
+width:100%;border:0;background:#eee9ff;color:var(--purple);
+padding:13px;border-radius:13px;font-weight:800;margin-top:10px
+}
+.authMessage{
+margin-top:12px;padding:11px;border-radius:11px;
+font-size:12px;display:none
+}
 .authMessage.error{display:block;background:#ffe8e8;color:#a32020}
 .authMessage.ok{display:block;background:#e4f8ed;color:#197348}
 .authUser{font-size:11px;color:var(--muted);margin-top:5px}
-.logoutBtn{margin-top:12px;background:#ffe8e8;color:#b42318;border:0;border-radius:12px;padding:10px 14px;font-weight:800}
+.logoutBtn{
+margin-top:12px;background:#ffe8e8;color:#b42318;
+border:0;border-radius:12px;padding:10px 14px;font-weight:800
+}
 </style>
 </head>
 
@@ -119,22 +340,16 @@ small{color:var(--muted)}
 <input id="authPassword" type="password" autocomplete="current-password" placeholder="Your password">
 
 <div id="authNameWrap" style="display:none">
-
 <label>Your name</label>
 <input id="authName" type="text" placeholder="Your name">
-
 </div>
 
 <div id="authUsernameWrap" style="display:none">
-
 <label>Username</label>
 <input id="authUsername" type="text" placeholder="@your_username">
-
 </div>
 
-<button id="authMainButton" class="authPrimary" onclick="handleAuth()">
-Log In
-</button>
+<button id="authMainButton" class="authPrimary" onclick="handleAuth()">Log In</button>
 
 <button class="authSecondary" onclick="toggleAuthMode()" id="authSwitchButton">
 Create New Account
@@ -164,7 +379,10 @@ Create New Account
 
 <section>
 
-<div class="row"><h2>Popular Categories</h2><span class="see" onclick="show('explore')">See all</span></div>
+<div class="row">
+<h2>Popular Categories</h2>
+<span class="see" onclick="show('explore')">See all</span>
+</div>
 
 <div class="cats">
 <button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
@@ -178,15 +396,21 @@ Create New Account
 <div class="teachers">
 
 <div class="teacher" onclick="openTeacher('Adam Visuals')">
-<div class="avatar">🎥</div><b>Adam Visuals</b><div class="stars">⭐ 4.9</div>
+<div class="avatar">🎥</div>
+<b>Adam Visuals</b>
+<div class="stars">⭐ 4.9</div>
 </div>
 
 <div class="teacher" onclick="openTeacher('Lea Music')">
-<div class="avatar">🎤</div><b>Lea Music</b><div class="stars">⭐ 4.8</div>
+<div class="avatar">🎤</div>
+<b>Lea Music</b>
+<div class="stars">⭐ 4.8</div>
 </div>
 
 <div class="teacher" onclick="openTeacher('Coach Ibra')">
-<div class="avatar">⚽</div><b>Coach Ibra</b><div class="stars">⭐ 4.9</div>
+<div class="avatar">⚽</div>
+<b>Coach Ibra</b>
+<div class="stars">⭐ 4.9</div>
 </div>
 
 </div>
@@ -210,7 +434,9 @@ Create New Account
 
 <div class="search">
 🔎
-<input id="searchInput" placeholder="Search skills, teachers, courses..." oninput="searchLessons()">
+<input id="searchInput"
+placeholder="Search skills, teachers, courses..."
+oninput="searchLessons()">
 </div>
 
 <section>
@@ -218,7 +444,6 @@ Create New Account
 <div class="row"><h2>Categories</h2></div>
 
 <div class="cats">
-
 <button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
 <button class="cat" onclick="selectCategory('Art')"><span class="emoji">🎨</span>Art</button>
 <button class="cat" onclick="selectCategory('Dance')"><span class="emoji">💃</span>Dance</button>
@@ -227,7 +452,6 @@ Create New Account
 <button class="cat" onclick="selectCategory('Technology')"><span class="emoji">💻</span>Technology</button>
 <button class="cat" onclick="selectCategory('Sports')"><span class="emoji">⚽</span>Sports</button>
 <button class="cat" onclick="selectCategory('Languages')"><span class="emoji">🗣️</span>Languages</button>
-
 </div>
 
 <div class="row"><h2 id="categoryTitle">All courses</h2></div>
@@ -268,7 +492,6 @@ Your profile and course information are saved for your account on this device.
 <input id="createUsername" placeholder="@your_username">
 
 <label>Profile photo</label>
-
 <div class="photoPreview" id="createPhotoPreview">👨🏾‍💻</div>
 <input id="createPhoto" type="file" accept="image/*">
 
@@ -276,7 +499,6 @@ Your profile and course information are saved for your account on this device.
 <textarea id="createBio" placeholder="Tell people about yourself and your talent"></textarea>
 
 <div class="grid2">
-
 <div>
 <label>Your talent</label>
 <input id="createTalent" placeholder="e.g. Music">
@@ -286,7 +508,6 @@ Your profile and course information are saved for your account on this device.
 <label>Experience</label>
 <input id="createExperience" placeholder="e.g. 2 years">
 </div>
-
 </div>
 
 <h3>📚 Your Course</h3>
@@ -295,7 +516,6 @@ Your profile and course information are saved for your account on this device.
 <input id="lessonTitle" placeholder="What are you teaching?">
 
 <label>Category</label>
-
 <select id="lessonCategory">
 <option value="Music">🎵 Music</option>
 <option value="Art">🎨 Art</option>
@@ -325,14 +545,13 @@ Your profile and course information are saved for your account on this device.
 <label>Price</label>
 
 <div class="grid2">
-
 <select id="priceType" onchange="togglePrice()">
 <option value="FREE">FREE</option>
 <option value="PAID">PAID</option>
 </select>
 
-<input id="lessonPrice" type="number" min="0" step="0.01" placeholder="€ price" disabled>
-
+<input id="lessonPrice" type="number" min="0" step="0.01"
+placeholder="€ price" disabled>
 </div>
 
 <h3>📖 Course Lessons</h3>
@@ -348,7 +567,7 @@ Videos are stored on this device using IndexedDB.
 Your account and profile are authenticated through Studio Talent.
 </div>
 
-<button class="publish" onclick="publishEverything()">
+<button id="publishButton" class="publish" onclick="publishEverything()">
 🚀 Publish Course
 </button>
 
@@ -365,38 +584,28 @@ Your account and profile are authenticated through Studio Talent.
 <div id="profile" class="view">
 
 <header>
-
 <div>
 <div class="logo">My Profile</div>
 <div class="sub">Your Studio journey</div>
 </div>
-
 <button class="icon" onclick="openNotifications()">🔔</button>
-
 </header>
 
 <div class="stats">
-
 <div><b id="courseCount">0</b><span>Courses</span></div>
 <div><b id="followerCount">0</b><span>Following</span></div>
 <div><b id="earningCount">€0</b><span>Earnings</span></div>
-
 </div>
 
 <div class="profile">
 
 <div class="bigavatar">
-
 <span id="profileEmoji">👨🏾‍💻</span>
-
 <img id="profileImage" style="display:none" alt="Profile">
-
 </div>
 
 <h2 id="profileName">Your Name</h2>
-
 <p id="profileUsername" class="profileUsername">@your_studio_name</p>
-
 <p id="profileBio" class="profileBio">
 Tell people about yourself and your talent.
 </p>
@@ -409,9 +618,7 @@ Tell people about yourself and your talent.
 
 <div id="teacherInfo"></div>
 
-<button class="logoutBtn" onclick="logout()">
-🚪 Log Out
-</button>
+<button class="logoutBtn" onclick="logout()">🚪 Log Out</button>
 
 </div>
 
@@ -436,10 +643,8 @@ Tell people about yourself and your talent.
 </div>
 
 <section>
-
 <div class="row"><h2>My Courses</h2></div>
 <div id="profileLessons"></div>
-
 </section>
 
 </div>
@@ -466,23 +671,20 @@ Tell people about yourself and your talent.
 
 </div>
 
-<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
 /* =========================================================
-   SUPABASE REAL USER ACCOUNTS
+   SUPABASE
 ========================================================= */
 
-const SUPABASE_URL =
-"https://pzrqcitvdhpkfexcqnpd.supabase.co";
+const SUPABASE_URL="https://pzrqcitvdhpkfexcqnpd.supabase.co";
 
-const SUPABASE_ANON_KEY =
+const SUPABASE_ANON_KEY=
 "sb_publishable_pjaQtq6A0DYj0sHI-hBnXg_ZVmuDmOk";
 
-const supabaseClient =
-window.supabase.createClient(
+const supabaseClient=window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_ANON_KEY,
 {
@@ -497,212 +699,96 @@ detectSessionInUrl:true
 let currentUser=null;
 let authMode="login";
 
-function setAuthMessage(message,type){
-
-const box=
-document.getElementById("authMessage");
-
+function setAuthMessage(message,type="error"){
+const box=document.getElementById("authMessage");
 if(!box)return;
-
 box.textContent=message;
-box.className=
-"authMessage "+
-(type||"error");
-
+box.className="authMessage "+(message?type:"");
 }
 
 function toggleAuthMode(){
 
-authMode=
-authMode==="login"
-?
-"signup"
-:
-"login";
+authMode=authMode==="login"?"signup":"login";
 
-const title=
-document.getElementById("authTitle");
+document.getElementById("authTitle").textContent=
+authMode==="signup"?"Create your account 🚀":"Welcome back 👋";
 
-const description=
-document.getElementById("authDescription");
+document.getElementById("authDescription").textContent=
+authMode==="signup"
+?"Create a real Studio Talent account."
+:"Log in to your real Studio Talent account.";
 
-const main=
-document.getElementById("authMainButton");
+document.getElementById("authMainButton").textContent=
+authMode==="signup"?"Create Account":"Log In";
 
-const switchButton=
-document.getElementById("authSwitchButton");
+document.getElementById("authSwitchButton").textContent=
+authMode==="signup"
+?"Already have an account? Log In"
+:"Create New Account";
 
-const nameWrap=
-document.getElementById("authNameWrap");
+document.getElementById("authNameWrap").style.display=
+authMode==="signup"?"block":"none";
 
-const usernameWrap=
-document.getElementById("authUsernameWrap");
+document.getElementById("authUsernameWrap").style.display=
+authMode==="signup"?"block":"none";
 
-setAuthMessage("","");
-
-if(authMode==="signup"){
-
-title.textContent="Create your account 🚀";
-
-description.textContent=
-"Create a real Studio Talent account.";
-
-main.textContent="Create Account";
-
-switchButton.textContent=
-"Already have an account? Log In";
-
-nameWrap.style.display="block";
-usernameWrap.style.display="block";
-
-}else{
-
-title.textContent="Welcome back 👋";
-
-description.textContent=
-"Log in to your real Studio Talent account.";
-
-main.textContent="Log In";
-
-switchButton.textContent=
-"Create New Account";
-
-nameWrap.style.display="none";
-usernameWrap.style.display="none";
-
-}
-
+setAuthMessage("");
 }
 
 async function handleAuth(){
 
-const email=
-document
-.getElementById("authEmail")
-.value
-.trim();
-
-const password=
-document
-.getElementById("authPassword")
-.value;
+const email=document.getElementById("authEmail").value.trim();
+const password=document.getElementById("authPassword").value;
 
 if(!email){
-
-setAuthMessage(
-"Please enter your email.",
-"error"
-);
-
+setAuthMessage("Please enter your email.");
 return;
-
 }
 
 if(!password){
-
-setAuthMessage(
-"Please enter your password.",
-"error"
-);
-
+setAuthMessage("Please enter your password.");
 return;
-
 }
 
 if(password.length<6){
-
-setAuthMessage(
-"Password must be at least 6 characters.",
-"error"
-);
-
+setAuthMessage("Password must be at least 6 characters.");
 return;
-
 }
 
-const button=
-document.getElementById("authMainButton");
+const button=document.getElementById("authMainButton");
 
 button.disabled=true;
-button.textContent=
-authMode==="signup"
-?
-"Creating..."
-:
-"Logging in...";
-
-setAuthMessage("","");
+button.textContent=authMode==="signup"?"Creating...":"Logging in...";
+setAuthMessage("");
 
 try{
 
 if(authMode==="signup"){
 
-const name=
-document
-.getElementById("authName")
-.value
-.trim();
-
-const username=
-cleanUsername(
-document
-.getElementById("authUsername")
-.value
+const name=document.getElementById("authName").value.trim();
+const username=cleanUsername(
+document.getElementById("authUsername").value
 );
 
-if(!name){
+if(!name)throw new Error("Please enter your name.");
+if(!username)throw new Error("Please enter a username.");
 
-throw new Error(
-"Please enter your name."
-);
-
-}
-
-if(!username){
-
-throw new Error(
-"Please enter a username."
-);
-
-}
-
-const result=
-await supabaseClient.auth.signUp({
-
-email:email,
-
-password:password,
-
+const result=await supabaseClient.auth.signUp({
+email,
+password,
 options:{
-data:{
-name:name,
-username:username
+data:{name,username}
 }
-}
-
 });
 
-if(result.error){
+if(result.error)throw result.error;
 
-throw result.error;
-
-}
-
-localStorage.setItem(
-"studioName",
-name
-);
-
-localStorage.setItem(
-"studioUsername",
-username
-);
+localStorage.setItem("studioName",name);
+localStorage.setItem("studioUsername",username);
 
 if(result.data.session){
 
-currentUser=
-result.data.user;
-
+currentUser=result.data.user;
 await finishLogin();
 
 }else{
@@ -716,24 +802,14 @@ setAuthMessage(
 
 }else{
 
-const result=
-await supabaseClient.auth.signInWithPassword({
-
-email:email,
-
-password:password
-
+const result=await supabaseClient.auth.signInWithPassword({
+email,
+password
 });
 
-if(result.error){
+if(result.error)throw result.error;
 
-throw result.error;
-
-}
-
-currentUser=
-result.data.user;
-
+currentUser=result.data.user;
 await finishLogin();
 
 }
@@ -741,23 +817,12 @@ await finishLogin();
 }catch(error){
 
 console.error(error);
-
-setAuthMessage(
-error.message||
-"Authentication failed. Please try again.",
-"error"
-);
+setAuthMessage(error.message||"Authentication failed.");
 
 }finally{
 
 button.disabled=false;
-
-button.textContent=
-authMode==="signup"
-?
-"Create Account"
-:
-"Log In";
+button.textContent=authMode==="signup"?"Create Account":"Log In";
 
 }
 
@@ -767,125 +832,58 @@ async function finishLogin(){
 
 if(!currentUser){
 
-const result=
-await supabaseClient.auth.getUser();
-
-currentUser=
-result.data.user;
-
+const result=await supabaseClient.auth.getUser();
+currentUser=result.data.user;
 }
 
-if(!currentUser){
+if(!currentUser)throw new Error("Could not load your account.");
 
-throw new Error(
-"Could not load your account."
-);
-
-}
-
-const metadata=
-currentUser.user_metadata||{};
+const metadata=currentUser.user_metadata||{};
 
 const name=
-localStorage.getItem("studioName")||
+getAccountValue("studioName")||
 metadata.name||
 currentUser.email.split("@")[0];
 
 const username=
-localStorage.getItem("studioUsername")||
+getAccountValue("studioUsername")||
 metadata.username||
 currentUser.email.split("@")[0];
 
-localStorage.setItem(
-"studioName",
-name
-);
+setAccountValue("studioName",name);
+setAccountValue("studioUsername",cleanUsername(username));
 
-localStorage.setItem(
-"studioUsername",
-cleanUsername(username)
-);
+document.getElementById("authEmail").value="";
+document.getElementById("authPassword").value="";
 
-document.getElementById(
-"authEmail"
-).value="";
-
-document.getElementById(
-"authPassword"
-).value="";
-
-show("home");
-
+ensureElectricalCourse();
+migrateCourses();
 renderAll();
-
+show("home");
 }
 
 async function logout(){
 
-const result=
-await supabaseClient.auth.signOut();
+const result=await supabaseClient.auth.signOut();
 
 if(result.error){
-
-alert(
-"Could not log out: "+
-result.error.message
-);
-
+alert("Could not log out: "+result.error.message);
 return;
-
 }
 
 currentUser=null;
 
-document
-.querySelectorAll(".view")
-.forEach(function(view){
-
-view.classList.remove("activeView");
-
-});
-
-document
-.getElementById("authView")
-.classList.add("activeView");
-
-setAuthMessage(
-"You are logged out.",
-"ok"
+document.querySelectorAll(".view").forEach(v=>
+v.classList.remove("activeView")
 );
 
+document.getElementById("authView").classList.add("activeView");
+
+setAuthMessage("You are logged out.","ok");
 }
-
-/* AUTH STATE */
-
-supabaseClient.auth.onAuthStateChange(
-function(event,session){
-
-if(session){
-
-currentUser=session.user;
-
-setTimeout(
-function(){
-
-finishLogin()
-.catch(console.error);
-
-},
-0
-);
-
-}else{
-
-currentUser=null;
-
-}
-
-});
 
 /* =========================================================
-   CATEGORY DATA
+   DATA
 ========================================================= */
 
 const CATEGORY_ICONS={
@@ -930,49 +928,55 @@ content:"Learn how to check an electrical installation safely before using it. T
 }
 ];
 
-/* =========================================================
-   ACCOUNT-SCOPED STORAGE
-========================================================= */
-
 function accountKey(key){
-
-if(!currentUser){
-
-return key;
-
-}
-
-return "studio_"+currentUser.id+"_"+key;
-
+return currentUser?"studio_"+currentUser.id+"_"+key:key;
 }
 
 function getLessons(){
 
 try{
-
-const data=
-JSON.parse(
-localStorage.getItem(
-accountKey("lessons")
-)||"[]"
+const data=JSON.parse(
+localStorage.getItem(accountKey("lessons"))||"[]"
 );
-
 return Array.isArray(data)?data:[];
+}catch(e){
+console.error("Could not read courses:",e);
+return[];
+}
+
+}
+
+/* IMPORTANT FIX:
+   Safely save courses and report storage errors.
+*/
+function saveLessons(data){
+
+try{
+
+const json=JSON.stringify(data);
+
+localStorage.setItem(accountKey("lessons"),json);
+
+return true;
 
 }catch(error){
 
-return[];
+console.error("Course storage error:",error);
 
-}
+if(error.name==="QuotaExceededError"||
+error.code===22){
 
-}
-
-function saveLessons(data){
-
-localStorage.setItem(
-accountKey("lessons"),
-JSON.stringify(data)
+throw new Error(
+"Your browser storage is full. Please remove a very large old course image/video selection and try again."
 );
+
+}
+
+throw new Error(
+"Could not save the course. Please try again."
+);
+
+}
 
 }
 
@@ -980,94 +984,140 @@ function getArray(key){
 
 try{
 
-const data=
-JSON.parse(
-localStorage.getItem(
-accountKey(key)
-)||"[]"
+const data=JSON.parse(
+localStorage.getItem(accountKey(key))||"[]"
 );
 
 return Array.isArray(data)?data:[];
 
-}catch(error){
-
+}catch(e){
 return[];
-
 }
 
 }
 
 function saveArray(key,data){
-
-localStorage.setItem(
-accountKey(key),
-JSON.stringify(data)
-);
-
+localStorage.setItem(accountKey(key),JSON.stringify(data));
 }
 
 function getAccountValue(key,fallback=""){
-
-return localStorage.getItem(
-accountKey(key)
-)||
-fallback;
-
+return localStorage.getItem(accountKey(key))||fallback;
 }
 
 function setAccountValue(key,value){
-
-localStorage.setItem(
-accountKey(key),
-value
-);
-
+localStorage.setItem(accountKey(key),value);
 }
 
 function cleanUsername(value){
-
-return String(value||"")
-.trim()
-.replace(/^@/,"");
-
+return String(value||"").trim().replace(/^@/,"");
 }
 
 function categoryName(value){
-
-return String(value||"")
-.replace(/^[^A-Za-z]+/,"")
-.trim();
-
+return String(value||"").replace(/^[^A-Za-z]+/,"").trim();
 }
 
 function escapeHTML(value){
-
 return String(value??"")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
-
 }
 
 function priceText(course){
 
 if(course.priceType==="PAID"){
-
-return "€"+
-Number(course.price||0)
-.toFixed(2)
-.replace(/\.00$/,"");
-
+return "€"+Number(course.price||0)
+.toFixed(2).replace(/\.00$/,"");
 }
 
 return "FREE";
-
 }
 
 /* =========================================================
-   INDEXEDDB VIDEO STORAGE
+   IMAGE COMPRESSION — FIXED
+========================================================= */
+
+function compressImage(file,maxSize=900,quality=.68){
+
+return new Promise(function(resolve,reject){
+
+if(!file){
+resolve("");
+return;
+}
+
+const reader=new FileReader();
+
+reader.onload=function(event){
+
+const image=new Image();
+
+image.onload=function(){
+
+let width=image.width;
+let height=image.height;
+
+if(width>height){
+
+if(width>maxSize){
+height=Math.round(height*(maxSize/width));
+width=maxSize;
+}
+
+}else{
+
+if(height>maxSize){
+width=Math.round(width*(maxSize/height));
+height=maxSize;
+}
+
+}
+
+const canvas=document.createElement("canvas");
+canvas.width=width;
+canvas.height=height;
+
+const context=canvas.getContext("2d");
+
+if(!context){
+reject(new Error("Canvas is not supported."));
+return;
+}
+
+context.drawImage(image,0,0,width,height);
+
+resolve(
+canvas.toDataURL("image/jpeg",quality)
+);
+
+};
+
+image.onerror=function(){
+reject(new Error("Could not read image."));
+};
+
+image.src=event.target.result;
+
+};
+
+reader.onerror=function(){
+reject(reader.error||new Error("Could not read file."));
+};
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+function compressProfilePhoto(file){
+return compressImage(file,700,.72);
+}
+
+/* =========================================================
+   VIDEO INDEXEDDB
 ========================================================= */
 
 const VIDEO_DB_NAME="StudioTalentVideoDB";
@@ -1079,17 +1129,11 @@ function openVideoDB(){
 return new Promise(function(resolve,reject){
 
 if(!window.indexedDB){
-
-reject(new Error(
-"IndexedDB is not supported."
-));
-
+reject(new Error("IndexedDB is not supported."));
 return;
-
 }
 
-const request=
-indexedDB.open(
+const request=indexedDB.open(
 VIDEO_DB_NAME,
 VIDEO_DB_VERSION
 );
@@ -1099,23 +1143,17 @@ request.onupgradeneeded=function(event){
 const db=event.target.result;
 
 if(!db.objectStoreNames.contains(VIDEO_STORE)){
-
 db.createObjectStore(VIDEO_STORE);
-
 }
 
 };
 
 request.onsuccess=function(){
-
 resolve(request.result);
-
 };
 
 request.onerror=function(){
-
 reject(request.error);
-
 };
 
 });
@@ -1128,40 +1166,24 @@ const db=await openVideoDB();
 
 return new Promise(function(resolve,reject){
 
-const transaction=
-db.transaction(
-VIDEO_STORE,
-"readwrite"
-);
-
-const store=
-transaction.objectStore(VIDEO_STORE);
-
-const request=
-store.put(file,String(courseId));
+const transaction=db.transaction(VIDEO_STORE,"readwrite");
+const store=transaction.objectStore(VIDEO_STORE);
+const request=store.put(file,String(courseId));
 
 request.onsuccess=function(){
-
 resolve(true);
-
 };
 
 request.onerror=function(){
-
 reject(request.error);
-
 };
 
 transaction.oncomplete=function(){
-
 db.close();
-
 };
 
 transaction.onerror=function(){
-
 reject(transaction.error);
-
 };
 
 });
@@ -1176,45 +1198,27 @@ const db=await openVideoDB();
 
 return await new Promise(function(resolve,reject){
 
-const transaction=
-db.transaction(
-VIDEO_STORE,
-"readonly"
-);
-
-const store=
-transaction.objectStore(VIDEO_STORE);
-
-const request=
-store.get(String(courseId));
+const transaction=db.transaction(VIDEO_STORE,"readonly");
+const store=transaction.objectStore(VIDEO_STORE);
+const request=store.get(String(courseId));
 
 request.onsuccess=function(){
-
 resolve(request.result||null);
-
 };
 
 request.onerror=function(){
-
 reject(request.error);
-
 };
 
 transaction.oncomplete=function(){
-
 db.close();
-
 };
 
 });
 
 }catch(error){
 
-console.error(
-"Video loading error:",
-error
-);
-
+console.error("Video loading error:",error);
 return null;
 
 }
@@ -1222,11 +1226,7 @@ return null;
 }
 
 function getLegacyVideo(course){
-
-return course.videoFile||
-course.uploadedVideo||
-"";
-
+return course.videoFile||course.uploadedVideo||"";
 }
 
 /* =========================================================
@@ -1235,57 +1235,154 @@ course.uploadedVideo||
 
 function show(id,skipRender=false){
 
-if(!currentUser){
+if(!currentUser)return;
 
+document.querySelectorAll(".view").forEach(function(view){
+view.classList.remove("activeView");
+});
+
+const page=document.getElementById(id);
+
+if(page)page.classList.add("activeView");
+
+document.querySelectorAll("nav button").forEach(function(button){
+button.classList.remove("active");
+});
+
+const nav=document.getElementById("n-"+id);
+
+if(nav)nav.classList.add("active");
+
+if(id==="create")loadCreateForm();
+if(id==="profile")loadProfile();
+if(id==="explore"&&!skipRender)renderLessons();
+if(id==="home")renderHomeCourses();
+
+window.scrollTo(0,0);
+}
+
+/* =========================================================
+   CREATE FORM
+========================================================= */
+
+function loadCreateForm(){
+
+const fields={
+createName:"studioName",
+createUsername:"studioUsername",
+createBio:"studioBio",
+createTalent:"studioTeacherTalent",
+createExperience:"studioTeacherExperience"
+};
+
+Object.keys(fields).forEach(function(id){
+
+const element=document.getElementById(id);
+
+if(element){
+element.value=getAccountValue(fields[id],"");
+}
+
+});
+
+const photo=getAccountValue("studioProfilePhoto","");
+
+const preview=document.getElementById("createPhotoPreview");
+
+if(preview){
+
+preview.innerHTML=photo
+?'<img src="'+escapeHTML(photo)+'" alt="Profile">'
+:"👨🏾‍💻";
+
+}
+
+renderMyLessons();
+
+}
+
+/* =========================================================
+   PROFILE PHOTO PREVIEW
+========================================================= */
+
+document.getElementById("createPhoto").addEventListener(
+"change",
+async function(){
+
+const file=this.files[0];
+
+if(!file)return;
+
+if(!file.type.startsWith("image/")){
+
+alert("Please select an image.");
+this.value="";
 return;
 
 }
 
-document
-.querySelectorAll(".view")
-.forEach(function(view){
+try{
 
-view.classList.remove("activeView");
+const compressed=await compressProfilePhoto(file);
+
+document.getElementById("createPhotoPreview").innerHTML=
+'<img src="'+escapeHTML(compressed)+'" alt="Profile">';
+
+this.dataset.compressedPhoto=compressed;
+
+}catch(error){
+
+console.error(error);
+alert("Could not process the profile photo.");
+this.value="";
+this.dataset.compressedPhoto="";
+
+}
 
 });
 
-const page=
-document.getElementById(id);
+/* =========================================================
+   VIDEO PREVIEW
+========================================================= */
 
-if(page){
+document.getElementById("lessonVideoFile").addEventListener(
+"change",
+function(){
 
-page.classList.add("activeView");
+const file=this.files[0];
+
+const preview=document.getElementById("videoUploadPreview");
+const info=document.getElementById("videoUploadInfo");
+
+if(!file){
+
+preview.style.display="none";
+preview.innerHTML="";
+info.style.display="none";
+info.textContent="";
+return;
 
 }
 
-document
-.querySelectorAll("nav button")
-.forEach(function(button){
+if(!file.type.startsWith("video/")){
 
-button.classList.remove("active");
+alert("Please select a video file.");
+this.value="";
+return;
+
+}
+
+const url=URL.createObjectURL(file);
+
+preview.style.display="block";
+preview.innerHTML=
+'<video controls playsinline src="'+escapeHTML(url)+'"></video>';
+
+info.style.display="block";
+info.textContent=
+file.name+" · "+(file.size/1024/1024).toFixed(1)+" MB";
 
 });
-
-const nav=
-document.getElementById("n-"+id);
-
-if(nav){
-
-nav.classList.add("active");
-
-}
-
-if(id==="create")loadCreateForm();
-
-if(id==="profile")loadProfile();
-
-if(id==="explore"&&!skipRender)renderLessons();
-
-if(id==="home")renderHomeCourses();
-
-window.scrollTo(0,0);
-
-}
 
 /* =========================================================
    PRICE
@@ -1293,24 +1390,16 @@ window.scrollTo(0,0);
 
 function togglePrice(){
 
-const type=
-document.getElementById("priceType");
-
-const price=
-document.getElementById("lessonPrice");
+const type=document.getElementById("priceType");
+const price=document.getElementById("lessonPrice");
 
 if(!type||!price)return;
 
 if(type.value==="PAID"){
-
 price.disabled=false;
-
 }else{
-
 price.disabled=true;
-
 price.value="";
-
 }
 
 }
@@ -1321,17 +1410,13 @@ price.value="";
 
 function addLessonEditor(data={title:"",content:""}){
 
-const box=
-document.getElementById("lessonEditors");
+const box=document.getElementById("lessonEditors");
 
 if(!box)return;
 
-const number=
-box.children.length+1;
+const number=box.children.length+1;
 
-const div=
-document.createElement("div");
-
+const div=document.createElement("div");
 div.className="lessonEditor";
 
 div.innerHTML=`
@@ -1355,23 +1440,17 @@ onclick="this.parentElement.remove();renumberEditors()">
 `;
 
 box.appendChild(div);
-
 }
 
 function renumberEditors(){
 
-document
-.querySelectorAll("#lessonEditors .lessonEditor")
-.forEach(function(box,index){
+document.querySelectorAll(
+"#lessonEditors .lessonEditor"
+).forEach(function(box,index){
 
 const label=box.querySelector("label");
 
-if(label){
-
-label.textContent=
-"Lesson "+(index+1)+" title";
-
-}
+if(label)label.textContent="Lesson "+(index+1)+" title";
 
 });
 
@@ -1387,430 +1466,76 @@ document.querySelectorAll(
 .map(function(box){
 
 return{
-
-title:
-box.querySelector(".newLessonTitle").value.trim(),
-
-content:
-box.querySelector(".newLessonContent").value.trim()
-
+title:box.querySelector(".newLessonTitle").value.trim(),
+content:box.querySelector(".newLessonContent").value.trim()
 };
 
 })
 .filter(function(item){
-
 return item.title||item.content;
-
 });
 
 }
 
 /* =========================================================
-   CREATE FORM
-========================================================= */
-
-function loadCreateForm(){
-
-const fields={
-
-createName:"studioName",
-createUsername:"studioUsername",
-createBio:"studioBio",
-createTalent:"studioTeacherTalent",
-createExperience:"studioTeacherExperience"
-
-};
-
-Object.keys(fields).forEach(function(id){
-
-const element=
-document.getElementById(id);
-
-if(element){
-
-element.value=
-getAccountValue(fields[id],"");
-
-}
-
-});
-
-const photo=
-getAccountValue("studioProfilePhoto","");
-
-const preview=
-document.getElementById(
-"createPhotoPreview"
-);
-
-if(preview){
-
-preview.innerHTML=
-photo
-?
-'<img src="'+escapeHTML(photo)+'" alt="Profile">'
-:
-"👨🏾‍💻";
-
-}
-
-renderMyLessons();
-
-}
-
-/* FILE READER */
-
-function readFileAsDataURL(file){
-
-return new Promise(function(resolve,reject){
-
-if(!file){
-
-resolve("");
-
-return;
-
-}
-
-const reader=new FileReader();
-
-reader.onload=function(){
-
-resolve(reader.result);
-
-};
-
-reader.onerror=reject;
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-/* PHOTO */
-
-document
-.getElementById("createPhoto")
-.addEventListener(
-"change",
-async function(){
-
-const file=this.files[0];
-
-if(!file)return;
-
-if(!file.type.startsWith("image/")){
-
-alert("Please select an image.");
-
-this.value="";
-
-return;
-
-}
-
-try{
-
-const compressedPhoto=
-await compressProfilePhoto(file);
-
-document.getElementById(
-"createPhotoPreview"
-).innerHTML=
-'<img src="'+
-escapeHTML(compressedPhoto)+
-'" alt="Profile">';
-
-this.dataset.compressedPhoto=
-compressedPhoto;
-
-}catch(error){
-
-console.error(
-"Profile photo compression error:",
-error
-);
-
-alert(
-"Could not process the profile photo. Please choose another photo."
-);
-
-this.value="";
-this.dataset.compressedPhoto="";
-
-}
-
-}
-);
-
-/* PROFILE PHOTO COMPRESSION */
-
-function compressProfilePhoto(file){
-
-return new Promise(function(resolve,reject){
-
-const reader=new FileReader();
-
-reader.onload=function(event){
-
-const image=new Image();
-
-image.onload=function(){
-
-const MAX_SIZE=700;
-
-let width=image.width;
-let height=image.height;
-
-if(width>height){
-
-if(width>MAX_SIZE){
-
-height=
-Math.round(
-height*(MAX_SIZE/width)
-);
-
-width=MAX_SIZE;
-
-}
-
-}else{
-
-if(height>MAX_SIZE){
-
-width=
-Math.round(
-width*(MAX_SIZE/height)
-);
-
-height=MAX_SIZE;
-
-}
-
-}
-
-const canvas=
-document.createElement("canvas");
-
-canvas.width=width;
-canvas.height=height;
-
-const context=
-canvas.getContext("2d");
-
-if(!context){
-
-reject(
-new Error("Canvas is not supported.")
-);
-
-return;
-
-}
-
-context.drawImage(
-image,
-0,
-0,
-width,
-height
-);
-
-const compressed=
-canvas.toDataURL(
-"image/jpeg",
-0.72
-);
-
-resolve(compressed);
-
-};
-
-image.onerror=function(){
-
-reject(
-new Error("Could not read image.")
-);
-
-};
-
-image.src=event.target.result;
-
-};
-
-reader.onerror=function(){
-
-reject(reader.error);
-
-};
-
-reader.readAsDataURL(file);
-
-});
-
-}
-
-/* VIDEO PREVIEW */
-
-document
-.getElementById("lessonVideoFile")
-.addEventListener(
-"change",
-function(){
-
-const file=this.files[0];
-
-const preview=
-document.getElementById(
-"videoUploadPreview"
-);
-
-const info=
-document.getElementById(
-"videoUploadInfo"
-);
-
-if(!file){
-
-preview.style.display="none";
-preview.innerHTML="";
-info.style.display="none";
-info.textContent="";
-
-return;
-
-}
-
-if(!file.type.startsWith("video/")){
-
-alert("Please select a video file.");
-
-this.value="";
-
-return;
-
-}
-
-const url=URL.createObjectURL(file);
-
-preview.style.display="block";
-
-preview.innerHTML=`
-
-<video controls playsinline src="${escapeHTML(url)}"></video>
-`;
-
-info.style.display="block";
-
-info.textContent=
-file.name+
-" · "+
-(file.size/1024/1024).toFixed(1)+
-" MB";
-
-}
-);
-
-/* =========================================================
-   PUBLISH COURSE
+   PUBLISH COURSE — FIXED
 ========================================================= */
 
 async function publishEverything(){
 
 if(!currentUser){
-
 alert("Please log in first.");
-
 return;
-
 }
 
-const name=
-document.getElementById("createName").value.trim();
+const publishButton=document.getElementById("publishButton");
 
-const username=
-cleanUsername(
+if(publishButton.disabled)return;
+
+publishButton.disabled=true;
+publishButton.textContent="Publishing...";
+
+try{
+
+const name=document.getElementById("createName").value.trim();
+
+const username=cleanUsername(
 document.getElementById("createUsername").value
 );
 
-const bio=
-document.getElementById("createBio").value.trim();
+const bio=document.getElementById("createBio").value.trim();
 
-const talent=
-document.getElementById("createTalent").value.trim();
+const talent=document.getElementById("createTalent").value.trim();
 
-const experience=
-document.getElementById("createExperience").value.trim();
+const experience=document.getElementById("createExperience").value.trim();
 
-const title=
-document.getElementById("lessonTitle").value.trim();
+const title=document.getElementById("lessonTitle").value.trim();
 
-const category=
-document.getElementById("lessonCategory").value;
+const category=document.getElementById("lessonCategory").value;
 
-const description=
-document.getElementById("lessonDescription").value.trim();
+const description=document.getElementById("lessonDescription").value.trim();
 
-const video=
-document.getElementById("lessonVideo").value.trim();
+const video=document.getElementById("lessonVideo").value.trim();
 
-const videoInput=
-document.getElementById("lessonVideoFile");
+const videoInput=document.getElementById("lessonVideoFile");
 
-const selectedVideo=
-videoInput.files[0];
+const selectedVideo=videoInput.files[0];
 
-const priceType=
-document.getElementById("priceType").value;
+const priceType=document.getElementById("priceType").value;
 
-const price=
-document.getElementById("lessonPrice").value;
+const price=document.getElementById("lessonPrice").value;
 
-if(!name){
-
-alert("Please enter your name.");
-return;
-
-}
-
-if(!username){
-
-alert("Please enter your username.");
-return;
-
-}
-
-if(!talent){
-
-alert("Please enter your talent.");
-return;
-
-}
-
-if(!title){
-
-alert("Please enter your course title.");
-return;
-
-}
-
-if(!description){
-
-alert("Please describe your course.");
-return;
-
-}
+if(!name)throw new Error("Please enter your name.");
+if(!username)throw new Error("Please enter your username.");
+if(!talent)throw new Error("Please enter your talent.");
+if(!title)throw new Error("Please enter your course title.");
+if(!description)throw new Error("Please describe your course.");
 
 if(
 priceType==="PAID"&&
 (!price||Number(price)<0)
 ){
-
-alert("Please enter a valid price.");
-return;
-
+throw new Error("Please enter a valid price.");
 }
 
 if(video){
@@ -1819,25 +1544,17 @@ try{
 
 const url=new URL(video);
 
-if(
-url.protocol!=="http:"&&
-url.protocol!=="https:"
-){
-
+if(url.protocol!=="http:"&&url.protocol!=="https:"){
 throw new Error();
-
 }
 
-}catch(error){
-
-alert("Please enter a valid video URL.");
-return;
-
+}catch(e){
+throw new Error("Please enter a valid video URL.");
 }
 
 }
 
-/* SAVE PROFILE */
+/* PROFILE */
 
 setAccountValue("studioName",name);
 setAccountValue("studioUsername",username);
@@ -1845,88 +1562,62 @@ setAccountValue("studioBio",bio);
 setAccountValue("studioTeacherTalent",talent);
 setAccountValue("studioTeacherExperience",experience);
 
-/* UPDATE REAL USER METADATA */
-
 try{
 
 await supabaseClient.auth.updateUser({
-
-data:{
-name:name,
-username:username
-}
-
+data:{name,username}
 });
 
 }catch(error){
-
-console.warn(
-"Could not update account metadata:",
-error
-);
-
+console.warn("Metadata update failed:",error);
 }
 
-/* PROFILE IMAGE */
+/* PROFILE PHOTO
+   FIX: use compressed version
+*/
 
-const photoFile=
-document.getElementById("createPhoto").files[0];
+const photoInput=document.getElementById("createPhoto");
+const photoFile=photoInput.files[0];
 
 if(photoFile){
 
-try{
-
-const photo=
-await readFileAsDataURL(photoFile);
+const compressed=
+photoInput.dataset.compressedPhoto||
+await compressProfilePhoto(photoFile);
 
 setAccountValue(
 "studioProfilePhoto",
-photo
+compressed
 );
 
-}catch(error){
-
-alert("Could not save profile photo.");
-return;
-
 }
 
-}
-
-/* COURSE IMAGE */
+/* COURSE IMAGE
+   FIX: compress before localStorage
+*/
 
 let courseImage="";
 
-const imageFile=
-document.getElementById("lessonImage").files[0];
+const imageInput=document.getElementById("lessonImage");
+const imageFile=imageInput.files[0];
 
 if(imageFile){
 
 if(!imageFile.type.startsWith("image/")){
-
-alert("Please select a valid course image.");
-return;
-
+throw new Error("Please select a valid course image.");
 }
 
-try{
-
-courseImage=
-await readFileAsDataURL(imageFile);
-
-}catch(error){
-
-alert("Could not save course image.");
-return;
-
-}
+courseImage=await compressImage(
+imageFile,
+900,
+.68
+);
 
 }
 
 /* LESSONS */
 
-let courseLessons=
-collectEditors();
+let courseLessons=collectEditors();
 
 if(!courseLessons.length){
 
@@ -1935,30 +1626,25 @@ title.toLowerCase().includes("electrical")||
 title.toLowerCase().includes("wiring")
 ){
 
-courseLessons=
-DEFAULT_ELECTRICAL.map(function(item){
-
+courseLessons=DEFAULT_ELECTRICAL.map(function(item){
 return{...item};
-
 });
 
 }else{
 
 courseLessons=[{
-
 title:"Lesson 1 — Introduction",
-
 content:description
-
 }];
 
 }
 
 }
 
-/* COURSE */
+/* UNIQUE COURSE ID */
 
-const courseId=Date.now();
+const courseId=
+Date.now().toString()+"_"+Math.random().toString(36).slice(2,8);
 
 const course={
 
@@ -2003,13 +1689,19 @@ createdAt:new Date().toISOString()
 
 };
 
+/* SAVE COURSE */
+
 const lessons=getLessons();
 
 lessons.push(course);
 
+/*
+  This is the important part:
+  if localStorage cannot save it, an error is shown.
+*/
 saveLessons(lessons);
 
-/* VIDEO */
+/* SAVE VIDEO SEPARATELY */
 
 if(selectedVideo){
 
@@ -2026,13 +1718,11 @@ saveLessons(lessons);
 
 }catch(error){
 
-console.error(error);
+console.error("Video save error:",error);
 
 alert(
-"Course was saved, but the video could not be stored on this device."
+"Your course was published, but the video could not be stored on this device."
 );
-
-return;
 
 }
 
@@ -2043,24 +1733,74 @@ addNotification(
 title+" is now available."
 );
 
+/* RESET COURSE FIELDS ONLY */
+
+resetCourseForm();
+
 renderAll();
+
+show("profile");
 
 alert(
 "Your profile and course have been published! 🎉"
 );
 
-show("profile");
+}catch(error){
+
+console.error("PUBLISH ERROR:",error);
+
+alert(
+"Could not publish the course.\n\n"+
+(error.message||"Please try again.")
+);
+
+}finally{
+
+publishButton.disabled=false;
+publishButton.textContent="🚀 Publish Course";
+
+}
 
 }
 
 /* =========================================================
-   VIDEO RENDER
+   RESET AFTER PUBLISH
+========================================================= */
+
+function resetCourseForm(){
+
+document.getElementById("lessonTitle").value="";
+document.getElementById("lessonDescription").value="";
+document.getElementById("lessonVideo").value="";
+document.getElementById("lessonImage").value="";
+document.getElementById("lessonVideoFile").value="";
+
+document.getElementById("priceType").value="FREE";
+document.getElementById("lessonPrice").value="";
+document.getElementById("lessonPrice").disabled=true;
+
+document.getElementById("lessonEditors").innerHTML="";
+
+document.getElementById("videoUploadPreview").style.display="none";
+document.getElementById("videoUploadPreview").innerHTML="";
+
+document.getElementById("videoUploadInfo").style.display="none";
+document.getElementById("videoUploadInfo").textContent="";
+
+document.getElementById("createPhoto").value="";
+document.getElementById("createPhoto").dataset.compressedPhoto="";
+
+loadCreateForm();
+
+}
+
+/* =========================================================
+   COURSE VIDEO RENDER
 ========================================================= */
 
 async function renderCourseVideo(course,containerId){
 
-const container=
-document.getElementById(containerId);
+const container=document.getElementById(containerId);
 
 if(!container)return;
 
@@ -2071,40 +1811,35 @@ const legacy=getLegacyVideo(course);
 if(legacy){
 
 container.innerHTML=`
-
 <div class="courseVideo">
 <video controls playsinline src="${escapeHTML(legacy)}"></video>
 </div>
 `;
 
 return;
-
 }
 
 if(!course.hasUploadedVideo)return;
 
-const blob=
-await getVideoBlob(course.id);
+const blob=await getVideoBlob(course.id);
 
 if(!blob){
 
 container.innerHTML=`
-
 <div class="notice">
 🎥 This uploaded video is not available on this device.
 </div>
 `;
 
 return;
-
 }
 
 const url=URL.createObjectURL(blob);
 
 container.innerHTML=`
-
 <div class="courseVideo">
-<video controls playsinline preload="metadata" src="${escapeHTML(url)}"></video>
+<video controls playsinline preload="metadata"
+src="${escapeHTML(url)}"></video>
 </div>
 `;
 
@@ -2117,22 +1852,13 @@ container.innerHTML=`
 function renderLessonCard(course,includeTeacher){
 
 const category=categoryName(course.category);
-
 const icon=CATEGORY_ICONS[category]||"📚";
 
-const likes=
-Array.isArray(course.likes)
-?
-course.likes.length
-:
-0;
+const likes=Array.isArray(course.likes)
+?course.likes.length:0;
 
-const comments=
-Array.isArray(course.comments)
-?
-course.comments.length
-:
-0;
+const comments=Array.isArray(course.comments)
+?course.comments.length:0;
 
 return`
 
@@ -2165,11 +1891,8 @@ ${escapeHTML(category)} · ${priceText(course)}
 ${
 includeTeacher
 ?
-`
-<p>👨‍🏫 <b>${escapeHTML(course.teacher||"Studio Teacher")}</b></p>
-`
-:
-""
+`<p>👨‍🏫 <b>${escapeHTML(course.teacher||"Studio Teacher")}</b></p>`
+:""
 }
 
 <div class="price">${priceText(course)}</div>
@@ -2178,21 +1901,20 @@ ${
 course.hasUploadedVideo||getLegacyVideo(course)
 ?
 '<div class="videoMeta">🎥 Video available</div>'
-:
-""
+:""
 }
 
 <div class="socialBar">
 
-<button onclick="event.stopPropagation();toggleLike(${Number(course.id)})">
+<button onclick="event.stopPropagation();toggleLike('${String(course.id)}')">
 ❤️ ${likes}
 </button>
 
-<button onclick="event.stopPropagation();openComments(${Number(course.id)})">
+<button onclick="event.stopPropagation();openComments('${String(course.id)}')">
 💬 ${comments}
 </button>
 
-<button onclick="event.stopPropagation();shareCourse(${Number(course.id)})">
+<button onclick="event.stopPropagation();shareCourse('${String(course.id)}')">
 🔗 Share
 </button>
 
@@ -2201,7 +1923,6 @@ course.hasUploadedVideo||getLegacyVideo(course)
 </div>
 </div>
 `;
-
 }
 
 /* =========================================================
@@ -2210,58 +1931,42 @@ course.hasUploadedVideo||getLegacyVideo(course)
 
 function openCourse(id){
 
-const course=
-getLessons().find(function(item){
-
+const course=getLessons().find(function(item){
 return String(item.id)===String(id);
-
 });
 
 if(!course){
-
 alert("Course not found.");
 return;
-
 }
 
 const category=categoryName(course.category);
 const icon=CATEGORY_ICONS[category]||"📚";
 
-const enrolled=
-getArray("studioEnrolled")
-.includes(Number(course.id));
+const enrolled=getArray("studioEnrolled")
+.map(String)
+.includes(String(course.id));
 
-const lessons=
-Array.isArray(course.lessons)
-?
-course.lessons
-:
-[];
+const lessons=Array.isArray(course.lessons)?course.lessons:[];
 
 let actionButton;
 
 if(course.priceType==="PAID"){
 
-actionButton=
-enrolled
+actionButton=enrolled
 ?
-`
-<button class="enroll" onclick="startCourse(${Number(course.id)})">
+`<button class="enroll" onclick="startCourse('${String(course.id)}')">
 ▶️ Continue Course
-</button>
-`
+</button>`
 :
-`
-<button class="enroll" onclick="buyCourse(${Number(course.id)})">
+`<button class="enroll" onclick="buyCourse('${String(course.id)}')">
 💳 Buy Course ${priceText(course)}
-</button>
-`;
+</button>`;
 
 }else{
 
 actionButton=`
-
-<button class="enroll" onclick="startCourse(${Number(course.id)})">
+<button class="enroll" onclick="startCourse('${String(course.id)}')">
 ▶️ ${enrolled?"Continue Free Course":"Start Free Course"}
 </button>
 `;
@@ -2274,16 +1979,9 @@ const list=document.getElementById("lessonList");
 
 const progress=getCourseProgress(course.id);
 
-const percent=
-lessons.length
-?
-Math.round(
-(Math.max(progress,0)+1)/
-lessons.length*
-100
-)
-:
-0;
+const percent=lessons.length
+?Math.round((Math.max(progress,0)+1)/lessons.length*100)
+:0;
 
 list.innerHTML=`
 
@@ -2340,26 +2038,21 @@ enrolled
 </div>
 
 <small>
-
 ${
 lessons.length
 ?
 "Progress: "+
 Math.min(Math.max(progress+1,0),lessons.length)+
-" of "+
-lessons.length+
-" lessons"
+" of "+lessons.length+" lessons"
 :
 "No lessons yet"
 }
-
 </small>
 
 ${
 lessons.map(function(item,index){
 
-const completed=
-index<=progress&&enrolled;
+const completed=index<=progress&&enrolled;
 
 return`
 
@@ -2369,27 +2062,22 @@ border-radius:14px;
 padding:14px;
 margin-top:10px">
 
-<div style="
-font-weight:800;
-margin-bottom:8px">
+<div style="font-weight:800;margin-bottom:8px">
 
 ${completed?"✅":"📘"}
 
-${escapeHTML(
-item.title||"Lesson "+(index+1)
-)}
+${escapeHTML(item.title||"Lesson "+(index+1))}
 
 </div>
 
 <button class="smallBtn"
-onclick="openLesson(${Number(course.id)},${index})">
+onclick="openLesson('${String(course.id)}',${index})">
 
 ${completed?"Review Lesson":"Open Lesson"}
 
 </button>
 
 </div>
-
 `;
 
 }).join("")
@@ -2399,34 +2087,21 @@ ${completed?"Review Lesson":"Open Lesson"}
 </div>
 
 <div class="lesson">
-
 <div class="lessonBody">
 
 <h2>❤️ Course Activity</h2>
 
 <div class="socialBar">
 
-<button onclick="toggleLike(${Number(course.id)})">
-❤️ ${
-Array.isArray(course.likes)
-?
-course.likes.length
-:
-0
-}
+<button onclick="toggleLike('${String(course.id)}')">
+❤️ ${Array.isArray(course.likes)?course.likes.length:0}
 </button>
 
-<button onclick="openComments(${Number(course.id)})">
-💬 ${
-Array.isArray(course.comments)
-?
-course.comments.length
-:
-0
-}
+<button onclick="openComments('${String(course.id)}')">
+💬 ${Array.isArray(course.comments)?course.comments.length:0}
 </button>
 
-<button onclick="shareCourse(${Number(course.id)})">
+<button onclick="shareCourse('${String(course.id)}')">
 🔗 Share
 </button>
 
@@ -2451,22 +2126,18 @@ function getCourseProgress(id){
 
 try{
 
-const progress=
-JSON.parse(
+const progress=JSON.parse(
 localStorage.getItem(
 accountKey("studioCourseProgress")
 )||"{}"
 );
 
-const value=
-Number(progress[String(id)]);
+const value=Number(progress[String(id)]);
 
 return Number.isFinite(value)?value:-1;
 
-}catch(error){
-
+}catch(e){
 return-1;
-
 }
 
 }
@@ -2477,17 +2148,14 @@ let progress={};
 
 try{
 
-progress=
-JSON.parse(
+progress=JSON.parse(
 localStorage.getItem(
 accountKey("studioCourseProgress")
 )||"{}"
 );
 
-}catch(error){
-
+}catch(e){
 progress={};
-
 }
 
 progress[String(id)]=index;
@@ -2505,51 +2173,35 @@ JSON.stringify(progress)
 
 function openLesson(courseId,index){
 
-const course=
-getLessons().find(function(item){
-
+const course=getLessons().find(function(item){
 return String(item.id)===String(courseId);
-
 });
 
 if(!course){
-
 alert("Course not found.");
 return;
-
 }
 
-const lessons=
-Array.isArray(course.lessons)
-?
-course.lessons
-:
-[];
+const lessons=Array.isArray(course.lessons)
+?course.lessons:[];
 
 if(!lessons.length){
-
 openCourse(courseId);
 return;
-
 }
 
-const lessonIndex=
-Math.max(
+const lessonIndex=Math.max(
 0,
-Math.min(
-Number(index)||0,
-lessons.length-1
-)
+Math.min(Number(index)||0,lessons.length-1)
 );
 
 const item=lessons[lessonIndex];
 
 let enrolled=getArray("studioEnrolled");
 
-if(!enrolled.includes(Number(courseId))){
+if(!enrolled.map(String).includes(String(courseId))){
 
-enrolled.push(Number(courseId));
-
+enrolled.push(String(courseId));
 saveArray("studioEnrolled",enrolled);
 
 addNotification(
@@ -2565,36 +2217,27 @@ show("explore",true);
 
 const list=document.getElementById("lessonList");
 
-const percent=
-Math.round(
+const percent=Math.round(
 ((lessonIndex+1)/lessons.length)*100
 );
 
-const previous=
-lessonIndex>0
+const previous=lessonIndex>0
 ?
-`
-<button onclick="openLesson(${Number(courseId)},${lessonIndex-1})">
+`<button onclick="openLesson('${String(courseId)}',${lessonIndex-1})">
 ← Previous
-</button>
-`
+</button>`
 :
 `<button disabled>← Previous</button>`;
 
-const next=
-lessonIndex<lessons.length-1
+const next=lessonIndex<lessons.length-1
 ?
-`
-<button onclick="openLesson(${Number(courseId)},${lessonIndex+1})">
+`<button onclick="openLesson('${String(courseId)}',${lessonIndex+1})">
 Next →
-</button>
-`
+</button>`
 :
-`
-<button onclick="finishCourse(${Number(courseId)})">
+`<button onclick="finishCourse('${String(courseId)}')">
 🎉 Finish Course
-</button>
-`;
+</button>`;
 
 list.innerHTML=`
 
@@ -2602,7 +2245,8 @@ list.innerHTML=`
 
 <div class="lessonBody">
 
-<button class="backButton" onclick="openCourse(${Number(courseId)})">
+<button class="backButton"
+onclick="openCourse('${String(courseId)}')">
 ← Back to Course
 </button>
 
@@ -2636,10 +2280,8 @@ ${escapeHTML(item.content||"Lesson content coming soon.")}
 <div id="lessonVideo-${course.id}"></div>
 
 <div class="lessonNavigation">
-
 ${previous}
 ${next}
-
 </div>
 
 <div class="notice">
@@ -2668,31 +2310,25 @@ window.scrollTo(0,0);
 }
 
 /* =========================================================
-   COURSE START / FINISH / BUY
+   START / FINISH / BUY
 ========================================================= */
 
 function startCourse(id){
 
-const course=
-getLessons().find(function(item){
-
+const course=getLessons().find(function(item){
 return String(item.id)===String(id);
-
 });
 
 if(!course){
-
 alert("Course not found.");
 return;
-
 }
 
 let enrolled=getArray("studioEnrolled");
 
-if(!enrolled.includes(Number(id))){
+if(!enrolled.map(String).includes(String(id))){
 
-enrolled.push(Number(id));
-
+enrolled.push(String(id));
 saveArray("studioEnrolled",enrolled);
 
 addNotification(
@@ -2713,29 +2349,17 @@ savedProgress>=0?savedProgress:0
 
 function finishCourse(id){
 
-const course=
-getLessons().find(function(item){
-
+const course=getLessons().find(function(item){
 return String(item.id)===String(id);
-
 });
 
 if(!course)return;
 
-const lessons=
-Array.isArray(course.lessons)
-?
-course.lessons
-:
-[];
+const lessons=Array.isArray(course.lessons)
+?course.lessons:[];
 
 if(lessons.length){
-
-saveCourseProgress(
-id,
-lessons.length-1
-);
-
+saveCourseProgress(id,lessons.length-1);
 }
 
 addNotification(
@@ -2743,9 +2367,7 @@ addNotification(
 "You completed: "+course.title
 );
 
-alert(
-"🎉 Congratulations! You completed the course."
-);
+alert("🎉 Congratulations! You completed the course.");
 
 openCourse(id);
 
@@ -2753,40 +2375,30 @@ openCourse(id);
 
 function buyCourse(id){
 
-const course=
-getLessons().find(function(item){
-
+const course=getLessons().find(function(item){
 return String(item.id)===String(id);
-
 });
 
 if(!course)return;
 
 if(course.priceType!=="PAID"){
-
 startCourse(id);
 return;
-
 }
 
 let enrolled=getArray("studioEnrolled");
 
-if(!enrolled.includes(Number(id))){
-
-enrolled.push(Number(id));
-
+if(!enrolled.map(String).includes(String(id))){
+enrolled.push(String(id));
 saveArray("studioEnrolled",enrolled);
-
 }
 
 let purchases=getArray("studioPurchases");
 
 purchases.push({
-
-courseId:Number(id),
+courseId:String(id),
 price:Number(course.price||0),
 time:new Date().toISOString()
-
 });
 
 saveArray("studioPurchases",purchases);
@@ -2808,19 +2420,15 @@ openLesson(id,0);
 
 function renderLessons(lessonsToShow){
 
-const list=
-document.getElementById("lessonList");
+const list=document.getElementById("lessonList");
 
 if(!list)return;
 
-const lessons=
-lessonsToShow||
-getLessons();
+const lessons=lessonsToShow||getLessons();
 
 if(!lessons.length){
 
 list.innerHTML=`
-
 <div class="empty">
 No courses found yet.<br>
 Create the first course! 📚
@@ -2828,73 +2436,45 @@ Create the first course! 📚
 `;
 
 return;
-
 }
 
-list.innerHTML=
-lessons
-.slice()
-.reverse()
-.map(function(course){
+list.innerHTML=lessons.slice().reverse().map(function(course){
 
 return`
-
-<div onclick="openCourse(${Number(course.id)})">
-
+<div onclick="openCourse('${String(course.id)}')">
 ${renderLessonCard(course,true)}
-
 </div>
-
 `;
 
-})
-.join("");
+}).join("");
 
 }
 
 function searchLessons(){
 
-const input=
-document.getElementById("searchInput");
+const input=document.getElementById("searchInput");
 
 if(!input)return;
 
-const query=
-input.value.toLowerCase().trim();
+const query=input.value.toLowerCase().trim();
 
-const lessons=
-getLessons().filter(function(course){
+const lessons=getLessons().filter(function(course){
 
 return(
-
 !query||
-
 String(course.title||"").toLowerCase().includes(query)||
-
 String(course.description||"").toLowerCase().includes(query)||
-
 String(course.teacher||"").toLowerCase().includes(query)||
-
 String(course.username||"").toLowerCase().includes(query)||
-
 categoryName(course.category).toLowerCase().includes(query)
-
 );
 
 });
 
-const title=
-document.getElementById("categoryTitle");
+const title=document.getElementById("categoryTitle");
 
 if(title){
-
-title.textContent=
-query
-?
-'Results for "'+query+'"'
-:
-"All courses";
-
+title.textContent=query?'Results for "'+query+'"':"All courses";
 }
 
 renderLessons(lessons);
@@ -2903,17 +2483,11 @@ renderLessons(lessons);
 
 function selectCategory(category){
 
-const input=
-document.getElementById("searchInput");
+const input=document.getElementById("searchInput");
 
-if(input){
-
-input.value=category;
-
-}
+if(input)input.value=category;
 
 show("explore");
-
 searchLessons();
 
 }
@@ -2924,21 +2498,15 @@ searchLessons();
 
 function renderHomeCourses(){
 
-const box=
-document.getElementById("homeCourses");
+const box=document.getElementById("homeCourses");
 
 if(!box)return;
 
-const courses=
-getLessons()
-.slice()
-.reverse()
-.slice(0,3);
+const courses=getLessons().slice().reverse().slice(0,3);
 
 if(!courses.length){
 
 box.innerHTML=`
-
 <div class="empty">
 No courses yet.<br>
 Create the first one! 📚
@@ -2946,19 +2514,16 @@ Create the first one! 📚
 `;
 
 return;
-
 }
 
-box.innerHTML=
-courses.map(function(course){
+box.innerHTML=courses.map(function(course){
 
-const category=
-categoryName(course.category);
+const category=categoryName(course.category);
 
 return`
 
 <div class="course"
-onclick="openCourse(${Number(course.id)})">
+onclick="openCourse('${String(course.id)}')">
 
 <div class="thumb">
 
@@ -3000,14 +2565,13 @@ function renderMyLessons(){
 
 const box=document.getElementById("myLessons");
 
-if(!box)return;
+if(!box||!currentUser)return;
 
 const name=getAccountValue("studioName","");
 
-const courses=
-getLessons().filter(function(course){
+const courses=getLessons().filter(function(course){
 
-return course.ownerId===currentUser?.id||
+return course.ownerId===currentUser.id||
 (!course.ownerId&&course.teacher===name);
 
 });
@@ -3015,26 +2579,22 @@ return course.ownerId===currentUser?.id||
 if(!courses.length){
 
 box.innerHTML=`
-
 <div class="empty">
 You haven't published a course yet.
 </div>
 `;
 
 return;
-
 }
 
-box.innerHTML=
-courses.slice().reverse().map(function(course){
+box.innerHTML=courses.slice().reverse().map(function(course){
 
-const category=
-categoryName(course.category);
+const category=categoryName(course.category);
 
 return`
 
 <div class="course"
-onclick="openCourse(${Number(course.id)})">
+onclick="openCourse('${String(course.id)}')">
 
 <div class="thumb">
 
@@ -3062,8 +2622,7 @@ ${
 course.hasUploadedVideo||getLegacyVideo(course)
 ?
 "<p>🎥 Video uploaded</p>"
-:
-""
+:""
 }
 
 <span class="pill ${
@@ -3086,18 +2645,15 @@ ${priceText(course)}
 
 function renderProfileLessons(){
 
-const box=
-document.getElementById("profileLessons");
+const box=document.getElementById("profileLessons");
 
-if(!box)return;
+if(!box||!currentUser)return;
 
-const name=
-getAccountValue("studioName","");
+const name=getAccountValue("studioName","");
 
-const courses=
-getLessons().filter(function(course){
+const courses=getLessons().filter(function(course){
 
-return course.ownerId===currentUser?.id||
+return course.ownerId===currentUser.id||
 (!course.ownerId&&course.teacher===name);
 
 });
@@ -3105,34 +2661,23 @@ return course.ownerId===currentUser?.id||
 if(!courses.length){
 
 box.innerHTML=`
-
 <div class="empty">
 Your published courses will appear here.
 </div>
 `;
 
 return;
-
 }
 
-box.innerHTML=
-courses
-.slice()
-.reverse()
-.map(function(course){
+box.innerHTML=courses.slice().reverse().map(function(course){
 
 return`
-
-<div onclick="openCourse(${Number(course.id)})">
-
+<div onclick="openCourse('${String(course.id)}')">
 ${renderLessonCard(course,false)}
-
 </div>
-
 `;
 
-})
-.join("");
+}).join("");
 
 }
 
@@ -3144,55 +2689,35 @@ function loadProfile(){
 
 if(!currentUser)return;
 
-const metadata=
-currentUser.user_metadata||{};
+const metadata=currentUser.user_metadata||{};
 
-const name=
-getAccountValue(
+const name=getAccountValue(
 "studioName",
-metadata.name||
-currentUser.email.split("@")[0]
+metadata.name||currentUser.email.split("@")[0]
 );
 
-const username=
-getAccountValue(
+const username=getAccountValue(
 "studioUsername",
-metadata.username||
-currentUser.email.split("@")[0]
+metadata.username||currentUser.email.split("@")[0]
 );
 
-const bio=
-getAccountValue("studioBio","");
+const bio=getAccountValue("studioBio","");
+const photo=getAccountValue("studioProfilePhoto","");
 
-const photo=
-getAccountValue("studioProfilePhoto","");
-
-document.getElementById(
-"profileName"
-).textContent=
+document.getElementById("profileName").textContent=
 name||"Your Name";
 
-document.getElementById(
-"profileUsername"
-).textContent=
+document.getElementById("profileUsername").textContent=
 "@"+(username||"your_studio_name");
 
-document.getElementById(
-"profileBio"
-).textContent=
-bio||
-"Tell people about yourself and your talent.";
+document.getElementById("profileBio").textContent=
+bio||"Tell people about yourself and your talent.";
 
-document.getElementById(
-"accountEmail"
-).textContent=
+document.getElementById("accountEmail").textContent=
 "Signed in as "+currentUser.email;
 
-const image=
-document.getElementById("profileImage");
-
-const emoji=
-document.getElementById("profileEmoji");
+const image=document.getElementById("profileImage");
+const emoji=document.getElementById("profileEmoji");
 
 if(photo){
 
@@ -3207,29 +2732,21 @@ emoji.style.display="block";
 
 }
 
-const courses=
-getLessons().filter(function(course){
+const courses=getLessons().filter(function(course){
 
 return course.ownerId===currentUser.id||
 (!course.ownerId&&course.teacher===name);
 
 });
 
-document.getElementById(
-"courseCount"
-).textContent=
+document.getElementById("courseCount").textContent=
 courses.length;
 
-document.getElementById(
-"followerCount"
-).textContent=
+document.getElementById("followerCount").textContent=
 getArray("studioFollowing").length;
 
-document.getElementById(
-"earningCount"
-).textContent=
-"€"+
-Number(
+document.getElementById("earningCount").textContent=
+"€"+Number(
 getAccountValue("studioEarnings","0")
 ).toFixed(2);
 
@@ -3238,28 +2755,17 @@ renderProfileLessons();
 
 }
 
-/* =========================================================
-   TEACHER INFO
-========================================================= */
-
 function renderTeacherInfo(){
 
-const talent=
-getAccountValue("studioTeacherTalent","");
-
-const experience=
-getAccountValue("studioTeacherExperience","");
-
-const box=
-document.getElementById("teacherInfo");
+const talent=getAccountValue("studioTeacherTalent","");
+const experience=getAccountValue("studioTeacherExperience","");
+const box=document.getElementById("teacherInfo");
 
 if(!box)return;
 
 if(!talent){
-
 box.innerHTML="";
 return;
-
 }
 
 box.innerHTML=`
@@ -3291,10 +2797,8 @@ function getTeacherLessons(name){
 
 return getLessons().filter(function(course){
 
-return String(course.teacher||"")
-.toLowerCase()===
-String(name||"")
-.toLowerCase();
+return String(course.teacher||"").toLowerCase()===
+String(name||"").toLowerCase();
 
 });
 
@@ -3302,13 +2806,10 @@ String(name||"")
 
 function getFollowers(name){
 
-return getArray("studioFollowers")
-.filter(function(item){
+return getArray("studioFollowers").filter(function(item){
 
-return String(item.teacher||"")
-.toLowerCase()===
-String(name||"")
-.toLowerCase();
+return String(item.teacher||"").toLowerCase()===
+String(name||"").toLowerCase();
 
 }).length;
 
@@ -3318,23 +2819,17 @@ function openTeacher(name){
 
 const lessons=getTeacherLessons(name);
 
-const myName=
-getAccountValue("studioName","");
+const myName=getAccountValue("studioName","");
 
 const isMine=name===myName;
 
-const photo=
-isMine
-?
-getAccountValue("studioProfilePhoto","")
-:
-"";
+const photo=isMine
+?getAccountValue("studioProfilePhoto","")
+:"";
 
 show("explore",true);
 
-document.getElementById(
-"lessonList"
-).innerHTML=`
+document.getElementById("lessonList").innerHTML=`
 
 <div class="profile">
 
@@ -3358,14 +2853,12 @@ ${
 !isMine
 ?
 `
-<button
-class="editButton darkButton"
+<button class="editButton darkButton"
 onclick='openMessage(${JSON.stringify(name)})'>
 💬 Message
 </button>
 `
-:
-""
+:""
 }
 
 </div>
@@ -3381,31 +2874,24 @@ onclick='openMessage(${JSON.stringify(name)})'>
 </section>
 `;
 
-const courseBox=
-document.getElementById("teacherCourses");
+const courseBox=document.getElementById("teacherCourses");
 
 if(!lessons.length){
 
 courseBox.innerHTML=`
-
 <div class="empty">
 This teacher hasn't published a course yet.
 </div>
 `;
 
 return;
-
 }
 
-courseBox.innerHTML=
-lessons.slice().reverse().map(function(course){
+courseBox.innerHTML=lessons.slice().reverse().map(function(course){
 
 return`
-
-<div onclick="openCourse(${Number(course.id)})">
-
+<div onclick="openCourse('${String(course.id)}')">
 ${renderLessonCard(course,true)}
-
 </div>
 `;
 
@@ -3418,15 +2904,11 @@ ${renderLessonCard(course,true)}
 ========================================================= */
 
 function getNotifications(){
-
 return getArray("studioNotifications");
-
 }
 
 function saveNotifications(data){
-
 saveArray("studioNotifications",data);
-
 }
 
 function addNotification(title,message){
@@ -3434,22 +2916,14 @@ function addNotification(title,message){
 const notifications=getNotifications();
 
 notifications.unshift({
-
 id:Date.now(),
-
-title:title,
-
-message:message,
-
+title,
+message,
 read:false,
-
 time:new Date().toLocaleString()
-
 });
 
-saveNotifications(
-notifications.slice(0,50)
-);
+saveNotifications(notifications.slice(0,50));
 
 }
 
@@ -3457,11 +2931,8 @@ function openNotifications(){
 
 const notifications=getNotifications();
 
-const unread=
-notifications.filter(function(item){
-
+const unread=notifications.filter(function(item){
 return !item.read;
-
 }).length;
 
 show("explore",true);
@@ -3482,8 +2953,7 @@ let html=`
 ${unread} unread notification${unread===1?"":"s"}
 </p>
 
-<button class="enroll"
-onclick="markNotificationsRead()">
+<button class="enroll" onclick="markNotificationsRead()">
 ✓ Mark all as read
 </button>
 
@@ -3494,7 +2964,6 @@ onclick="markNotificationsRead()">
 if(!notifications.length){
 
 html+=`
-
 <div class="empty">
 No notifications yet. 🔔
 </div>
@@ -3502,8 +2971,7 @@ No notifications yet. 🔔
 
 }else{
 
-html+=
-notifications.map(function(n){
+html+=notifications.map(function(n){
 
 return`
 
@@ -3535,16 +3003,12 @@ document.getElementById("lessonList").innerHTML=html;
 
 function markNotificationsRead(){
 
-const data=
-getNotifications().map(function(item){
-
+const data=getNotifications().map(function(item){
 item.read=true;
 return item;
-
 });
 
 saveNotifications(data);
-
 openNotifications();
 
 }
@@ -3554,31 +3018,22 @@ openNotifications();
 ========================================================= */
 
 function getMessages(){
-
 return getArray("studioMessages");
-
 }
 
 function saveMessages(data){
-
 saveArray("studioMessages",data);
-
 }
 
 function openMessage(teacher){
 
-const messages=
-getMessages().filter(function(item){
-
+const messages=getMessages().filter(function(item){
 return item.teacher===teacher;
-
 });
 
 show("explore",true);
 
-document.getElementById(
-"lessonList"
-).innerHTML=`
+document.getElementById("lessonList").innerHTML=`
 
 <div class="lesson">
 
@@ -3644,18 +3099,15 @@ onclick='sendMessage(${JSON.stringify(teacher)})'>
 
 function sendMessage(teacher){
 
-const input=
-document.getElementById("messageText");
+const input=document.getElementById("messageText");
 
 if(!input)return;
 
 const text=input.value.trim();
 
 if(!text){
-
 alert("Write a message first.");
 return;
-
 }
 
 const messages=getMessages();
@@ -3664,12 +3116,11 @@ messages.push({
 
 id:Date.now(),
 
-teacher:teacher,
+teacher,
 
-from:
-getAccountValue("studioName","You"),
+from:getAccountValue("studioName","You"),
 
-text:text,
+text,
 
 time:new Date().toLocaleString()
 
@@ -3693,11 +3144,9 @@ const messages=getMessages();
 show("explore",true);
 
 const teachers=[
-...new Set(
-messages.map(function(item){
+...new Set(messages.map(function(item){
 return item.teacher;
-})
-)
+}))
 ];
 
 const list=document.getElementById("lessonList");
@@ -3721,7 +3170,6 @@ No messages yet.
 `;
 
 return;
-
 }
 
 list.innerHTML=`
@@ -3780,8 +3228,7 @@ const earnings=getEarnings();
 
 const name=getAccountValue("studioName","");
 
-const courses=
-getLessons().filter(function(item){
+const courses=getLessons().filter(function(item){
 
 return(
 (item.ownerId===currentUser?.id||
@@ -3794,8 +3241,7 @@ item.priceType==="PAID"
 
 show("profile");
 
-const box=
-document.getElementById("profileLessons");
+const box=document.getElementById("profileLessons");
 
 box.innerHTML=`
 
@@ -3814,10 +3260,8 @@ Demo earnings from paid-course activity.
 </p>
 
 <div class="notice">
-
 💡 This is a demo earning system.
 Real payments and withdrawals require a secure backend and payment provider.
-
 </div>
 
 </div>
@@ -3831,7 +3275,6 @@ Real payments and withdrawals require a secure backend and payment provider.
 if(!courses.length){
 
 box.innerHTML+=`
-
 <div class="empty">
 You don't have paid courses yet.
 </div>
@@ -3839,8 +3282,7 @@ You don't have paid courses yet.
 
 }else{
 
-box.innerHTML+=
-courses.map(function(course){
+box.innerHTML+=courses.map(function(course){
 
 return`
 
@@ -3873,28 +3315,19 @@ function toggleLike(id){
 
 const courses=getLessons();
 
-const course=
-courses.find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=courses.find(function(item){
+return String(item.id)===String(id);
 });
 
 if(!course)return;
 
-const user=
-currentUser?.id||
+const user=currentUser?.id||
 getAccountValue("studioUsername","local-user");
 
-course.likes=
-Array.isArray(course.likes)
-?
-course.likes
-:
-[];
+course.likes=Array.isArray(course.likes)
+?course.likes:[];
 
-const index=
-course.likes.indexOf(user);
+const index=course.likes.indexOf(user);
 
 if(index>=0){
 
@@ -3923,34 +3356,25 @@ openCourse(id);
 
 function openComments(id){
 
-const course=
-getLessons().find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=getLessons().find(function(item){
+return String(item.id)===String(id);
 });
 
 if(!course)return;
 
-course.comments=
-Array.isArray(course.comments)
-?
-course.comments
-:
-[];
+course.comments=Array.isArray(course.comments)
+?course.comments:[];
 
 show("explore",true);
 
-document.getElementById(
-"lessonList"
-).innerHTML=`
+document.getElementById("lessonList").innerHTML=`
 
 <div class="lesson">
 
 <div class="lessonBody">
 
 <button class="backButton"
-onclick="openCourse(${Number(id)})">
+onclick="openCourse('${String(id)}')">
 ← Back to Course
 </button>
 
@@ -3993,7 +3417,7 @@ padding:12px
 
 <button class="enroll"
 style="margin-top:8px"
-onclick="addComment(${Number(id)})">
+onclick="addComment('${String(id)}')">
 📤 Comment
 </button>
 
@@ -4005,44 +3429,33 @@ onclick="addComment(${Number(id)})">
 
 function addComment(id){
 
-const input=
-document.getElementById("commentText");
+const input=document.getElementById("commentText");
 
 if(!input)return;
 
 const text=input.value.trim();
 
 if(!text){
-
 alert("Write a comment first.");
 return;
-
 }
 
 const courses=getLessons();
 
-const course=
-courses.find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=courses.find(function(item){
+return String(item.id)===String(id);
 });
 
 if(!course)return;
 
-course.comments=
-Array.isArray(course.comments)
-?
-course.comments
-:
-[];
+course.comments=Array.isArray(course.comments)
+?course.comments:[];
 
 course.comments.push({
 
-user:
-getAccountValue("studioName","You"),
+user:getAccountValue("studioName","You"),
 
-text:text,
+text,
 
 time:new Date().toISOString()
 
@@ -4060,28 +3473,22 @@ openComments(id);
 
 async function shareCourse(id){
 
-const course=
-getLessons().find(function(item){
-
-return Number(item.id)===Number(id);
-
+const course=getLessons().find(function(item){
+return String(item.id)===String(id);
 });
 
 if(!course)return;
 
 const text=
-"Check out this Studio Talent course: "+
-course.title;
+"Check out this Studio Talent course: "+course.title;
 
 if(navigator.share){
 
 try{
 
 await navigator.share({
-
 title:course.title,
-text:text
-
+text
 });
 
 }catch(error){}
@@ -4112,8 +3519,7 @@ function ensureElectricalCourse(){
 
 let lessons=getLessons();
 
-const electrical=
-lessons.find(function(course){
+const electrical=lessons.find(function(course){
 
 return String(course.title||"")
 .toLowerCase()
@@ -4125,21 +3531,18 @@ if(!electrical){
 
 if(lessons.length===0){
 
-const name=
-getAccountValue("studioName","Mamadou");
-
-const username=
-getAccountValue("studioUsername","mamadou");
+const name=getAccountValue("studioName","Mamadou");
+const username=getAccountValue("studioUsername","mamadou");
 
 lessons.push({
 
-id:Date.now(),
+id:"electrical_default_"+Date.now(),
 
 ownerId:currentUser?.id,
 
 teacher:name,
 
-username:username,
+username,
 
 title:"House Electrical Wiring",
 
@@ -4156,8 +3559,7 @@ hasUploadedVideo:false,
 
 image:"",
 
-lessons:
-DEFAULT_ELECTRICAL.map(function(item){
+lessons:DEFAULT_ELECTRICAL.map(function(item){
 return{...item};
 }),
 
@@ -4186,8 +3588,7 @@ if(
 electrical.lessons.length<7
 ){
 
-electrical.lessons=
-DEFAULT_ELECTRICAL.map(function(item){
+electrical.lessons=DEFAULT_ELECTRICAL.map(function(item){
 return{...item};
 });
 
@@ -4207,7 +3608,6 @@ saveLessons(lessons);
 function migrateCourses(){
 
 let lessons=getLessons();
-
 let changed=false;
 
 lessons=lessons.map(function(course){
@@ -4215,7 +3615,6 @@ lessons=lessons.map(function(course){
 if(!course.ownerId&&currentUser){
 
 course.ownerId=currentUser.id;
-
 changed=true;
 
 }
@@ -4223,12 +3622,8 @@ changed=true;
 if(!Array.isArray(course.lessons)){
 
 course.lessons=
-String(course.title||"")
-.toLowerCase()
-.includes("electrical")||
-String(course.title||"")
-.toLowerCase()
-.includes("wiring")
+String(course.title||"").toLowerCase().includes("electrical")||
+String(course.title||"").toLowerCase().includes("wiring")
 ?
 DEFAULT_ELECTRICAL.map(function(item){
 return{...item};
@@ -4236,8 +3631,7 @@ return{...item};
 :
 [{
 title:"Lesson 1 — Introduction",
-content:
-course.description||
+content:course.description||
 "Lesson content coming soon."
 }];
 
@@ -4246,24 +3640,18 @@ changed=true;
 }
 
 if(!Array.isArray(course.likes)){
-
 course.likes=[];
 changed=true;
-
 }
 
 if(!Array.isArray(course.comments)){
-
 course.comments=[];
 changed=true;
-
 }
 
 if(typeof course.hasUploadedVideo!=="boolean"){
 
-course.hasUploadedVideo=
-Boolean(course.videoFile);
-
+course.hasUploadedVideo=Boolean(course.videoFile);
 changed=true;
 
 }
@@ -4272,16 +3660,12 @@ return course;
 
 });
 
-if(changed){
-
-saveLessons(lessons);
-
-}
+if(changed)saveLessons(lessons);
 
 }
 
 /* =========================================================
-   RENDER
+   RENDER ALL
 ========================================================= */
 
 function renderAll(){
@@ -4301,39 +3685,26 @@ async function startStudioTalent(){
 
 try{
 
-const result=
-await supabaseClient.auth.getSession();
+const result=await supabaseClient.auth.getSession();
 
 if(result.error){
-
 console.error(result.error);
-
 }
 
-currentUser=
-result.data.session?.user||
-null;
+currentUser=result.data.session?.user||null;
 
 if(!currentUser){
 
-document
-.querySelectorAll(".view")
-.forEach(function(view){
-
+document.querySelectorAll(".view").forEach(function(view){
 view.classList.remove("activeView");
-
 });
 
-document
-.getElementById("authView")
-.classList.add("activeView");
+document.getElementById("authView").classList.add("activeView");
 
 return;
-
 }
 
-const metadata=
-currentUser.user_metadata||{};
+const metadata=currentUser.user_metadata||{};
 
 if(
 !getAccountValue("studioName","")&&
@@ -4360,13 +3731,9 @@ metadata.username
 }
 
 ensureElectricalCourse();
-
 migrateCourses();
-
 renderAll();
-
 togglePrice();
-
 show("home");
 
 }catch(error){
@@ -4380,9 +3747,28 @@ error
 
 }
 
-if(
-document.readyState==="loading"
-){
+supabaseClient.auth.onAuthStateChange(
+function(event,session){
+
+if(session){
+
+currentUser=session.user;
+
+setTimeout(function(){
+
+finishLogin().catch(console.error);
+
+},0);
+
+}else{
+
+currentUser=null;
+
+}
+
+});
+
+if(document.readyState==="loading"){
 
 document.addEventListener(
 "DOMContentLoaded",
