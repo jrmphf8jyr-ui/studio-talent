@@ -27,7 +27,7 @@ header{padding:28px 20px 12px;display:flex;justify-content:space-between;align-i
 .hero{margin:12px 16px;background:linear-gradient(135deg,#17142d,#4931b9);color:#fff;border-radius:24px;padding:24px;min-height:230px;display:flex;flex-direction:column;justify-content:center}
 .hero h1{font-size:32px;line-height:1.02;margin:0 0 12px}
 .hero p{margin:0 0 18px;color:#ddd9ff}
-.cta{border:0;background:#fff;color:var(--purple);font-weight:800;padding:12px 18px;border-radius:14px;width:max-content}
+.cta{border:0;background:#fff;color:var(--purple);font-weight:800;padding:12px 18px;border-radius:14px}
 
 section{padding:0 16px}
 .row{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}
@@ -146,7 +146,6 @@ small{color:var(--muted)}
 <body>
 <div class="app">
 
-<!-- AUTH -->
 <div id="authView" class="view activeView">
 <div class="authLogo">Studio Talent</div>
 <div class="authSub">Learn. Teach. Share your talent.</div>
@@ -176,7 +175,6 @@ small{color:var(--muted)}
 </div>
 </div>
 
-<!-- HOME -->
 <div id="home" class="view">
 <header>
 <div><div class="logo">Studio</div><div class="sub">Talent</div></div>
@@ -211,7 +209,6 @@ small{color:var(--muted)}
 </section>
 </div>
 
-<!-- EXPLORE -->
 <div id="explore" class="view">
 <header>
 <div><div class="logo">Explore</div><div class="sub">Find your next skill</div></div>
@@ -240,7 +237,6 @@ small{color:var(--muted)}
 <div id="lessonList"></div>
 </div>
 
-<!-- CREATE / COURSE MANAGEMENT -->
 <div id="create" class="view">
 <header>
 <div><div class="logo">Create</div><div class="sub">Create and manage your courses</div></div>
@@ -309,25 +305,30 @@ Your profile and courses are saved for your account on this device.
 
 <label>Course image</label>
 <input id="lessonImage" type="file" accept="image/*">
-
 <div id="currentCourseImageInfo" class="videoMeta"></div>
 
 <label>🎥 Upload Course Video</label>
 <input id="lessonVideoFile" type="file" accept="video/*">
-
 <div id="videoUploadPreview" class="videoPreview" style="display:none"></div>
 <div id="videoUploadInfo" class="videoMeta" style="display:none"></div>
 
 <label>Or add a video link</label>
 <input id="lessonVideo" type="url" placeholder="Optional YouTube/video URL">
 
-<label>Price</label>
+<div id="existingVideoInfo" class="videoMeta"></div>
+
 <div class="grid2">
+<div>
+<label>Price</label>
 <select id="priceType" onchange="togglePrice()">
 <option value="FREE">FREE</option>
 <option value="PAID">PAID</option>
 </select>
+</div>
+<div>
+<label>Price amount</label>
 <input id="lessonPrice" type="number" min="0" step="0.01" placeholder="€ price" disabled>
+</div>
 </div>
 
 <h3>📖 Course Lessons</h3>
@@ -336,8 +337,7 @@ Your profile and courses are saved for your account on this device.
 <button type="button" class="smallBtn" onclick="addLessonEditor()">➕ Add Lesson</button>
 
 <div class="notice">
-Your courses, profile and lesson information remain saved after refreshing Safari.
-Uploaded course videos are stored separately using IndexedDB.
+Everything is saved for the current account after saving. Course images are stored in browser storage and uploaded course videos are stored in IndexedDB.
 </div>
 
 <button id="publishButton" class="publish" onclick="publishEverything()">🚀 Publish Course</button>
@@ -351,7 +351,6 @@ Uploaded course videos are stored separately using IndexedDB.
 </section>
 </div>
 
-<!-- PROFILE -->
 <div id="profile" class="view">
 <header>
 <div><div class="logo">My Profile</div><div class="sub">Your Studio journey</div></div>
@@ -384,7 +383,7 @@ Uploaded course videos are stored separately using IndexedDB.
 <button class="actionButton" onclick="openNotifications()"><span>🔔</span>Notifications</button>
 <button class="actionButton" onclick="openMyMessages()"><span>💬</span>Messages</button>
 <button class="actionButton" onclick="openEarnings()"><span>💰</span>Earnings</button>
-<button class="actionButton" onclick="show('create')"><span>➕</span>Create Course</button>
+<button class="actionButton" onclick="startNewCourse()"><span>➕</span>Create Course</button>
 </div>
 
 <section>
@@ -396,7 +395,7 @@ Uploaded course videos are stored separately using IndexedDB.
 <nav>
 <button id="n-home" class="active" onclick="show('home')"><span class="navicon">🏠</span>Home</button>
 <button id="n-explore" onclick="show('explore')"><span class="navicon">🔎</span>Explore</button>
-<button id="n-create" onclick="show('create')"><span class="navicon">➕</span>Create</button>
+<button id="n-create" onclick="startNewCourse()"><span class="navicon">➕</span>Create</button>
 <button id="n-profile" onclick="show('profile')"><span class="navicon">👤</span>Profile</button>
 </nav>
 
@@ -405,10 +404,6 @@ Uploaded course videos are stored separately using IndexedDB.
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-/* =========================================================
-   SUPABASE
-========================================================= */
-
 const SUPABASE_URL="https://pzrqcitvdhpkfexcqnpd.supabase.co";
 const SUPABASE_ANON_KEY="sb_publishable_pjaQtq6A0DYj0sHI-hBnXg_ZVmuDmOk";
 
@@ -491,11 +486,10 @@ options:{data:{name,username}}
 
 if(result.error)throw result.error;
 
-localStorage.setItem("studioName",name);
-localStorage.setItem("studioUsername",username);
-
 if(result.data.session){
 currentUser=result.data.user;
+setAccountValue("studioName",name);
+setAccountValue("studioUsername",username);
 await finishLogin();
 }else{
 setAuthMessage("Account created! Please check your email to confirm your account, then log in.","ok");
@@ -565,10 +559,6 @@ document.getElementById("authView").classList.add("activeView");
 setAuthMessage("You are logged out.","ok");
 }
 
-/* =========================================================
-   DATA
-========================================================= */
-
 const CATEGORY_ICONS={
 Music:"🎵",Art:"🎨",Dance:"💃",Content:"🎬",
 Technical:"🔧",Technology:"💻",Sports:"⚽",Languages:"🗣️"
@@ -602,7 +592,7 @@ return true;
 }catch(error){
 console.error(error);
 if(error.name==="QuotaExceededError"||error.code===22)
-throw new Error("Your browser storage is full. Please remove a large old course image.");
+throw new Error("Your browser storage is full. Please remove an old large course image.");
 throw new Error("Could not save the course. Please try again.");
 }
 }
@@ -649,10 +639,6 @@ return course.priceType==="PAID"
 :"FREE";
 }
 
-/* =========================================================
-   IMAGE
-========================================================= */
-
 function compressImage(file,maxSize=900,quality=.68){
 return new Promise(function(resolve,reject){
 
@@ -669,9 +655,15 @@ image.onload=function(){
 let width=image.width,height=image.height;
 
 if(width>height){
-if(width>maxSize){height=Math.round(height*(maxSize/width));width=maxSize}
+if(width>maxSize){
+height=Math.round(height*(maxSize/width));
+width=maxSize;
+}
 }else{
-if(height>maxSize){width=Math.round(width*(maxSize/height));height=maxSize}
+if(height>maxSize){
+width=Math.round(width*(maxSize/height));
+height=maxSize;
+}
 }
 
 const canvas=document.createElement("canvas");
@@ -702,9 +694,7 @@ function compressProfilePhoto(file){
 return compressImage(file,700,.72);
 }
 
-/* =========================================================
-   VIDEO INDEXEDDB
-========================================================= */
+/* VIDEO DATABASE */
 
 const VIDEO_DB_NAME="StudioTalentVideoDB";
 const VIDEO_DB_VERSION=1;
@@ -741,8 +731,7 @@ const db=await openVideoDB();
 return new Promise(function(resolve,reject){
 
 const transaction=db.transaction(VIDEO_STORE,"readwrite");
-const store=transaction.objectStore(VIDEO_STORE);
-const request=store.put(file,String(courseId));
+const request=transaction.objectStore(VIDEO_STORE).put(file,String(courseId));
 
 request.onsuccess=()=>resolve(true);
 request.onerror=()=>reject(request.error);
@@ -794,7 +783,7 @@ transaction.oncomplete=()=>db.close();
 });
 
 }catch(error){
-console.error("Video deletion error:",error);
+console.error(error);
 return false;
 }
 }
@@ -803,9 +792,7 @@ function getLegacyVideo(course){
 return course.videoFile||course.uploadedVideo||"";
 }
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* NAVIGATION */
 
 function show(id,skipRender=false){
 
@@ -829,9 +816,49 @@ if(id==="home")renderHomeCourses();
 window.scrollTo(0,0);
 }
 
-/* =========================================================
-   CREATE FORM
-========================================================= */
+/* CREATE */
+
+function startNewCourse(){
+
+editingCourseId=null;
+
+show("create");
+
+setTimeout(function(){
+
+clearCourseFieldsOnly();
+
+},0);
+}
+
+function clearCourseFieldsOnly(){
+
+document.getElementById("lessonTitle").value="";
+document.getElementById("lessonCategory").value="Music";
+document.getElementById("lessonDescription").value="";
+document.getElementById("lessonVideo").value="";
+document.getElementById("lessonImage").value="";
+document.getElementById("lessonVideoFile").value="";
+document.getElementById("lessonPrice").value="";
+document.getElementById("priceType").value="FREE";
+togglePrice();
+
+document.getElementById("lessonEditors").innerHTML="";
+document.getElementById("currentCourseImageInfo").textContent="";
+document.getElementById("existingVideoInfo").textContent="";
+
+document.getElementById("videoUploadPreview").style.display="none";
+document.getElementById("videoUploadPreview").innerHTML="";
+document.getElementById("videoUploadInfo").style.display="none";
+document.getElementById("videoUploadInfo").textContent="";
+
+document.getElementById("courseFormHeading").textContent="Create & Publish";
+document.getElementById("editModeBanner").style.display="none";
+document.getElementById("cancelEditButton").style.display="none";
+document.getElementById("publishButton").textContent="🚀 Publish Course";
+
+addLessonEditor();
+}
 
 function loadCreateForm(){
 
@@ -869,9 +896,7 @@ document.getElementById("publishButton").textContent="🚀 Publish Course";
 renderMyLessons();
 }
 
-/* =========================================================
-   PROFILE PHOTO
-========================================================= */
+/* PROFILE PHOTO */
 
 document.getElementById("createPhoto").addEventListener("change",async function(){
 
@@ -902,9 +927,7 @@ this.dataset.compressedPhoto="";
 
 });
 
-/* =========================================================
-   VIDEO PREVIEW
-========================================================= */
+/* VIDEO PREVIEW */
 
 document.getElementById("lessonVideoFile").addEventListener("change",function(){
 
@@ -935,9 +958,7 @@ info.style.display="block";
 info.textContent=file.name+" · "+(file.size/1024/1024).toFixed(1)+" MB";
 });
 
-/* =========================================================
-   PRICE
-========================================================= */
+/* PRICE */
 
 function togglePrice(){
 
@@ -954,9 +975,7 @@ price.value="";
 }
 }
 
-/* =========================================================
-   LESSON EDITORS
-========================================================= */
+/* LESSON EDITORS */
 
 function addLessonEditor(data={title:"",content:""}){
 
@@ -1040,9 +1059,7 @@ content:box.querySelector(".newLessonContent").value.trim()
 .filter(item=>item.title||item.content);
 }
 
-/* =========================================================
-   OWNER CHECK
-========================================================= */
+/* OWNER */
 
 function isMyCourse(course){
 
@@ -1052,9 +1069,7 @@ return String(course.ownerId||"")===String(currentUser.id);
 
 }
 
-/* =========================================================
-   LOAD COURSE FOR EDITING
-========================================================= */
+/* LOAD EDIT */
 
 function loadCourseIntoForm(id){
 
@@ -1084,8 +1099,21 @@ document.getElementById("priceType").value=course.priceType||"FREE";
 document.getElementById("lessonPrice").value=course.price||"";
 togglePrice();
 
-const info=document.getElementById("currentCourseImageInfo");
-info.textContent=course.image?"🖼️ Existing course image saved.":"No course image currently saved.";
+document.getElementById("currentCourseImageInfo").textContent=
+course.image?"🖼️ Existing course image is saved.":"No course image currently saved.";
+
+let videoInfo="";
+
+if(course.video){
+videoInfo+="🔗 Video link saved.";
+}
+
+if(course.hasUploadedVideo){
+videoInfo+=(videoInfo?" ":"")+"🎥 Uploaded video saved.";
+}
+
+document.getElementById("existingVideoInfo").textContent=
+videoInfo||"No course video currently saved.";
 
 const editors=document.getElementById("lessonEditors");
 editors.innerHTML="";
@@ -1100,18 +1128,15 @@ document.getElementById("lessonImage").value="";
 document.getElementById("lessonVideoFile").value="";
 
 const videoPreview=document.getElementById("videoUploadPreview");
-const videoInfo=document.getElementById("videoUploadInfo");
+const videoUploadInfo=document.getElementById("videoUploadInfo");
 
 videoPreview.style.display="none";
 videoPreview.innerHTML="";
-videoInfo.style.display="none";
-videoInfo.textContent="";
-
+videoUploadInfo.style.display="none";
+videoUploadInfo.textContent="";
 }
 
-/* =========================================================
-   EDIT COURSE
-========================================================= */
+/* EDIT */
 
 function editCourse(id){
 
@@ -1128,18 +1153,10 @@ return;
 }
 
 editingCourseId=course.id;
-
 show("create");
-
-setTimeout(function(){
-loadCourseIntoForm(course.id);
-},0);
-
 }
 
-/* =========================================================
-   DELETE COURSE
-========================================================= */
+/* DELETE */
 
 async function deleteCourse(id){
 
@@ -1157,16 +1174,17 @@ return;
 }
 
 const confirmed=confirm(
-'Delete "'+course.title+'"?\n\nThis will remove the course and its lessons from your account.'
+'Delete "'+course.title+'"?\n\nThis will permanently remove this course and all of its lessons from your account on this device.'
 );
 
 if(!confirmed)return;
 
-const updated=courses.filter(item=>String(item.id)!==String(id));
-
 try{
 
+const updated=courses.filter(item=>String(item.id)!==String(id));
+
 saveLessons(updated);
+
 await deleteVideoBlob(course.id);
 
 let progress={};
@@ -1191,7 +1209,7 @@ addNotification("Course deleted",course.title+" was removed.");
 renderAll();
 show("create");
 
-alert("Course deleted successfully.");
+alert("Course deleted successfully. ✅");
 
 }catch(error){
 
@@ -1202,9 +1220,7 @@ alert("Could not delete the course.\n\n"+error.message);
 
 }
 
-/* =========================================================
-   MANAGE LESSONS
-========================================================= */
+/* MANAGE LESSONS */
 
 function manageLessons(id){
 
@@ -1224,15 +1240,15 @@ editingCourseId=course.id;
 show("create");
 
 setTimeout(function(){
-loadCourseIntoForm(course.id);
-document.getElementById("lessonEditors").scrollIntoView({behavior:"smooth",block:"start"});
-},50);
+document.getElementById("lessonEditors").scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+},100);
 
 }
 
-/* =========================================================
-   PUBLISH OR SAVE COURSE
-========================================================= */
+/* SAVE COURSE */
 
 async function publishEverything(){
 
@@ -1245,8 +1261,10 @@ const button=document.getElementById("publishButton");
 
 if(button.disabled)return;
 
+const saveId=editingCourseId;
+
 button.disabled=true;
-button.textContent=editingCourseId?"Saving...":"Publishing...";
+button.textContent=saveId?"Saving...":"Publishing...";
 
 try{
 
@@ -1344,35 +1362,17 @@ courseImage=await compressImage(imageFile,900,.68);
 let courseLessons=collectEditors();
 
 if(!courseLessons.length){
-
-if(
-title.toLowerCase().includes("electrical")||
-title.toLowerCase().includes("wiring")
-){
-
-courseLessons=DEFAULT_ELECTRICAL.map(item=>({...item}));
-
-}else{
-
-courseLessons=[{
-title:"Lesson 1 — Introduction",
-content:description
-}];
-
+throw new Error("Please add at least one lesson.");
 }
 
-}
+/* EDIT EXISTING */
 
-/* =========================================================
-   EDIT EXISTING COURSE
-========================================================= */
-
-if(editingCourseId){
+if(saveId){
 
 const courses=getLessons();
 
 const index=courses.findIndex(item=>
-String(item.id)===String(editingCourseId)
+String(item.id)===String(saveId)
 );
 
 if(index<0)throw new Error("The course could not be found.");
@@ -1383,24 +1383,51 @@ if(!isMyCourse(oldCourse)){
 throw new Error("You can only edit your own courses.");
 }
 
-/* Keep old image unless new image selected */
+/* Keep old image if no new image was selected */
 if(!courseImage){
 courseImage=oldCourse.image||"";
 }
 
-/* Keep old video unless user changes it */
+/*
+Video behaviour:
+- New uploaded file replaces old uploaded video.
+- New URL replaces old URL.
+- If neither is changed, existing video remains.
+- If the user clears the URL and does not upload a new video,
+  the old URL is removed.
+*/
+
+let newVideo=video;
+
 let newHasUploadedVideo=oldCourse.hasUploadedVideo||false;
 
 if(selectedVideo){
 
-await saveVideoBlob(oldCourse.id,selectedVideo);
-newHasUploadedVideo=true;
-
+if(!selectedVideo.type.startsWith("video/")){
+throw new Error("Please select a valid video file.");
 }
 
-/* If a new URL is entered, old uploaded video remains stored,
-   but the URL takes priority when displayed. */
+await saveVideoBlob(oldCourse.id,selectedVideo);
 
+newHasUploadedVideo=true;
+
+}else if(video){
+
+/* URL is now the selected video source. */
+}else{
+
+/*
+No URL was entered.
+Keep uploaded video if one already exists.
+If there was only an old URL, it is removed.
+*/
+newVideo="";
+}
+
+/*
+If user has chosen a URL, it becomes the visible video.
+The uploaded video can remain stored as a backup.
+*/
 const updatedCourse={
 ...oldCourse,
 ownerId:currentUser.id,
@@ -1409,7 +1436,7 @@ username,
 title,
 category,
 description,
-video,
+video:newVideo,
 image:courseImage,
 lessons:courseLessons,
 priceType,
@@ -1429,7 +1456,7 @@ title+" was updated successfully."
 
 editingCourseId=null;
 
-resetCourseForm();
+clearCourseFieldsOnly();
 
 renderAll();
 show("profile");
@@ -1439,9 +1466,7 @@ alert("Course updated successfully! ✅");
 return;
 }
 
-/* =========================================================
-   CREATE NEW COURSE
-========================================================= */
+/* CREATE NEW */
 
 const courseId=
 Date.now().toString()+"_"+Math.random().toString(36).slice(2,8);
@@ -1495,7 +1520,7 @@ alert(
 
 addNotification("Course published",title+" is now available.");
 
-resetCourseForm();
+clearCourseFieldsOnly();
 
 renderAll();
 show("profile");
@@ -1521,56 +1546,19 @@ editingCourseId
 
 }
 
-/* =========================================================
-   RESET FORM
-========================================================= */
-
 function resetCourseForm(){
-
-editingCourseId=null;
-
-document.getElementById("lessonTitle").value="";
-document.getElementById("lessonDescription").value="";
-document.getElementById("lessonVideo").value="";
-document.getElementById("lessonImage").value="";
-document.getElementById("lessonVideoFile").value="";
-
-document.getElementById("priceType").value="FREE";
-document.getElementById("lessonPrice").value="";
-document.getElementById("lessonPrice").disabled=true;
-
-document.getElementById("lessonEditors").innerHTML="";
-
-document.getElementById("videoUploadPreview").style.display="none";
-document.getElementById("videoUploadPreview").innerHTML="";
-
-document.getElementById("videoUploadInfo").style.display="none";
-document.getElementById("videoUploadInfo").textContent="";
-
-document.getElementById("currentCourseImageInfo").textContent="";
-
-document.getElementById("createPhoto").value="";
-document.getElementById("createPhoto").dataset.compressedPhoto="";
-
-document.getElementById("courseFormHeading").textContent="Create & Publish";
-document.getElementById("editModeBanner").style.display="none";
-document.getElementById("cancelEditButton").style.display="none";
-document.getElementById("publishButton").textContent="🚀 Publish Course";
-
-loadCreateForm();
+clearCourseFieldsOnly();
 }
 
 function cancelCourseEdit(){
 
 editingCourseId=null;
-resetCourseForm();
+clearCourseFieldsOnly();
 show("create");
 
 }
 
-/* =========================================================
-   COURSE VIDEO RENDER
-========================================================= */
+/* COURSE VIDEO */
 
 async function renderCourseVideo(course,containerId){
 
@@ -1579,13 +1567,14 @@ if(!container)return;
 
 container.innerHTML="";
 
-const legacy=getLegacyVideo(course);
-
-if(legacy){
+/*
+If a URL exists, it is the primary video.
+*/
+if(course.video){
 
 container.innerHTML=`
 <div class="courseVideo">
-<video controls playsinline src="${escapeHTML(legacy)}"></video>
+<video controls playsinline preload="metadata" src="${escapeHTML(course.video)}"></video>
 </div>`;
 return;
 }
@@ -1609,9 +1598,7 @@ container.innerHTML=`
 </div>`;
 }
 
-/* =========================================================
-   COURSE CARD
-========================================================= */
+/* COURSE CARD */
 
 function renderLessonCard(course,includeTeacher){
 
@@ -1651,7 +1638,7 @@ includeTeacher
 <div class="price">${priceText(course)}</div>
 
 ${
-course.hasUploadedVideo||getLegacyVideo(course)
+course.hasUploadedVideo||course.video||getLegacyVideo(course)
 ?'<div class="videoMeta">🎥 Video available</div>'
 :""
 }
@@ -1667,9 +1654,7 @@ course.hasUploadedVideo||getLegacyVideo(course)
 `;
 }
 
-/* =========================================================
-   OWNER COURSE MANAGEMENT CARD
-========================================================= */
+/* OWNER MANAGEMENT */
 
 function renderMyCourseManager(course){
 
@@ -1703,7 +1688,7 @@ ${priceText(course)}
 </span>
 
 ${
-course.hasUploadedVideo||getLegacyVideo(course)
+course.hasUploadedVideo||course.video||getLegacyVideo(course)
 ?'<p>🎥 Video available</p>'
 :""
 }
@@ -1736,9 +1721,7 @@ onclick="event.stopPropagation();manageLessons('${String(course.id)}')">
 `;
 }
 
-/* =========================================================
-   OPEN COURSE
-========================================================= */
+/* OPEN COURSE */
 
 function openCourse(id){
 
@@ -1784,7 +1767,7 @@ const ownerControls=isMyCourse(course)
 ?`
 <div class="notice">
 <b>🔒 Your Course</b><br>
-You are the owner of this course. You can edit, delete or manage its lessons from Create.
+Only your account can edit, delete or manage this course.
 <div class="manageButtons">
 <button class="manageEdit" onclick="editCourse('${String(course.id)}')">✏️ Edit</button>
 <button class="manageDelete" onclick="deleteCourse('${String(course.id)}')">🗑️ Delete</button>
@@ -1888,9 +1871,7 @@ ${completed?"Review Lesson":"Open Lesson"}
 renderCourseVideo(course,"courseVideo-"+course.id);
 }
 
-/* =========================================================
-   PROGRESS
-========================================================= */
+/* PROGRESS */
 
 function getCourseProgress(id){
 
@@ -1925,9 +1906,7 @@ JSON.stringify(progress)
 );
 }
 
-/* =========================================================
-   LESSON READER
-========================================================= */
+/* LESSON READER */
 
 function openLesson(courseId,index){
 
@@ -2021,9 +2000,7 @@ renderCourseVideo(course,"lessonVideo-"+course.id);
 window.scrollTo(0,0);
 }
 
-/* =========================================================
-   START / FINISH / BUY
-========================================================= */
+/* START / FINISH / BUY */
 
 function startCourse(id){
 
@@ -2099,9 +2076,7 @@ alert("Demo purchase successful! 💳");
 openLesson(id,0);
 }
 
-/* =========================================================
-   EXPLORE
-========================================================= */
+/* EXPLORE */
 
 function renderLessons(lessonsToShow){
 
@@ -2168,9 +2143,7 @@ show("explore");
 searchLessons();
 }
 
-/* =========================================================
-   HOME
-========================================================= */
+/* HOME */
 
 function renderHomeCourses(){
 
@@ -2220,9 +2193,7 @@ ${priceText(course)}
 }).join("");
 }
 
-/* =========================================================
-   MY COURSES — OWNER ONLY
-========================================================= */
+/* MY COURSES */
 
 function renderMyLessons(){
 
@@ -2251,9 +2222,7 @@ ${courses.slice().reverse().map(renderMyCourseManager).join("")}
 `;
 }
 
-/* =========================================================
-   PROFILE COURSES — OWNER ONLY
-========================================================= */
+/* PROFILE COURSES */
 
 function renderProfileLessons(){
 
@@ -2283,9 +2252,7 @@ ${renderLessonCard(course,false)}
 }).join("");
 }
 
-/* =========================================================
-   PROFILE
-========================================================= */
+/* PROFILE */
 
 function loadProfile(){
 
@@ -2361,9 +2328,7 @@ box.innerHTML=`
 `;
 }
 
-/* =========================================================
-   TEACHERS
-========================================================= */
+/* TEACHERS */
 
 function getTeacherLessons(name){
 
@@ -2436,9 +2401,7 @@ ${renderLessonCard(course,true)}
 }).join("");
 }
 
-/* =========================================================
-   NOTIFICATIONS
-========================================================= */
+/* NOTIFICATIONS */
 
 function getNotifications(){
 return getArray("studioNotifications");
@@ -2532,9 +2495,7 @@ saveNotifications(data);
 openNotifications();
 }
 
-/* =========================================================
-   MESSAGES
-========================================================= */
+/* MESSAGES */
 
 function getMessages(){
 return getArray("studioMessages");
@@ -2676,9 +2637,7 @@ list.innerHTML+=`
 });
 }
 
-/* =========================================================
-   EARNINGS
-========================================================= */
+/* EARNINGS */
 
 function getEarnings(){
 return Number(getAccountValue("studioEarnings","0"));
@@ -2687,15 +2646,9 @@ return Number(getAccountValue("studioEarnings","0"));
 function openEarnings(){
 
 const earnings=getEarnings();
-const name=getAccountValue("studioName","");
 
 const courses=getLessons().filter(function(item){
-
-return(
-isMyCourse(item)&&
-item.priceType==="PAID"
-);
-
+return isMyCourse(item)&&item.priceType==="PAID";
 });
 
 show("profile");
@@ -2755,9 +2708,7 @@ return`
 }
 }
 
-/* =========================================================
-   LIKES
-========================================================= */
+/* LIKES */
 
 function toggleLike(id){
 
@@ -2788,9 +2739,7 @@ saveLessons(courses);
 openCourse(id);
 }
 
-/* =========================================================
-   COMMENTS
-========================================================= */
+/* COMMENTS */
 
 function openComments(id){
 
@@ -2875,9 +2824,7 @@ saveLessons(courses);
 openComments(id);
 }
 
-/* =========================================================
-   SHARE
-========================================================= */
+/* SHARE */
 
 async function shareCourse(id){
 
@@ -2905,9 +2852,7 @@ alert(text);
 }
 }
 
-/* =========================================================
-   ELECTRICAL COURSE
-========================================================= */
+/* ELECTRICAL */
 
 function ensureElectricalCourse(){
 
@@ -2966,9 +2911,7 @@ saveLessons(lessons);
 }
 }
 
-/* =========================================================
-   MIGRATION
-========================================================= */
+/* MIGRATION */
 
 function migrateCourses(){
 
@@ -2978,9 +2921,8 @@ let changed=false;
 lessons=lessons.map(function(course){
 
 /*
-Important:
-Old courses without ownerId are assigned only once,
-to the currently logged-in account.
+Only legacy courses without an owner are assigned to the current
+account. Courses already belonging to another account remain untouched.
 */
 
 if(!course.ownerId&&currentUser){
@@ -3019,8 +2961,13 @@ course.hasUploadedVideo=Boolean(course.videoFile);
 changed=true;
 }
 
-if(!course.ownerId&&currentUser){
-course.ownerId=currentUser.id;
+if(!course.priceType){
+course.priceType=Number(course.price||0)>0?"PAID":"FREE";
+changed=true;
+}
+
+if(typeof course.price!=="number"){
+course.price=Number(course.price||0);
 changed=true;
 }
 
@@ -3030,9 +2977,7 @@ return course;
 if(changed)saveLessons(lessons);
 }
 
-/* =========================================================
-   RENDER ALL
-========================================================= */
+/* RENDER */
 
 function renderAll(){
 
@@ -3043,9 +2988,7 @@ loadProfile();
 
 }
 
-/* =========================================================
-   START
-========================================================= */
+/* START */
 
 async function startStudioTalent(){
 
