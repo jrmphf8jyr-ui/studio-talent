@@ -13,323 +13,144 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-margin:0;background:#e9e9f1;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-color:var(--ink)
-}
+body{margin:0;background:#e9e9f1;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-.app{
-width:min(430px,100%);
-min-height:100vh;
-margin:auto;
-background:var(--bg);
-position:relative;
-padding-bottom:92px
-}
-.view{display:none}
-.view.activeView{display:block}
+.app{width:min(430px,100%);min-height:100vh;margin:auto;background:var(--bg);position:relative;padding-bottom:92px}
+.view{display:none}.view.activeView{display:block}
 
-header{
-padding:28px 20px 12px;
-display:flex;
-justify-content:space-between;
-align-items:center
-}
+header{padding:28px 20px 12px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-size:28px;font-weight:800;color:var(--purple)}
 .sub{font-size:13px;font-weight:700;margin-top:-3px;color:var(--muted)}
-.icon{
-width:42px;height:42px;border:0;border-radius:50%;
-background:#fff;font-size:20px
-}
+.icon{width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:20px}
 
-.hero{
-margin:12px 16px;
-background:linear-gradient(135deg,#17142d,#4931b9);
-color:#fff;border-radius:24px;padding:24px;
-min-height:230px;
-display:flex;flex-direction:column;justify-content:center
-}
+.hero{margin:12px 16px;background:linear-gradient(135deg,#17142d,#4931b9);color:#fff;border-radius:24px;padding:24px;min-height:230px;display:flex;flex-direction:column;justify-content:center}
 .hero h1{font-size:32px;line-height:1.02;margin:0 0 12px}
 .hero p{margin:0 0 18px;color:#ddd9ff}
-.cta{
-border:0;background:#fff;color:var(--purple);
-font-weight:800;padding:12px 18px;border-radius:14px;width:max-content
-}
+.cta{border:0;background:#fff;color:var(--purple);font-weight:800;padding:12px 18px;border-radius:14px;width:max-content}
 
 section{padding:0 16px}
-.row{
-display:flex;justify-content:space-between;align-items:center;
-margin:22px 0 12px
-}
+.row{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px}
 h2{font-size:18px;margin:0}
 .see{color:var(--purple);font-weight:700;font-size:13px;cursor:pointer}
 
-.cats{
-display:grid;grid-template-columns:repeat(4,1fr);gap:9px
-}
-.cat{
-border:0;background:#fff;border-radius:16px;padding:12px 5px;
-font-size:11px;font-weight:700;min-height:76px;color:var(--ink)
-}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.cat{border:0;background:#fff;border-radius:16px;padding:12px 5px;font-size:11px;font-weight:700;min-height:76px;color:var(--ink)}
 .emoji{font-size:25px;display:block;margin-bottom:6px}
 
-.teachers{
-display:flex;gap:10px;overflow:auto;padding-bottom:4px
-}
-.teacher{
-min-width:118px;background:#fff;border-radius:17px;
-padding:12px;cursor:pointer
-}
-.avatar{
-height:72px;border-radius:14px;
-background:linear-gradient(135deg,#ddd,#aaa);
-display:grid;place-items:center;font-size:30px;overflow:hidden
-}
-.avatar img,.bigavatar img,.photoPreview img,
-.courseImg img,.thumb img,.lessonImg img{
-width:100%;height:100%;object-fit:cover
-}
+.teachers{display:flex;gap:10px;overflow:auto;padding-bottom:4px}
+.teacher{min-width:118px;background:#fff;border-radius:17px;padding:12px;cursor:pointer}
+.avatar{height:72px;border-radius:14px;background:linear-gradient(135deg,#ddd,#aaa);display:grid;place-items:center;font-size:30px;overflow:hidden}
+.avatar img,.bigavatar img,.photoPreview img,.courseImg img,.thumb img,.lessonImg img{width:100%;height:100%;object-fit:cover}
 .teacher b{display:block;margin-top:8px;font-size:13px}
 .stars{font-size:11px;color:#8a6d00;margin-top:4px}
 
-.course{
-display:flex;gap:12px;background:#fff;border-radius:17px;
-padding:12px;margin-top:10px;cursor:pointer
-}
-.thumb{
-width:88px;height:72px;flex-shrink:0;border-radius:13px;
-background:#d9d4ff;display:grid;place-items:center;
-font-size:28px;overflow:hidden
-}
-.course h3{margin:4px 0;font-size:14px}
-.course p{margin:6px 0;color:var(--muted);font-size:12px}
+.course{display:flex;gap:12px;background:#fff;border-radius:17px;padding:12px;margin-top:10px;cursor:pointer}
+.thumb{width:88px;height:72px;flex-shrink:0;border-radius:13px;background:#d9d4ff;display:grid;place-items:center;font-size:28px;overflow:hidden}
+.course h3{margin:4px 0;font-size:14px}.course p{margin:6px 0;color:var(--muted);font-size:12px}
 
-.pill{
-display:inline-block;background:#ddf8e9;color:#197348;
-border-radius:10px;padding:4px 8px;font-size:10px;font-weight:800
-}
+.pill{display:inline-block;background:#ddf8e9;color:#197348;border-radius:10px;padding:4px 8px;font-size:10px;font-weight:800}
 .paid{background:#eee9ff;color:var(--purple)}
 
-.search{
-margin:12px 16px;background:#fff;border-radius:15px;
-padding:14px;color:#999
-}
-.search input{
-border:0;outline:0;width:calc(100% - 30px);font-size:15px
-}
+.search{margin:12px 16px;background:#fff;border-radius:15px;padding:14px;color:#999}
+.search input{border:0;outline:0;width:calc(100% - 30px);font-size:15px}
 
-.lesson{
-margin:16px;background:#fff;border-radius:20px;
-overflow:hidden;box-shadow:0 2px 10px #e4e4ec
-}
-.lessonImg{
-height:190px;background:linear-gradient(135deg,#222,#777);
-display:grid;place-items:center;color:#fff;font-size:48px;overflow:hidden
-}
+.lesson{margin:16px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 10px #e4e4ec}
+.lessonImg{height:190px;background:linear-gradient(135deg,#222,#777);display:grid;place-items:center;color:#fff;font-size:48px;overflow:hidden}
 .lessonBody{padding:18px}
-.lessonBody h1{font-size:22px;margin:8px 0}
-.lessonBody h2{font-size:20px;margin:8px 0 14px}
+.lessonBody h1{font-size:22px;margin:8px 0}.lessonBody h2{font-size:20px;margin:8px 0 14px}
 .lessonBody p{color:var(--muted);line-height:1.5}
 
 .price{font-size:20px;font-weight:800;margin:16px 0}
-.enroll,.publish,.editButton{
-width:100%;border:0;background:var(--purple);
-color:#fff;padding:14px;border-radius:14px;font-weight:800
-}
+.enroll,.publish,.editButton{width:100%;border:0;background:var(--purple);color:#fff;padding:14px;border-radius:14px;font-weight:800}
 .publish:disabled{opacity:.6}
 .darkButton{background:#151529!important}
-.backButton{
-width:100%;border:0;background:#f0eff8;color:var(--ink);
-padding:13px;border-radius:14px;font-weight:800;margin-bottom:10px
-}
-.notice{
-background:#f1efff;color:#4b3bc2;border-radius:12px;
-padding:12px;font-size:12px;margin-top:12px
-}
-.progressWrap{
-background:#eeeef5;height:9px;border-radius:20px;
-overflow:hidden;margin:12px 0
-}
-.progressBar{
-height:100%;background:var(--purple);
-border-radius:20px;width:0
-}
-.lessonNavigation{
-display:grid;grid-template-columns:1fr 1fr;
-gap:10px;margin-top:15px
-}
-.lessonNavigation button{
-border:0;border-radius:13px;padding:13px 8px;
-background:#eee9ff;color:var(--purple);font-weight:800
-}
+.backButton{width:100%;border:0;background:#f0eff8;color:var(--ink);padding:13px;border-radius:14px;font-weight:800;margin-bottom:10px}
+.notice{background:#f1efff;color:#4b3bc2;border-radius:12px;padding:12px;font-size:12px;margin-top:12px}
+
+.progressWrap{background:#eeeef5;height:9px;border-radius:20px;overflow:hidden;margin:12px 0}
+.progressBar{height:100%;background:var(--purple);border-radius:20px;width:0}
+.lessonNavigation{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+.lessonNavigation button{border:0;border-radius:13px;padding:13px 8px;background:#eee9ff;color:var(--purple);font-weight:800}
 .lessonNavigation button:disabled{opacity:.4}
 
-.createForm{
-margin:16px;background:#fff;border-radius:22px;padding:18px
-}
+.createForm{margin:16px;background:#fff;border-radius:22px;padding:18px}
 .createForm h3{margin:20px 0 10px}
-.createForm label{
-display:block;font-size:12px;font-weight:800;margin:12px 0 6px
-}
-.createForm input,.createForm textarea,.createForm select{
-width:100%;border:1px solid var(--border);
-background:#fafafd;border-radius:12px;padding:12px;outline:0
-}
+.createForm label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px}
+.createForm input,.createForm textarea,.createForm select{width:100%;border:1px solid var(--border);background:#fafafd;border-radius:12px;padding:12px;outline:0}
 .createForm textarea{min-height:85px;resize:vertical}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .publish{margin-top:18px}
 
-.photoPreview{
-width:70px;height:70px;border-radius:50%;
-background:#ddd5ff;display:grid;place-items:center;
-font-size:30px;overflow:hidden;margin-bottom:8px
-}
-
-.profile{
-margin:16px;background:#fff;border-radius:22px;
-padding:22px;text-align:center
-}
-.bigavatar{
-width:100px;height:100px;margin:auto;border-radius:50%;
-background:#d8d2ff;overflow:hidden;
-display:flex;align-items:center;justify-content:center;font-size:42px
-}
-.profile h2{margin:12px 0 4px}
-.profileUsername{color:var(--muted);margin:0}
-.profileBio{color:var(--muted);line-height:1.5;margin-top:12px}
+.photoPreview{width:70px;height:70px;border-radius:50%;background:#ddd5ff;display:grid;place-items:center;font-size:30px;overflow:hidden;margin-bottom:8px}
+.profile{margin:16px;background:#fff;border-radius:22px;padding:22px;text-align:center}
+.bigavatar{width:100px;height:100px;margin:auto;border-radius:50%;background:#d8d2ff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:42px}
+.profile h2{margin:12px 0 4px}.profileUsername{color:var(--muted);margin:0}.profileBio{color:var(--muted);line-height:1.5;margin-top:12px}
 .editButton{margin-top:10px}
-.stats{
-display:grid;grid-template-columns:repeat(3,1fr);
-margin:22px 16px 0;background:#fff;border-radius:18px;
-padding:18px 5px;text-align:center
-}
-.stats b{display:block;font-size:18px}
-.stats span{font-size:11px;color:var(--muted)}
-
-.teacherInfo{
-margin-top:16px;padding:15px;background:#f1efff;
-border-radius:15px;text-align:left
-}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 16px 0;background:#fff;border-radius:18px;padding:18px 5px;text-align:center}
+.stats b{display:block;font-size:18px}.stats span{font-size:11px;color:var(--muted)}
+.teacherInfo{margin-top:16px;padding:15px;background:#f1efff;border-radius:15px;text-align:left}
 .empty{text-align:center;padding:35px 20px;color:var(--muted)}
 
-.actionGrid{
-display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px
-}
-.actionButton{
-border:0;background:#fff;border-radius:16px;
-padding:15px 10px;font-weight:800;color:var(--ink)
-}
+.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.actionButton{border:0;background:#fff;border-radius:16px;padding:15px 10px;font-weight:800;color:var(--ink)}
 .actionButton span{display:block;font-size:25px;margin-bottom:5px}
 
 .socialBar{display:flex;gap:8px;margin-top:12px}
-.socialBar button{
-flex:1;border:0;background:#f4f3fb;
-border-radius:11px;padding:9px;font-weight:700
-}
-.comment{
-background:#f7f7fb;border-radius:12px;
-padding:10px;margin-top:8px;font-size:13px
-}
-.lessonEditor{
-border:1px solid var(--border);border-radius:14px;
-padding:12px;margin-top:10px;background:#fafafd
-}
+.socialBar button{flex:1;border:0;background:#f4f3fb;border-radius:11px;padding:9px;font-weight:700}
+.comment{background:#f7f7fb;border-radius:12px;padding:10px;margin-top:8px;font-size:13px}
+
+.lessonEditor{border:1px solid var(--border);border-radius:14px;padding:12px;margin-top:10px;background:#fafafd}
 .lessonEditor textarea{min-height:70px}
-.smallBtn{
-border:0;border-radius:10px;padding:9px 11px;
-background:#eee9ff;color:var(--purple);font-weight:800
-}
+.smallBtn{border:0;border-radius:10px;padding:9px 11px;background:#eee9ff;color:var(--purple);font-weight:800}
 .danger{background:#ffe8e8;color:#b42318}
+.moveBtns{display:flex;gap:6px;margin-top:8px}
+.moveBtns button{flex:1}
 
-.videoPreview,.courseVideo{
-width:100%;margin-top:10px;border-radius:14px;
-background:#111;overflow:hidden
-}
-.videoPreview video,.courseVideo video{
-display:block;width:100%;max-height:280px;object-fit:contain
-}
+.videoPreview,.courseVideo{width:100%;margin-top:10px;border-radius:14px;background:#111;overflow:hidden}
+.videoPreview video,.courseVideo video{display:block;width:100%;max-height:280px;object-fit:contain}
 .videoMeta{font-size:11px;color:var(--muted);margin-top:6px}
-.videoButton{
-display:block;text-align:center;text-decoration:none;
-background:#151529;color:#fff;padding:13px;
-border-radius:13px;font-weight:800;margin-top:12px
-}
+.videoButton{display:block;text-align:center;text-decoration:none;background:#151529;color:#fff;padding:13px;border-radius:13px;font-weight:800;margin-top:12px}
 
-nav{
-position:fixed;bottom:0;left:50%;
-transform:translateX(-50%);
-width:min(430px,100%);
-height:78px;background:#fff;border-top:1px solid #eee;
-display:grid;grid-template-columns:repeat(4,1fr);
-padding:8px 10px env(safe-area-inset-bottom);
-z-index:100
-}
-nav button{
-border:0;background:transparent;color:#777;
-font-size:11px;font-weight:700
-}
-.navicon{display:block;font-size:22px;margin-bottom:2px}
-nav button.active{color:var(--purple)!important}
+.manageCard{background:#fff;border-radius:18px;padding:14px;margin-top:10px}
+.manageButtons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.manageButtons button{border:0;border-radius:11px;padding:11px;font-weight:800}
+.manageEdit{background:#eee9ff;color:var(--purple)}
+.manageDelete{background:#ffe8e8;color:#b42318}
+.manageLessons{background:#e4f8ed;color:#197348}
+
+.editModeBanner{background:#eee9ff;color:#4931b9;padding:12px;border-radius:13px;margin-bottom:12px;font-size:12px;font-weight:700}
+.cancelEdit{background:#f0eff8;color:var(--ink);border:0;border-radius:12px;padding:12px;width:100%;font-weight:800;margin-top:8px}
+
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:78px;background:#fff;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 10px env(safe-area-inset-bottom);z-index:100}
+nav button{border:0;background:transparent;color:#777;font-size:11px;font-weight:700}
+.navicon{display:block;font-size:22px;margin-bottom:2px}nav button.active{color:var(--purple)!important}
 small{color:var(--muted)}
 
-/* AUTH */
-#authView{
-min-height:100vh;padding:28px 20px;
-background:linear-gradient(180deg,#f7f7fb,#eeeafd)
-}
-.authLogo{
-font-size:40px;font-weight:900;color:var(--purple);margin-top:35px
-}
+#authView{min-height:100vh;padding:28px 20px;background:linear-gradient(180deg,#f7f7fb,#eeeafd)}
+.authLogo{font-size:40px;font-weight:900;color:var(--purple);margin-top:35px}
 .authSub{color:var(--muted);font-weight:700;margin-bottom:28px}
-.authCard{
-background:#fff;border-radius:24px;padding:22px;
-box-shadow:0 4px 20px #dddde8
-}
-.authCard h1{margin:0 0 8px;font-size:26px}
-.authCard p{color:var(--muted);font-size:13px;line-height:1.5}
-.authCard label{
-display:block;font-size:12px;font-weight:800;margin:14px 0 6px
-}
-.authCard input{
-width:100%;border:1px solid var(--border);
-background:#fafafd;border-radius:12px;padding:13px;outline:0
-}
-.authPrimary{
-width:100%;border:0;background:var(--purple);color:#fff;
-padding:14px;border-radius:13px;font-weight:800;margin-top:18px
-}
-.authSecondary{
-width:100%;border:0;background:#eee9ff;color:var(--purple);
-padding:13px;border-radius:13px;font-weight:800;margin-top:10px
-}
-.authMessage{
-margin-top:12px;padding:11px;border-radius:11px;
-font-size:12px;display:none
-}
-.authMessage.error{display:block;background:#ffe8e8;color:#a32020}
-.authMessage.ok{display:block;background:#e4f8ed;color:#197348}
+.authCard{background:#fff;border-radius:24px;padding:22px;box-shadow:0 4px 20px #dddde8}
+.authCard h1{margin:0 0 8px;font-size:26px}.authCard p{color:var(--muted);font-size:13px;line-height:1.5}
+.authCard label{display:block;font-size:12px;font-weight:800;margin:14px 0 6px}
+.authCard input{width:100%;border:1px solid var(--border);background:#fafafd;border-radius:12px;padding:13px;outline:0}
+.authPrimary{width:100%;border:0;background:var(--purple);color:#fff;padding:14px;border-radius:13px;font-weight:800;margin-top:18px}
+.authSecondary{width:100%;border:0;background:#eee9ff;color:var(--purple);padding:13px;border-radius:13px;font-weight:800;margin-top:10px}
+.authMessage{margin-top:12px;padding:11px;border-radius:11px;font-size:12px;display:none}
+.authMessage.error{display:block;background:#ffe8e8;color:#a32020}.authMessage.ok{display:block;background:#e4f8ed;color:#197348}
 .authUser{font-size:11px;color:var(--muted);margin-top:5px}
-.logoutBtn{
-margin-top:12px;background:#ffe8e8;color:#b42318;
-border:0;border-radius:12px;padding:10px 14px;font-weight:800
-}
+.logoutBtn{margin-top:12px;background:#ffe8e8;color:#b42318;border:0;border-radius:12px;padding:10px 14px;font-weight:800}
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
 <!-- AUTH -->
 <div id="authView" class="view activeView">
-
 <div class="authLogo">Studio Talent</div>
 <div class="authSub">Learn. Teach. Share your talent.</div>
-
 <div class="authCard">
-
 <h1 id="authTitle">Welcome back 👋</h1>
 <p id="authDescription">Log in to your real Studio Talent account.</p>
 
@@ -350,24 +171,15 @@ border:0;border-radius:12px;padding:10px 14px;font-weight:800
 </div>
 
 <button id="authMainButton" class="authPrimary" onclick="handleAuth()">Log In</button>
-
-<button class="authSecondary" onclick="toggleAuthMode()" id="authSwitchButton">
-Create New Account
-</button>
-
+<button class="authSecondary" onclick="toggleAuthMode()" id="authSwitchButton">Create New Account</button>
 <div id="authMessage" class="authMessage"></div>
-
 </div>
 </div>
 
 <!-- HOME -->
 <div id="home" class="view">
-
 <header>
-<div>
-<div class="logo">Studio</div>
-<div class="sub">Talent</div>
-</div>
+<div><div class="logo">Studio</div><div class="sub">Talent</div></div>
 <button class="icon" onclick="openNotifications()">🔔</button>
 </header>
 
@@ -378,11 +190,7 @@ Create New Account
 </div>
 
 <section>
-
-<div class="row">
-<h2>Popular Categories</h2>
-<span class="see" onclick="show('explore')">See all</span>
-</div>
+<div class="row"><h2>Popular Categories</h2><span class="see" onclick="show('explore')">See all</span></div>
 
 <div class="cats">
 <button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
@@ -392,57 +200,30 @@ Create New Account
 </div>
 
 <div class="row"><h2>Top Teachers</h2></div>
-
 <div class="teachers">
-
-<div class="teacher" onclick="openTeacher('Adam Visuals')">
-<div class="avatar">🎥</div>
-<b>Adam Visuals</b>
-<div class="stars">⭐ 4.9</div>
-</div>
-
-<div class="teacher" onclick="openTeacher('Lea Music')">
-<div class="avatar">🎤</div>
-<b>Lea Music</b>
-<div class="stars">⭐ 4.8</div>
-</div>
-
-<div class="teacher" onclick="openTeacher('Coach Ibra')">
-<div class="avatar">⚽</div>
-<b>Coach Ibra</b>
-<div class="stars">⭐ 4.9</div>
-</div>
-
+<div class="teacher" onclick="openTeacher('Adam Visuals')"><div class="avatar">🎥</div><b>Adam Visuals</b><div class="stars">⭐ 4.9</div></div>
+<div class="teacher" onclick="openTeacher('Lea Music')"><div class="avatar">🎤</div><b>Lea Music</b><div class="stars">⭐ 4.8</div></div>
+<div class="teacher" onclick="openTeacher('Coach Ibra')"><div class="avatar">⚽</div><b>Coach Ibra</b><div class="stars">⭐ 4.9</div></div>
 </div>
 
 <div class="row"><h2>New Courses</h2></div>
 <div id="homeCourses"></div>
-
 </section>
 </div>
 
 <!-- EXPLORE -->
 <div id="explore" class="view">
-
 <header>
-<div>
-<div class="logo">Explore</div>
-<div class="sub">Find your next skill</div>
-</div>
+<div><div class="logo">Explore</div><div class="sub">Find your next skill</div></div>
 <button class="icon" onclick="openNotifications()">🔔</button>
 </header>
 
-<div class="search">
-🔎
-<input id="searchInput"
-placeholder="Search skills, teachers, courses..."
-oninput="searchLessons()">
+<div class="search">🔎
+<input id="searchInput" placeholder="Search skills, teachers, courses..." oninput="searchLessons()">
 </div>
 
 <section>
-
 <div class="row"><h2>Categories</h2></div>
-
 <div class="cats">
 <button class="cat" onclick="selectCategory('Music')"><span class="emoji">🎵</span>Music</button>
 <button class="cat" onclick="selectCategory('Art')"><span class="emoji">🎨</span>Art</button>
@@ -456,32 +237,29 @@ oninput="searchLessons()">
 
 <div class="row"><h2 id="categoryTitle">All courses</h2></div>
 </section>
-
 <div id="lessonList"></div>
 </div>
 
-<!-- CREATE -->
+<!-- CREATE / COURSE MANAGEMENT -->
 <div id="create" class="view">
-
 <header>
-<div>
-<div class="logo">Create</div>
-<div class="sub">Create everything in one place</div>
-</div>
+<div><div class="logo">Create</div><div class="sub">Create and manage your courses</div></div>
 </header>
 
 <div class="hero">
 <h1>Create.<br>Teach.<br><span style="color:#a99cff">Earn.</span></h1>
-<p>Create your teacher profile and publish your course.</p>
+<p>Create your teacher profile and manage courses you have published.</p>
 </div>
 
 <div class="createForm">
 
-<h2>Create & Publish</h2>
+<h2 id="courseFormHeading">Create & Publish</h2>
 
 <p style="color:#777;font-size:12px">
-Your profile and course information are saved for your account on this device.
+Your profile and courses are saved for your account on this device.
 </p>
+
+<div id="editModeBanner" class="editModeBanner" style="display:none"></div>
 
 <h3>👤 Your Profile</h3>
 
@@ -503,14 +281,13 @@ Your profile and course information are saved for your account on this device.
 <label>Your talent</label>
 <input id="createTalent" placeholder="e.g. Music">
 </div>
-
 <div>
 <label>Experience</label>
 <input id="createExperience" placeholder="e.g. 2 years">
 </div>
 </div>
 
-<h3>📚 Your Course</h3>
+<h3>📚 Course</h3>
 
 <label>Course title</label>
 <input id="lessonTitle" placeholder="What are you teaching?">
@@ -533,6 +310,8 @@ Your profile and course information are saved for your account on this device.
 <label>Course image</label>
 <input id="lessonImage" type="file" accept="image/*">
 
+<div id="currentCourseImageInfo" class="videoMeta"></div>
+
 <label>🎥 Upload Course Video</label>
 <input id="lessonVideoFile" type="file" accept="video/*">
 
@@ -543,51 +322,39 @@ Your profile and course information are saved for your account on this device.
 <input id="lessonVideo" type="url" placeholder="Optional YouTube/video URL">
 
 <label>Price</label>
-
 <div class="grid2">
 <select id="priceType" onchange="togglePrice()">
 <option value="FREE">FREE</option>
 <option value="PAID">PAID</option>
 </select>
-
-<input id="lessonPrice" type="number" min="0" step="0.01"
-placeholder="€ price" disabled>
+<input id="lessonPrice" type="number" min="0" step="0.01" placeholder="€ price" disabled>
 </div>
 
 <h3>📖 Course Lessons</h3>
-
 <div id="lessonEditors"></div>
 
-<button type="button" class="smallBtn" onclick="addLessonEditor()">
-➕ Add Lesson
-</button>
+<button type="button" class="smallBtn" onclick="addLessonEditor()">➕ Add Lesson</button>
 
 <div class="notice">
-Videos are stored on this device using IndexedDB.
-Your account and profile are authenticated through Studio Talent.
+Your courses, profile and lesson information remain saved after refreshing Safari.
+Uploaded course videos are stored separately using IndexedDB.
 </div>
 
-<button id="publishButton" class="publish" onclick="publishEverything()">
-🚀 Publish Course
-</button>
+<button id="publishButton" class="publish" onclick="publishEverything()">🚀 Publish Course</button>
+<button id="cancelEditButton" class="cancelEdit" style="display:none" onclick="cancelCourseEdit()">Cancel Editing</button>
 
 </div>
 
 <section>
-<div class="row"><h2>My Published Courses</h2></div>
+<div class="row"><h2>📚 My Published Courses</h2></div>
 <div id="myLessons"></div>
 </section>
-
 </div>
 
 <!-- PROFILE -->
 <div id="profile" class="view">
-
 <header>
-<div>
-<div class="logo">My Profile</div>
-<div class="sub">Your Studio journey</div>
-</div>
+<div><div class="logo">My Profile</div><div class="sub">Your Studio journey</div></div>
 <button class="icon" onclick="openNotifications()">🔔</button>
 </header>
 
@@ -598,7 +365,6 @@ Your account and profile are authenticated through Studio Talent.
 </div>
 
 <div class="profile">
-
 <div class="bigavatar">
 <span id="profileEmoji">👨🏾‍💻</span>
 <img id="profileImage" style="display:none" alt="Profile">
@@ -606,67 +372,32 @@ Your account and profile are authenticated through Studio Talent.
 
 <h2 id="profileName">Your Name</h2>
 <p id="profileUsername" class="profileUsername">@your_studio_name</p>
-<p id="profileBio" class="profileBio">
-Tell people about yourself and your talent.
-</p>
-
+<p id="profileBio" class="profileBio">Tell people about yourself and your talent.</p>
 <div class="authUser" id="accountEmail"></div>
 
-<button class="editButton" onclick="show('create')">
-✏️ Edit Profile / Create Course
-</button>
-
+<button class="editButton" onclick="show('create')">✏️ Edit Profile / Create Course</button>
 <div id="teacherInfo"></div>
-
 <button class="logoutBtn" onclick="logout()">🚪 Log Out</button>
-
 </div>
 
 <div class="actionGrid">
-
-<button class="actionButton" onclick="openNotifications()">
-<span>🔔</span>Notifications
-</button>
-
-<button class="actionButton" onclick="openMyMessages()">
-<span>💬</span>Messages
-</button>
-
-<button class="actionButton" onclick="openEarnings()">
-<span>💰</span>Earnings
-</button>
-
-<button class="actionButton" onclick="show('create')">
-<span>➕</span>Create Course
-</button>
-
+<button class="actionButton" onclick="openNotifications()"><span>🔔</span>Notifications</button>
+<button class="actionButton" onclick="openMyMessages()"><span>💬</span>Messages</button>
+<button class="actionButton" onclick="openEarnings()"><span>💰</span>Earnings</button>
+<button class="actionButton" onclick="show('create')"><span>➕</span>Create Course</button>
 </div>
 
 <section>
 <div class="row"><h2>My Courses</h2></div>
 <div id="profileLessons"></div>
 </section>
-
 </div>
 
 <nav>
-
-<button id="n-home" class="active" onclick="show('home')">
-<span class="navicon">🏠</span>Home
-</button>
-
-<button id="n-explore" onclick="show('explore')">
-<span class="navicon">🔎</span>Explore
-</button>
-
-<button id="n-create" onclick="show('create')">
-<span class="navicon">➕</span>Create
-</button>
-
-<button id="n-profile" onclick="show('profile')">
-<span class="navicon">👤</span>Profile
-</button>
-
+<button id="n-home" class="active" onclick="show('home')"><span class="navicon">🏠</span>Home</button>
+<button id="n-explore" onclick="show('explore')"><span class="navicon">🔎</span>Explore</button>
+<button id="n-create" onclick="show('create')"><span class="navicon">➕</span>Create</button>
+<button id="n-profile" onclick="show('profile')"><span class="navicon">👤</span>Profile</button>
 </nav>
 
 </div>
@@ -674,15 +405,12 @@ Tell people about yourself and your talent.
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
 /* =========================================================
    SUPABASE
 ========================================================= */
 
 const SUPABASE_URL="https://pzrqcitvdhpkfexcqnpd.supabase.co";
-
-const SUPABASE_ANON_KEY=
-"sb_publishable_pjaQtq6A0DYj0sHI-hBnXg_ZVmuDmOk";
+const SUPABASE_ANON_KEY="sb_publishable_pjaQtq6A0DYj0sHI-hBnXg_ZVmuDmOk";
 
 const supabaseClient=window.supabase.createClient(
 SUPABASE_URL,
@@ -698,6 +426,7 @@ detectSessionInUrl:true
 
 let currentUser=null;
 let authMode="login";
+let editingCourseId=null;
 
 function setAuthMessage(message,type="error"){
 const box=document.getElementById("authMessage");
@@ -707,24 +436,19 @@ box.className="authMessage "+(message?type:"");
 }
 
 function toggleAuthMode(){
-
 authMode=authMode==="login"?"signup":"login";
 
 document.getElementById("authTitle").textContent=
 authMode==="signup"?"Create your account 🚀":"Welcome back 👋";
 
 document.getElementById("authDescription").textContent=
-authMode==="signup"
-?"Create a real Studio Talent account."
-:"Log in to your real Studio Talent account.";
+authMode==="signup"?"Create a real Studio Talent account.":"Log in to your real Studio Talent account.";
 
 document.getElementById("authMainButton").textContent=
 authMode==="signup"?"Create Account":"Log In";
 
 document.getElementById("authSwitchButton").textContent=
-authMode==="signup"
-?"Already have an account? Log In"
-:"Create New Account";
+authMode==="signup"?"Already have an account? Log In":"Create New Account";
 
 document.getElementById("authNameWrap").style.display=
 authMode==="signup"?"block":"none";
@@ -740,23 +464,11 @@ async function handleAuth(){
 const email=document.getElementById("authEmail").value.trim();
 const password=document.getElementById("authPassword").value;
 
-if(!email){
-setAuthMessage("Please enter your email.");
-return;
-}
-
-if(!password){
-setAuthMessage("Please enter your password.");
-return;
-}
-
-if(password.length<6){
-setAuthMessage("Password must be at least 6 characters.");
-return;
-}
+if(!email)return setAuthMessage("Please enter your email.");
+if(!password)return setAuthMessage("Please enter your password.");
+if(password.length<6)return setAuthMessage("Password must be at least 6 characters.");
 
 const button=document.getElementById("authMainButton");
-
 button.disabled=true;
 button.textContent=authMode==="signup"?"Creating...":"Logging in...";
 setAuthMessage("");
@@ -766,9 +478,7 @@ try{
 if(authMode==="signup"){
 
 const name=document.getElementById("authName").value.trim();
-const username=cleanUsername(
-document.getElementById("authUsername").value
-);
+const username=cleanUsername(document.getElementById("authUsername").value);
 
 if(!name)throw new Error("Please enter your name.");
 if(!username)throw new Error("Please enter a username.");
@@ -776,9 +486,7 @@ if(!username)throw new Error("Please enter a username.");
 const result=await supabaseClient.auth.signUp({
 email,
 password,
-options:{
-data:{name,username}
-}
+options:{data:{name,username}}
 });
 
 if(result.error)throw result.error;
@@ -787,25 +495,15 @@ localStorage.setItem("studioName",name);
 localStorage.setItem("studioUsername",username);
 
 if(result.data.session){
-
 currentUser=result.data.user;
 await finishLogin();
-
 }else{
-
-setAuthMessage(
-"Account created! Please check your email to confirm your account, then log in.",
-"ok"
-);
-
+setAuthMessage("Account created! Please check your email to confirm your account, then log in.","ok");
 }
 
 }else{
 
-const result=await supabaseClient.auth.signInWithPassword({
-email,
-password
-});
+const result=await supabaseClient.auth.signInWithPassword({email,password});
 
 if(result.error)throw result.error;
 
@@ -815,23 +513,17 @@ await finishLogin();
 }
 
 }catch(error){
-
 console.error(error);
 setAuthMessage(error.message||"Authentication failed.");
-
 }finally{
-
 button.disabled=false;
 button.textContent=authMode==="signup"?"Create Account":"Log In";
-
 }
-
 }
 
 async function finishLogin(){
 
 if(!currentUser){
-
 const result=await supabaseClient.auth.getUser();
 currentUser=result.data.user;
 }
@@ -840,15 +532,8 @@ if(!currentUser)throw new Error("Could not load your account.");
 
 const metadata=currentUser.user_metadata||{};
 
-const name=
-getAccountValue("studioName")||
-metadata.name||
-currentUser.email.split("@")[0];
-
-const username=
-getAccountValue("studioUsername")||
-metadata.username||
-currentUser.email.split("@")[0];
+const name=getAccountValue("studioName")||metadata.name||currentUser.email.split("@")[0];
+const username=getAccountValue("studioUsername")||metadata.username||currentUser.email.split("@")[0];
 
 setAccountValue("studioName",name);
 setAccountValue("studioUsername",cleanUsername(username));
@@ -872,11 +557,9 @@ return;
 }
 
 currentUser=null;
+editingCourseId=null;
 
-document.querySelectorAll(".view").forEach(v=>
-v.classList.remove("activeView")
-);
-
+document.querySelectorAll(".view").forEach(v=>v.classList.remove("activeView"));
 document.getElementById("authView").classList.add("activeView");
 
 setAuthMessage("You are logged out.","ok");
@@ -887,45 +570,18 @@ setAuthMessage("You are logged out.","ok");
 ========================================================= */
 
 const CATEGORY_ICONS={
-Music:"🎵",
-Art:"🎨",
-Dance:"💃",
-Content:"🎬",
-Technical:"🔧",
-Technology:"💻",
-Sports:"⚽",
-Languages:"🗣️"
+Music:"🎵",Art:"🎨",Dance:"💃",Content:"🎬",
+Technical:"🔧",Technology:"💻",Sports:"⚽",Languages:"🗣️"
 };
 
 const DEFAULT_ELECTRICAL=[
-{
-title:"Lesson 1 — Electrical Safety",
-content:"Before working with electricity, always switch OFF the power and verify that the circuit is dead. Use insulated tools, appropriate protective equipment, keep the work area dry, and never work on exposed live wires."
-},
-{
-title:"Lesson 2 — Electrical Tools",
-content:"Learn the essential tools used for house electrical wiring. Identify insulated screwdrivers, voltage testers, pliers, wire strippers, measuring tools and other equipment."
-},
-{
-title:"Lesson 3 — Cables and Wires",
-content:"Learn the different types of electrical cables and how to choose them. Understand conductor size, insulation, identification and the importance of selecting cables appropriate for the circuit."
-},
-{
-title:"Lesson 4 — Switches and Sockets",
-content:"Learn the basic principles of installing switches and electrical sockets. Understand correct connections, positioning and safe isolation before working on the circuit."
-},
-{
-title:"Lesson 5 — Lighting",
-content:"Learn the basic principles of house lighting circuits. Understand how lighting points, switches and cables work together and how to plan a safe lighting installation."
-},
-{
-title:"Lesson 6 — House Wiring",
-content:"Learn how to plan and install the electrical wiring of a house. Understand circuit organisation, distribution, protection, cable routing and applicable electrical regulations."
-},
-{
-title:"Lesson 7 — Testing the Installation",
-content:"Learn how to check an electrical installation safely before using it. Testing should be performed with appropriate equipment and according to applicable electrical safety procedures and regulations."
-}
+{title:"Lesson 1 — Electrical Safety",content:"Before working with electricity, always switch OFF the power and verify that the circuit is dead. Use insulated tools, appropriate protective equipment, keep the work area dry, and never work on exposed live wires."},
+{title:"Lesson 2 — Electrical Tools",content:"Learn the essential tools used for house electrical wiring. Identify insulated screwdrivers, voltage testers, pliers, wire strippers, measuring tools and other equipment."},
+{title:"Lesson 3 — Cables and Wires",content:"Learn the different types of electrical cables and how to choose them. Understand conductor size, insulation, identification and the importance of selecting cables appropriate for the circuit."},
+{title:"Lesson 4 — Switches and Sockets",content:"Learn the basic principles of installing switches and electrical sockets. Understand correct connections, positioning and safe isolation before working on the circuit."},
+{title:"Lesson 5 — Lighting",content:"Learn the basic principles of house lighting circuits. Understand how lighting points, switches and cables work together and how to plan a safe lighting installation."},
+{title:"Lesson 6 — House Wiring",content:"Learn how to plan and install the electrical wiring of a house. Understand circuit organisation, distribution, protection, cable routing and applicable electrical regulations."},
+{title:"Lesson 7 — Testing the Installation",content:"Learn how to check an electrical installation safely before using it. Testing should be performed with appropriate equipment and according to applicable electrical safety procedures and regulations."}
 ];
 
 function accountKey(key){
@@ -933,67 +589,29 @@ return currentUser?"studio_"+currentUser.id+"_"+key:key;
 }
 
 function getLessons(){
-
 try{
-const data=JSON.parse(
-localStorage.getItem(accountKey("lessons"))||"[]"
-);
+const data=JSON.parse(localStorage.getItem(accountKey("lessons"))||"[]");
 return Array.isArray(data)?data:[];
-}catch(e){
-console.error("Could not read courses:",e);
-return[];
+}catch(e){return[]}
 }
 
-}
-
-/* IMPORTANT FIX:
-   Safely save courses and report storage errors.
-*/
 function saveLessons(data){
-
 try{
-
-const json=JSON.stringify(data);
-
-localStorage.setItem(accountKey("lessons"),json);
-
+localStorage.setItem(accountKey("lessons"),JSON.stringify(data));
 return true;
-
 }catch(error){
-
-console.error("Course storage error:",error);
-
-if(error.name==="QuotaExceededError"||
-error.code===22){
-
-throw new Error(
-"Your browser storage is full. Please remove a very large old course image/video selection and try again."
-);
-
+console.error(error);
+if(error.name==="QuotaExceededError"||error.code===22)
+throw new Error("Your browser storage is full. Please remove a large old course image.");
+throw new Error("Could not save the course. Please try again.");
 }
-
-throw new Error(
-"Could not save the course. Please try again."
-);
-
-}
-
 }
 
 function getArray(key){
-
 try{
-
-const data=JSON.parse(
-localStorage.getItem(accountKey(key))||"[]"
-);
-
+const data=JSON.parse(localStorage.getItem(accountKey(key))||"[]");
 return Array.isArray(data)?data:[];
-
-}catch(e){
-return[];
-}
-
+}catch(e){return[]}
 }
 
 function saveArray(key,data){
@@ -1026,27 +644,19 @@ return String(value??"")
 }
 
 function priceText(course){
-
-if(course.priceType==="PAID"){
-return "€"+Number(course.price||0)
-.toFixed(2).replace(/\.00$/,"");
-}
-
-return "FREE";
+return course.priceType==="PAID"
+?"€"+Number(course.price||0).toFixed(2).replace(/\.00$/,"")
+:"FREE";
 }
 
 /* =========================================================
-   IMAGE COMPRESSION — FIXED
+   IMAGE
 ========================================================= */
 
 function compressImage(file,maxSize=900,quality=.68){
-
 return new Promise(function(resolve,reject){
 
-if(!file){
-resolve("");
-return;
-}
+if(!file){resolve("");return}
 
 const reader=new FileReader();
 
@@ -1056,23 +666,12 @@ const image=new Image();
 
 image.onload=function(){
 
-let width=image.width;
-let height=image.height;
+let width=image.width,height=image.height;
 
 if(width>height){
-
-if(width>maxSize){
-height=Math.round(height*(maxSize/width));
-width=maxSize;
-}
-
+if(width>maxSize){height=Math.round(height*(maxSize/width));width=maxSize}
 }else{
-
-if(height>maxSize){
-width=Math.round(width*(maxSize/height));
-height=maxSize;
-}
-
+if(height>maxSize){width=Math.round(width*(maxSize/height));height=maxSize}
 }
 
 const canvas=document.createElement("canvas");
@@ -1087,29 +686,16 @@ return;
 }
 
 context.drawImage(image,0,0,width,height);
-
-resolve(
-canvas.toDataURL("image/jpeg",quality)
-);
-
+resolve(canvas.toDataURL("image/jpeg",quality));
 };
 
-image.onerror=function(){
-reject(new Error("Could not read image."));
-};
-
+image.onerror=()=>reject(new Error("Could not read image."));
 image.src=event.target.result;
-
 };
 
-reader.onerror=function(){
-reject(reader.error||new Error("Could not read file."));
-};
-
+reader.onerror=()=>reject(reader.error||new Error("Could not read file."));
 reader.readAsDataURL(file);
-
 });
-
 }
 
 function compressProfilePhoto(file){
@@ -1133,31 +719,19 @@ reject(new Error("IndexedDB is not supported."));
 return;
 }
 
-const request=indexedDB.open(
-VIDEO_DB_NAME,
-VIDEO_DB_VERSION
-);
+const request=indexedDB.open(VIDEO_DB_NAME,VIDEO_DB_VERSION);
 
 request.onupgradeneeded=function(event){
-
 const db=event.target.result;
-
 if(!db.objectStoreNames.contains(VIDEO_STORE)){
 db.createObjectStore(VIDEO_STORE);
 }
-
 };
 
-request.onsuccess=function(){
-resolve(request.result);
-};
-
-request.onerror=function(){
-reject(request.error);
-};
+request.onsuccess=()=>resolve(request.result);
+request.onerror=()=>reject(request.error);
 
 });
-
 }
 
 async function saveVideoBlob(courseId,file){
@@ -1170,24 +744,13 @@ const transaction=db.transaction(VIDEO_STORE,"readwrite");
 const store=transaction.objectStore(VIDEO_STORE);
 const request=store.put(file,String(courseId));
 
-request.onsuccess=function(){
-resolve(true);
-};
+request.onsuccess=()=>resolve(true);
+request.onerror=()=>reject(request.error);
 
-request.onerror=function(){
-reject(request.error);
-};
-
-transaction.oncomplete=function(){
-db.close();
-};
-
-transaction.onerror=function(){
-reject(transaction.error);
-};
+transaction.oncomplete=()=>db.close();
+transaction.onerror=()=>reject(transaction.error);
 
 });
-
 }
 
 async function getVideoBlob(courseId){
@@ -1199,30 +762,41 @@ const db=await openVideoDB();
 return await new Promise(function(resolve,reject){
 
 const transaction=db.transaction(VIDEO_STORE,"readonly");
-const store=transaction.objectStore(VIDEO_STORE);
-const request=store.get(String(courseId));
+const request=transaction.objectStore(VIDEO_STORE).get(String(courseId));
 
-request.onsuccess=function(){
-resolve(request.result||null);
-};
-
-request.onerror=function(){
-reject(request.error);
-};
-
-transaction.oncomplete=function(){
-db.close();
-};
+request.onsuccess=()=>resolve(request.result||null);
+request.onerror=()=>reject(request.error);
+transaction.oncomplete=()=>db.close();
 
 });
 
 }catch(error){
-
-console.error("Video loading error:",error);
+console.error(error);
 return null;
-
+}
 }
 
+async function deleteVideoBlob(courseId){
+
+try{
+
+const db=await openVideoDB();
+
+return await new Promise(function(resolve,reject){
+
+const transaction=db.transaction(VIDEO_STORE,"readwrite");
+const request=transaction.objectStore(VIDEO_STORE).delete(String(courseId));
+
+request.onsuccess=()=>resolve(true);
+request.onerror=()=>reject(request.error);
+transaction.oncomplete=()=>db.close();
+
+});
+
+}catch(error){
+console.error("Video deletion error:",error);
+return false;
+}
 }
 
 function getLegacyVideo(course){
@@ -1237,20 +811,14 @@ function show(id,skipRender=false){
 
 if(!currentUser)return;
 
-document.querySelectorAll(".view").forEach(function(view){
-view.classList.remove("activeView");
-});
+document.querySelectorAll(".view").forEach(view=>view.classList.remove("activeView"));
 
 const page=document.getElementById(id);
-
 if(page)page.classList.add("activeView");
 
-document.querySelectorAll("nav button").forEach(function(button){
-button.classList.remove("active");
-});
+document.querySelectorAll("nav button").forEach(button=>button.classList.remove("active"));
 
 const nav=document.getElementById("n-"+id);
-
 if(nav)nav.classList.add("active");
 
 if(id==="create")loadCreateForm();
@@ -1276,49 +844,44 @@ createExperience:"studioTeacherExperience"
 };
 
 Object.keys(fields).forEach(function(id){
-
 const element=document.getElementById(id);
-
-if(element){
-element.value=getAccountValue(fields[id],"");
-}
-
+if(element)element.value=getAccountValue(fields[id],"");
 });
 
 const photo=getAccountValue("studioProfilePhoto","");
-
 const preview=document.getElementById("createPhotoPreview");
 
 if(preview){
-
 preview.innerHTML=photo
 ?'<img src="'+escapeHTML(photo)+'" alt="Profile">'
 :"👨🏾‍💻";
+}
 
+if(editingCourseId){
+loadCourseIntoForm(editingCourseId);
+}else{
+document.getElementById("courseFormHeading").textContent="Create & Publish";
+document.getElementById("editModeBanner").style.display="none";
+document.getElementById("cancelEditButton").style.display="none";
+document.getElementById("publishButton").textContent="🚀 Publish Course";
 }
 
 renderMyLessons();
-
 }
 
 /* =========================================================
-   PROFILE PHOTO PREVIEW
+   PROFILE PHOTO
 ========================================================= */
 
-document.getElementById("createPhoto").addEventListener(
-"change",
-async function(){
+document.getElementById("createPhoto").addEventListener("change",async function(){
 
 const file=this.files[0];
-
 if(!file)return;
 
 if(!file.type.startsWith("image/")){
-
 alert("Please select an image.");
 this.value="";
 return;
-
 }
 
 try{
@@ -1331,12 +894,10 @@ document.getElementById("createPhotoPreview").innerHTML=
 this.dataset.compressedPhoto=compressed;
 
 }catch(error){
-
 console.error(error);
 alert("Could not process the profile photo.");
 this.value="";
 this.dataset.compressedPhoto="";
-
 }
 
 });
@@ -1345,43 +906,33 @@ this.dataset.compressedPhoto="";
    VIDEO PREVIEW
 ========================================================= */
 
-document.getElementById("lessonVideoFile").addEventListener(
-"change",
-function(){
+document.getElementById("lessonVideoFile").addEventListener("change",function(){
 
 const file=this.files[0];
-
 const preview=document.getElementById("videoUploadPreview");
 const info=document.getElementById("videoUploadInfo");
 
 if(!file){
-
 preview.style.display="none";
 preview.innerHTML="";
 info.style.display="none";
 info.textContent="";
 return;
-
 }
 
 if(!file.type.startsWith("video/")){
-
 alert("Please select a video file.");
 this.value="";
 return;
-
 }
 
 const url=URL.createObjectURL(file);
 
 preview.style.display="block";
-preview.innerHTML=
-'<video controls playsinline src="'+escapeHTML(url)+'"></video>';
+preview.innerHTML='<video controls playsinline src="'+escapeHTML(url)+'"></video>';
 
 info.style.display="block";
-info.textContent=
-file.name+" · "+(file.size/1024/1024).toFixed(1)+" MB";
-
+info.textContent=file.name+" · "+(file.size/1024/1024).toFixed(1)+" MB";
 });
 
 /* =========================================================
@@ -1401,7 +952,6 @@ price.disabled=false;
 price.disabled=true;
 price.value="";
 }
-
 }
 
 /* =========================================================
@@ -1411,7 +961,6 @@ price.value="";
 function addLessonEditor(data={title:"",content:""}){
 
 const box=document.getElementById("lessonEditors");
-
 if(!box)return;
 
 const number=box.children.length+1;
@@ -1434,51 +983,255 @@ placeholder="What will students learn?">${escapeHTML(data.content)}</textarea>
 
 <button type="button"
 class="smallBtn danger"
-onclick="this.parentElement.remove();renumberEditors()">
+onclick="removeLessonEditor(this)">
 🗑️ Remove lesson
 </button>
+
+<div class="moveBtns">
+<button type="button" class="smallBtn" onclick="moveLesson(this,-1)">⬆️ Up</button>
+<button type="button" class="smallBtn" onclick="moveLesson(this,1)">⬇️ Down</button>
+</div>
 `;
 
 box.appendChild(div);
 }
 
+function removeLessonEditor(button){
+const box=button.closest(".lessonEditor");
+if(box)box.remove();
+renumberEditors();
+}
+
+function moveLesson(button,direction){
+
+const current=button.closest(".lessonEditor");
+if(!current)return;
+
+if(direction<0){
+const previous=current.previousElementSibling;
+if(previous)current.parentNode.insertBefore(current,previous);
+}else{
+const next=current.nextElementSibling;
+if(next)current.parentNode.insertBefore(next,current);
+}
+
+renumberEditors();
+}
+
 function renumberEditors(){
 
-document.querySelectorAll(
-"#lessonEditors .lessonEditor"
-).forEach(function(box,index){
+document.querySelectorAll("#lessonEditors .lessonEditor").forEach(function(box,index){
 
 const label=box.querySelector("label");
-
 if(label)label.textContent="Lesson "+(index+1)+" title";
 
 });
-
 }
 
 function collectEditors(){
 
-return Array.from(
-document.querySelectorAll(
-"#lessonEditors .lessonEditor"
-)
-)
+return Array.from(document.querySelectorAll("#lessonEditors .lessonEditor"))
 .map(function(box){
-
 return{
 title:box.querySelector(".newLessonTitle").value.trim(),
 content:box.querySelector(".newLessonContent").value.trim()
 };
-
 })
-.filter(function(item){
-return item.title||item.content;
-});
+.filter(item=>item.title||item.content);
+}
+
+/* =========================================================
+   OWNER CHECK
+========================================================= */
+
+function isMyCourse(course){
+
+if(!currentUser||!course)return false;
+
+return String(course.ownerId||"")===String(currentUser.id);
 
 }
 
 /* =========================================================
-   PUBLISH COURSE — FIXED
+   LOAD COURSE FOR EDITING
+========================================================= */
+
+function loadCourseIntoForm(id){
+
+const course=getLessons().find(item=>String(item.id)===String(id));
+
+if(!course||!isMyCourse(course)){
+editingCourseId=null;
+alert("You can only edit your own courses.");
+return;
+}
+
+document.getElementById("courseFormHeading").textContent="✏️ Edit Course";
+
+const banner=document.getElementById("editModeBanner");
+banner.style.display="block";
+banner.textContent="You are editing: "+course.title;
+
+document.getElementById("cancelEditButton").style.display="block";
+document.getElementById("publishButton").textContent="💾 Save Course Changes";
+
+document.getElementById("lessonTitle").value=course.title||"";
+document.getElementById("lessonCategory").value=course.category||"Music";
+document.getElementById("lessonDescription").value=course.description||"";
+document.getElementById("lessonVideo").value=course.video||"";
+
+document.getElementById("priceType").value=course.priceType||"FREE";
+document.getElementById("lessonPrice").value=course.price||"";
+togglePrice();
+
+const info=document.getElementById("currentCourseImageInfo");
+info.textContent=course.image?"🖼️ Existing course image saved.":"No course image currently saved.";
+
+const editors=document.getElementById("lessonEditors");
+editors.innerHTML="";
+
+const courseLessons=Array.isArray(course.lessons)?course.lessons:[];
+
+courseLessons.forEach(lesson=>addLessonEditor(lesson));
+
+if(!courseLessons.length)addLessonEditor();
+
+document.getElementById("lessonImage").value="";
+document.getElementById("lessonVideoFile").value="";
+
+const videoPreview=document.getElementById("videoUploadPreview");
+const videoInfo=document.getElementById("videoUploadInfo");
+
+videoPreview.style.display="none";
+videoPreview.innerHTML="";
+videoInfo.style.display="none";
+videoInfo.textContent="";
+
+}
+
+/* =========================================================
+   EDIT COURSE
+========================================================= */
+
+function editCourse(id){
+
+const course=getLessons().find(item=>String(item.id)===String(id));
+
+if(!course){
+alert("Course not found.");
+return;
+}
+
+if(!isMyCourse(course)){
+alert("You can only edit your own courses.");
+return;
+}
+
+editingCourseId=course.id;
+
+show("create");
+
+setTimeout(function(){
+loadCourseIntoForm(course.id);
+},0);
+
+}
+
+/* =========================================================
+   DELETE COURSE
+========================================================= */
+
+async function deleteCourse(id){
+
+const courses=getLessons();
+const course=courses.find(item=>String(item.id)===String(id));
+
+if(!course){
+alert("Course not found.");
+return;
+}
+
+if(!isMyCourse(course)){
+alert("You can only delete your own courses.");
+return;
+}
+
+const confirmed=confirm(
+'Delete "'+course.title+'"?\n\nThis will remove the course and its lessons from your account.'
+);
+
+if(!confirmed)return;
+
+const updated=courses.filter(item=>String(item.id)!==String(id));
+
+try{
+
+saveLessons(updated);
+await deleteVideoBlob(course.id);
+
+let progress={};
+
+try{
+progress=JSON.parse(localStorage.getItem(accountKey("studioCourseProgress"))||"{}");
+}catch(e){}
+
+delete progress[String(course.id)];
+
+localStorage.setItem(
+accountKey("studioCourseProgress"),
+JSON.stringify(progress)
+);
+
+if(String(editingCourseId)===String(course.id)){
+editingCourseId=null;
+}
+
+addNotification("Course deleted",course.title+" was removed.");
+
+renderAll();
+show("create");
+
+alert("Course deleted successfully.");
+
+}catch(error){
+
+console.error(error);
+alert("Could not delete the course.\n\n"+error.message);
+
+}
+
+}
+
+/* =========================================================
+   MANAGE LESSONS
+========================================================= */
+
+function manageLessons(id){
+
+const course=getLessons().find(item=>String(item.id)===String(id));
+
+if(!course){
+alert("Course not found.");
+return;
+}
+
+if(!isMyCourse(course)){
+alert("You can only manage lessons in your own courses.");
+return;
+}
+
+editingCourseId=course.id;
+show("create");
+
+setTimeout(function(){
+loadCourseIntoForm(course.id);
+document.getElementById("lessonEditors").scrollIntoView({behavior:"smooth",block:"start"});
+},50);
+
+}
+
+/* =========================================================
+   PUBLISH OR SAVE COURSE
 ========================================================= */
 
 async function publishEverything(){
@@ -1488,41 +1241,30 @@ alert("Please log in first.");
 return;
 }
 
-const publishButton=document.getElementById("publishButton");
+const button=document.getElementById("publishButton");
 
-if(publishButton.disabled)return;
+if(button.disabled)return;
 
-publishButton.disabled=true;
-publishButton.textContent="Publishing...";
+button.disabled=true;
+button.textContent=editingCourseId?"Saving...":"Publishing...";
 
 try{
 
 const name=document.getElementById("createName").value.trim();
-
-const username=cleanUsername(
-document.getElementById("createUsername").value
-);
-
+const username=cleanUsername(document.getElementById("createUsername").value);
 const bio=document.getElementById("createBio").value.trim();
-
 const talent=document.getElementById("createTalent").value.trim();
-
 const experience=document.getElementById("createExperience").value.trim();
 
 const title=document.getElementById("lessonTitle").value.trim();
-
 const category=document.getElementById("lessonCategory").value;
-
 const description=document.getElementById("lessonDescription").value.trim();
-
 const video=document.getElementById("lessonVideo").value.trim();
 
 const videoInput=document.getElementById("lessonVideoFile");
-
 const selectedVideo=videoInput.files[0];
 
 const priceType=document.getElementById("priceType").value;
-
 const price=document.getElementById("lessonPrice").value;
 
 if(!name)throw new Error("Please enter your name.");
@@ -1531,10 +1273,7 @@ if(!talent)throw new Error("Please enter your talent.");
 if(!title)throw new Error("Please enter your course title.");
 if(!description)throw new Error("Please describe your course.");
 
-if(
-priceType==="PAID"&&
-(!price||Number(price)<0)
-){
+if(priceType==="PAID"&&(!price||Number(price)<0)){
 throw new Error("Please enter a valid price.");
 }
 
@@ -1554,7 +1293,7 @@ throw new Error("Please enter a valid video URL.");
 
 }
 
-/* PROFILE */
+/* SAVE PROFILE */
 
 setAccountValue("studioName",name);
 setAccountValue("studioUsername",username);
@@ -1563,18 +1302,12 @@ setAccountValue("studioTeacherTalent",talent);
 setAccountValue("studioTeacherExperience",experience);
 
 try{
-
-await supabaseClient.auth.updateUser({
-data:{name,username}
-});
-
+await supabaseClient.auth.updateUser({data:{name,username}});
 }catch(error){
 console.warn("Metadata update failed:",error);
 }
 
-/* PROFILE PHOTO
-   FIX: use compressed version
-*/
+/* PROFILE PHOTO */
 
 const photoInput=document.getElementById("createPhoto");
 const photoFile=photoInput.files[0];
@@ -1585,16 +1318,11 @@ const compressed=
 photoInput.dataset.compressedPhoto||
 await compressProfilePhoto(photoFile);
 
-setAccountValue(
-"studioProfilePhoto",
-compressed
-);
+setAccountValue("studioProfilePhoto",compressed);
 
 }
 
-/* COURSE IMAGE
-   FIX: compress before localStorage
-*/
+/* COURSE IMAGE */
 
 let courseImage="";
 
@@ -1607,11 +1335,7 @@ if(!imageFile.type.startsWith("image/")){
 throw new Error("Please select a valid course image.");
 }
 
-courseImage=await compressImage(
-imageFile,
-900,
-.68
-);
+courseImage=await compressImage(imageFile,900,.68);
 
 }
 
@@ -1626,9 +1350,7 @@ title.toLowerCase().includes("electrical")||
 title.toLowerCase().includes("wiring")
 ){
 
-courseLessons=DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
-});
+courseLessons=DEFAULT_ELECTRICAL.map(item=>({...item}));
 
 }else{
 
@@ -1641,84 +1363,127 @@ content:description
 
 }
 
-/* UNIQUE COURSE ID */
+/* =========================================================
+   EDIT EXISTING COURSE
+========================================================= */
+
+if(editingCourseId){
+
+const courses=getLessons();
+
+const index=courses.findIndex(item=>
+String(item.id)===String(editingCourseId)
+);
+
+if(index<0)throw new Error("The course could not be found.");
+
+const oldCourse=courses[index];
+
+if(!isMyCourse(oldCourse)){
+throw new Error("You can only edit your own courses.");
+}
+
+/* Keep old image unless new image selected */
+if(!courseImage){
+courseImage=oldCourse.image||"";
+}
+
+/* Keep old video unless user changes it */
+let newHasUploadedVideo=oldCourse.hasUploadedVideo||false;
+
+if(selectedVideo){
+
+await saveVideoBlob(oldCourse.id,selectedVideo);
+newHasUploadedVideo=true;
+
+}
+
+/* If a new URL is entered, old uploaded video remains stored,
+   but the URL takes priority when displayed. */
+
+const updatedCourse={
+...oldCourse,
+ownerId:currentUser.id,
+teacher:name,
+username,
+title,
+category,
+description,
+video,
+image:courseImage,
+lessons:courseLessons,
+priceType,
+price:priceType==="PAID"?Number(price):0,
+hasUploadedVideo:newHasUploadedVideo,
+updatedAt:new Date().toISOString()
+};
+
+courses[index]=updatedCourse;
+
+saveLessons(courses);
+
+addNotification(
+"Course updated",
+title+" was updated successfully."
+);
+
+editingCourseId=null;
+
+resetCourseForm();
+
+renderAll();
+show("profile");
+
+alert("Course updated successfully! ✅");
+
+return;
+}
+
+/* =========================================================
+   CREATE NEW COURSE
+========================================================= */
 
 const courseId=
 Date.now().toString()+"_"+Math.random().toString(36).slice(2,8);
 
 const course={
-
 id:courseId,
-
 ownerId:currentUser.id,
-
 teacher:name,
-
-username:username,
-
-title:title,
-
-category:category,
-
-description:description,
-
-video:video,
-
+username,
+title,
+category,
+description,
+video,
 videoFile:"",
-
 hasUploadedVideo:false,
-
 image:courseImage,
-
 lessons:courseLessons,
-
-priceType:priceType,
-
-price:
-priceType==="PAID"
-?
-Number(price)
-:
-0,
-
+priceType,
+price:priceType==="PAID"?Number(price):0,
 likes:[],
-
 comments:[],
-
 createdAt:new Date().toISOString()
-
 };
-
-/* SAVE COURSE */
 
 const lessons=getLessons();
 
 lessons.push(course);
 
-/*
-  This is the important part:
-  if localStorage cannot save it, an error is shown.
-*/
 saveLessons(lessons);
-
-/* SAVE VIDEO SEPARATELY */
 
 if(selectedVideo){
 
 try{
 
-await saveVideoBlob(
-courseId,
-selectedVideo
-);
+await saveVideoBlob(courseId,selectedVideo);
 
 course.hasUploadedVideo=true;
-
 saveLessons(lessons);
 
 }catch(error){
 
-console.error("Video save error:",error);
+console.error(error);
 
 alert(
 "Your course was published, but the video could not be stored on this device."
@@ -1728,46 +1493,41 @@ alert(
 
 }
 
-addNotification(
-"Course published",
-title+" is now available."
-);
-
-/* RESET COURSE FIELDS ONLY */
+addNotification("Course published",title+" is now available.");
 
 resetCourseForm();
 
 renderAll();
-
 show("profile");
 
-alert(
-"Your profile and course have been published! 🎉"
-);
+alert("Your profile and course have been published! 🎉");
 
 }catch(error){
 
-console.error("PUBLISH ERROR:",error);
+console.error("COURSE SAVE ERROR:",error);
 
-alert(
-"Could not publish the course.\n\n"+
-(error.message||"Please try again.")
-);
+alert("Could not save the course.\n\n"+(error.message||"Please try again."));
 
 }finally{
 
-publishButton.disabled=false;
-publishButton.textContent="🚀 Publish Course";
+button.disabled=false;
+
+button.textContent=
+editingCourseId
+?"💾 Save Course Changes"
+:"🚀 Publish Course";
 
 }
 
 }
 
 /* =========================================================
-   RESET AFTER PUBLISH
+   RESET FORM
 ========================================================= */
 
 function resetCourseForm(){
+
+editingCourseId=null;
 
 document.getElementById("lessonTitle").value="";
 document.getElementById("lessonDescription").value="";
@@ -1787,10 +1547,24 @@ document.getElementById("videoUploadPreview").innerHTML="";
 document.getElementById("videoUploadInfo").style.display="none";
 document.getElementById("videoUploadInfo").textContent="";
 
+document.getElementById("currentCourseImageInfo").textContent="";
+
 document.getElementById("createPhoto").value="";
 document.getElementById("createPhoto").dataset.compressedPhoto="";
 
+document.getElementById("courseFormHeading").textContent="Create & Publish";
+document.getElementById("editModeBanner").style.display="none";
+document.getElementById("cancelEditButton").style.display="none";
+document.getElementById("publishButton").textContent="🚀 Publish Course";
+
 loadCreateForm();
+}
+
+function cancelCourseEdit(){
+
+editingCourseId=null;
+resetCourseForm();
+show("create");
 
 }
 
@@ -1801,7 +1575,6 @@ loadCreateForm();
 async function renderCourseVideo(course,containerId){
 
 const container=document.getElementById(containerId);
-
 if(!container)return;
 
 container.innerHTML="";
@@ -1813,9 +1586,7 @@ if(legacy){
 container.innerHTML=`
 <div class="courseVideo">
 <video controls playsinline src="${escapeHTML(legacy)}"></video>
-</div>
-`;
-
+</div>`;
 return;
 }
 
@@ -1826,11 +1597,7 @@ const blob=await getVideoBlob(course.id);
 if(!blob){
 
 container.innerHTML=`
-<div class="notice">
-🎥 This uploaded video is not available on this device.
-</div>
-`;
-
+<div class="notice">🎥 This uploaded video is not available on this device.</div>`;
 return;
 }
 
@@ -1838,11 +1605,8 @@ const url=URL.createObjectURL(blob);
 
 container.innerHTML=`
 <div class="courseVideo">
-<video controls playsinline preload="metadata"
-src="${escapeHTML(url)}"></video>
-</div>
-`;
-
+<video controls playsinline preload="metadata" src="${escapeHTML(url)}"></video>
+</div>`;
 }
 
 /* =========================================================
@@ -1854,44 +1618,33 @@ function renderLessonCard(course,includeTeacher){
 const category=categoryName(course.category);
 const icon=CATEGORY_ICONS[category]||"📚";
 
-const likes=Array.isArray(course.likes)
-?course.likes.length:0;
-
-const comments=Array.isArray(course.comments)
-?course.comments.length:0;
+const likes=Array.isArray(course.likes)?course.likes.length:0;
+const comments=Array.isArray(course.comments)?course.comments.length:0;
 
 return`
 
 <div class="lesson">
 
 <div class="lessonImg">
-
 ${
 course.image
-?
-'<img src="'+escapeHTML(course.image)+'" alt="">'
-:
-icon
+?'<img src="'+escapeHTML(course.image)+'" alt="">'
+:icon
 }
-
 </div>
 
 <div class="lessonBody">
 
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
 ${escapeHTML(category)} · ${priceText(course)}
 </span>
 
 <h1>${escapeHTML(course.title)}</h1>
-
 <p>${escapeHTML(course.description)}</p>
 
 ${
 includeTeacher
-?
-`<p>👨‍🏫 <b>${escapeHTML(course.teacher||"Studio Teacher")}</b></p>`
+?`<p>👨‍🏫 <b>${escapeHTML(course.teacher||"Studio Teacher")}</b></p>`
 :""
 }
 
@@ -1899,28 +1652,86 @@ includeTeacher
 
 ${
 course.hasUploadedVideo||getLegacyVideo(course)
-?
-'<div class="videoMeta">🎥 Video available</div>'
+?'<div class="videoMeta">🎥 Video available</div>'
 :""
 }
 
 <div class="socialBar">
+<button onclick="event.stopPropagation();toggleLike('${String(course.id)}')">❤️ ${likes}</button>
+<button onclick="event.stopPropagation();openComments('${String(course.id)}')">💬 ${comments}</button>
+<button onclick="event.stopPropagation();shareCourse('${String(course.id)}')">🔗 Share</button>
+</div>
 
-<button onclick="event.stopPropagation();toggleLike('${String(course.id)}')">
-❤️ ${likes}
-</button>
+</div>
+</div>
+`;
+}
 
-<button onclick="event.stopPropagation();openComments('${String(course.id)}')">
-💬 ${comments}
-</button>
+/* =========================================================
+   OWNER COURSE MANAGEMENT CARD
+========================================================= */
 
-<button onclick="event.stopPropagation();shareCourse('${String(course.id)}')">
-🔗 Share
-</button>
+function renderMyCourseManager(course){
+
+const category=categoryName(course.category);
+const lessons=Array.isArray(course.lessons)?course.lessons.length:0;
+
+return`
+
+<div class="manageCard">
+
+<div style="display:flex;gap:12px">
+
+<div class="thumb">
+
+${
+course.image
+?'<img src="'+escapeHTML(course.image)+'" alt="">'
+:(CATEGORY_ICONS[category]||"📚")
+}
+
+</div>
+
+<div style="flex:1">
+
+<h3>${escapeHTML(course.title)}</h3>
+
+<p>${escapeHTML(category)} · ${lessons} lesson${lessons===1?"":"s"}</p>
+
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
+${priceText(course)}
+</span>
+
+${
+course.hasUploadedVideo||getLegacyVideo(course)
+?'<p>🎥 Video available</p>'
+:""
+}
 
 </div>
 
 </div>
+
+<div class="manageButtons">
+
+<button class="manageEdit"
+onclick="event.stopPropagation();editCourse('${String(course.id)}')">
+✏️ Edit Course
+</button>
+
+<button class="manageDelete"
+onclick="event.stopPropagation();deleteCourse('${String(course.id)}')">
+🗑️ Delete
+</button>
+
+<button class="manageLessons"
+style="grid-column:1 / -1"
+onclick="event.stopPropagation();manageLessons('${String(course.id)}')">
+📚 Manage Lessons
+</button>
+
+</div>
+
 </div>
 `;
 }
@@ -1931,9 +1742,7 @@ course.hasUploadedVideo||getLegacyVideo(course)
 
 function openCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
-});
+const course=getLessons().find(item=>String(item.id)===String(id));
 
 if(!course){
 alert("Course not found.");
@@ -1943,10 +1752,7 @@ return;
 const category=categoryName(course.category);
 const icon=CATEGORY_ICONS[category]||"📚";
 
-const enrolled=getArray("studioEnrolled")
-.map(String)
-.includes(String(course.id));
-
+const enrolled=getArray("studioEnrolled").map(String).includes(String(course.id));
 const lessons=Array.isArray(course.lessons)?course.lessons:[];
 
 let actionButton;
@@ -1954,34 +1760,38 @@ let actionButton;
 if(course.priceType==="PAID"){
 
 actionButton=enrolled
-?
-`<button class="enroll" onclick="startCourse('${String(course.id)}')">
-▶️ Continue Course
-</button>`
-:
-`<button class="enroll" onclick="buyCourse('${String(course.id)}')">
-💳 Buy Course ${priceText(course)}
-</button>`;
+?`<button class="enroll" onclick="startCourse('${String(course.id)}')">▶️ Continue Course</button>`
+:`<button class="enroll" onclick="buyCourse('${String(course.id)}')">💳 Buy Course ${priceText(course)}</button>`;
 
 }else{
 
 actionButton=`
 <button class="enroll" onclick="startCourse('${String(course.id)}')">
 ▶️ ${enrolled?"Continue Free Course":"Start Free Course"}
-</button>
-`;
-
+</button>`;
 }
 
 show("explore",true);
 
 const list=document.getElementById("lessonList");
-
 const progress=getCourseProgress(course.id);
 
 const percent=lessons.length
 ?Math.round((Math.max(progress,0)+1)/lessons.length*100)
 :0;
+
+const ownerControls=isMyCourse(course)
+?`
+<div class="notice">
+<b>🔒 Your Course</b><br>
+You are the owner of this course. You can edit, delete or manage its lessons from Create.
+<div class="manageButtons">
+<button class="manageEdit" onclick="editCourse('${String(course.id)}')">✏️ Edit</button>
+<button class="manageDelete" onclick="deleteCourse('${String(course.id)}')">🗑️ Delete</button>
+<button class="manageLessons" style="grid-column:1 / -1" onclick="manageLessons('${String(course.id)}')">📚 Manage Lessons</button>
+</div>
+</div>`
+:"";
 
 list.innerHTML=`
 
@@ -1991,31 +1801,25 @@ list.innerHTML=`
 
 ${
 course.image
-?
-'<img src="'+escapeHTML(course.image)+'" alt="">'
-:
-icon
+?'<img src="'+escapeHTML(course.image)+'" alt="">'
+:icon
 }
 
 </div>
 
 <div class="lessonBody">
 
-<button class="backButton" onclick="renderLessons()">
-← Back to All Courses
-</button>
+<button class="backButton" onclick="renderLessons()">← Back to All Courses</button>
 
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
 ${escapeHTML(category)} · ${priceText(course)}
 </span>
 
 <h1>${escapeHTML(course.title)}</h1>
-
 <p>${escapeHTML(course.description)}</p>
-
 <p>👨‍🏫 <b>${escapeHTML(course.teacher||"Studio Teacher")}</b></p>
+
+${ownerControls}
 
 ${actionButton}
 
@@ -2024,10 +1828,8 @@ ${actionButton}
 <div class="notice">
 ${
 enrolled
-?
-"You are enrolled in this course. Choose a lesson below."
-:
-"Start the course to begin learning."
+?"You are enrolled in this course. Choose a lesson below."
+:"Start the course to begin learning."
 }
 </div>
 
@@ -2040,12 +1842,8 @@ enrolled
 <small>
 ${
 lessons.length
-?
-"Progress: "+
-Math.min(Math.max(progress+1,0),lessons.length)+
-" of "+lessons.length+" lessons"
-:
-"No lessons yet"
+?"Progress: "+Math.min(Math.max(progress+1,0),lessons.length)+" of "+lessons.length+" lessons"
+:"No lessons yet"
 }
 </small>
 
@@ -2055,28 +1853,14 @@ lessons.map(function(item,index){
 const completed=index<=progress&&enrolled;
 
 return`
-
-<div style="
-background:#f7f7fb;
-border-radius:14px;
-padding:14px;
-margin-top:10px">
-
+<div style="background:#f7f7fb;border-radius:14px;padding:14px;margin-top:10px">
 <div style="font-weight:800;margin-bottom:8px">
-
-${completed?"✅":"📘"}
-
-${escapeHTML(item.title||"Lesson "+(index+1))}
-
+${completed?"✅":"📘"} ${escapeHTML(item.title||"Lesson "+(index+1))}
 </div>
 
-<button class="smallBtn"
-onclick="openLesson('${String(course.id)}',${index})">
-
+<button class="smallBtn" onclick="openLesson('${String(course.id)}',${index})">
 ${completed?"Review Lesson":"Open Lesson"}
-
 </button>
-
 </div>
 `;
 
@@ -2092,30 +1876,16 @@ ${completed?"Review Lesson":"Open Lesson"}
 <h2>❤️ Course Activity</h2>
 
 <div class="socialBar">
-
-<button onclick="toggleLike('${String(course.id)}')">
-❤️ ${Array.isArray(course.likes)?course.likes.length:0}
-</button>
-
-<button onclick="openComments('${String(course.id)}')">
-💬 ${Array.isArray(course.comments)?course.comments.length:0}
-</button>
-
-<button onclick="shareCourse('${String(course.id)}')">
-🔗 Share
-</button>
-
+<button onclick="toggleLike('${String(course.id)}')">❤️ ${Array.isArray(course.likes)?course.likes.length:0}</button>
+<button onclick="openComments('${String(course.id)}')">💬 ${Array.isArray(course.comments)?course.comments.length:0}</button>
+<button onclick="shareCourse('${String(course.id)}')">🔗 Share</button>
 </div>
 
 </div>
 </div>
 `;
 
-renderCourseVideo(
-course,
-"courseVideo-"+course.id
-);
-
+renderCourseVideo(course,"courseVideo-"+course.id);
 }
 
 /* =========================================================
@@ -2127,9 +1897,7 @@ function getCourseProgress(id){
 try{
 
 const progress=JSON.parse(
-localStorage.getItem(
-accountKey("studioCourseProgress")
-)||"{}"
+localStorage.getItem(accountKey("studioCourseProgress"))||"{}"
 );
 
 const value=Number(progress[String(id)]);
@@ -2139,7 +1907,6 @@ return Number.isFinite(value)?value:-1;
 }catch(e){
 return-1;
 }
-
 }
 
 function saveCourseProgress(id,index){
@@ -2147,16 +1914,8 @@ function saveCourseProgress(id,index){
 let progress={};
 
 try{
-
-progress=JSON.parse(
-localStorage.getItem(
-accountKey("studioCourseProgress")
-)||"{}"
-);
-
-}catch(e){
-progress={};
-}
+progress=JSON.parse(localStorage.getItem(accountKey("studioCourseProgress"))||"{}");
+}catch(e){progress={}}
 
 progress[String(id)]=index;
 
@@ -2164,7 +1923,6 @@ localStorage.setItem(
 accountKey("studioCourseProgress"),
 JSON.stringify(progress)
 );
-
 }
 
 /* =========================================================
@@ -2173,28 +1931,21 @@ JSON.stringify(progress)
 
 function openLesson(courseId,index){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(courseId);
-});
+const course=getLessons().find(item=>String(item.id)===String(courseId));
 
 if(!course){
 alert("Course not found.");
 return;
 }
 
-const lessons=Array.isArray(course.lessons)
-?course.lessons:[];
+const lessons=Array.isArray(course.lessons)?course.lessons:[];
 
 if(!lessons.length){
 openCourse(courseId);
 return;
 }
 
-const lessonIndex=Math.max(
-0,
-Math.min(Number(index)||0,lessons.length-1)
-);
-
+const lessonIndex=Math.max(0,Math.min(Number(index)||0,lessons.length-1));
 const item=lessons[lessonIndex];
 
 let enrolled=getArray("studioEnrolled");
@@ -2204,11 +1955,7 @@ if(!enrolled.map(String).includes(String(courseId))){
 enrolled.push(String(courseId));
 saveArray("studioEnrolled",enrolled);
 
-addNotification(
-"Course started",
-"You started: "+course.title
-);
-
+addNotification("Course started","You started: "+course.title);
 }
 
 saveCourseProgress(courseId,lessonIndex);
@@ -2217,27 +1964,15 @@ show("explore",true);
 
 const list=document.getElementById("lessonList");
 
-const percent=Math.round(
-((lessonIndex+1)/lessons.length)*100
-);
+const percent=Math.round(((lessonIndex+1)/lessons.length)*100);
 
 const previous=lessonIndex>0
-?
-`<button onclick="openLesson('${String(courseId)}',${lessonIndex-1})">
-← Previous
-</button>`
-:
-`<button disabled>← Previous</button>`;
+?`<button onclick="openLesson('${String(courseId)}',${lessonIndex-1})">← Previous</button>`
+:`<button disabled>← Previous</button>`;
 
 const next=lessonIndex<lessons.length-1
-?
-`<button onclick="openLesson('${String(courseId)}',${lessonIndex+1})">
-Next →
-</button>`
-:
-`<button onclick="finishCourse('${String(courseId)}')">
-🎉 Finish Course
-</button>`;
+?`<button onclick="openLesson('${String(courseId)}',${lessonIndex+1})">Next →</button>`
+:`<button onclick="finishCourse('${String(courseId)}')">🎉 Finish Course</button>`;
 
 list.innerHTML=`
 
@@ -2245,14 +1980,9 @@ list.innerHTML=`
 
 <div class="lessonBody">
 
-<button class="backButton"
-onclick="openCourse('${String(courseId)}')">
-← Back to Course
-</button>
+<button class="backButton" onclick="openCourse('${String(courseId)}')">← Back to Course</button>
 
-<span class="pill">
-${escapeHTML(course.category||"Course")}
-</span>
+<span class="pill">${escapeHTML(course.category||"Course")}</span>
 
 <h1>${escapeHTML(course.title)}</h1>
 
@@ -2260,21 +1990,12 @@ ${escapeHTML(course.category||"Course")}
 <div class="progressBar" style="width:${percent}%"></div>
 </div>
 
-<small>
-Lesson ${lessonIndex+1} of ${lessons.length}
-</small>
+<small>Lesson ${lessonIndex+1} of ${lessons.length}</small>
 
-<h2 style="margin-top:18px">
-${escapeHTML(item.title||"Lesson "+(lessonIndex+1))}
-</h2>
+<h2 style="margin-top:18px">${escapeHTML(item.title||"Lesson "+(lessonIndex+1))}</h2>
 
-<p style="
-font-size:16px;
-line-height:1.7;
-color:#55536b">
-
+<p style="font-size:16px;line-height:1.7;color:#55536b">
 ${escapeHTML(item.content||"Lesson content coming soon.")}
-
 </p>
 
 <div id="lessonVideo-${course.id}"></div>
@@ -2285,28 +2006,19 @@ ${next}
 </div>
 
 <div class="notice">
-
 ${
 lessonIndex===lessons.length-1
-?
-"🎉 You reached the final lesson. Keep practicing and stay safe."
-:
-"Complete this lesson and continue to the next lesson."
+?"🎉 You reached the final lesson. Keep practicing and stay safe."
+:"Complete this lesson and continue to the next lesson."
 }
-
 </div>
 
 </div>
 </div>
 `;
 
-renderCourseVideo(
-course,
-"lessonVideo-"+course.id
-);
-
+renderCourseVideo(course,"lessonVideo-"+course.id);
 window.scrollTo(0,0);
-
 }
 
 /* =========================================================
@@ -2315,9 +2027,7 @@ window.scrollTo(0,0);
 
 function startCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
-});
+const course=getLessons().find(item=>String(item.id)===String(id));
 
 if(!course){
 alert("Course not found.");
@@ -2331,54 +2041,33 @@ if(!enrolled.map(String).includes(String(id))){
 enrolled.push(String(id));
 saveArray("studioEnrolled",enrolled);
 
-addNotification(
-"Course started",
-"You started: "+course.title
-);
-
+addNotification("Course started","You started: "+course.title);
 }
 
 const savedProgress=getCourseProgress(id);
 
-openLesson(
-id,
-savedProgress>=0?savedProgress:0
-);
-
+openLesson(id,savedProgress>=0?savedProgress:0);
 }
 
 function finishCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
-});
-
+const course=getLessons().find(item=>String(item.id)===String(id));
 if(!course)return;
 
-const lessons=Array.isArray(course.lessons)
-?course.lessons:[];
+const lessons=Array.isArray(course.lessons)?course.lessons:[];
 
-if(lessons.length){
-saveCourseProgress(id,lessons.length-1);
-}
+if(lessons.length)saveCourseProgress(id,lessons.length-1);
 
-addNotification(
-"Course completed",
-"You completed: "+course.title
-);
+addNotification("Course completed","You completed: "+course.title);
 
 alert("🎉 Congratulations! You completed the course.");
 
 openCourse(id);
-
 }
 
 function buyCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
-});
-
+const course=getLessons().find(item=>String(item.id)===String(id));
 if(!course)return;
 
 if(course.priceType!=="PAID"){
@@ -2403,15 +2092,11 @@ time:new Date().toISOString()
 
 saveArray("studioPurchases",purchases);
 
-addNotification(
-"Course purchased",
-"Demo purchase: "+course.title
-);
+addNotification("Course purchased","Demo purchase: "+course.title);
 
 alert("Demo purchase successful! 💳");
 
 openLesson(id,0);
-
 }
 
 /* =========================================================
@@ -2421,7 +2106,6 @@ openLesson(id,0);
 function renderLessons(lessonsToShow){
 
 const list=document.getElementById("lessonList");
-
 if(!list)return;
 
 const lessons=lessonsToShow||getLessons();
@@ -2432,9 +2116,7 @@ list.innerHTML=`
 <div class="empty">
 No courses found yet.<br>
 Create the first course! 📚
-</div>
-`;
-
+</div>`;
 return;
 }
 
@@ -2443,17 +2125,13 @@ list.innerHTML=lessons.slice().reverse().map(function(course){
 return`
 <div onclick="openCourse('${String(course.id)}')">
 ${renderLessonCard(course,true)}
-</div>
-`;
-
+</div>`;
 }).join("");
-
 }
 
 function searchLessons(){
 
 const input=document.getElementById("searchInput");
-
 if(!input)return;
 
 const query=input.value.toLowerCase().trim();
@@ -2478,7 +2156,6 @@ title.textContent=query?'Results for "'+query+'"':"All courses";
 }
 
 renderLessons(lessons);
-
 }
 
 function selectCategory(category){
@@ -2489,7 +2166,6 @@ if(input)input.value=category;
 
 show("explore");
 searchLessons();
-
 }
 
 /* =========================================================
@@ -2499,7 +2175,6 @@ searchLessons();
 function renderHomeCourses(){
 
 const box=document.getElementById("homeCourses");
-
 if(!box)return;
 
 const courses=getLessons().slice().reverse().slice(0,3);
@@ -2510,9 +2185,7 @@ box.innerHTML=`
 <div class="empty">
 No courses yet.<br>
 Create the first one! 📚
-</div>
-`;
-
+</div>`;
 return;
 }
 
@@ -2522,30 +2195,21 @@ const category=categoryName(course.category);
 
 return`
 
-<div class="course"
-onclick="openCourse('${String(course.id)}')">
+<div class="course" onclick="openCourse('${String(course.id)}')">
 
 <div class="thumb">
-
 ${
 course.image
-?
-'<img src="'+escapeHTML(course.image)+'">'
-:
-(CATEGORY_ICONS[category]||"📚")
+?'<img src="'+escapeHTML(course.image)+'">'
+:(CATEGORY_ICONS[category]||"📚")
 }
-
 </div>
 
 <div>
-
 <h3>${escapeHTML(course.title)}</h3>
-
 <p>${escapeHTML(course.teacher||"Studio Teacher")}</p>
 
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
+<span class="pill ${course.priceType==="PAID"?"paid":""}">
 ${priceText(course)}
 </span>
 
@@ -2554,11 +2218,10 @@ ${priceText(course)}
 `;
 
 }).join("");
-
 }
 
 /* =========================================================
-   MY COURSES
+   MY COURSES — OWNER ONLY
 ========================================================= */
 
 function renderMyLessons(){
@@ -2567,80 +2230,29 @@ const box=document.getElementById("myLessons");
 
 if(!box||!currentUser)return;
 
-const name=getAccountValue("studioName","");
-
-const courses=getLessons().filter(function(course){
-
-return course.ownerId===currentUser.id||
-(!course.ownerId&&course.teacher===name);
-
-});
+const courses=getLessons().filter(course=>isMyCourse(course));
 
 if(!courses.length){
 
 box.innerHTML=`
 <div class="empty">
 You haven't published a course yet.
-</div>
-`;
-
+</div>`;
 return;
 }
 
-box.innerHTML=courses.slice().reverse().map(function(course){
+box.innerHTML=`
 
-const category=categoryName(course.category);
-
-return`
-
-<div class="course"
-onclick="openCourse('${String(course.id)}')">
-
-<div class="thumb">
-
-${
-course.image
-?
-'<img src="'+escapeHTML(course.image)+'">'
-:
-(CATEGORY_ICONS[category]||"📚")
-}
-
+<div class="notice">
+🔒 Only courses created by your current account are shown here.
 </div>
 
-<div>
-
-<h3>${escapeHTML(course.title)}</h3>
-
-<p>
-${escapeHTML(category)} ·
-${Array.isArray(course.lessons)?course.lessons.length:0}
-lessons
-</p>
-
-${
-course.hasUploadedVideo||getLegacyVideo(course)
-?
-"<p>🎥 Video uploaded</p>"
-:""
-}
-
-<span class="pill ${
-course.priceType==="PAID"?"paid":""
-}">
-${priceText(course)}
-</span>
-
-</div>
-</div>
+${courses.slice().reverse().map(renderMyCourseManager).join("")}
 `;
-
-}).join("");
-
 }
 
 /* =========================================================
-   PROFILE COURSES
+   PROFILE COURSES — OWNER ONLY
 ========================================================= */
 
 function renderProfileLessons(){
@@ -2649,23 +2261,14 @@ const box=document.getElementById("profileLessons");
 
 if(!box||!currentUser)return;
 
-const name=getAccountValue("studioName","");
-
-const courses=getLessons().filter(function(course){
-
-return course.ownerId===currentUser.id||
-(!course.ownerId&&course.teacher===name);
-
-});
+const courses=getLessons().filter(course=>isMyCourse(course));
 
 if(!courses.length){
 
 box.innerHTML=`
 <div class="empty">
 Your published courses will appear here.
-</div>
-`;
-
+</div>`;
 return;
 }
 
@@ -2678,7 +2281,6 @@ ${renderLessonCard(course,false)}
 `;
 
 }).join("");
-
 }
 
 /* =========================================================
@@ -2704,55 +2306,33 @@ metadata.username||currentUser.email.split("@")[0]
 const bio=getAccountValue("studioBio","");
 const photo=getAccountValue("studioProfilePhoto","");
 
-document.getElementById("profileName").textContent=
-name||"Your Name";
-
-document.getElementById("profileUsername").textContent=
-"@"+(username||"your_studio_name");
-
-document.getElementById("profileBio").textContent=
-bio||"Tell people about yourself and your talent.";
-
-document.getElementById("accountEmail").textContent=
-"Signed in as "+currentUser.email;
+document.getElementById("profileName").textContent=name||"Your Name";
+document.getElementById("profileUsername").textContent="@"+(username||"your_studio_name");
+document.getElementById("profileBio").textContent=bio||"Tell people about yourself and your talent.";
+document.getElementById("accountEmail").textContent="Signed in as "+currentUser.email;
 
 const image=document.getElementById("profileImage");
 const emoji=document.getElementById("profileEmoji");
 
 if(photo){
-
 image.src=photo;
 image.style.display="block";
 emoji.style.display="none";
-
 }else{
-
 image.style.display="none";
 emoji.style.display="block";
-
 }
 
-const courses=getLessons().filter(function(course){
+const courses=getLessons().filter(course=>isMyCourse(course));
 
-return course.ownerId===currentUser.id||
-(!course.ownerId&&course.teacher===name);
-
-});
-
-document.getElementById("courseCount").textContent=
-courses.length;
-
-document.getElementById("followerCount").textContent=
-getArray("studioFollowing").length;
+document.getElementById("courseCount").textContent=courses.length;
+document.getElementById("followerCount").textContent=getArray("studioFollowing").length;
 
 document.getElementById("earningCount").textContent=
-"€"+Number(
-getAccountValue("studioEarnings","0")
-).toFixed(2);
+"€"+Number(getAccountValue("studioEarnings","0")).toFixed(2);
 
 renderTeacherInfo();
 renderProfileLessons();
-
 }
 
 function renderTeacherInfo(){
@@ -2774,19 +2354,11 @@ box.innerHTML=`
 
 <b>👨‍🏫 Teacher Profile</b>
 
-<p>
-<b>Talent:</b>
-${escapeHTML(talent)}
-</p>
-
-<p>
-<b>Experience:</b>
-${escapeHTML(experience||"Not specified")}
-</p>
+<p><b>Talent:</b> ${escapeHTML(talent)}</p>
+<p><b>Experience:</b> ${escapeHTML(experience||"Not specified")}</p>
 
 </div>
 `;
-
 }
 
 /* =========================================================
@@ -2796,10 +2368,7 @@ ${escapeHTML(experience||"Not specified")}
 function getTeacherLessons(name){
 
 return getLessons().filter(function(course){
-
-return String(course.teacher||"").toLowerCase()===
-String(name||"").toLowerCase();
-
+return String(course.teacher||"").toLowerCase()===String(name||"").toLowerCase();
 });
 
 }
@@ -2807,25 +2376,17 @@ String(name||"").toLowerCase();
 function getFollowers(name){
 
 return getArray("studioFollowers").filter(function(item){
-
-return String(item.teacher||"").toLowerCase()===
-String(name||"").toLowerCase();
-
+return String(item.teacher||"").toLowerCase()===String(name||"").toLowerCase();
 }).length;
-
 }
 
 function openTeacher(name){
 
 const lessons=getTeacherLessons(name);
-
 const myName=getAccountValue("studioName","");
-
 const isMine=name===myName;
 
-const photo=isMine
-?getAccountValue("studioProfilePhoto","")
-:"";
+const photo=isMine?getAccountValue("studioProfilePhoto",""):"";
 
 show("explore",true);
 
@@ -2834,43 +2395,24 @@ document.getElementById("lessonList").innerHTML=`
 <div class="profile">
 
 <div class="bigavatar">
-
-${
-photo
-?
-'<img src="'+escapeHTML(photo)+'">'
-:
-"👨‍🏫"
-}
-
+${photo?'<img src="'+escapeHTML(photo)+'">':"👨‍🏫"}
 </div>
 
 <h2>${escapeHTML(name)}</h2>
-
 <p>👥 ${getFollowers(name)} followers</p>
 
 ${
 !isMine
 ?
-`
-<button class="editButton darkButton"
-onclick='openMessage(${JSON.stringify(name)})'>
-💬 Message
-</button>
-`
+`<button class="editButton darkButton" onclick='openMessage(${JSON.stringify(name)})'>💬 Message</button>`
 :""
 }
 
 </div>
 
 <section>
-
-<div class="row">
-<h2>${escapeHTML(name)}'s Courses</h2>
-</div>
-
+<div class="row"><h2>${escapeHTML(name)}'s Courses</h2></div>
 <div id="teacherCourses"></div>
-
 </section>
 `;
 
@@ -2881,9 +2423,7 @@ if(!lessons.length){
 courseBox.innerHTML=`
 <div class="empty">
 This teacher hasn't published a course yet.
-</div>
-`;
-
+</div>`;
 return;
 }
 
@@ -2892,11 +2432,8 @@ courseBox.innerHTML=lessons.slice().reverse().map(function(course){
 return`
 <div onclick="openCourse('${String(course.id)}')">
 ${renderLessonCard(course,true)}
-</div>
-`;
-
+</div>`;
 }).join("");
-
 }
 
 /* =========================================================
@@ -2924,16 +2461,13 @@ time:new Date().toLocaleString()
 });
 
 saveNotifications(notifications.slice(0,50));
-
 }
 
 function openNotifications(){
 
 const notifications=getNotifications();
 
-const unread=notifications.filter(function(item){
-return !item.read;
-}).length;
+const unread=notifications.filter(item=>!item.read).length;
 
 show("explore",true);
 
@@ -2943,19 +2477,13 @@ let html=`
 
 <div class="lessonBody">
 
-<button class="backButton" onclick="renderLessons()">
-← Back to Explore
-</button>
+<button class="backButton" onclick="renderLessons()">← Back to Explore</button>
 
 <h1>🔔 Notifications</h1>
 
-<p>
-${unread} unread notification${unread===1?"":"s"}
-</p>
+<p>${unread} unread notification${unread===1?"":"s"}</p>
 
-<button class="enroll" onclick="markNotificationsRead()">
-✓ Mark all as read
-</button>
+<button class="enroll" onclick="markNotificationsRead()">✓ Mark all as read</button>
 
 </div>
 </div>
@@ -2966,8 +2494,7 @@ if(!notifications.length){
 html+=`
 <div class="empty">
 No notifications yet. 🔔
-</div>
-`;
+</div>`;
 
 }else{
 
@@ -2977,28 +2504,21 @@ return`
 
 <div class="course">
 
-<div class="thumb">
-${n.read?"🔔":"🔴"}
-</div>
+<div class="thumb">${n.read?"🔔":"🔴"}</div>
 
 <div>
-
 <h3>${escapeHTML(n.title)}</h3>
-
 <p>${escapeHTML(n.message)}</p>
-
 <small>${escapeHTML(n.time)}</small>
-
 </div>
+
 </div>
 `;
 
 }).join("");
-
 }
 
 document.getElementById("lessonList").innerHTML=html;
-
 }
 
 function markNotificationsRead(){
@@ -3010,7 +2530,6 @@ return item;
 
 saveNotifications(data);
 openNotifications();
-
 }
 
 /* =========================================================
@@ -3027,9 +2546,7 @@ saveArray("studioMessages",data);
 
 function openMessage(teacher){
 
-const messages=getMessages().filter(function(item){
-return item.teacher===teacher;
-});
+const messages=getMessages().filter(item=>item.teacher===teacher);
 
 show("explore",true);
 
@@ -3039,8 +2556,7 @@ document.getElementById("lessonList").innerHTML=`
 
 <div class="lessonBody">
 
-<button class="backButton"
-onclick='openTeacher(${JSON.stringify(teacher)})'>
+<button class="backButton" onclick='openTeacher(${JSON.stringify(teacher)})'>
 ← Back to Teacher
 </button>
 
@@ -3061,46 +2577,28 @@ return`
 
 <small>${escapeHTML(m.time)}</small>
 
-</div>
-`;
-
+</div>`;
 }).join("")
 :
-`
-<div class="empty">
-No messages yet.<br>
-Start the conversation!
-</div>
-`
+`<div class="empty">No messages yet.<br>Start the conversation!</div>`
 }
 
 <textarea id="messageText"
 placeholder="Write a message..."
-style="
-width:100%;
-margin-top:15px;
-border:1px solid var(--border);
-border-radius:12px;
-padding:12px;
-min-height:80px
-"></textarea>
+style="width:100%;margin-top:15px;border:1px solid var(--border);border-radius:12px;padding:12px;min-height:80px"></textarea>
 
-<button class="enroll"
-style="margin-top:10px"
-onclick='sendMessage(${JSON.stringify(teacher)})'>
+<button class="enroll" style="margin-top:10px" onclick='sendMessage(${JSON.stringify(teacher)})'>
 📤 Send Message
 </button>
 
 </div>
 </div>
 `;
-
 }
 
 function sendMessage(teacher){
 
 const input=document.getElementById("messageText");
-
 if(!input)return;
 
 const text=input.value.trim();
@@ -3113,28 +2611,18 @@ return;
 const messages=getMessages();
 
 messages.push({
-
 id:Date.now(),
-
 teacher,
-
 from:getAccountValue("studioName","You"),
-
 text,
-
 time:new Date().toLocaleString()
-
 });
 
 saveMessages(messages);
 
-addNotification(
-"Message sent",
-"Your message was sent to "+teacher
-);
+addNotification("Message sent","Your message was sent to "+teacher);
 
 openMessage(teacher);
-
 }
 
 function openMyMessages(){
@@ -3143,12 +2631,7 @@ const messages=getMessages();
 
 show("explore",true);
 
-const teachers=[
-...new Set(messages.map(function(item){
-return item.teacher;
-}))
-];
-
+const teachers=[...new Set(messages.map(item=>item.teacher))];
 const list=document.getElementById("lessonList");
 
 if(!teachers.length){
@@ -3156,18 +2639,11 @@ if(!teachers.length){
 list.innerHTML=`
 
 <div class="lesson">
-
 <div class="lessonBody">
-
 <h1>💬 Messages</h1>
-
-<div class="empty">
-No messages yet.
+<div class="empty">No messages yet.</div>
 </div>
-
-</div>
-</div>
-`;
+</div>`;
 
 return;
 }
@@ -3175,13 +2651,9 @@ return;
 list.innerHTML=`
 
 <div class="lesson">
-
 <div class="lessonBody">
-
 <h1>💬 Messages</h1>
-
 <p>Choose a conversation.</p>
-
 </div>
 </div>
 `;
@@ -3190,24 +2662,18 @@ teachers.forEach(function(teacher){
 
 list.innerHTML+=`
 
-<div class="course"
-onclick='openMessage(${JSON.stringify(teacher)})'>
+<div class="course" onclick='openMessage(${JSON.stringify(teacher)})'>
 
 <div class="thumb">💬</div>
 
 <div>
-
 <h3>${escapeHTML(teacher)}</h3>
-
 <p>Open conversation</p>
-
 </div>
 
 </div>
 `;
-
 });
-
 }
 
 /* =========================================================
@@ -3215,25 +2681,18 @@ onclick='openMessage(${JSON.stringify(teacher)})'>
 ========================================================= */
 
 function getEarnings(){
-
-return Number(
-getAccountValue("studioEarnings","0")
-);
-
+return Number(getAccountValue("studioEarnings","0"));
 }
 
 function openEarnings(){
 
 const earnings=getEarnings();
-
 const name=getAccountValue("studioName","");
 
 const courses=getLessons().filter(function(item){
 
 return(
-(item.ownerId===currentUser?.id||
-(!item.ownerId&&item.teacher===name))
-&&
+isMyCourse(item)&&
 item.priceType==="PAID"
 );
 
@@ -3251,13 +2710,9 @@ box.innerHTML=`
 
 <h1>💰 Earnings</h1>
 
-<div class="price">
-€${earnings.toFixed(2)}
-</div>
+<div class="price">€${earnings.toFixed(2)}</div>
 
-<p>
-Demo earnings from paid-course activity.
-</p>
+<p>Demo earnings from paid-course activity.</p>
 
 <div class="notice">
 💡 This is a demo earning system.
@@ -3277,8 +2732,7 @@ if(!courses.length){
 box.innerHTML+=`
 <div class="empty">
 You don't have paid courses yet.
-</div>
-`;
+</div>`;
 
 }else{
 
@@ -3291,20 +2745,14 @@ return`
 <div class="thumb">💰</div>
 
 <div>
-
 <h3>${escapeHTML(course.title)}</h3>
-
 <p>Price: ${priceText(course)}</p>
-
 </div>
 
 </div>
 `;
-
 }).join("");
-
 }
-
 }
 
 /* =========================================================
@@ -3315,17 +2763,13 @@ function toggleLike(id){
 
 const courses=getLessons();
 
-const course=courses.find(function(item){
-return String(item.id)===String(id);
-});
+const course=courses.find(item=>String(item.id)===String(id));
 
 if(!course)return;
 
-const user=currentUser?.id||
-getAccountValue("studioUsername","local-user");
+const user=currentUser?.id||getAccountValue("studioUsername","local-user");
 
-course.likes=Array.isArray(course.likes)
-?course.likes:[];
+course.likes=Array.isArray(course.likes)?course.likes:[];
 
 const index=course.likes.indexOf(user);
 
@@ -3337,17 +2781,11 @@ course.likes.splice(index,1);
 
 course.likes.push(user);
 
-addNotification(
-"Course liked",
-"You liked "+course.title
-);
-
+addNotification("Course liked","You liked "+course.title);
 }
 
 saveLessons(courses);
-
 openCourse(id);
-
 }
 
 /* =========================================================
@@ -3356,14 +2794,11 @@ openCourse(id);
 
 function openComments(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
-});
+const course=getLessons().find(item=>String(item.id)===String(id));
 
 if(!course)return;
 
-course.comments=Array.isArray(course.comments)
-?course.comments:[];
+course.comments=Array.isArray(course.comments)?course.comments:[];
 
 show("explore",true);
 
@@ -3373,8 +2808,7 @@ document.getElementById("lessonList").innerHTML=`
 
 <div class="lessonBody">
 
-<button class="backButton"
-onclick="openCourse('${String(id)}')">
+<button class="backButton" onclick="openCourse('${String(id)}')">
 ← Back to Course
 </button>
 
@@ -3390,47 +2824,30 @@ return`
 <div class="comment">
 
 <b>${escapeHTML(comment.user)}</b>
-
 <div>${escapeHTML(comment.text)}</div>
 
-</div>
-`;
-
+</div>`;
 }).join("")
 :
-`
-<div class="empty">
-No comments yet.
-</div>
-`
+`<div class="empty">No comments yet.</div>`
 }
 
 <textarea id="commentText"
 placeholder="Write a comment..."
-style="
-width:100%;
-margin-top:12px;
-border:1px solid var(--border);
-border-radius:12px;
-padding:12px
-"></textarea>
+style="width:100%;margin-top:12px;border:1px solid var(--border);border-radius:12px;padding:12px"></textarea>
 
-<button class="enroll"
-style="margin-top:8px"
-onclick="addComment('${String(id)}')">
+<button class="enroll" style="margin-top:8px" onclick="addComment('${String(id)}')">
 📤 Comment
 </button>
 
 </div>
 </div>
 `;
-
 }
 
 function addComment(id){
 
 const input=document.getElementById("commentText");
-
 if(!input)return;
 
 const text=input.value.trim();
@@ -3442,29 +2859,20 @@ return;
 
 const courses=getLessons();
 
-const course=courses.find(function(item){
-return String(item.id)===String(id);
-});
+const course=courses.find(item=>String(item.id)===String(id));
 
 if(!course)return;
 
-course.comments=Array.isArray(course.comments)
-?course.comments:[];
+course.comments=Array.isArray(course.comments)?course.comments:[];
 
 course.comments.push({
-
 user:getAccountValue("studioName","You"),
-
 text,
-
 time:new Date().toISOString()
-
 });
 
 saveLessons(courses);
-
 openComments(id);
-
 }
 
 /* =========================================================
@@ -3473,42 +2881,28 @@ openComments(id);
 
 async function shareCourse(id){
 
-const course=getLessons().find(function(item){
-return String(item.id)===String(id);
-});
+const course=getLessons().find(item=>String(item.id)===String(id));
 
 if(!course)return;
 
-const text=
-"Check out this Studio Talent course: "+course.title;
+const text="Check out this Studio Talent course: "+course.title;
 
 if(navigator.share){
 
 try{
-
-await navigator.share({
-title:course.title,
-text
-});
-
+await navigator.share({title:course.title,text});
 }catch(error){}
 
 }else{
 
 try{
-
 await navigator.clipboard.writeText(text);
-
 alert("Course text copied to clipboard.");
-
 }catch(error){
-
 alert(text);
-
 }
 
 }
-
 }
 
 /* =========================================================
@@ -3537,68 +2931,39 @@ const username=getAccountValue("studioUsername","mamadou");
 lessons.push({
 
 id:"electrical_default_"+Date.now(),
-
 ownerId:currentUser?.id,
-
 teacher:name,
-
 username,
-
 title:"House Electrical Wiring",
-
 category:"Technical",
-
-description:
-"Learn how to install electrical systems and wire a house safely.",
-
+description:"Learn how to install electrical systems and wire a house safely.",
 video:"",
-
 videoFile:"",
-
 hasUploadedVideo:false,
-
 image:"",
-
-lessons:DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
-}),
-
+lessons:DEFAULT_ELECTRICAL.map(item=>({...item})),
 priceType:"FREE",
-
 price:0,
-
 likes:[],
-
 comments:[],
-
 createdAt:new Date().toISOString()
 
 });
 
 saveLessons(lessons);
-
 }
 
 return;
-
 }
 
-if(
-!Array.isArray(electrical.lessons)||
-electrical.lessons.length<7
-){
+if(!Array.isArray(electrical.lessons)||electrical.lessons.length<7){
 
-electrical.lessons=DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
-});
-
+electrical.lessons=DEFAULT_ELECTRICAL.map(item=>({...item}));
 electrical.priceType="FREE";
 electrical.price=0;
 
 saveLessons(lessons);
-
 }
-
 }
 
 /* =========================================================
@@ -3612,11 +2977,15 @@ let changed=false;
 
 lessons=lessons.map(function(course){
 
-if(!course.ownerId&&currentUser){
+/*
+Important:
+Old courses without ownerId are assigned only once,
+to the currently logged-in account.
+*/
 
+if(!course.ownerId&&currentUser){
 course.ownerId=currentUser.id;
 changed=true;
-
 }
 
 if(!Array.isArray(course.lessons)){
@@ -3625,18 +2994,14 @@ course.lessons=
 String(course.title||"").toLowerCase().includes("electrical")||
 String(course.title||"").toLowerCase().includes("wiring")
 ?
-DEFAULT_ELECTRICAL.map(function(item){
-return{...item};
-})
+DEFAULT_ELECTRICAL.map(item=>({...item}))
 :
 [{
 title:"Lesson 1 — Introduction",
-content:course.description||
-"Lesson content coming soon."
+content:course.description||"Lesson content coming soon."
 }];
 
 changed=true;
-
 }
 
 if(!Array.isArray(course.likes)){
@@ -3650,18 +3015,19 @@ changed=true;
 }
 
 if(typeof course.hasUploadedVideo!=="boolean"){
-
 course.hasUploadedVideo=Boolean(course.videoFile);
 changed=true;
+}
 
+if(!course.ownerId&&currentUser){
+course.ownerId=currentUser.id;
+changed=true;
 }
 
 return course;
-
 });
 
 if(changed)saveLessons(lessons);
-
 }
 
 /* =========================================================
@@ -3687,18 +3053,13 @@ try{
 
 const result=await supabaseClient.auth.getSession();
 
-if(result.error){
-console.error(result.error);
-}
+if(result.error)console.error(result.error);
 
 currentUser=result.data.session?.user||null;
 
 if(!currentUser){
 
-document.querySelectorAll(".view").forEach(function(view){
-view.classList.remove("activeView");
-});
-
+document.querySelectorAll(".view").forEach(view=>view.classList.remove("activeView"));
 document.getElementById("authView").classList.add("activeView");
 
 return;
@@ -3706,28 +3067,12 @@ return;
 
 const metadata=currentUser.user_metadata||{};
 
-if(
-!getAccountValue("studioName","")&&
-metadata.name
-){
-
-setAccountValue(
-"studioName",
-metadata.name
-);
-
+if(!getAccountValue("studioName","")&&metadata.name){
+setAccountValue("studioName",metadata.name);
 }
 
-if(
-!getAccountValue("studioUsername","")&&
-metadata.username
-){
-
-setAccountValue(
-"studioUsername",
-metadata.username
-);
-
+if(!getAccountValue("studioUsername","")&&metadata.username){
+setAccountValue("studioUsername",metadata.username);
 }
 
 ensureElectricalCourse();
@@ -3738,26 +3083,19 @@ show("home");
 
 }catch(error){
 
-console.error(
-"Studio Talent startup error:",
-error
-);
+console.error("Studio Talent startup error:",error);
 
 }
-
 }
 
-supabaseClient.auth.onAuthStateChange(
-function(event,session){
+supabaseClient.auth.onAuthStateChange(function(event,session){
 
 if(session){
 
 currentUser=session.user;
 
 setTimeout(function(){
-
 finishLogin().catch(console.error);
-
 },0);
 
 }else{
@@ -3765,22 +3103,17 @@ finishLogin().catch(console.error);
 currentUser=null;
 
 }
-
 });
 
 if(document.readyState==="loading"){
 
-document.addEventListener(
-"DOMContentLoaded",
-startStudioTalent
-);
+document.addEventListener("DOMContentLoaded",startStudioTalent);
 
 }else{
 
 startStudioTalent();
 
 }
-
 </script>
 
 </body>
