@@ -899,6 +899,10 @@ let editingCourseId=null;
 let pendingPhoneVerification=false;
 
 
+/* =========================
+   AUTH MESSAGE
+========================= */
+
 function setAuthMessage(message,type="error"){
 
 const box=document.getElementById("authMessage");
@@ -912,6 +916,10 @@ box.className=
 
 }
 
+
+/* =========================
+   PHONE
+========================= */
 
 function normalizePhone(phone){
 
@@ -958,9 +966,21 @@ function showPhoneVerification(){
 
 pendingPhoneVerification=true;
 
+authMode="phoneVerify";
+
 document.getElementById("authPhoneWrap").style.display="block";
 
 document.getElementById("authOtpWrap").style.display="block";
+
+document.getElementById("authNameWrap").style.display="none";
+
+document.getElementById("authUsernameWrap").style.display="none";
+
+document.getElementById("authTitle").textContent=
+"Verify your phone 📱";
+
+document.getElementById("authDescription").textContent=
+"Enter the 6-digit SMS code sent to your phone.";
 
 document.getElementById("authMainButton").textContent=
 "Verify SMS Code";
@@ -1041,10 +1061,18 @@ authMode==="signup"
 
 document.getElementById("authOtp").value="";
 
+if(authMode!=="signup"){
+document.getElementById("authPhone").value="";
+}
+
 setAuthMessage("");
 
 }
 
+
+/* =========================
+   SEND SMS
+========================= */
 
 async function sendPhoneVerification(phone){
 
@@ -1065,13 +1093,23 @@ phone:normalized
 
 if(result.error)throw result.error;
 
-setAccountValue("studioPhone",normalized);
+setAccountValue(
+"studioPhone",
+normalized
+);
 
 showPhoneVerification();
 
 document.getElementById("authPhone").value=normalized;
 
+setTimeout(
+function(){
+
 document.getElementById("authOtp").focus();
+
+},
+100
+);
 
 setAuthMessage(
 "SMS verification code sent to "+normalized+". Enter the 6-digit code.",
@@ -1080,6 +1118,10 @@ setAuthMessage(
 
 }
 
+
+/* =========================
+   RESEND SMS
+========================= */
 
 async function resendPhoneOtp(){
 
@@ -1093,11 +1135,25 @@ return;
 
 }
 
-const phone=
+let phone="";
+
+try{
+
+phone=
 normalizePhone(
 document.getElementById("authPhone").value||
 getAccountValue("studioPhone","")
 );
+
+}catch(error){
+
+setAuthMessage(
+error.message
+);
+
+return;
+
+}
 
 if(!phone){
 
@@ -1109,7 +1165,10 @@ return;
 
 }
 
-const button=document.getElementById("resendOtpButton");
+const button=
+document.getElementById(
+"resendOtpButton"
+);
 
 button.disabled=true;
 button.textContent="Sending...";
@@ -1136,12 +1195,26 @@ button.textContent="📱 Resend SMS Code";
 }
 
 
+/* =========================
+   VERIFY SMS
+========================= */
+
 async function verifyPhoneCode(){
 
-const phone=
+let phone="";
+
+try{
+
+phone=
 normalizePhone(
 document.getElementById("authPhone").value
 );
+
+}catch(error){
+
+throw error;
+
+}
 
 const token=
 document.getElementById("authOtp").value.trim();
@@ -1164,9 +1237,13 @@ throw new Error(
 
 const result=
 await supabaseClient.auth.verifyOtp({
+
 phone,
+
 token,
+
 type:"phone_change"
+
 });
 
 if(result.error)throw result.error;
@@ -1175,36 +1252,56 @@ currentUser=
 result.data.user||
 currentUser;
 
-setAccountValue("studioPhone",phone);
+setAccountValue(
+"studioPhone",
+phone
+);
 
 pendingPhoneVerification=false;
 
+authMode="login";
+
 hidePhoneVerification();
+
+document.getElementById("authPhoneWrap").style.display="none";
+
+document.getElementById("authOtp").value="";
 
 setAuthMessage(
 "Phone number verified successfully! ✅",
 "ok"
 );
 
-document.getElementById("authPhoneWrap").style.display="none";
-
 await finishLogin();
 
 }
 
 
+/* =========================
+   MAIN AUTH
+========================= */
+
 async function handleAuth(){
 
 const email=
-document.getElementById("authEmail").value.trim();
+document.getElementById(
+"authEmail"
+).value.trim();
 
 const password=
-document.getElementById("authPassword").value;
+document.getElementById(
+"authPassword"
+).value;
+
+
+/* PHONE VERIFICATION MODE */
 
 if(authMode==="phoneVerify"){
 
 const button=
-document.getElementById("authMainButton");
+document.getElementById(
+"authMainButton"
+);
 
 button.disabled=true;
 button.textContent="Verifying...";
@@ -1218,7 +1315,8 @@ await verifyPhoneCode();
 console.error(error);
 
 setAuthMessage(
-error.message||"Phone verification failed."
+error.message||
+"Phone verification failed."
 );
 
 }finally{
@@ -1227,7 +1325,8 @@ button.disabled=false;
 
 if(pendingPhoneVerification){
 
-button.textContent="Verify SMS Code";
+button.textContent=
+"Verify SMS Code";
 
 }
 
@@ -1237,6 +1336,8 @@ return;
 
 }
 
+
+/* BASIC VALIDATION */
 
 if(!email){
 
@@ -1269,7 +1370,9 @@ return;
 }
 
 const button=
-document.getElementById("authMainButton");
+document.getElementById(
+"authMainButton"
+);
 
 button.disabled=true;
 
@@ -1282,20 +1385,41 @@ setAuthMessage("");
 
 try{
 
+
+/* =========================
+   SIGN UP
+========================= */
+
 if(authMode==="signup"){
 
 const name=
-document.getElementById("authName").value.trim();
+document.getElementById(
+"authName"
+).value.trim();
 
 const username=
 cleanUsername(
-document.getElementById("authUsername").value
+document.getElementById(
+"authUsername"
+).value
 );
 
-const phone=
+let phone="";
+
+try{
+
+phone=
 normalizePhone(
-document.getElementById("authPhone").value
+document.getElementById(
+"authPhone"
+).value
 );
+
+}catch(error){
+
+throw error;
+
+}
 
 if(!name){
 
@@ -1321,17 +1445,20 @@ throw new Error(
 
 }
 
+
 /*
-The email/password account is created first.
-The phone number is stored in the user's metadata.
-After the email is confirmed and the user logs in,
-Studio Talent sends the SMS verification code.
+Create the email/password account.
+
+The phone is stored in metadata first.
+After the email is confirmed and the user
+logs in, Supabase sends the SMS verification.
 */
 
 const result=
 await supabaseClient.auth.signUp({
 
 email,
+
 password,
 
 options:{
@@ -1346,50 +1473,63 @@ phone
 
 if(result.error)throw result.error;
 
-setAccountValue("studioName",name);
-setAccountValue("studioUsername",username);
-setAccountValue("studioPhone",phone);
+setAccountValue(
+"studioName",
+name
+);
+
+setAccountValue(
+"studioUsername",
+username
+);
+
+setAccountValue(
+"studioPhone",
+phone
+);
+
+
+/*
+If Supabase gives us a session immediately,
+start phone verification now.
+*/
 
 if(result.data.session){
 
-currentUser=result.data.user;
-
-try{
+currentUser=
+result.data.user;
 
 await sendPhoneVerification(phone);
-
-}catch(error){
-
-console.error(error);
-
-setAuthMessage(
-"Account created, but the SMS code could not be sent: "+
-error.message
-);
-
-}
 
 }else{
 
 setAuthMessage(
-"Account created! Check your email to confirm your account. After you confirm it and log in, Studio Talent will send the SMS verification code to "+
-phone+".",
+"Account created! Check your email to confirm your account. After you confirm it and log in, Studio Talent will send the SMS verification code to "+phone+".",
 "ok"
 );
 
 }
 
+
+/* =========================
+   LOGIN
+========================= */
+
 }else{
 
 const result=
 await supabaseClient.auth.signInWithPassword({
+
 email,
+
 password
+
 });
 
 if(result.error)throw result.error;
 
-currentUser=result.data.user;
+currentUser=
+result.data.user;
 
 await finishLogin();
 
@@ -1400,7 +1540,8 @@ await finishLogin();
 console.error(error);
 
 setAuthMessage(
-error.message||"Authentication failed."
+error.message||
+"Authentication failed."
 );
 
 }finally{
@@ -1409,15 +1550,18 @@ button.disabled=false;
 
 if(authMode==="signup"){
 
-button.textContent="Create Account";
+button.textContent=
+"Create Account";
 
 }else if(authMode==="phoneVerify"){
 
-button.textContent="Verify SMS Code";
+button.textContent=
+"Verify SMS Code";
 
 }else{
 
-button.textContent="Log In";
+button.textContent=
+"Log In";
 
 }
 
@@ -1425,6 +1569,10 @@ button.textContent="Log In";
 
 }
 
+
+/* =========================
+   FINISH LOGIN
+========================= */
 
 async function finishLogin(){
 
@@ -1433,7 +1581,8 @@ if(!currentUser){
 const result=
 await supabaseClient.auth.getUser();
 
-currentUser=result.data.user;
+currentUser=
+result.data.user;
 
 }
 
@@ -1446,21 +1595,35 @@ throw new Error(
 }
 
 const metadata=
-currentUser.user_metadata||{};
+currentUser.user_metadata||
+{};
+
+const emailName=
+currentUser.email
+?
+currentUser.email.split("@")[0]
+:"User";
 
 const name=
-getAccountValue("studioName")||
+getAccountValue(
+"studioName"
+)||
 metadata.name||
-currentUser.email.split("@")[0];
+emailName;
 
 const username=
-getAccountValue("studioUsername")||
+getAccountValue(
+"studioUsername"
+)||
 metadata.username||
-currentUser.email.split("@")[0];
+emailName;
 
 const metadataPhone=
 metadata.phone||
-getAccountValue("studioPhone","");
+getAccountValue(
+"studioPhone",
+""
+);
 
 setAccountValue(
 "studioName",
@@ -1481,23 +1644,36 @@ metadataPhone
 
 }
 
-document.getElementById("authEmail").value="";
-document.getElementById("authPassword").value="";
+document.getElementById(
+"authEmail"
+).value="";
+
+document.getElementById(
+"authPassword"
+).value="";
 
 ensureElectricalCourse();
+
 migrateCourses();
+
 renderAll();
+
 show("home");
 
 }
 
+
+/* =========================
+   CHECK PHONE
+========================= */
 
 async function checkPhoneAfterLogin(){
 
 if(!currentUser)return false;
 
 const metadata=
-currentUser.user_metadata||{};
+currentUser.user_metadata||
+{};
 
 const savedPhone=
 getAccountValue("studioPhone")||
@@ -1506,12 +1682,8 @@ metadata.phone||
 
 if(!savedPhone)return false;
 
-/*
-If Supabase already has a verified phone,
-nothing else is needed.
-*/
 if(
-currentUser.phone &&
+currentUser.phone&&
 normalizePhone(currentUser.phone)===
 normalizePhone(savedPhone)
 ){
@@ -1522,24 +1694,11 @@ return false;
 
 }
 
-/*
-Send the phone-change OTP only when the account
-does not yet have that phone verified.
-*/
 try{
 
-await sendPhoneVerification(savedPhone);
-
-authMode="phoneVerify";
-
-document.getElementById("authTitle").textContent=
-"Verify your phone 📱";
-
-document.getElementById("authDescription").textContent=
-"Enter the SMS code sent to your phone.";
-
-document.getElementById("authNameWrap").style.display="none";
-document.getElementById("authUsernameWrap").style.display="none";
+await sendPhoneVerification(
+savedPhone
+);
 
 return true;
 
@@ -1556,6 +1715,10 @@ return false;
 
 }
 
+
+/* =========================
+   LOGOUT
+========================= */
 
 async function logout(){
 
@@ -1574,35 +1737,71 @@ return;
 }
 
 currentUser=null;
+
 editingCourseId=null;
+
 pendingPhoneVerification=false;
+
 authMode="login";
 
-document.querySelectorAll(".view")
+document
+.querySelectorAll(".view")
 .forEach(
-v=>v.classList.remove("activeView")
+v=>
+v.classList.remove(
+"activeView"
+)
 );
 
-document.getElementById("authView")
-.classList.add("activeView");
+document
+.getElementById("authView")
+.classList.add(
+"activeView"
+);
 
-document.getElementById("authPhoneWrap")
-.style.display="none";
+document.getElementById(
+"authPhoneWrap"
+).style.display="none";
 
-hidePhoneVerification();
+document.getElementById(
+"authOtpWrap"
+).style.display="none";
 
-document.getElementById("authTitle")
-.textContent="Welcome back 👋";
+document.getElementById(
+"authNameWrap"
+).style.display="none";
 
-document.getElementById("authDescription")
-.textContent=
+document.getElementById(
+"authUsernameWrap"
+).style.display="none";
+
+document.getElementById(
+"resendOtpButton"
+).style.display="none";
+
+document.getElementById(
+"authSwitchButton"
+).style.display="block";
+
+document.getElementById(
+"authTitle"
+).textContent=
+"Welcome back 👋";
+
+document.getElementById(
+"authDescription"
+).textContent=
 "Log in to your real Studio Talent account.";
 
-document.getElementById("authMainButton")
-.textContent="Log In";
+document.getElementById(
+"authMainButton"
+).textContent=
+"Log In";
 
-document.getElementById("authSwitchButton")
-.textContent="Create New Account";
+document.getElementById(
+"authSwitchButton"
+).textContent=
+"Create New Account";
 
 setAuthMessage(
 "You are logged out.",
@@ -1611,6 +1810,10 @@ setAuthMessage(
 
 }
 
+
+/* =========================
+   CATEGORY
+========================= */
 
 const CATEGORY_ICONS={
 Music:"🎵",
@@ -1664,10 +1867,15 @@ content:"Learn how to check an electrical installation safely before using it. T
 ];
 
 
+/* =========================
+   STORAGE
+========================= */
+
 function accountKey(key){
 
 return currentUser
-?"studio_"+currentUser.id+"_"+key
+?
+"studio_"+currentUser.id+"_"+key
 :key;
 
 }
@@ -1684,7 +1892,9 @@ accountKey("lessons")
 )||"[]"
 );
 
-return Array.isArray(data)?data:[];
+return Array.isArray(data)
+?data
+:[];
 
 }catch(e){
 
@@ -1741,7 +1951,9 @@ accountKey(key)
 )||"[]"
 );
 
-return Array.isArray(data)?data:[];
+return Array.isArray(data)
+?data
+:[];
 
 }catch(e){
 
@@ -1762,7 +1974,10 @@ JSON.stringify(data)
 }
 
 
-function getAccountValue(key,fallback=""){
+function getAccountValue(
+key,
+fallback=""
+){
 
 return localStorage.getItem(
 accountKey(key)
@@ -1771,7 +1986,10 @@ accountKey(key)
 }
 
 
-function setAccountValue(key,value){
+function setAccountValue(
+key,
+value
+){
 
 localStorage.setItem(
 accountKey(key),
@@ -1814,21 +2032,34 @@ return String(value??"")
 function priceText(course){
 
 return course.priceType==="PAID"
-?"€"+Number(course.price||0)
+?
+"€"+
+Number(course.price||0)
 .toFixed(2)
 .replace(/\.00$/,"")
-:"FREE";
+:
+"FREE";
 
 }
 
 
-function compressImage(file,maxSize=900,quality=.68){
+/* =========================
+   IMAGE
+========================= */
 
-return new Promise(function(resolve,reject){
+function compressImage(
+file,
+maxSize=900,
+quality=.68
+){
+
+return new Promise(
+function(resolve,reject){
 
 if(!file){
 
 resolve("");
+
 return;
 
 }
@@ -1836,12 +2067,14 @@ return;
 const reader=
 new FileReader();
 
-reader.onload=function(event){
+reader.onload=
+function(event){
 
 const image=
 new Image();
 
-image.onload=function(){
+image.onload=
+function(){
 
 let width=image.width;
 let height=image.height;
@@ -1912,19 +2145,26 @@ quality
 
 };
 
-image.onerror=()=>
+image.onerror=
+()=>
 reject(
-new Error("Could not read image.")
+new Error(
+"Could not read image."
+)
 );
 
-image.src=event.target.result;
+image.src=
+event.target.result;
 
 };
 
-reader.onerror=()=>
+reader.onerror=
+()=>
 reject(
 reader.error||
-new Error("Could not read file.")
+new Error(
+"Could not read file."
+)
 );
 
 reader.readAsDataURL(file);
@@ -1945,7 +2185,9 @@ file,
 }
 
 
-/* VIDEO DATABASE */
+/* =========================
+   VIDEO DATABASE
+========================= */
 
 const VIDEO_DB_NAME=
 "StudioTalentVideoDB";
@@ -1957,7 +2199,8 @@ const VIDEO_STORE="videos";
 
 function openVideoDB(){
 
-return new Promise(function(resolve,reject){
+return new Promise(
+function(resolve,reject){
 
 if(!window.indexedDB){
 
@@ -1996,23 +2239,33 @@ VIDEO_STORE
 
 };
 
-request.onsuccess=()=>
-resolve(request.result);
+request.onsuccess=
+()=>
+resolve(
+request.result
+);
 
-request.onerror=()=>
-reject(request.error);
+request.onerror=
+()=>
+reject(
+request.error
+);
 
 });
 
 }
 
 
-async function saveVideoBlob(courseId,file){
+async function saveVideoBlob(
+courseId,
+file
+){
 
 const db=
 await openVideoDB();
 
-return new Promise(function(resolve,reject){
+return new Promise(
+function(resolve,reject){
 
 const transaction=
 db.transaction(
@@ -2028,16 +2281,20 @@ file,
 String(courseId)
 );
 
-request.onsuccess=()=>
+request.onsuccess=
+()=>
 resolve(true);
 
-request.onerror=()=>
+request.onerror=
+()=>
 reject(request.error);
 
-transaction.oncomplete=()=>
+transaction.oncomplete=
+()=>
 db.close();
 
-transaction.onerror=()=>
+transaction.onerror=
+()=>
 reject(transaction.error);
 
 });
@@ -2045,14 +2302,17 @@ reject(transaction.error);
 }
 
 
-async function getVideoBlob(courseId){
+async function getVideoBlob(
+courseId
+){
 
 try{
 
 const db=
 await openVideoDB();
 
-return await new Promise(function(resolve,reject){
+return await new Promise(
+function(resolve,reject){
 
 const transaction=
 db.transaction(
@@ -2067,15 +2327,20 @@ transaction
 String(courseId)
 );
 
-request.onsuccess=()=>
+request.onsuccess=
+()=>
 resolve(
 request.result||null
 );
 
-request.onerror=()=>
-reject(request.error);
+request.onerror=
+()=>
+reject(
+request.error
+);
 
-transaction.oncomplete=()=>
+transaction.oncomplete=
+()=>
 db.close();
 
 });
@@ -2091,14 +2356,17 @@ return null;
 }
 
 
-async function deleteVideoBlob(courseId){
+async function deleteVideoBlob(
+courseId
+){
 
 try{
 
 const db=
 await openVideoDB();
 
-return await new Promise(function(resolve,reject){
+return await new Promise(
+function(resolve,reject){
 
 const transaction=
 db.transaction(
@@ -2113,13 +2381,18 @@ transaction
 String(courseId)
 );
 
-request.onsuccess=()=>
+request.onsuccess=
+()=>
 resolve(true);
 
-request.onerror=()=>
-reject(request.error);
+request.onerror=
+()=>
+reject(
+request.error
+);
 
-transaction.oncomplete=()=>
+transaction.oncomplete=
+()=>
 db.close();
 
 });
@@ -2144,16 +2417,24 @@ course.uploadedVideo||
 }
 
 
-/* NAVIGATION */
+/* =========================
+   NAVIGATION
+========================= */
 
-function show(id,skipRender=false){
+function show(
+id,
+skipRender=false
+){
 
 if(!currentUser)return;
 
 document
 .querySelectorAll(".view")
 .forEach(
-view=>view.classList.remove("activeView")
+view=>
+view.classList.remove(
+"activeView"
+)
 );
 
 const page=
@@ -2165,11 +2446,16 @@ page.classList.add("activeView");
 document
 .querySelectorAll("nav button")
 .forEach(
-button=>button.classList.remove("active")
+button=>
+button.classList.remove(
+"active"
+)
 );
 
 const nav=
-document.getElementById("n-"+id);
+document.getElementById(
+"n-"+id
+);
 
 if(nav)
 nav.classList.add("active");
@@ -2194,7 +2480,9 @@ window.scrollTo(0,0);
 }
 
 
-/* CREATE */
+/* =========================
+   CREATE
+========================= */
 
 function startNewCourse(){
 
@@ -2204,7 +2492,9 @@ show("create");
 
 setTimeout(
 function(){
+
 clearCourseFieldsOnly();
+
 },
 0
 );
@@ -2214,36 +2504,84 @@ clearCourseFieldsOnly();
 
 function clearCourseFieldsOnly(){
 
-document.getElementById("lessonTitle").value="";
-document.getElementById("lessonCategory").value="Music";
-document.getElementById("lessonDescription").value="";
-document.getElementById("lessonVideo").value="";
-document.getElementById("lessonImage").value="";
-document.getElementById("lessonVideoFile").value="";
-document.getElementById("lessonPrice").value="";
-document.getElementById("priceType").value="FREE";
+document.getElementById(
+"lessonTitle"
+).value="";
+
+document.getElementById(
+"lessonCategory"
+).value="Music";
+
+document.getElementById(
+"lessonDescription"
+).value="";
+
+document.getElementById(
+"lessonVideo"
+).value="";
+
+document.getElementById(
+"lessonImage"
+).value="";
+
+document.getElementById(
+"lessonVideoFile"
+).value="";
+
+document.getElementById(
+"lessonPrice"
+).value="";
+
+document.getElementById(
+"priceType"
+).value="FREE";
 
 togglePrice();
 
-document.getElementById("lessonEditors").innerHTML="";
+document.getElementById(
+"lessonEditors"
+).innerHTML="";
 
-document.getElementById("currentCourseImageInfo").textContent="";
-document.getElementById("existingVideoInfo").textContent="";
+document.getElementById(
+"currentCourseImageInfo"
+).textContent="";
 
-document.getElementById("videoUploadPreview").style.display="none";
-document.getElementById("videoUploadPreview").innerHTML="";
+document.getElementById(
+"existingVideoInfo"
+).textContent="";
 
-document.getElementById("videoUploadInfo").style.display="none";
-document.getElementById("videoUploadInfo").textContent="";
+document.getElementById(
+"videoUploadPreview"
+).style.display="none";
 
-document.getElementById("courseFormHeading").textContent=
+document.getElementById(
+"videoUploadPreview"
+).innerHTML="";
+
+document.getElementById(
+"videoUploadInfo"
+).style.display="none";
+
+document.getElementById(
+"videoUploadInfo"
+).textContent="";
+
+document.getElementById(
+"courseFormHeading"
+).textContent=
 "Create & Publish";
 
-document.getElementById("editModeBanner").style.display="none";
+document.getElementById(
+"editModeBanner"
+).style.display="none";
 
-document.getElementById("cancelEditButton").style.display="none";
+document.getElementById(
+"cancelEditButton"
+).style.display="none";
 
-document.getElementById("publishButton").textContent=
+document.getElementById(
+"publishButton"
+).textContent=
 "🚀 Publish Course";
 
 addLessonEditor();
@@ -2338,7 +2676,9 @@ renderMyLessons();
 }
 
 
-/* PROFILE PHOTO */
+/* =========================
+   PROFILE PHOTO
+========================= */
 
 document
 .getElementById("createPhoto")
@@ -2365,7 +2705,9 @@ return;
 try{
 
 const compressed=
-await compressProfilePhoto(file);
+await compressProfilePhoto(
+file
+);
 
 document.getElementById(
 "createPhotoPreview"
@@ -2395,7 +2737,9 @@ this.dataset.compressedPhoto="";
 );
 
 
-/* VIDEO PREVIEW */
+/* =========================
+   VIDEO PREVIEW
+========================= */
 
 document
 .getElementById("lessonVideoFile")
@@ -2454,14 +2798,17 @@ info.style.display="block";
 info.textContent=
 file.name+
 " · "+
-(file.size/1024/1024).toFixed(1)+
+(file.size/1024/1024)
+.toFixed(1)+
 " MB";
 
 }
 );
 
 
-/* PRICE */
+/* =========================
+   PRICE
+========================= */
 
 function togglePrice(){
 
@@ -2492,10 +2839,15 @@ price.value="";
 }
 
 
-/* LESSON EDITORS */
+/* =========================
+   LESSON EDITORS
+========================= */
 
 function addLessonEditor(
-data={title:"",content:""}
+data={
+title:"",
+content:""
+}
 ){
 
 const box=
@@ -2511,7 +2863,8 @@ box.children.length+1;
 const div=
 document.createElement("div");
 
-div.className="lessonEditor";
+div.className=
+"lessonEditor";
 
 div.innerHTML=`
 
@@ -2578,7 +2931,10 @@ renumberEditors();
 }
 
 
-function moveLesson(button,direction){
+function moveLesson(
+button,
+direction
+){
 
 const current=
 button.closest(
@@ -2626,7 +2982,9 @@ document
 function(box,index){
 
 const label=
-box.querySelector("label");
+box.querySelector(
+"label"
+);
 
 if(label)
 label.textContent=
@@ -2652,30 +3010,30 @@ function(box){
 return{
 
 title:
-box
-.querySelector(
+box.querySelector(
 ".newLessonTitle"
-)
-.value.trim(),
+).value.trim(),
 
 content:
-box
-.querySelector(
+box.querySelector(
 ".newLessonContent"
-)
-.value.trim()
+).value.trim()
 
 };
 
 })
 .filter(
-item=>item.title||item.content
+item=>
+item.title||
+item.content
 );
 
 }
 
 
-/* OWNER */
+/* =========================
+   OWNER
+========================= */
 
 function isMyCourse(course){
 
@@ -2692,7 +3050,9 @@ currentUser.id
 }
 
 
-/* LOAD EDIT */
+/* =========================
+   LOAD EDIT
+========================= */
 
 function loadCourseIntoForm(id){
 
@@ -2703,8 +3063,10 @@ String(item.id)===
 String(id)
 );
 
-if(!course||
-!isMyCourse(course)){
+if(
+!course||
+!isMyCourse(course)
+){
 
 editingCourseId=null;
 
@@ -2786,7 +3148,8 @@ let videoInfo="";
 
 if(course.video){
 
-videoInfo+="🔗 Video link saved.";
+videoInfo+=
+"🔗 Video link saved.";
 
 }
 
@@ -2813,7 +3176,8 @@ editors.innerHTML="";
 
 const courseLessons=
 Array.isArray(course.lessons)
-?course.lessons
+?
+course.lessons
 :[];
 
 courseLessons.forEach(
@@ -2851,7 +3215,9 @@ videoUploadInfo.textContent="";
 }
 
 
-/* EDIT */
+/* =========================
+   EDIT
+========================= */
 
 function editCourse(id){
 
@@ -2890,7 +3256,9 @@ show("create");
 }
 
 
-/* DELETE */
+/* =========================
+   DELETE
+========================= */
 
 async function deleteCourse(id){
 
@@ -3011,7 +3379,9 @@ error.message
 }
 
 
-/* MANAGE LESSONS */
+/* =========================
+   MANAGE LESSONS
+========================= */
 
 function manageLessons(id){
 
@@ -3066,7 +3436,9 @@ block:"start"
 }
 
 
-/* SAVE COURSE */
+/* =========================
+   SAVE COURSE
+========================= */
 
 async function publishEverything(){
 
@@ -3094,8 +3466,10 @@ button.disabled=true;
 
 button.textContent=
 saveId
-?"Saving..."
-:"Publishing...";
+?
+"Saving..."
+:
+"Publishing...";
 
 try{
 
@@ -3227,7 +3601,7 @@ throw new Error(
 }
 
 
-/* SAVE PROFILE */
+/* PROFILE */
 
 setAccountValue(
 "studioName",
@@ -3257,10 +3631,12 @@ experience
 try{
 
 await supabaseClient.auth.updateUser({
+
 data:{
 name,
 username
 }
+
 });
 
 }catch(error){
@@ -3273,7 +3649,7 @@ error
 }
 
 
-/* PROFILE PHOTO */
+/* PHOTO */
 
 const photoInput=
 document.getElementById(
@@ -3299,7 +3675,7 @@ compressed
 }
 
 
-/* COURSE IMAGE */
+/* IMAGE */
 
 let courseImage="";
 
@@ -3345,7 +3721,7 @@ throw new Error(
 }
 
 
-/* EDIT EXISTING */
+/* EDIT */
 
 if(saveId){
 
@@ -3388,7 +3764,8 @@ oldCourse.image||"";
 let newVideo=video;
 
 let newHasUploadedVideo=
-oldCourse.hasUploadedVideo||false;
+oldCourse.hasUploadedVideo||
+false;
 
 if(selectedVideo){
 
@@ -3446,7 +3823,8 @@ priceType,
 
 price:
 priceType==="PAID"
-?Number(price)
+?
+Number(price)
 :0,
 
 hasUploadedVideo:
@@ -3485,11 +3863,12 @@ return;
 }
 
 
-/* CREATE NEW */
+/* NEW */
 
 const courseId=
 Date.now().toString()+
-"_"+Math.random()
+"_"+
+Math.random()
 .toString(36)
 .slice(2,8);
 
@@ -3524,7 +3903,8 @@ priceType,
 
 price:
 priceType==="PAID"
-?Number(price)
+?
+Number(price)
 :0,
 
 likes:[],
@@ -3593,8 +3973,10 @@ error
 
 alert(
 "Could not save the course.\n\n"+
-(error.message||
-"Please try again.")
+(
+error.message||
+"Please try again."
+)
 );
 
 }finally{
@@ -3603,8 +3985,10 @@ button.disabled=false;
 
 button.textContent=
 editingCourseId
-?"💾 Save Course Changes"
-:"🚀 Publish Course";
+?
+"💾 Save Course Changes"
+:
+"🚀 Publish Course";
 
 }
 
@@ -3629,7 +4013,9 @@ show("create");
 }
 
 
-/* COURSE VIDEO */
+/* =========================
+   COURSE VIDEO
+========================= */
 
 async function renderCourseVideo(
 course,
@@ -3659,6 +4045,7 @@ src="${escapeHTML(course.video)}"
 ></video>
 
 </div>
+
 `;
 
 return;
@@ -3680,6 +4067,7 @@ container.innerHTML=`
 <div class="notice">
 🎥 This uploaded video is not available on this device.
 </div>
+
 `;
 
 return;
@@ -3701,12 +4089,15 @@ src="${escapeHTML(url)}"
 ></video>
 
 </div>
+
 `;
 
 }
 
 
-/* COURSE CARD */
+/* =========================
+   COURSE CARD
+========================= */
 
 function renderLessonCard(
 course,
@@ -3724,12 +4115,14 @@ CATEGORY_ICONS[category]||
 
 const likes=
 Array.isArray(course.likes)
-?course.likes.length
+?
+course.likes.length
 :0;
 
 const comments=
 Array.isArray(course.comments)
-?course.comments.length
+?
+course.comments.length
 :0;
 
 return`
@@ -3754,7 +4147,8 @@ icon
 
 <span class="pill ${
 course.priceType==="PAID"
-?"paid"
+?
+"paid"
 :""
 }">
 
@@ -3832,7 +4226,9 @@ onclick="event.stopPropagation();shareCourse('${String(course.id)}')"
 }
 
 
-/* OWNER MANAGEMENT */
+/* =========================
+   COURSE MANAGER
+========================= */
 
 function renderMyCourseManager(course){
 
@@ -3841,7 +4237,8 @@ categoryName(course.category);
 
 const lessons=
 Array.isArray(course.lessons)
-?course.lessons.length
+?
+course.lessons.length
 :0;
 
 return`
@@ -3882,7 +4279,8 @@ lesson${lessons===1?"":"s"}
 
 <span class="pill ${
 course.priceType==="PAID"
-?"paid"
+?
+"paid"
 :""
 }">
 
@@ -3937,7 +4335,9 @@ onclick="event.stopPropagation();manageLessons('${String(course.id)}')"
 }
 
 
-/* OPEN COURSE */
+/* =========================
+   OPEN COURSE
+========================= */
 
 function openCourse(id){
 
@@ -3959,9 +4359,7 @@ return;
 }
 
 const category=
-categoryName(
-course.category
-);
+categoryName(course.category);
 
 const icon=
 CATEGORY_ICONS[category]||
@@ -3976,7 +4374,8 @@ String(course.id)
 
 const lessons=
 Array.isArray(course.lessons)
-?course.lessons
+?
+course.lessons
 :[];
 
 let actionButton;
@@ -4084,6 +4483,7 @@ onclick="manageLessons('${String(course.id)}')"
 </div>
 
 </div>
+
 `
 :
 "";
@@ -4117,7 +4517,8 @@ onclick="renderLessons()"
 
 <span class="pill ${
 course.priceType==="PAID"
-?"paid"
+?
+"paid"
 :""
 }">
 
@@ -4269,7 +4670,8 @@ completed
 <button onclick="toggleLike('${String(course.id)}')">
 ❤️ ${
 Array.isArray(course.likes)
-?course.likes.length
+?
+course.likes.length
 :0
 }
 </button>
@@ -4277,7 +4679,8 @@ Array.isArray(course.likes)
 <button onclick="openComments('${String(course.id)}')">
 💬 ${
 Array.isArray(course.comments)
-?course.comments.length
+?
+course.comments.length
 :0
 }
 </button>
@@ -4289,6 +4692,7 @@ Array.isArray(course.comments)
 </div>
 
 </div>
+
 </div>
 
 `;
@@ -4301,7 +4705,9 @@ course,
 }
 
 
-/* PROGRESS */
+/* =========================
+   PROGRESS
+========================= */
 
 function getCourseProgress(id){
 
@@ -4322,7 +4728,8 @@ progress[String(id)]
 );
 
 return Number.isFinite(value)
-?value
+?
+value
 :-1;
 
 }catch(e){
@@ -4334,7 +4741,10 @@ return -1;
 }
 
 
-function saveCourseProgress(id,index){
+function saveCourseProgress(
+id,
+index
+){
 
 let progress={};
 
@@ -4367,9 +4777,14 @@ JSON.stringify(progress)
 }
 
 
-/* LESSON READER */
+/* =========================
+   LESSON READER
+========================= */
 
-function openLesson(courseId,index){
+function openLesson(
+courseId,
+index
+){
 
 const course=
 getLessons().find(
@@ -4390,7 +4805,8 @@ return;
 
 const lessons=
 Array.isArray(course.lessons)
-?course.lessons
+?
+course.lessons
 :[];
 
 if(!lessons.length){
@@ -4414,7 +4830,9 @@ const item=
 lessons[lessonIndex];
 
 let enrolled=
-getArray("studioEnrolled");
+getArray(
+"studioEnrolled"
+);
 
 if(
 !enrolled
@@ -4585,7 +5003,9 @@ window.scrollTo(0,0);
 }
 
 
-/* START / FINISH / BUY */
+/* =========================
+   START / FINISH / BUY
+========================= */
 
 function startCourse(id){
 
@@ -4642,8 +5062,10 @@ getCourseProgress(id);
 openLesson(
 id,
 savedProgress>=0
-?savedProgress
-:0
+?
+savedProgress
+:
+0
 );
 
 }
@@ -4662,7 +5084,8 @@ if(!course)return;
 
 const lessons=
 Array.isArray(course.lessons)
-?course.lessons
+?
+course.lessons
 :[];
 
 if(lessons.length){
@@ -4772,7 +5195,9 @@ id,
 }
 
 
-/* EXPLORE */
+/* =========================
+   EXPLORE
+========================= */
 
 function renderLessons(
 lessonsToShow
@@ -4935,7 +5360,9 @@ searchLessons();
 }
 
 
-/* HOME */
+/* =========================
+   HOME
+========================= */
 
 function renderHomeCourses(){
 
@@ -5019,7 +5446,8 @@ course.teacher||
 
 <span class="pill ${
 course.priceType==="PAID"
-?"paid"
+?
+"paid"
 :""
 }">
 
@@ -5040,7 +5468,9 @@ ${priceText(course)}
 }
 
 
-/* MY COURSES */
+/* =========================
+   MY COURSES
+========================= */
 
 function renderMyLessons(){
 
@@ -5094,7 +5524,9 @@ renderMyCourseManager
 }
 
 
-/* PROFILE COURSES */
+/* =========================
+   PROFILE COURSES
+========================= */
 
 function renderProfileLessons(){
 
@@ -5156,27 +5588,36 @@ false
 }
 
 
-/* PROFILE */
+/* =========================
+   PROFILE
+========================= */
 
 function loadProfile(){
 
 if(!currentUser)return;
 
 const metadata=
-currentUser.user_metadata||{};
+currentUser.user_metadata||
+{};
+
+const emailName=
+currentUser.email
+?
+currentUser.email.split("@")[0]
+:"User";
 
 const name=
 getAccountValue(
 "studioName",
 metadata.name||
-currentUser.email.split("@")[0]
+emailName
 );
 
 const username=
 getAccountValue(
 "studioUsername",
 metadata.username||
-currentUser.email.split("@")[0]
+emailName
 );
 
 const bio=
@@ -5194,7 +5635,8 @@ getAccountValue(
 document.getElementById(
 "profileName"
 ).textContent=
-name||"Your Name";
+name||
+"Your Name";
 
 document.getElementById(
 "profileUsername"
@@ -5278,6 +5720,7 @@ getAccountValue(
 ).toFixed(2);
 
 renderTeacherInfo();
+
 renderProfileLessons();
 
 }
@@ -5338,7 +5781,9 @@ experience||
 }
 
 
-/* TEACHERS */
+/* =========================
+   TEACHERS
+========================= */
 
 function getTeacherLessons(name){
 
@@ -5401,8 +5846,7 @@ getAccountValue(
 "studioProfilePhoto",
 ""
 )
-:
-"";
+:"";
 
 show(
 "explore",
@@ -5520,7 +5964,9 @@ true
 }
 
 
-/* NOTIFICATIONS */
+/* =========================
+   NOTIFICATIONS
+========================= */
 
 function getNotifications(){
 
@@ -5580,7 +6026,8 @@ getNotifications();
 const unread=
 notifications
 .filter(
-item=>!item.read
+item=>
+!item.read
 )
 .length;
 
@@ -5678,7 +6125,8 @@ ${escapeHTML(n.time)}
 
 document.getElementById(
 "lessonList"
-).innerHTML=html;
+).innerHTML=
+html;
 
 }
 
@@ -5704,7 +6152,9 @@ openNotifications();
 }
 
 
-/* MESSAGES */
+/* =========================
+   MESSAGES
+========================= */
 
 function getMessages(){
 
@@ -5899,7 +6349,8 @@ const teachers=
 [
 ...new Set(
 messages.map(
-item=>item.teacher
+item=>
+item.teacher
 )
 )
 ];
@@ -5988,7 +6439,9 @@ Open conversation
 }
 
 
-/* EARNINGS */
+/* =========================
+   EARNINGS
+========================= */
 
 function getEarnings(){
 
@@ -6118,7 +6571,9 @@ ${priceText(course)}
 }
 
 
-/* LIKES */
+/* =========================
+   LIKES
+========================= */
 
 function toggleLike(id){
 
@@ -6143,7 +6598,8 @@ getAccountValue(
 
 course.likes=
 Array.isArray(course.likes)
-?course.likes
+?
+course.likes
 :[];
 
 const index=
@@ -6175,7 +6631,9 @@ openCourse(id);
 }
 
 
-/* COMMENTS */
+/* =========================
+   COMMENTS
+========================= */
 
 function openComments(id){
 
@@ -6190,7 +6648,8 @@ if(!course)return;
 
 course.comments=
 Array.isArray(course.comments)
-?course.comments
+?
+course.comments
 :[];
 
 show(
@@ -6316,7 +6775,8 @@ if(!course)return;
 
 course.comments=
 Array.isArray(course.comments)
-?course.comments
+?
+course.comments
 :[];
 
 course.comments.push({
@@ -6341,7 +6801,9 @@ openComments(id);
 }
 
 
-/* SHARE */
+/* =========================
+   SHARE
+========================= */
 
 async function shareCourse(id){
 
@@ -6363,8 +6825,11 @@ if(navigator.share){
 try{
 
 await navigator.share({
+
 title:course.title,
+
 text
+
 });
 
 }catch(error){}
@@ -6392,7 +6857,9 @@ alert(text);
 }
 
 
-/* ELECTRICAL */
+/* =========================
+   ELECTRICAL COURSE
+========================= */
 
 function ensureElectricalCourse(){
 
@@ -6510,7 +6977,9 @@ saveLessons(lessons);
 }
 
 
-/* MIGRATION */
+/* =========================
+   MIGRATION
+========================= */
 
 function migrateCourses(){
 
@@ -6648,7 +7117,9 @@ saveLessons(lessons);
 }
 
 
-/* RENDER */
+/* =========================
+   RENDER ALL
+========================= */
 
 function renderAll(){
 
@@ -6663,7 +7134,9 @@ loadProfile();
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 async function startStudioTalent(){
 
@@ -6701,7 +7174,8 @@ return;
 }
 
 const metadata=
-currentUser.user_metadata||{};
+currentUser.user_metadata||
+{};
 
 if(
 !getAccountValue(
@@ -6758,6 +7232,40 @@ togglePrice();
 
 show("home");
 
+
+/*
+If the user is already logged in but has
+not verified their phone, send the SMS.
+*/
+
+if(
+!currentUser.phone&&
+getAccountValue(
+"studioPhone",
+""
+)
+){
+
+try{
+
+await sendPhoneVerification(
+getAccountValue(
+"studioPhone",
+""
+)
+);
+
+}catch(error){
+
+console.warn(
+"Could not start phone verification:",
+error
+);
+
+}
+
+}
+
 }catch(error){
 
 console.error(
@@ -6769,6 +7277,10 @@ error
 
 }
 
+
+/* =========================
+   AUTH STATE
+========================= */
 
 supabaseClient.auth.onAuthStateChange(
 function(event,session){
@@ -6785,10 +7297,12 @@ try{
 
 await finishLogin();
 
+
 /*
-If the phone has not yet been verified,
-send the SMS verification code after login.
+After login, if a phone number exists
+but is not verified, start SMS verification.
 */
+
 if(
 !currentUser.phone&&
 getAccountValue(
@@ -6808,29 +7322,6 @@ try{
 await sendPhoneVerification(
 phone
 );
-
-authMode=
-"phoneVerify";
-
-document.getElementById(
-"authTitle"
-).textContent=
-"Verify your phone 📱";
-
-document.getElementById(
-"authDescription"
-).textContent=
-"Enter the SMS code sent to your phone.";
-
-document.getElementById(
-"authNameWrap"
-).style.display=
-"none";
-
-document.getElementById(
-"authUsernameWrap"
-).style.display=
-"none";
 
 }catch(phoneError){
 
@@ -6862,6 +7353,10 @@ currentUser=null;
 }
 );
 
+
+/* =========================
+   START APP
+========================= */
 
 if(
 document.readyState===
